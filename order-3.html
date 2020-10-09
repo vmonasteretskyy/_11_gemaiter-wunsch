@@ -416,36 +416,36 @@
           
               <div class="delivery-inner">
                 <p>Get it on:</p>
-                 <label class="radio-button ">
-                   <input type="radio"  
-                     name="subject" >
-                   <span class="checkmark"></span>
-                   <p>
-                     Monday, 19.10 2020
-                     <span class="new-text-pay">For Free</span>
-                      <br><span class="new-text-descrip">Normal delivery</span> 
-                   </p>
-                 </label>       <label class="radio-button ">
-                   <input type="radio"  
-                     name="subject" >
-                   <span class="checkmark"></span>
-                   <p>
-                     Wednesday, 20.10 2020
-                     <span class="new-text-pay">15% Extra</span>
-                      <br><span class="new-text-descrip">Express Service delivery</span> 
-                   </p>
-                 </label>       <label class="radio-button ">
-                   <input type="radio"  
-                     name="subject" >
-                   <span class="checkmark"></span>
-                   <p>
-                     Friday, 21.10 2020
-                     <span class="new-text-pay">30% Extra</span>
-                      <br><span class="new-text-descrip">Normal delivery</span> 
-                   </p>
-                 </label>      <label class="radio-button ">
-                  <input type="radio"  
-                    name="subject" >
+                <label class="radio-button radio-button1">
+                  <input data-from="2020-10-15" data-calendar_class="calendar_style_1" data-count="1000" type="radio"  
+                    name="subject"  class="select_day_radio">
+                  <span class="checkmark"></span>
+                  <p>
+                    Monday, 19.10 2020
+                    <span class="new-text-pay">For Free</span>
+                     <br><span class="new-text-descrip">Normal delivery</span> 
+                  </p>
+                </label>      <label class="radio-button radio-button2">
+                  <input data-from="2020-10-14" data-calendar_class="calendar_style_2" data-count="1" type="radio"  
+                    name="subject"  class="select_day_radio">
+                  <span class="checkmark"></span>
+                  <p>
+                    Wednesday, 20.10 2020
+                    <span class="new-text-pay">15% Extra</span>
+                     <br><span class="new-text-descrip">Express Service delivery</span> 
+                  </p>
+                </label>      <label class="radio-button radio-button3">
+                  <input data-from="2020-10-12" data-calendar_class="calendar_style_3" data-count="2" type="radio"  
+                    name="subject"  class="select_day_radio">
+                  <span class="checkmark"></span>
+                  <p>
+                    Friday, 21.10 2020
+                    <span class="new-text-pay">30% Extra</span>
+                     <br><span class="new-text-descrip">Normal delivery</span> 
+                  </p>
+                </label>      <label class="radio-button radio-button4">
+                  <input data-from="2020-10-09" data-calendar_class="calendar_style_4" data-count="3" type="radio"  
+                    name="subject"  class="select_day_radio">
                   <span class="checkmark"></span>
                   <p>
                     Thursday, 22.10 2020
@@ -453,11 +453,81 @@
                      <br><span class="new-text-descrip">Request delivery</span> 
                   </p>
                 </label>      <div class="delivery__calendar">
-                <div class="datepicker-here" data-position="bottom left" data-language='en' data-orderDay='10'></div>
+                  <div class="datepicker-here-init" data-position="bottom left" data-language='en' data-orderDay='10'></div>
                 </div>
               </div>
             </div>
           </div>
+          
+          
+          
+          <script>
+          
+          
+            setTimeout(function () {
+          
+              document.querySelector('.js-radio-label.js-radio-summary.radio-button.radio-button--subject').click();
+              document.querySelector('.radio-button-wrap:nth-child(9) label').click();
+              document.querySelector('.controls__next').click();
+          
+          
+              setTimeout(function () {
+                console.log(document.querySelector('.controls__next'))
+                document.querySelector('.controls__next').click();
+          
+                setTimeout(function () {
+                  document.documentElement.scrollTop = 1600;
+                }, 100)
+              }, 1000)
+            }, 1500)
+          
+          
+          
+          </script>
+          
+          
+          
+          <style>
+            .calendar_style_1 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_1 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_1 .datepicker--cell-day:not(.-disabled-) {
+              color: #FFF;
+              background-color: #368498;
+            }
+          
+            .calendar_style_2 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_2 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_2 .datepicker--cell-day:not(.-disabled-) {
+              color: #FFF;
+             background-color: #facbbf;
+            }
+          
+            .calendar_style_3 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_3 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_3 .datepicker--cell-day:not(.-disabled-) {
+              color: #FFF;
+              background-color:  #91c4d1;
+            }
+            
+            .calendar_style_4 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_4 .datepicker--cell-day:not(.-disabled-),
+            .calendar_style_4 .datepicker--cell-day:not(.-disabled-) {
+              color: #FFF;
+              background-color: #F9AB97;
+            }
+          .radio-button1 .checkmark:after{
+           background: #368498;
+          }
+            .radio-button2 .checkmark:after { 
+              background: #facbbf;
+            }
+              .radio-button3 .checkmark:after { 
+            background: #91c4d1;
+            }
+              .radio-button4 .checkmark:after { 
+              background: #F9AB97;
+            }
+          </style>
         </div>
         <div class="js-active-section hidden">
 
