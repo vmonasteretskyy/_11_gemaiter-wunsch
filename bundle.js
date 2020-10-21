@@ -53212,6 +53212,19 @@ function sliderTeam() {
             dynamicMainBullets: 1,
         },
     });
+    // console.log(galleryThumbs.slides);
+    var slides = galleryThumbs.slides;
+    if (slides) {
+        var _loop_1 = function (key) {
+            if (Object.prototype.hasOwnProperty.call(slides, key)) {
+                var element = slides[key];
+                element.addEventListener('click', function () { return galleryThumbs.slideTo(key); });
+            }
+        };
+        for (var key in slides) {
+            _loop_1(key);
+        }
+    }
     // var galleryTop = new Swiper(SLIDER_TEAM_DESCRIPTION, {
     // 	// loopedSlides: 5, //looped slides should be the same
     // 	// autoplay: {
