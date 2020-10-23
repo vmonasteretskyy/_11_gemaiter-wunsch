@@ -52752,7 +52752,8 @@ function sliderGallery() {
     var sliders = document.querySelectorAll('.gallery-slider');
     sliders.forEach(function (slider) { return initSliderGallery(slider, false); });
 }
-function initSliderGallery(slider, item) {
+function initSliderGallery(slider, item, clickActive) {
+    if (clickActive === void 0) { clickActive = false; }
     var touch = false;
     var addEvents = function () {
         if (touch) {
@@ -52810,6 +52811,20 @@ function initSliderGallery(slider, item) {
             },
         },
     });
+    if (clickActive && swiper.slides) {
+        var _loop_1 = function (key) {
+            if (Object.prototype.hasOwnProperty.call(swiper.slides, key)) {
+                var element = swiper.slides[key];
+                element.swiperIndex = key;
+                element.addEventListener('click', function () {
+                    swiper.slideTo(key);
+                });
+            }
+        };
+        for (var key in swiper.slides) {
+            _loop_1(key);
+        }
+    }
     function mp(e) {
         if (e === void 0) { e = false; }
         if (!e)
@@ -53549,6 +53564,9 @@ var modal_Modal = /** @class */ (function () {
                 _this.closeModal();
             }
         });
+        this.modal.addEventListener('wheel', function (e) { return e.stopPropagation(); });
+        this.modal.addEventListener('scroll', function (e) { return e.stopPropagation(); });
+        this.modal.addEventListener('mousewheel', function (e) { return e.stopPropagation(); });
         // Close modal on trigger click
         var modalCloseTriggers = this.modal.querySelectorAll('.modal-close-js');
         modalCloseTriggers.forEach(function (modalClose) { return modalClose.addEventListener('click', _this.closeModal.bind(_this)); });
@@ -54079,6 +54097,21 @@ function BackStep() {
         return;
     }
 }
+function GoToStep(stepNumber) {
+    var formData = GetFormData();
+    if (stepNumber < 0 || stepNumber > 2 || formData.step <= stepNumber) {
+        return;
+    }
+    formData.step = stepNumber;
+    window.scrollTo(0, 0);
+    InitStepIcon();
+    InitCurrentStep();
+    lastStep(formData);
+    if (formData.step === Step.characteristic) {
+        document.querySelector(BTN_ORDER_BACK).classList.add('hidden');
+    }
+    return;
+}
 function lastStep(formData) {
     var bntNext = document.querySelector(BTN_ORDER_NEXT);
     var btnAdd = document.querySelector(BTN_ORDER_ADD);
@@ -54096,6 +54129,25 @@ function InitCurrentStep() {
     hideAllSteps();
     FormStep_sectionActive[formData.step].classList.add('js-active');
     FormStep_sectionActive[formData.step].classList.remove('hidden');
+    // Add select background slider on selected radion button
+    var slider = document.querySelector('.order-bg-slider');
+    var elemToObserve = document.getElementById('choose-bg__color');
+    var prevClassState = elemToObserve.classList.contains('hide');
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName == "class") {
+                var currentClassState = mutation.target.classList.contains('hide');
+                if (prevClassState !== currentClassState) {
+                    prevClassState = currentClassState;
+                    // if class hide remove
+                    if (!currentClassState)
+                        setTimeout(function () { if (slider)
+                            initSliderGallery(slider, false, true); });
+                }
+            }
+        });
+    });
+    observer.observe(elemToObserve, { attributes: true });
 }
 /* Clear all section from active status */
 function hideAllSteps() {
@@ -54143,6 +54195,8 @@ function chooseBg() {
 function Form() {
     var btnNext = document.querySelector(BTN_ORDER_NEXT);
     var btnBack = document.querySelector(BTN_ORDER_BACK);
+    var btnFirst = document.querySelector('.order-steps>.step:nth-child(1)');
+    var btnTwo = document.querySelector('.order-steps>.step:nth-child(2)');
     InitCurrentStep();
     InitStepIcon();
     initSummary();
@@ -54152,6 +54206,9 @@ function Form() {
     btnBack.addEventListener('click', function () {
         BackStep();
     });
+    console.log(btnFirst, btnTwo);
+    btnFirst.addEventListener('click', function () { return GoToStep(0); });
+    btnTwo.addEventListener('click', function () { return GoToStep(1); });
     if (document.querySelector(CHOOSE_BG_PARENT)) {
         chooseBg();
     }
