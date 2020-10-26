@@ -53122,8 +53122,12 @@ function isHTMLElement(element) {
 
 var select_2_Select = /** @class */ (function () {
     function Select(element, settings) {
+        var _this = this;
         if (settings === void 0) { settings = {}; }
         this.settings = settings;
+        this.onCloseEvent = function (e) {
+            _this.onCloseSelect();
+        };
         this.select = getElement(element);
         if (!isHTMLElement(this.select)) {
             // If select not exist => throw Error
@@ -53142,29 +53146,37 @@ var select_2_Select = /** @class */ (function () {
         this.list = this.select.querySelector('.options-js');
         this.options = this.list.querySelectorAll('.option-js');
     };
+    Select.prototype.onCloseSelect = function () {
+        window.removeEventListener('pointerdown', this.onCloseEvent);
+        this.list.classList.remove(Select.OPENED_CLASS);
+        this.select.classList.remove('active');
+    };
     Select.prototype.initInputEvents = function () {
         var _this = this;
-        // Show list on focus
-        this.input.addEventListener('focus', function () {
+        this.input.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             _this.list.classList.add(Select.OPENED_CLASS);
             _this.select.classList.add('active');
-        });
-        // Hide list on focusout
-        this.input.addEventListener('focusout', function () {
-            _this.list.classList.remove(Select.OPENED_CLASS);
-            _this.select.classList.remove('active');
-        });
+            window.addEventListener('pointerdown', _this.onCloseEvent, { once: true });
+            return false;
+        }, true);
+        this.list.addEventListener('pointerdown', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }, true);
     };
     Select.prototype.initSelectListEvents = function () {
-        var _this = this;
         // Show list on list hover in
-        this.list.addEventListener('mouseenter', function () {
-            _this.list.classList.add(Select.HOVERED_CLASS);
-        });
-        // Hide list on list hover out
-        this.list.addEventListener('mouseleave', function () {
-            _this.list.classList.remove(Select.HOVERED_CLASS);
-        });
+        // this.list.addEventListener('mouseenter', (e) => {
+        // 	e.preventDefault();
+        // 	this.list.classList.add(Select.HOVERED_CLASS);
+        // }, true);
+        // // Hide list on list hover out
+        // this.list.addEventListener('mouseleave', (e) => {
+        // 	e.preventDefault();
+        // 	this.list.classList.remove(Select.HOVERED_CLASS);
+        // }, true);
     };
     Select.prototype.initSelectOptionEvents = function () {
         var _this = this;
@@ -53185,6 +53197,7 @@ var select_2_Select = /** @class */ (function () {
                 if (isFunction(_this.settings.onSelect)) {
                     _this.settings.onSelect({ key: key, value: option.textContent });
                 }
+                _this.onCloseSelect();
                 _this.select.classList.add(Select.SELECT_FILL_CLASS);
             });
         });
@@ -54206,7 +54219,30 @@ function Form() {
     btnBack.addEventListener('click', function () {
         BackStep();
     });
-    console.log(btnFirst, btnTwo);
+    // let actionSelectBgColor = (action: Boolean) => {
+    // }
+    var choose__card = document.querySelector('#choose__card_charcoal');
+    var chose_tech_radios = document.querySelectorAll('.chose_tech_radio');
+    var choosebg__color_input = document.querySelector('#choose-bg__color_input');
+    var choosebg__color = document.querySelector('#choose-bg__color');
+    var parent = choosebg__color_input.parentNode;
+    parent.style.display = 'none';
+    if (chose_tech_radios) {
+        chose_tech_radios.forEach(function (el) {
+            el.addEventListener('change', function (e) {
+                if (choosebg__color_input) {
+                    if (choose__card == el) {
+                        parent.style.display = 'none';
+                        choosebg__color_input.checked = false;
+                        choosebg__color.classList.add('hide');
+                    }
+                    else {
+                        parent.style.display = null;
+                    }
+                }
+            });
+        });
+    }
     btnFirst.addEventListener('click', function () { return GoToStep(0); });
     btnTwo.addEventListener('click', function () { return GoToStep(1); });
     if (document.querySelector(CHOOSE_BG_PARENT)) {
@@ -54350,7 +54386,7 @@ window.addEventListener('load', function () {
         selectedRadioLabel();
     }
     if (document.querySelector('#drop-area')) {
-        var uploader = new upload_Upload(document.querySelector('#drop-area'));
+        var uploader_1 = new upload_Upload(document.querySelector('#drop-area'));
         // console.log(uploader);
     }
     // Frames slider
