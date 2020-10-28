@@ -54326,6 +54326,7 @@ function Form() {
 let widthEl = document.querySelector('.size-preview__picture .js-size-pre__width');
 let heightEl = document.querySelector('.size-line--horizontal .js-size-pre__width');
 let pictureEl = document.querySelector('.js-size-preview__picture.size-preview__picture');
+let sizePreviewBg = document.querySelector('.size-preview');
 
 let coef = 1.5;
 
@@ -54343,6 +54344,18 @@ let initPictureEvent = (el) => {
 
         pictureEl.style.width = w + 'px';
         pictureEl.style.height = h + 'px';
+
+        pictureEl.style.padding = (el.dataset.w / 10) + 'px';
+
+        if (el.dataset.w >= 70) {
+            widthEl.classList.remove('green');
+            heightEl.classList.remove('green');
+            sizePreviewBg.style.backgroundImage = 'url(/img/order_bg/bg_grey.jpg)';
+        } else {
+            widthEl.classList.add('green');
+            heightEl.classList.add('green');
+            sizePreviewBg.style.backgroundImage = 'url(/img/order_bg/bg_green.jpg)';
+        }
     }
 }
 
@@ -54498,24 +54511,4 @@ window.addEventListener('load', function () {
         Object(upload_accordion["a" /* UploadAccordion */])();
     }
     if (document.querySelector('.js-size-result')) {
-        var cards = document.querySelectorAll('.choose-card');
-        cards.forEach(function (card) { return calculatePriseOfSize(card); });
-    }
-    if (document.querySelector(SHOW_CUSTOM_FIELDS)) {
-        showCustomFields();
-    }
-    if (document.querySelector('.page-order')) {
-        Form();
-    }
-    console.log('Page fully loaded');
-});
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM fully loaded and parsed but without images');
-    if (document.querySelector('.header')) {
-        header();
-    }
-});
-
-
-/***/ })
-/******/ ]);
+        var cards =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
