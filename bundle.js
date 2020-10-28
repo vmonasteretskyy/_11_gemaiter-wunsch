@@ -54350,11 +54350,11 @@ let initPictureEvent = (el) => {
         if (el.dataset.w >= 70) {
             widthEl.classList.remove('green');
             heightEl.classList.remove('green');
-            sizePreviewBg.style.backgroundImage = 'url(/img/order_bg/bg_grey.jpg)';
+            sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_grey.jpg)';
         } else {
             widthEl.classList.add('green');
             heightEl.classList.add('green');
-            sizePreviewBg.style.backgroundImage = 'url(/img/order_bg/bg_green.jpg)';
+            sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_green.jpg)';
         }
     }
 }
