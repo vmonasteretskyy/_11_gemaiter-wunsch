@@ -53125,6 +53125,13 @@ var select_2_Select = /** @class */ (function () {
         var _this = this;
         if (settings === void 0) { settings = {}; }
         this.settings = settings;
+        this.status = false;
+        this.onCloseEventLabel = function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            _this.onCloseSelect();
+            return false;
+        };
         this.onCloseEvent = function (e) {
             _this.onCloseSelect();
         };
@@ -53150,21 +53157,34 @@ var select_2_Select = /** @class */ (function () {
         window.removeEventListener('pointerdown', this.onCloseEvent);
         this.list.classList.remove(Select.OPENED_CLASS);
         this.select.classList.remove('active');
+        this.status = false;
     };
     Select.prototype.initInputEvents = function () {
         var _this = this;
         this.input.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            _this.list.classList.add(Select.OPENED_CLASS);
-            _this.select.classList.add('active');
-            window.addEventListener('pointerdown', _this.onCloseEvent, { once: true });
+            if (_this.status) {
+                _this.onCloseSelect();
+            }
+            else {
+                _this.list.classList.add(Select.OPENED_CLASS);
+                _this.select.classList.add('active');
+                window.addEventListener('pointerdown', _this.onCloseEvent, { once: true });
+                _this.status = true;
+            }
             return false;
         }, true);
+        this.input.addEventListener('pointerdown', function (e) {
+            e.stopPropagation();
+        });
         this.list.addEventListener('pointerdown', function (e) {
             e.preventDefault();
             e.stopPropagation();
         }, true);
+        // this.label.addEventListener('pointerdown', (e) => {
+        // 	e.stopPropagation();
+        // });
     };
     Select.prototype.initSelectListEvents = function () {
         // Show list on list hover in
@@ -54081,7 +54101,7 @@ function NextStep() {
     var formData = GetFormData();
     if (CheckStepValid(formData.step)) {
         formData.step++;
-        console.log('next', formData.step);
+        // console.log('next', formData.step);
         document.querySelector(BTN_ORDER_BACK).classList.remove('hidden');
         window.scrollTo(0, 0);
         ClearValidation();
@@ -54205,6 +54225,56 @@ function chooseBg() {
 
 
 
+var selectedFormats = {
+    subject: '1_person',
+    choose_tech: 'charcoal'
+    // [index: string]: string
+};
+function loadPhotoPreview(name, value) {
+    var el = document.querySelector('.js-size-preview__picture .img');
+    // let order_form: HTMLFormElement = document.querySelector('#order_form');
+    if (Object.prototype.hasOwnProperty.call(selectedFormats, name)) {
+        selectedFormats[name] = value;
+    }
+    var photo = 'img/' + selectedFormats.subject + '_' + selectedFormats.choose_tech + '.jpg';
+    if (selectedFormats.choose_tech == 'charcoal') {
+        el.style.filter = 'grayscale(100%)';
+    }
+    else {
+        el.style.filter = null;
+    }
+    // console.log(photo, el);
+    el.style.backgroundImage = 'url(' + photo + ')';
+}
+function addRadioEvents() {
+    var radio_subjects = document.querySelectorAll('.radio_btn_subject');
+    var radio_subject_custom = document.querySelector('#subject-custom');
+    var radio_subject_custom_wrap = radio_subject_custom.parentNode;
+    var chose_tech_radios = document.querySelectorAll('.chose_tech_radio');
+    if (radio_subjects) {
+        radio_subjects.forEach(function (el) {
+            el.addEventListener('change', function () {
+                if (selectedFormats.hasOwnProperty(el.name)) {
+                    //@ts-ignore
+                    loadPhotoPreview(el.name, el.value);
+                    if (el.value != 'Custom') {
+                        radio_subject_custom_wrap.querySelectorAll('.input').forEach(function (inp) {
+                            inp.value = '0';
+                        });
+                    }
+                }
+            });
+        });
+    }
+    if (chose_tech_radios) {
+        chose_tech_radios.forEach(function (el) {
+            el.addEventListener('change', function () {
+                //@ts-ignore
+                loadPhotoPreview(el.name, el.value);
+            });
+        });
+    }
+}
 function Form() {
     var btnNext = document.querySelector(BTN_ORDER_NEXT);
     var btnBack = document.querySelector(BTN_ORDER_BACK);
@@ -54243,6 +54313,7 @@ function Form() {
             });
         });
     }
+    addRadioEvents();
     btnFirst.addEventListener('click', function () { return GoToStep(0); });
     btnTwo.addEventListener('click', function () { return GoToStep(1); });
     if (document.querySelector(CHOOSE_BG_PARENT)) {

@@ -251,7 +251,7 @@
         </header>        <!-- End header -->
 
         <!--Start page-->
-        <div class="page-wrapper page-order">
+        <form id="order_form" class="page-wrapper page-order" onsubmit="return false;">
 
             <!-- Start preloader -->
             <!-- <div class="preloader">
@@ -336,7 +336,7 @@
                                         <path d="M38.9128 37.4173C38.7384 37.2429 38.4966 37.1426 38.25 37.1426C38.0034 37.1426 37.7616 37.2429 37.5872 37.4173C37.4128 37.5916 37.3125 37.8335 37.3125 38.0801C37.3125 38.3266 37.4128 38.5685 37.5872 38.7429C37.7616 38.9172 38.0034 39.0176 38.25 39.0176C38.4966 39.0176 38.7384 38.9173 38.9128 38.7429C39.0872 38.5685 39.1875 38.3266 39.1875 38.0801C39.1875 37.8335 39.0872 37.5916 38.9128 37.4173Z" fill="#F9AB97"/>
                                         </svg>
                                     </div>
-                                    <input type="radio" name="subject" checked='checked' data-summary='result-person' value="1 person">
+                                    <input class="radio_btn_subject" type="radio" name="subject" checked='checked' data-summary='result-person' value="1_person">
                                     <span class="checkmark"></span>
                                     <p>1 person</p>
                                 </label>
@@ -355,7 +355,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M29.2562 27.7252C29.1766 27.7119 29.0964 27.7088 29.0173 27.7161C28.9077 27.7132 25.3125 27.7115 25.3125 27.7115V25.4927C28.1168 23.8239 30 20.7626 30 17.2693V9.79744C30.498 8.88863 30.7817 7.84641 30.7817 6.73903V0.9375C30.7817 0.419813 30.362 0 29.8442 0H16.3906C12.7807 0 9.84375 2.93691 9.84375 6.54684V8.45316C9.84375 9.55875 10.2306 10.5753 10.875 11.3762V17.2693C10.875 20.7626 12.7583 23.8239 15.5625 25.4927V27.7115C15.5625 27.7115 11.9678 27.7132 11.8584 27.7161C11.7789 27.7088 11.6983 27.7118 11.6183 27.7252C5.16131 28.0236 0 33.3696 0 39.899V47.0625C0 47.5802 0.419719 48 0.9375 48H39.9375C40.4553 48 40.875 47.5802 40.875 47.0625L40.5921 46.125H39H35.625H33.75H7.125V38.6421C7.125 38.1244 6.70528 37.7046 6.1875 37.7046C5.66972 37.7046 5.25 38.1244 5.25 38.6421V46.125H1.875V39.899C1.875 34.5265 6.00478 30.1012 11.2563 29.6289L19.6255 44.125C19.793 44.4151 20.1024 44.5938 20.4374 44.5938C20.7724 44.5938 21.0818 44.4151 21.2493 44.125L29.6185 29.6289C32.7904 29.5865 34.3379 31.3773 34.3379 31.3773C34.8096 31.0103 35.3149 30.6846 35.8483 30.4056C35.8483 30.4056 34.2022 27.8824 29.2562 27.7252ZM37.9563 39.5716V42.8233L36.6551 38.7073C36.7669 38.6601 36.8898 38.6341 37.0188 38.6341C37.5365 38.6341 37.9563 39.0538 37.9563 39.5716ZM11.7188 8.45316V6.54684C11.7188 3.97078 13.8145 1.875 16.3906 1.875H28.9066V3.75H21.7969C21.2791 3.75 20.8594 4.16981 20.8594 4.6875C20.8594 5.20519 21.2791 5.625 21.7969 5.625H28.9067V6.73903C28.9067 9.22641 26.8831 11.25 24.3957 11.25H14.5156C12.9734 11.25 11.7188 9.99534 11.7188 8.45316ZM12.75 17.2693V12.7775C13.2951 13.0009 13.891 13.125 14.5156 13.125H24.3956C25.787 13.125 27.0748 12.6764 28.1249 11.9181V17.2693C28.1249 21.5082 24.6763 24.9568 20.4374 24.9568C16.1985 24.9568 12.75 21.5082 12.75 17.2693ZM23.4375 26.3493V27.774C23.4375 29.4282 22.0917 30.774 20.4375 30.774C18.7833 30.774 17.4375 29.4282 17.4375 27.774V26.3493C18.3815 26.6619 19.3899 26.8318 20.4375 26.8318C21.4851 26.8318 22.4935 26.6619 23.4375 26.3493ZM15.9133 29.5865C16.6342 31.3793 18.3898 32.649 20.4375 32.649C22.4852 32.649 24.2408 31.3793 24.9617 29.5865H27.4782L20.4375 41.7813L13.3968 29.5865H15.9133Z" fill="#F9AB97"/>
                                         </svg>
                                     </div>
-                                    <input type="radio" name="subject" data-summary='result-person' value="2 person">
+                                    <input class="radio_btn_subject" type="radio" name="subject" data-summary='result-person' value="2_persons">
                                     <span class="checkmark"></span>
                                     <p>2 person</p>
                                 </label>
@@ -368,7 +368,7 @@
                                         <path d="M12.0648 19.8378C13.5607 22.922 16.772 25.3514 22.5996 25.3514C27.8105 25.3514 31.2444 22.9592 32.964 19.8378M12.0648 19.8378C10.1472 15.8844 11.0481 10.855 12.8699 8.48649C12.3218 5.74336 12.3993 4.27949 13.1942 2C15.9438 2.46265 17.1968 3.21552 19.0321 5.24324H25.5185C28.5289 2.84284 29.8687 2.07225 31.6807 2C32.4961 4.93342 32.3812 6.23997 32.005 8.48649C34.6365 11.469 34.9904 16.1597 32.964 19.8378M12.0648 19.8378C9.71215 20.7779 8.16688 25.4437 7.63618 30.8649M12.0648 50C8.16575 47.7196 6.88523 38.536 7.63618 30.8649M12.0648 50C2.71517 49.6772 0.580092 46.6104 1.19401 36.7027M12.0648 50H15.4645M32.964 19.8378C39.4643 26 39.4643 48.0541 31.6807 50H29.4104M7.63618 30.8649V15.9459C7.63618 10.1081 1.19401 10.7568 1.19401 15.9459V23.4054M15.4645 50H22.5996M15.4645 50V45.4595M15.4645 33.7838V45.4595M22.5996 50H29.4104M22.5996 50V45.4595M22.5996 32.4865V45.4595M29.4104 50V45.4595M29.4104 33.7838V45.4595M15.4645 45.4595C16.1131 41.5676 21.951 41.5676 22.5996 45.4595M22.5996 45.4595C23.2483 41.5676 29.0861 41.8919 29.4104 45.4595" stroke="#F9AB97" stroke-width="2"/>
                                         </svg>
                                     </div>
-                                    <input type="radio" name="subject" data-summary='result-person' value="1 pet">
+                                    <input class="radio_btn_subject" type="radio" name="subject" data-summary='result-person' value="1_pet">
                                     <span class="checkmark"></span>
                                     <p>1 pet</p>
                                 </label>
@@ -384,7 +384,7 @@
                                         <path d="M0.9375 37.3145C1.18406 37.3145 1.42594 37.2142 1.60022 37.0398C1.77459 36.8654 1.875 36.6235 1.875 36.377C1.875 36.1304 1.77469 35.8885 1.60022 35.7142C1.42594 35.5399 1.18406 35.4395 0.9375 35.4395C0.689906 35.4395 0.449062 35.5398 0.274687 35.7142C0.100219 35.8885 0 36.1295 0 36.377C0 36.6235 0.100219 36.8654 0.274687 37.0398C0.449156 37.2141 0.690938 37.3145 0.9375 37.3145Z" fill="#F9AB97"/>
                                         </svg>
                                     </div>
-                                    <input type="radio" name="subject" data-summary='result-person' value="1 person + 1 pet">
+                                    <input class="radio_btn_subject" type="radio" name="subject" data-summary='result-person' value="pet_and_person">
                                     <span class="checkmark"></span>
                                     <p>1 person + 1 pet</p>
                                 </label>
@@ -403,7 +403,7 @@
                                         <path d="M42.6627 34.4309C42.4884 34.2567 42.2465 34.1562 42 34.1562C41.7534 34.1562 41.5116 34.2566 41.3372 34.4309C41.1628 34.6062 41.0625 34.8472 41.0625 35.0937C41.0625 35.3403 41.1627 35.5822 41.3372 35.7575C41.5116 35.9319 41.7534 36.0312 42 36.0312C42.2466 36.0312 42.4884 35.9319 42.6627 35.7575C42.8371 35.5822 42.9375 35.3412 42.9375 35.0937C42.9375 34.8472 42.8372 34.6053 42.6627 34.4309Z" fill="#F9AB97"/>
                                         </svg>
                                     </div>
-                                    <input type="radio" name="subject" data-summary='result-person' value="Landscape">
+                                    <input class="radio_btn_subject" type="radio" name="subject" data-summary='result-person' value="landscape">
                                     <span class="checkmark"></span>
                                     <p>Landscape</p>
                                 </label>
@@ -499,7 +499,7 @@
                                         
                                           </ul>
                                         </div>                    </div>
-                                    <input id="subject-custom" type="radio" name="subject" data-summary='result-person' value="Custom">
+                                    <input class="radio_btn_subject" id="subject-custom" type="radio" name="subject" data-summary='result-person' value="Custom">
                                     <span class="checkmark"></span>
                                     <p>Custom</p>
                                 </label>
@@ -532,7 +532,7 @@
                             
                                         
                                         <div class="radio-wrap">
-                                            <input class="chose_tech_radio" type="radio" id="choose__card_charcoal"  checked="checked"  name="technique" value="Charcoal Portrait"
+                                            <input class="chose_tech_radio" type="radio" id="choose__card_charcoal"  checked="checked"  name="choose_tech" value="charcoal"
                                                 data-summary="result-style">
                                             <span class="checkmark"></span>
                                             <p>Charcoal Portrait</p>
@@ -565,7 +565,7 @@
                             
                                         
                                         <div class="radio-wrap">
-                                            <input class="chose_tech_radio" type="radio"   name="technique" value="Oil Portrait"
+                                            <input class="chose_tech_radio" type="radio"   name="choose_tech" value="oil"
                                                 data-summary="result-style">
                                             <span class="checkmark"></span>
                                             <p>Oil Portrait</p>
@@ -587,7 +587,7 @@
                         <div class="choose-size-inner js-require require">
                             <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="20" data-h="25" value="20x25 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="20" data-h="25" value="20x25 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">20x25 cm </p>
                                     <span class="r-size-card__descr">
@@ -604,7 +604,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="27" data-h="37" value="27x37 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="27" data-h="37" value="27x37 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">27x37 cm </p>
                                     <span class="r-size-card__descr">
@@ -621,7 +621,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="30" data-h="40" value="30x40 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="30" data-h="40" value="30x40 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">30x40 cm </p>
                                     <span class="r-size-card__descr">
@@ -638,7 +638,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="40" data-h="50" value="40x50 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="40" data-h="50" value="40x50 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">40x50 cm </p>
                                     <span class="r-size-card__descr">
@@ -655,7 +655,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="50" data-h="60" value="50x60 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="50" data-h="60" value="50x60 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">50x60 cm </p>
                                     <span class="r-size-card__descr">
@@ -673,7 +673,7 @@
                             </div>        
                             <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject" disabled class="picture_input" data-w="60" data-h="90" value="60x90 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size" disabled class="picture_input" data-w="60" data-h="90" value="60x90 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">60x90 cm </p>
                                     <span class="r-size-card__descr">
@@ -690,7 +690,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject"  class="picture_input" data-w="70" data-h="100" value="70x100 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size"  class="picture_input" data-w="70" data-h="100" value="70x100 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">70x100 cm <span>$ 879</span></p>
                                     <span class="r-size-card__descr">
@@ -707,7 +707,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio"  name="subject"  class="picture_input" data-w="90" data-h="120" value="90x120 cm" data-summary='result-size'>
+                                    <input type="radio"  name="choose-size"  class="picture_input" data-w="90" data-h="120" value="90x120 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">90x120 cm <span>$ 1019</span></p>
                                     <span class="r-size-card__descr">
@@ -724,7 +724,7 @@
                                 </label>
                             </div>                    <div class="radio-button-wrap">
                                 <label class="radio-button radio-button--size r-size-card js-radio-summary">
-                                    <input type="radio" checked="checked"  name="subject"  class="picture_input" data-w="120" data-h="180" value="120x180 cm" data-summary='result-size'>
+                                    <input type="radio" checked="checked"  name="choose-size"  class="picture_input" data-w="120" data-h="180" value="120x180 cm" data-summary='result-size'>
                                     <span class="checkmark"></span>
                                     <p class="r-size-card__size">120x180 cm <span>$ 1286</span></p>
                                     <span class="r-size-card__descr">
@@ -1327,7 +1327,7 @@
                 </button>
             
             </div>
-        </div>
+        </form>
         <!--End page-->
         <!-- Class notation: "modal-event-js" class will listen to document.dispatchEvent -->
         
