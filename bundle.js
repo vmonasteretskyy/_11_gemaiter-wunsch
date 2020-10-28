@@ -54511,4 +54511,24 @@ window.addEventListener('load', function () {
         Object(upload_accordion["a" /* UploadAccordion */])();
     }
     if (document.querySelector('.js-size-result')) {
-        var cards =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        var cards = document.querySelectorAll('.choose-card');
+        cards.forEach(function (card) { return calculatePriseOfSize(card); });
+    }
+    if (document.querySelector(SHOW_CUSTOM_FIELDS)) {
+        showCustomFields();
+    }
+    if (document.querySelector('.page-order')) {
+        Form();
+    }
+    console.log('Page fully loaded');
+});
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM fully loaded and parsed but without images');
+    if (document.querySelector('.header')) {
+        header();
+    }
+});
+
+
+/***/ })
+/******/ ]);
