@@ -19,8 +19,7 @@ function get_theme_path() {
 }
 
 function the_theme_path() {
-    echo get_theme_path();
-    return true;
+    return get_theme_path();
 }
 
 function get_assets_path() {
