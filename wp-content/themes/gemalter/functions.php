@@ -81,6 +81,7 @@ if ( ! function_exists( 'gemalter_setup' ) ) :
 		register_nav_menus(
 			array(
 				'menu-1' => esc_html__( 'Primary', 'gemalter' ),
+                'menu-2' => esc_html__( 'Footer', 'gemalter' ),
 			)
 		);
 
@@ -206,5 +207,39 @@ add_action( 'wp_enqueue_scripts', 'gemalter_scripts' );
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
+}
+
+
+/**
+ * Load lang file.
+ */
+require get_template_directory() . '/inc/lang.php';
+
+/**
+ * Load custom-functions file.
+ */
+require get_template_directory() . '/inc/custom-functions.php';
+
+/**
+ * Load custom-acf file.
+ */
+require get_template_directory() . '/inc/custom_acf.php';
+
+/**
+ * Load custom-posts file.
+ */
+require get_template_directory() . '/inc/custom_posts.php';
+
+/**
+ * Load settings file.
+ */
+require get_template_directory() . '/inc/settings.php';
+
+
+/**
+ * Load WooCommerce compatibility file.
+ */
+if ( class_exists( 'WooCommerce' ) ) {
+    require get_template_directory() . '/inc/woocommerce.php';
 }
 
