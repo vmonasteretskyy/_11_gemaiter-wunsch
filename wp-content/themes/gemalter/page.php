@@ -11,28 +11,36 @@
  *
  * @package Gemalter
  */
-
+global $post;
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+    <!--Start page-->
+    <div class="page-wrapper">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+        <?php get_template_part( 'template-parts/bread'); ?>
 
-			get_template_part( 'template-parts/content', 'page' );
+    <div class="container-small mx-w-1050">
+        <div class="title-wrap m-b-90">
+            <h2 class="">
+                <?php echo $post->post_title; ?>
+            </h2>
+        </div>
+    </div>
+    <div class="text">
+        <div class="text-block section--gray p-150 ">
+            <div class="container mx-w-1050">
+                <?php
+                 //not used
+                 //$post->image = get_the_post_thumbnail_url($post->ID, 'orig');
+                ?>
+                <?php echo wpautop($post->post_content); ?>
+            </div>
+        </div>
+    </div>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
+    </div>
+    <!--End page-->
 
 <?php
-get_sidebar();
 get_footer();

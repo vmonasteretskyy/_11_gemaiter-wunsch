@@ -187,7 +187,7 @@ class Kama_Breadcrumbs {
         'on_front_page'   => true,  // выводить крошки на главной странице
         'show_post_title' => true,  // показывать ли название записи в конце (последний элемент). Для записей, страниц, вложений
         'show_term_title' => true,  // показывать ли название элемента таксономии в конце (последний элемент). Для меток, рубрик и других такс
-        'title_patt'      => '<li>%s</li>', // шаблон для последнего заголовка. Если включено: show_post_title или show_term_title
+        'title_patt'      => '<li class="breadcrumbs__item">%s</li>', // шаблон для последнего заголовка. Если включено: show_post_title или show_term_title
         'last_sep'        => false,  // показывать последний разделитель, когда заголовок в конце не отображается
         'markup'          => 'schema.org', // 'markup' - микроразметка. Может быть: 'rdf.data-vocabulary.org', 'schema.org', '' - без микроразметки
         // или можно указать свой массив разметки:
@@ -240,7 +240,7 @@ class Kama_Breadcrumbs {
             elseif( $mark === 'schema.org' )
             {$mark = array(
                 'wrappatt'   => '%s',
-                'linkpatt'   => '<li><a href="%s" itemprop="item"><span itemprop="name">%s</span><meta itemprop="position" content="$d"></a></li>',
+                'linkpatt'   => '<li class="breadcrumbs__item"><a href="%s" itemprop="item" class="breadcrumbs__link"><span itemprop="name">%s</span><meta itemprop="position" content="$d"></a></li>',
                 'sep_after'  => '',
             );
 
@@ -269,7 +269,7 @@ class Kama_Breadcrumbs {
         // paged
         $arg->pg_end = '';
         if( ($paged_num = get_query_var('paged')) || ($paged_num = get_query_var('page')) ) {
-            $arg->pg_end = $sep . '<li>' .sprintf($loc->paged, (int)$paged_num) . '</li>';
+            $arg->pg_end = $sep . '<li class="breadcrumbs__item">' .sprintf($loc->paged, (int)$paged_num) . '</li>';
         }
 
         $pg_end = $arg->pg_end; // упростим
@@ -285,15 +285,15 @@ class Kama_Breadcrumbs {
             $out = $paged_num ? ( sprintf( $linkpatt, get_permalink($q_obj), esc_html($q_obj->post_title) ) . $pg_end ) : esc_html($q_obj->post_title);
         }
         elseif( is_404() ){
-            $out = '<li>' . $loc->_404 . '</li>';
+            $out = '<li class="breadcrumbs__item">' . $loc->_404 . '</li>';
         }
         elseif( is_search() ){
-            $out = '<li>' . sprintf( $loc->search, esc_html( $GLOBALS['s'] ) ) . '</li>';
+            $out = '<li class="breadcrumbs__item">' . sprintf( $loc->search, esc_html( $GLOBALS['s'] ) ) . '</li>';
         }
         elseif( is_author() ){
             $tit = sprintf( $loc->author, esc_html($q_obj->display_name) );
             $out = ( $paged_num ? sprintf( $linkpatt, get_author_posts_url( $q_obj->ID, $q_obj->user_nicename ) . $pg_end, $tit ) : $tit );
-            $out = '<li>' . $out . '</li>';
+            $out = '<li class="breadcrumbs__item">' . $out . '</li>';
         }
         elseif( is_year() || is_month() || is_day() ){
             $y_url  = get_year_link( $year = get_the_time('Y') );

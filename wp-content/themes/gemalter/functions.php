@@ -172,10 +172,13 @@ add_action( 'widgets_init', 'gemalter_widgets_init' );
  */
 function gemalter_scripts() {
 	wp_enqueue_style( 'gemalter-style', get_template_directory_uri(). '/main.css', _S_VERSION );
+	wp_enqueue_style( 'gemalter-custom-style', get_template_directory_uri(). '/css/custom.css', _S_VERSION );
 	// wp_style_add_data( 'gemalter-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'gemalter-js', get_template_directory_uri() . '/js/bundle.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'gemalter-svgsprite-js', get_template_directory_uri() . '/js/svgsprite.js', array(), _S_VERSION, true );
+
+    wp_enqueue_script( 'gemalter-custom-js', get_template_directory_uri() . '/js/custom.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

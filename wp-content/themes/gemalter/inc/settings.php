@@ -22,7 +22,7 @@ if(function_exists('acf_add_options_page')){
 
 add_action('admin_enqueue_scripts', 'my_admin_css', 99);
 function my_admin_css(){
-    wp_enqueue_style('my-wp-admin', get_template_directory_uri() .'/wp-admin.css' );
+    //wp_enqueue_style('my-wp-admin', get_template_directory_uri() .'/wp-admin.css' );
 }
 
 function custom_find_matching_product_variation( $product, $match_attributes = array() ) {
@@ -361,25 +361,6 @@ function redirect_cart_page() {
 }
 add_action('template_redirect', 'redirect_cart_page');
 
-
-function modify_port_per_page( $query ) {
-    if ( ! is_admin()) {
-        $query->set('posts_per_page', 9);
-    }
-    if ( ! is_admin() && in_array ( $query->get('post_type'), array('product') ) ) {
-        $query->set( 'posts_per_page', 9 );
-    }
-    if ( ! is_admin() && is_category() ) {
-        $query->set( 'posts_per_page', 9 );
-    }
-    if ( ! is_admin() && is_search() ) {
-        $query->set( 'posts_per_page', 9 );
-    }
-    if ( is_post_type_archive( "contact" )) {
-        $query->set( 'posts_per_page', 100 );
-    }
-}
-add_action( 'pre_get_posts', 'modify_port_per_page' );
 
 function add_postmeta_ordering_args( $sort_args ) {
     $orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
@@ -1085,5 +1066,26 @@ function export_products_to_xml() {
     }
 }
 add_action('init', 'export_products_to_xml');
+
+/*old end*/
+/*gemaiter start*/
+
+function modify_port_per_page( $query ) {
+    if ( ! is_admin()) {
+        $query->set('posts_per_page', 10);
+    }
+    /*if ( ! is_admin() && is_category() ) {
+        $query->set( 'posts_per_page', 7 );
+    }
+    if ( ! is_admin() && is_search() ) {
+        $query->set( 'posts_per_page', 7 );
+    }*/
+    if (! is_admin() && $query->get('post_type') == 'gallery') {
+        $query->set( 'posts_per_page', 7 );
+    }
+}
+add_action( 'pre_get_posts', 'modify_port_per_page' );
+
+/*gemaiter end*/
 
 ?>

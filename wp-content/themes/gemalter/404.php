@@ -6,55 +6,25 @@
  *
  * @package Gemalter
  */
-
+$current_lang = pll_current_language();
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+    <!--Start page-->
+    <div class="page-wrapper">
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'gemalter' ); ?></h1>
-			</header><!-- .page-header -->
+        <section class="error">
+            <div class="error__wrapper" style="background-image: url('<?php echo the_theme_path(); ?>/img/background.png')">
+                <div class="error__inner">
+                    <h1 class="error__title"><?php pll_e('Oopps... Something went wrong');?></h1>
+                    <p class="error__description"><?php pll_e('We are already working to fix this error. You can return to the main page to continue working with the site.');?></p>
+                    <a href="<?php the_url( $current_lang == 'de' ? '/de/' : '/');?>" class="error__link btn btn--accent"><?php pll_e('Go to the Main Page');?></a>
+                </div>
+            </div>
+        </section>
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'gemalter' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'gemalter' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$gemalter_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'gemalter' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$gemalter_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+    </div>
+    <!--End page-->
 
 <?php
 get_footer();

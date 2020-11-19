@@ -11,6 +11,7 @@
 
 global $wp;
 global $woocommerce;
+global $post;
 $current_lang = pll_current_language();
 $current_url = str_replace([$current_lang . '/'], '',$wp->request);
 if ($current_url == $current_lang) {
@@ -28,6 +29,29 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO meta tags -->
+    <meta property="og:url" content="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . $wp->request . '/'); ?>" />
+    <meta property="og:type" content="website" />
+    <?php if (isset($post->post_title) && $post->post_title): ?>
+        <meta property="og:title" content="<?php echo $post->post_title;?>" />
+    <?php endif; ?>
+    <?php if (isset($post->post_content) && $post->post_content): ?>
+        <meta property="og:description" content="<?php echo wp_trim_words($post->post_content);?>"/>
+    <?php endif; ?>
+    <?php $post->image = get_the_post_thumbnail_url($post->ID, 'post-thumbnail');?>
+    <?php if ($post->image): ?>
+        <meta property="og:image" content="<?php echo $post->image; ?>" />
+    <?php endif; ?>
+    <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>" />
+    <meta name="twitter:card" content=summary />
+    <?php if (isset($post->post_content) && $post->post_content): ?>
+        <meta name="twitter:description" content="<?php echo wp_trim_words($post->post_content);?>"/>
+    <?php endif; ?>
+    <?php if (isset($post->post_title) && $post->post_title): ?>
+        <meta name="twitter:title" content="<?php echo $post->post_title;?>" />
+    <?php endif; ?>
+    <!--End SEO meta tags -->
 
 	<?php wp_head(); ?>
 
@@ -83,7 +107,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
 
 </head>
 
-<body <?php body_class('fixed-header'); ?>>
+<body data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>
 <?php wp_body_open(); ?>
 
     <!-- Start site wrapper -->
