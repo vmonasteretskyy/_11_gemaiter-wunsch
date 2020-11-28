@@ -1,0 +1,28 @@
+2020-11-24T05:36:43+00:00 CRITICAL syntax error, unexpected '}' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1103
+
+2020-11-24T05:36:50+00:00 CRITICAL syntax error, unexpected '}' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1103
+
+2020-11-24T05:48:45+00:00 CRITICAL Uncaught Error: Call to undefined function test() in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang.php:38
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang-url.php(22): PLL_Choose_Lang->init()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\frontend.php(75): PLL_Choose_Lang_Url->init()
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\include\class-polylang.php(244): PLL_Frontend->init()
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(287): Polylang->init('')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\plugin.php(478): WP_Hook->do_action(Array)
+#6 D:\PROGRAMS\OpenServer\domains\ in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang.php on line 38
+
+2020-11-24T05:48:47+00:00 CRITICAL Uncaught Error: Call to undefined function test() in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang.php:38
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang-url.php(22): PLL_Choose_Lang->init()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\frontend.php(75): PLL_Choose_Lang_Url->init()
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\include\class-polylang.php(244): PLL_Frontend->init()
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(287): Polylang->init('')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#5 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\plugin.php(478): WP_Hook->do_action(Array)
+#6 D:\PROGRAMS\OpenServer\domains\ in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\polylang-pro\vendor\wpsyntex\polylang\frontend\choose-lang.php on line 38
+
+2020-11-24T15:45:29+00:00 CRITICAL syntax error, unexpected ';' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 361
+
+2020-11-24T15:45:31+00:00 CRITICAL syntax error, unexpected ';' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 361
+

@@ -10,8 +10,8 @@ function the_url($url = null) {
 }
 
 function get_url_lang_prefix() {
-    return '/' . pll_current_language() . '';
-    //pll_current_language() == 'uk' ? '' : '/ru'
+    $current_lang = pll_current_language();
+    return ($current_lang == 'de' ? '/de/' : '/');
 }
 
 function get_theme_path() {

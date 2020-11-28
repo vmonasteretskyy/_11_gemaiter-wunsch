@@ -20,9 +20,7 @@ if ($current_url == $current_lang) {
 if ($current_url) {
     $current_url .= '/';
 }
-
 $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option');
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -31,7 +29,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- SEO meta tags -->
-    <meta property="og:url" content="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . $wp->request . '/'); ?>" />
+    <meta property="og:url" content="<?php the_url( (get_url_lang_prefix()) . $wp->request . '/'); ?>" />
     <meta property="og:type" content="website" />
     <?php if (isset($post->post_title) && $post->post_title): ?>
         <meta property="og:title" content="<?php echo $post->post_title;?>" />
@@ -39,9 +37,9 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     <?php if (isset($post->post_content) && $post->post_content): ?>
         <meta property="og:description" content="<?php echo wp_trim_words($post->post_content);?>"/>
     <?php endif; ?>
-    <?php $post->image = get_the_post_thumbnail_url($post->ID, 'post-thumbnail');?>
-    <?php if ($post->image): ?>
-        <meta property="og:image" content="<?php echo $post->image; ?>" />
+    <?php $image = isset($post->ID) && $post->ID ? get_the_post_thumbnail_url($post->ID, 'post-thumbnail') : null;?>
+    <?php if ($image): ?>
+        <meta property="og:image" content="<?php echo $image; ?>" />
     <?php endif; ?>
     <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>" />
     <meta name="twitter:card" content=summary />
@@ -52,10 +50,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
         <meta name="twitter:title" content="<?php echo $post->post_title;?>" />
     <?php endif; ?>
     <!--End SEO meta tags -->
-
 	<?php wp_head(); ?>
-
-
 
   <!-- Template Basic Images Start -->
   <!-- <link rel="icon" href="img/favicon.ico" /> -->
@@ -102,17 +97,13 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
         visibility: hidden;
       }
     }
-
   </style>
-
 </head>
 
 <body data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>
 <?php wp_body_open(); ?>
-
     <!-- Start site wrapper -->
     <div class="site-wrapper">
-
         <!-- Start header -->
         <header class="header" style="top: auto">
             <div class="header-top">
@@ -197,7 +188,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                     <div class="burger__label"><? pll_e('close'); ?></div>
                 </div>
         
-                <a href="<?php the_url( $current_lang == 'de' ? '/de/' : '/');?>" class="logo">
+                <a href="<?php the_url( (get_url_lang_prefix()));?>" class="logo">
                     <img src="<?php echo the_theme_path(); ?>/img/logo.png" alt="logo">
                 </a>
                 <menu>
@@ -226,7 +217,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                                     <?php endforeach; ?>
                                     <?php if($woocommerce->cart->cart_contents_count): ?>
                                         <li>
-                                            <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'cart/'); ?>" class="header-cart">
+                                            <a href="<?php the_url( (get_url_lang_prefix()) . 'cart/'); ?>" class="header-cart">
                                                 <svg>
                                                     <use xlink:href="#icon-cart"></use>
                                                 </svg>
@@ -234,7 +225,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                                         </li>
                                     <?php endif; ?>
                                     <li>
-                                        <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent header-btn"><?php pll_e('Paint my Desire'); ?>
+                                        <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent header-btn"><?php pll_e('Paint my Desire'); ?>
                                             <svg>
                                                 <use xlink:href="#icon-btn-brush"></use>
                                             </svg>
@@ -297,16 +288,14 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                             </div>
                         </div>
                     </nav>
-
                     <?php if($woocommerce->cart->cart_contents_count): ?>
-                        <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'cart/'); ?>" class="header-cart">
+                        <a href="<?php the_url( (get_url_lang_prefix()) . 'cart/'); ?>" class="header-cart">
                             <svg>
                                 <use xlink:href="#icon-cart"></use>
                             </svg>
                         </a>
                     <?php endif; ?>
-        
                 </menu>
             </div>
-        </header>        <!-- End header -->
-
+        </header>
+        <!-- End header -->

@@ -79,7 +79,7 @@ function custom_find_matching_product_variation( $product, $match_attributes = a
     return 0;
 }
 
-function recalculate_product_price() {
+/*function recalculate_product_price() {
     $hasError = false;
     $errorMessage = '';
     $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : 0;
@@ -131,73 +131,7 @@ function recalculate_product_price() {
     wp_die();
 }
 add_action('wp_ajax_recalculate_price', 'recalculate_product_price');
-add_action('wp_ajax_nopriv_recalculate_price', 'recalculate_product_price');
-
-
-function ajax_add_to_cart() {
-    $hasError = false;
-    $errorMessage = '';
-    $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : 0;
-    $product_attributes = isset($_POST['product_attribute']) ? $_POST['product_attribute'] : [];
-    $attributes = [];
-    if ($product_id) {
-        if (isset($product_attributes['pa_size']) && $product_attributes['pa_size']) {
-            $attributes['attribute_pa_size'] = $product_attributes['pa_size'];
-        } else if (isset($product_attributes['pa_size2']) && $product_attributes['pa_size2']) {
-            $attributes['attribute_pa_size2'] = $product_attributes['pa_size2'];
-        }
-        $variation_id = custom_find_matching_product_variation(new \WC_Product($product_id), $attributes);
-        if ($variation_id) {
-            //if exist variant used it
-            $variant = wc_get_product($variation_id);
-            $product = wc_get_product($product_id);
-        } else {
-            //if not exist variant then used original troduct
-            $variant = wc_get_product($product_id);
-            $product = wc_get_product($product_id);
-        }
-    } else {
-        echo json_encode([
-            'has_error' => true,
-            'error_message' => pll__('Сталась помилка. Продукт не знайдено.')
-        ]);
-        wp_die();
-    }
-    $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
-    $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
-    $product_status = get_post_status($product_id);
-
-    //there will be attributes
-    $cart_item_data['attributes'] = $product_attributes;
-    $cart_item_data['price'] = $variant->get_price();
-
-    $variation = wc_get_product_variation_attributes( $variation_id );
-    if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data) && 'publish' === $product_status) {
-        do_action('woocommerce_ajax_added_to_cart', $product_id);
-    } else {
-        echo json_encode([
-            'has_error' => true,
-            'error_message' => pll__('Сталась помилка. Продукт не може бути доданий в корзину.')
-        ]);
-        wp_die();
-    }
-    $args = [
-        'prod_id' => $product_id,
-        'var_id' => $variation_id,
-
-    ];
-    $html = wc_get_template_html('single-product/cart_popup.php', $args, "", get_template_directory_uri() . "/woocommerce/");
-
-    echo json_encode([
-        'has_error' => false,
-        'redirect_link' => esc_url(get_url_lang_prefix() . '/checkout/'),
-        'html' => $html,
-        'total_products' => WC()->cart->get_cart_contents_count(),
-    ]);
-    wp_die();
-}
-add_action('wp_ajax_ajax_add_to_cart', 'ajax_add_to_cart');
-add_action('wp_ajax_nopriv_ajax_add_to_cart', 'ajax_add_to_cart');
+add_action('wp_ajax_nopriv_recalculate_price', 'recalculate_product_price');*/
 
 add_filter( 'woocommerce_add_cart_item', function( $cart_item )
 {
@@ -324,7 +258,7 @@ add_action('wp_ajax_set_quantity', 'set_quantity');
 add_action('wp_ajax_nopriv_set_quantity', 'set_quantity');
 
 
-function redirect_cart_page() {
+/*function redirect_cart_page() {
     if (is_checkout() && !is_wc_endpoint_url( 'order-received' )) {
         $totalCartItems = WC()->cart->get_cart_contents_count();
         if (!$totalCartItems) {
@@ -359,48 +293,7 @@ function redirect_cart_page() {
 
     }
 }
-add_action('template_redirect', 'redirect_cart_page');
-
-
-function add_postmeta_ordering_args( $sort_args ) {
-    $orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-    switch( $orderby_value ) {
-        // Name your sortby key whatever you'd like; must correspond to the $sortby in the next function
-        case 'is_new':
-            $sort_args['orderby']  = 'meta_value_num';
-            // Sort by meta_value because we're using alphabetic sorting
-            $sort_args['order']    = 'desc';
-            $sort_args['meta_key'] = 'is_new';
-            // use the meta key you've set for your custom field, i.e., something like "location" or "_wholesale_price"
-            break;
-
-        case 'is_promo':
-            $sort_args['orderby'] = 'meta_value_num';
-            // We use meta_value_num here because points are a number and we want to sort in numerical order
-            $sort_args['order'] = 'desc';
-            $sort_args['meta_key'] = 'is_promo';
-            break;
-
-    }
-
-    return $sort_args;
-}
-add_filter( 'woocommerce_get_catalog_ordering_args', 'add_postmeta_ordering_args' );
-
-
-/* NOT sure if this is needed
-// Add these new sorting arguments to the sortby options on the frontend
-function add_new_postmeta_orderby( $sortby ) {
-
-    // Adjust the text as desired
-    $sortby['location'] = __( 'Sort by location', 'woocommerce' );
-    $sortby['points_awarded'] = __( 'Sort by points for purchase', 'woocommerce' );
-
-    return $sortby;
-}
-add_filter( 'woocommerce_default_catalog_orderby_options', 'add_new_postmeta_orderby' );
-add_filter( 'woocommerce_catalog_orderby', 'add_new_postmeta_orderby' );
-*/
+add_action('template_redirect', 'redirect_cart_page');*/
 
 function woocommerce_after_checkout_validation_function( $data, $errors ){
     unset($errors->errors['shipping']);
@@ -412,679 +305,215 @@ add_filter('woocommerce_add_error', function ($message){
     return $message;
 }, 20, 3);
 
-/*Export orders to xlsx start */
-function export_products_to_xml_btn() {
-    $screen = get_current_screen();
-
-    if ( $screen->id != "edit-product" )   // Only add to products page
-        return;
-    ?>
-    <script type="text/javascript">
-        jQuery(document).ready( function($)
-        {
-            $('#wpbody-content .wp-header-end').before('<form action="#" style="display:inline-block;" method="POST" target="_blank"><input type="hidden" id="swd_products_export_xml" name="download" value="1" /><input type="hidden" id="swd_products_export_xml" name="swd_products_export_xml" value="1" /><input class="page-title-action" style="" type="submit" value="<?php esc_attr_e('Експорт XML', 'mytheme');?>" /></form>');
-        });
-    </script>
-    <?php
-}
-add_action('admin_footer', 'export_products_to_xml_btn');
-
-function export_products_to_xml() {
-    if ((isset($_POST['swd_products_export_xml']) && !empty($_POST['swd_products_export_xml'])) || isset($_GET['export_products_xml'])) {
-        $records = [];
-        $args = array(
-            'paginate' => false,
-            'limit' => -1,
-        );
-
-        $xml = '';
-        $xml .= "<?xml version='1.0' encoding='utf-8'?>\n";
-        $xml .= "<rss version='2.0' xmlns:g='http://base.google.com/ns/1.0'>\n";
-	    $xml .= "\t<channel>\n";
-        $xml .= "\t\t<title>swd products XML</title>\n";
-        $xml .= "\t\t<link>" . get_url('/') . "</link>\n";
-		$xml .= "\t\t<description>swd products XML</description>\n";
-
-        $products = wc_get_products($args);
-        if (!empty($products)) {
-            foreach ($products as $product) {
-                if (!$product) continue;
-                //simple, variable, external, grouped
-                $product_type = $product->get_type();
-                $product_status = $product->get_status();
-                if ($product_status != 'publish') continue;
-                if (!$product_type) continue;
-
-                $image = get_the_post_thumbnail_url($product->get_id(), 'orig');
-                $product_slug = $product->get_slug();
-                $product_slug = get_url((get_url_lang_prefix()) .  '/product/' . $product_slug . '/');
-                $benefits = get_field('benefits', $product->get_id());
-                $specifications = get_field('specifications', $product->get_id());
-                $other_specifications = get_field('other_specifications', $product->get_id());
-                switch ($product_type) {
-                    case 'simple':
-                        /*
-                        $xml .= "\t\t<item>\n";
-                        $xml .= "\t\t\t<g:id>" . $product->get_id() . "</g:id>\n";
-                        $xml .= "\t\t\t<sku>" . $product->get_sku() . "</sku>\n";
-                        $xml .= "\t\t\t<title>" . $product->get_name() . "</title>\n";
-                        $xml .= "\t\t\t<g:product_type>" . $product->get_type() . "</g:product_type>\n";
-                        if ($product->get_description()) {
-                            $xml .= "\t\t\t<description>" . $product->get_description() . "</description>\n";
-                        }
-                        if ($product_slug) {
-                            $xml .= "\t\t\t<link>" . $product_slug . "</link>\n";
-                        }
-                        if ($image) {
-                            $xml .= "\t\t\t<g:image_link>" . $image . "</g:image_link>\n";
-                        }
-                        if ($product->get_price()) {
-                            $xml .= "\t\t\t<g:price>" . $product->get_price() . "</g:price>\n";
-                        }
-                        if ($product->get_sale_price()) {
-                            $xml .= "\t\t\t<g:sale_price>" . $product->get_sale_price() . "</g:sale_price>\n";
-                        }
-                        if ($product->get_categories()) {
-                            $xml .= "\t\t\t<g:google_product_category>" . strip_tags($product->get_categories()) . "</g:google_product_category>\n";
-                        }
-                        if ($product->get_parent_id()) {
-                            $xml .= "\t\t\t<g:item_group_id>" . $product->get_parent_id() . "</g:item_group_id>\n";
-                        }
-                        */
-                        $xml .= "\t\t<item>\n";
-                        $xml .= "\t\t\t<id>" . $product->get_id() . "</id>\n";
-                        $xml .= "\t\t\t<sku>" . $product->get_sku() . "</sku>\n";
-                        $xml .= "\t\t\t<title>" . $product->get_name() . "</title>\n";
-                        $xml .= "\t\t\t<product_type>" . $product->get_type() . "</product_type>\n";
-
-                        if ($product->get_description()) {
-                            $xml .= "\t\t\t<description>" . $product->get_description() . "</description>\n";
-                        }
-                        if ($product_slug) {
-                            $xml .= "\t\t\t<link>" . $product_slug . "</link>\n";
-                        }
-                        if ($image) {
-                            $xml .= "\t\t\t<image_link>" . $image . "</image_link>\n";
-                        }
-                        if ($product->get_price()) {
-                            $xml .= "\t\t\t<price>" . $product->get_price() . "</price>\n";
-                        }
-                        if ($product->get_sale_price()) {
-                            $xml .= "\t\t\t<sale_price>" . $product->get_sale_price() . "</sale_price>\n";
-                        }
-                        /*if ($product->get_categories()) {
-                            $xml .= "\t\t\t<categories>" . strip_tags($product->get_categories()) . "</categories>\n";
-                        }*/
-                        if ($product->get_category_ids() && !empty($product->get_category_ids())) {
-                            $xml .= "\t\t\t<category_ids>" . implode(',', $product->get_category_ids()) . "</category_ids>\n";
-                            $categories = $product->get_category_ids();
-                            if ($categories) {
-                                $xml .= "\t\t\t<categories>";
-                                foreach ($categories as $categoryID) {
-                                    $category = get_term_by('id', $categoryID, 'product_cat');
-                                    if ($category) {
-                                        $xml .= "\t\t\t\t<category>\n";
-                                        $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                        $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                        $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                        $xml .= "\t\t\t\t</category>\n";
-                                    }
-                                }
-                                $xml .= "\t\t\t</categories>\n";
-                            }
-                        }
-                        if ($product->get_parent_id()) {
-                            $xml .= "\t\t\t<group_id>" . $product->get_parent_id() . "</group_id>\n";
-                        }
-                        $xml .= "\t\t\t<product_detail>\n";
-                        if ($benefits) {
-                            $xml .= "\t\t\t\t<benefits>";
-                            foreach ($benefits as $benefit) {
-                                if ($benefit['title']) {
-                                    $xml .= "\t\t\t\t\t<benefit>\n";
-                                    $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                    $xml .= "\t\t\t\t\t</benefit>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</benefits>\n";
-                        }
-                        if ($specifications) {
-                            $xml .= "\t\t\t\t<specifications>";
-                            foreach ($specifications as $specification) {
-                                if ($specification['title']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</specifications>\n";
-                        }
-                        if ($other_specifications) {
-                            $xml .= "\t\t\t\t<other_specifications>";
-                            foreach ($other_specifications as $specification) {
-                                if ($specification['name']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</other_specifications>\n";
-                        }
-                        $xml .= "\t\t\t</product_detail>\n";
-                        $xml .= "\t\t</item>\n";
-                        break;
-                    case 'variable':
-                        $xml .= "\t\t<item>\n";
-                        $xml .= "\t\t\t<id>" . $product->get_id() . "</id>\n";
-                        $xml .= "\t\t\t<sku>" . $product->get_sku() . "</sku>\n";
-                        $xml .= "\t\t\t<title>" . $product->get_name() . "</title>\n";
-                        $xml .= "\t\t\t<product_type>" . $product->get_type() . "</product_type>\n";
-                        if ($product->get_description()) {
-                            $xml .= "\t\t\t<description>" . $product->get_description() . "</description>\n";
-                        }
-                        if ($product_slug) {
-                            $xml .= "\t\t\t<link>" . $product_slug . "</link>\n";
-                        }
-                        if ($image) {
-                            $xml .= "\t\t\t<image_link>" . $image . "</image_link>\n";
-                        }
-                        if ($product->get_price()) {
-                            $xml .= "\t\t\t<price>" . $product->get_price() . "</price>\n";
-                        }
-                        if ($product->get_sale_price()) {
-                            $xml .= "\t\t\t<sale_price>" . $product->get_sale_price() . "</sale_price>\n";
-                        }
-                        /*if ($product->get_categories()) {
-                            $xml .= "\t\t\t<categories>" . strip_tags($product->get_categories()) . "</categories>\n";
-                        }*/
-                        if ($product->get_category_ids() && !empty($product->get_category_ids())) {
-                            $xml .= "\t\t\t<category_ids>" . implode(',', $product->get_category_ids()) . "</category_ids>\n";
-                            $categories = $product->get_category_ids();
-                            if ($categories) {
-                                $xml .= "\t\t\t<categories>";
-                                foreach ($categories as $categoryID) {
-                                    $category = get_term_by('id', $categoryID, 'product_cat');
-                                    if ($category) {
-                                        $xml .= "\t\t\t\t<category>\n";
-                                        $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                        $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                        $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                        $xml .= "\t\t\t\t</category>\n";
-                                    }
-                                }
-                                $xml .= "\t\t\t</categories>\n";
-                            }
-                        }
-                        if ($product->get_parent_id()) {
-                            $xml .= "\t\t\t<group_id>" . $product->get_parent_id() . "</group_id>\n";
-                        }
-                        $xml .= "\t\t\t<product_detail>\n";
-                        if ($benefits) {
-                            $xml .= "\t\t\t\t<benefits>";
-                            foreach ($benefits as $benefit) {
-                                if ($benefit['title']) {
-                                    $xml .= "\t\t\t\t\t<benefit>\n";
-                                    $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                    $xml .= "\t\t\t\t\t</benefit>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</benefits>\n";
-                        }
-                        if ($specifications) {
-                            $xml .= "\t\t\t\t<specifications>";
-                            foreach ($specifications as $specification) {
-                                if ($specification['title']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</specifications>\n";
-                        }
-                        if ($other_specifications) {
-                            $xml .= "\t\t\t\t<other_specifications>";
-                            foreach ($other_specifications as $specification) {
-                                if ($specification['name']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</other_specifications>\n";
-                        }
-                        $xml .= "\t\t\t</product_detail>\n";
-                        $xml .= "\t\t</item>\n";
-
-                        $child_products = $product->get_children();
-                        if ($child_products) {
-                            foreach ($child_products as $child_product_id) {
-                                $child_product = wc_get_product($child_product_id);
-                                $child_image = get_the_post_thumbnail_url($child_product->get_id(), 'orig');
-                                if (isset($child_product->get_attributes()['pa_size'])) {
-                                    $child_product_slug = $product_slug . '?attribute_pa_size=' . $child_product->get_attributes()['pa_size'];
-                                }else if (isset($child_product->get_attributes()['pa_size2'])) {
-                                    $child_product_slug = $product_slug . '?attribute_pa_size2=' . $child_product->get_attributes()['pa_size2'];
-                                } else {
-                                    $child_product_slug = $product_slug;
-                                }
-
-                                $xml .= "\t\t<item>\n";
-                                $xml .= "\t\t\t<id>" . $child_product->get_id() . "</id>\n";
-                                $xml .= "\t\t\t<sku>" . $child_product->get_sku() . "</sku>\n";
-                                $xml .= "\t\t\t<title>" . $child_product->get_name() . "</title>\n";
-                                $xml .= "\t\t\t<product_type>" . $child_product->get_type() . "</product_type>\n";
-                                if ($child_product->get_description()) {
-                                    $xml .= "\t\t\t<description>" . $child_product->get_description() . "</description>\n";
-                                }
-                                if ($child_product_slug) {
-                                    $xml .= "\t\t\t<link>" . $child_product_slug . "</link>\n";
-                                }
-                                if ($child_image) {
-                                    $xml .= "\t\t\t<image_link>" . $child_image . "</image_link>\n";
-                                }
-                                if ($child_product->get_price()) {
-                                    $xml .= "\t\t\t<price>" . $child_product->get_price() . "</price>\n";
-                                }
-                                if ($child_product->get_sale_price()) {
-                                    $xml .= "\t\t\t<sale_price>" . $child_product->get_sale_price() . "</sale_price>\n";
-                                }
-                                /*if ($child_product->get_categories()) {
-                                    $xml .= "\t\t\t<categories>" . strip_tags($child_product->get_categories()) . "</categories>\n";
-                                }*/
-                                if ($child_product->get_category_ids() && !empty($child_product->get_category_ids())) {
-                                    $xml .= "\t\t\t<category_ids>" . implode(',', $child_product->get_category_ids()) . "</category_ids>\n";
-                                    $categories = $child_product->get_category_ids();
-                                    if ($categories) {
-                                        $xml .= "\t\t\t<categories>";
-                                        foreach ($categories as $categoryID) {
-                                            $category = get_term_by('id', $categoryID, 'product_cat');
-                                            if ($category) {
-                                                $xml .= "\t\t\t\t<category>\n";
-                                                $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                                $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                                $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                                $xml .= "\t\t\t\t</category>\n";
-                                            }
-                                        }
-                                        $xml .= "\t\t\t</categories>\n";
-                                    }
-                                }
-                                if ($child_product->get_parent_id()) {
-                                    $xml .= "\t\t\t<group_id>" . $child_product->get_parent_id() . "</group_id>\n";
-                                }
-                                $xml .= "\t\t\t<product_detail>\n";
-                                if ($benefits) {
-                                    $xml .= "\t\t\t\t<benefits>";
-                                    foreach ($benefits as $benefit) {
-                                        if ($benefit['title']) {
-                                            $xml .= "\t\t\t\t\t<benefit>\n";
-                                            $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                            $xml .= "\t\t\t\t\t</benefit>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</benefits>\n";
-                                }
-                                if ($specifications) {
-                                    $xml .= "\t\t\t\t<specifications>";
-                                    foreach ($specifications as $specification) {
-                                        if ($specification['title']) {
-                                            $xml .= "\t\t\t\t\t<specification>";
-                                            $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                            $xml .= "\t\t\t\t\t</specification>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</specifications>\n";
-                                }
-                                if ($other_specifications) {
-                                    $xml .= "\t\t\t\t<other_specifications>";
-                                    foreach ($other_specifications as $specification) {
-                                        if ($specification['name']) {
-                                            $xml .= "\t\t\t\t\t<specification>";
-                                            $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                            $xml .= "\t\t\t\t\t</specification>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</other_specifications>\n";
-                                }
-                                $xml .= "\t\t\t</product_detail>\n";
-                                $xml .= "\t\t</item>\n";
-                            }
-                        }
-                        //get_children
-                        //get_available_variation
-                        break;
-                    case 'external':
-                        $xml .= "\t\t<item>\n";
-                        $xml .= "\t\t\t<id>" . $product->get_id() . "</id>\n";
-                        $xml .= "\t\t\t<sku>" . $product->get_sku() . "</sku>\n";
-                        $xml .= "\t\t\t<title>" . $product->get_name() . "</title>\n";
-                        $xml .= "\t\t\t<product_type>" . $product->get_type() . "</product_type>\n";
-                        if ($product->get_description()) {
-                            $xml .= "\t\t\t<description>" . $product->get_description() . "</description>\n";
-                        }
-                        if ($product_slug) {
-                            $xml .= "\t\t\t<link>" . $product_slug . "</link>\n";
-                        }
-                        if ($image) {
-                            $xml .= "\t\t\t<image_link>" . $image . "</image_link>\n";
-                        }
-                        if ($product->get_price()) {
-                            $xml .= "\t\t\t<price>" . $product->get_price() . "</price>\n";
-                        }
-                        if ($product->get_sale_price()) {
-                            $xml .= "\t\t\t<sale_price>" . $product->get_sale_price() . "</sale_price>\n";
-                        }
-                        /*if ($product->get_categories()) {
-                            $xml .= "\t\t\t<categories>" . strip_tags($product->get_categories()) . "</categories>\n";
-                        }*/
-                        if ($product->get_category_ids() && !empty($product->get_category_ids())) {
-                            $xml .= "\t\t\t<category_ids>" . implode(',', $product->get_category_ids()) . "</category_ids>\n";
-                            $categories = $product->get_category_ids();
-                            if ($categories) {
-                                $xml .= "\t\t\t<categories>";
-                                foreach ($categories as $categoryID) {
-                                    $category = get_term_by('id', $categoryID, 'product_cat');
-                                    if ($category) {
-                                        $xml .= "\t\t\t\t<category>\n";
-                                        $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                        $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                        $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                        $xml .= "\t\t\t\t</category>\n";
-                                    }
-                                }
-                                $xml .= "\t\t\t</categories>\n";
-                            }
-                        }
-                        if ($product->get_parent_id()) {
-                            $xml .= "\t\t\t<group_id>" . $product->get_parent_id() . "</group_id>\n";
-                        }
-                        if ($product->get_product_url()) {
-                            $xml .= "\t\t\t<product_url>" . $product->get_product_url() . "</product_url>\n";
-                        }
-                        if ($product->get_button_text()) {
-                            $xml .= "\t\t\t<button_text>" . $product->get_button_text() . "</button_text>\n";
-                        }
-                        $xml .= "\t\t\t<product_detail>\n";
-                        if ($benefits) {
-                            $xml .= "\t\t\t\t<benefits>";
-                            foreach ($benefits as $benefit) {
-                                if ($benefit['title']) {
-                                    $xml .= "\t\t\t\t\t<benefit>\n";
-                                    $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                    $xml .= "\t\t\t\t\t</benefit>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</benefits>\n";
-                        }
-                        if ($specifications) {
-                            $xml .= "\t\t\t\t<specifications>";
-                            foreach ($specifications as $specification) {
-                                if ($specification['title']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</specifications>\n";
-                        }
-                        if ($other_specifications) {
-                            $xml .= "\t\t\t\t<other_specifications>";
-                            foreach ($other_specifications as $specification) {
-                                if ($specification['name']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</other_specifications>\n";
-                        }
-                        $xml .= "\t\t\t</product_detail>\n";
-                        $xml .= "\t\t</item>\n";
-                        //get_product_url
-                        //get_button_text
-                        break;
-                    case 'grouped':
-                        $xml .= "\t\t<item>\n";
-                        $xml .= "\t\t\t<id>" . $product->get_id() . "</id>\n";
-                        $xml .= "\t\t\t<sku>" . $product->get_sku() . "</sku>\n";
-                        $xml .= "\t\t\t<title>" . $product->get_name() . "</title>\n";
-                        $xml .= "\t\t\t<product_type>" . $product->get_type() . "</product_type>\n";
-                        if ($product->get_description()) {
-                            $xml .= "\t\t\t<description>" . $product->get_description() . "</description>\n";
-                        }
-                        if ($product_slug) {
-                            $xml .= "\t\t\t<link>" . $product_slug . "</link>\n";
-                        }
-                        if ($image) {
-                            $xml .= "\t\t\t<image_link>" . $image . "</image_link>\n";
-                        }
-                        if ($product->get_price()) {
-                            $xml .= "\t\t\t<price>" . $product->get_price() . "</price>\n";
-                        }
-                        if ($product->get_sale_price()) {
-                            $xml .= "\t\t\t<sale_price>" . $product->get_sale_price() . "</sale_price>\n";
-                        }
-                        /*if ($product->get_categories()) {
-                            $xml .= "\t\t\t<categories>" . strip_tags($product->get_categories()) . "</categories>\n";
-                        }*/
-                        if ($product->get_category_ids() && !empty($product->get_category_ids())) {
-                            $xml .= "\t\t\t<category_ids>" . implode(',', $product->get_category_ids()) . "</category_ids>\n";
-                            $categories = $product->get_category_ids();
-                            if ($categories) {
-                                $xml .= "\t\t\t<categories>";
-                                foreach ($categories as $categoryID) {
-                                    $category = get_term_by('id', $categoryID, 'product_cat');
-                                    if ($category) {
-                                        $xml .= "\t\t\t\t<category>\n";
-                                        $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                        $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                        $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                        $xml .= "\t\t\t\t</category>\n";
-                                    }
-                                }
-                                $xml .= "\t\t\t</categories>\n";
-                            }
-                        }
-                        if ($product->get_parent_id()) {
-                            $xml .= "\t\t\t<group_id>" . $product->get_parent_id() . "</group_id>\n";
-                        }
-                        $xml .= "\t\t\t<product_detail>\n";
-                        if ($benefits) {
-                            $xml .= "\t\t\t\t<benefits>";
-                            foreach ($benefits as $benefit) {
-                                if ($benefit['title']) {
-                                    $xml .= "\t\t\t\t\t<benefit>\n";
-                                    $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                    $xml .= "\t\t\t\t\t</benefit>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</benefits>\n";
-                        }
-                        if ($specifications) {
-                            $xml .= "\t\t\t\t<specifications>";
-                            foreach ($specifications as $specification) {
-                                if ($specification['title']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</specifications>\n";
-                        }
-                        if ($other_specifications) {
-                            $xml .= "\t\t\t\t<other_specifications>";
-                            foreach ($other_specifications as $specification) {
-                                if ($specification['name']) {
-                                    $xml .= "\t\t\t\t\t<specification>";
-                                    $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                    $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                    $xml .= "\t\t\t\t\t</specification>\n";
-                                }
-                            }
-                            $xml .= "\t\t\t\t</other_specifications>\n";
-                        }
-                        $xml .= "\t\t\t</product_detail>\n";
-                        $xml .= "\t\t</item>\n";
-
-                        $child_products = $product->get_children();
-                        if ($child_products) {
-                            foreach ($child_products as $child_product_id) {
-                                $child_product = wc_get_product($child_product_id);
-                                if (!$child_product) continue;
-                                $child_product_status = $child_product->get_status();
-                                if ($child_product_status != 'publish') continue;
-                                $child_image = get_the_post_thumbnail_url($child_product->get_id(), 'orig');
-                                $child_product_slug = $child_product->get_slug();
-                                $child_product_slug = get_url((get_url_lang_prefix()) .  '/product/' . $product_slug . '/');
-
-                                $child_benefits = get_field('benefits', $child_product->get_id());
-                                $child_specifications = get_field('specifications', $child_product->get_id());
-                                $child_other_specifications = get_field('other_specifications', $child_product->get_id());
-
-                                $xml .= "\t\t<item>\n";
-                                $xml .= "\t\t\t<id>" . $child_product->get_id() . "</id>\n";
-                                $xml .= "\t\t\t<sku>" . $child_product->get_sku() . "</sku>\n";
-                                $xml .= "\t\t\t<title>" . $child_product->get_name() . "</title>\n";
-                                $xml .= "\t\t\t<product_type>" . $child_product->get_type() . "</product_type>\n";
-                                if ($child_product->get_description()) {
-                                    $xml .= "\t\t\t<description>" . $child_product->get_description() . "</description>\n";
-                                }
-                                if ($child_product_slug) {
-                                    $xml .= "\t\t\t<link>" . $child_product_slug . "</link>\n";
-                                }
-                                if ($child_image) {
-                                    $xml .= "\t\t\t<image_link>" . $child_image . "</image_link>\n";
-                                }
-                                if ($child_product->get_price()) {
-                                    $xml .= "\t\t\t<price>" . $child_product->get_price() . "</price>\n";
-                                }
-                                if ($child_product->get_sale_price()) {
-                                    $xml .= "\t\t\t<sale_price>" . $child_product->get_sale_price() . "</sale_price>\n";
-                                }
-                                /*if ($child_product->get_categories()) {
-                                    $xml .= "\t\t\t<categories>" . strip_tags($child_product->get_categories()) . "</categories>\n";
-                                }*/
-                                if ($child_product->get_category_ids() && !empty($child_product->get_category_ids())) {
-                                    $xml .= "\t\t\t<category_ids>" . implode(',', $child_product->get_category_ids()) . "</category_ids>\n";
-                                    $categories = $child_product->get_category_ids();
-                                    if ($categories) {
-                                        $xml .= "\t\t\t<categories>";
-                                        foreach ($categories as $categoryID) {
-                                            $category = get_term_by('id', $categoryID, 'product_cat');
-                                            if ($category) {
-                                                $xml .= "\t\t\t\t<category>\n";
-                                                $xml .= "\t\t\t\t\t<category_id>" . $category->term_id . "</category_id>\n";
-                                                $xml .= "\t\t\t\t\t<category_title>" . $category->name . "</category_title>\n";
-                                                $xml .= "\t\t\t\t\t<category_link>" . get_url((get_url_lang_prefix()) .  '/product-category/' . $category->slug . '/') . "</category_link>\n";
-                                                $xml .= "\t\t\t\t</category>\n";
-                                            }
-                                        }
-                                        $xml .= "\t\t\t</categories>\n";
-                                    }
-                                }
-                                if ($child_product->get_parent_id()) {
-                                    $xml .= "\t\t\t<group_id>" . $child_product->get_parent_id() . "</group_id>\n";
-                                }
-                                $xml .= "\t\t\t<product_detail>\n";
-                                if ($child_benefits) {
-                                    $xml .= "\t\t\t\t<benefits>";
-                                    foreach ($child_benefits as $benefit) {
-                                        if ($benefit['title']) {
-                                            $xml .= "\t\t\t\t\t<benefit>\n";
-                                            $xml .= "\t\t\t\t\t\t<benefit_title>" . $benefit['title'] . "</benefit_title>\n";
-                                            $xml .= "\t\t\t\t\t</benefit>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</benefits>\n";
-                                }
-                                if ($child_specifications) {
-                                    $xml .= "\t\t\t\t<specifications>";
-                                    foreach ($child_specifications as $specification) {
-                                        if ($specification['title']) {
-                                            $xml .= "\t\t\t\t\t<specification>";
-                                            $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['title'] . "</specification_title>\n";
-                                            $xml .= "\t\t\t\t\t</specification>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</specifications>\n";
-                                }
-                                if ($child_other_specifications) {
-                                    $xml .= "\t\t\t\t<other_specifications>";
-                                    foreach ($child_other_specifications as $specification) {
-                                        if ($specification['name']) {
-                                            $xml .= "\t\t\t\t\t<specification>";
-                                            $xml .= "\t\t\t\t\t\t<specification_title>" . $specification['name'] . "</specification_title>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_units>" . $specification['units'] . "</specification_units>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_indicators>" . $specification['indicators'] . "</specification_indicators>\n";
-                                            $xml .= "\t\t\t\t\t\t<specification_standard>" . $specification['standart'] . "</specification_standard>\n";
-                                            $xml .= "\t\t\t\t\t</specification>\n";
-                                        }
-                                    }
-                                    $xml .= "\t\t\t\t</other_specifications>\n";
-                                }
-                                $xml .= "\t\t\t</product_detail>\n";
-                                $xml .= "\t\t</item>\n";
-                            }
-                        }
-                        //get_children
-                        break;
-                }
-                if ($product) {
-
-                }
-            }
-        }
-        $xml .= "\t</channel>\n";
-        $xml .= "</rss>";
-
-        header("Content-type: text/xml; charset=utf-8");
-        $saveFile = isset($_REQUEST['download']) && $_REQUEST['download'] ? true : false;
-        if ($saveFile) {
-            header('Content-Disposition: attachment; filename="products-' . date("YmdHis") . '.xml"');
-            header('Cache-Control: max-age=0');// If you're serving to IE over SSL, then the following may be needed
-            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-            header('Pragma: no-cache, public'); // HTTP/1.0
-        }
-        echo $xml;
-        exit;
-    }
-}
-add_action('init', 'export_products_to_xml');
-
 /*old end*/
-/*gemaiter start*/
 
+/*gemaiter start*/
+// posts per page
 function modify_port_per_page( $query ) {
     if ( ! is_admin()) {
         $query->set('posts_per_page', 10);
     }
-    /*if ( ! is_admin() && is_category() ) {
-        $query->set( 'posts_per_page', 7 );
+    if ( ! is_admin() && is_home() && $query->get('post_type') != 'acf-field') {
+        $query->set('posts_per_page', 4);
     }
-    if ( ! is_admin() && is_search() ) {
-        $query->set( 'posts_per_page', 7 );
-    }*/
+    if (! is_admin() && $query->get('post_type') == 'post') {
+        $query->set( 'posts_per_page', 4);
+    }
+    if ( ! is_admin() && is_category()) {
+        $query->set( 'posts_per_page', 4);
+    }
     if (! is_admin() && $query->get('post_type') == 'gallery') {
-        $query->set( 'posts_per_page', 7 );
+        $query->set( 'posts_per_page', 7);
     }
+    //wp_title();
 }
 add_action( 'pre_get_posts', 'modify_port_per_page' );
+
+//translate title tag
+function custom_theme_titles( $titleparts ) {
+    $titleparts['title'] = pll__($titleparts['title']);
+    return $titleparts;
+}
+add_filter( 'document_title_parts', 'custom_theme_titles', PHP_INT_MAX );
+
+// setting default language on site
+function set_pll_preferred_language() {
+    if (!isset($_COOKIE[PLL_COOKIE])) {
+        $langSlug = 'de';
+        $lang = PLL()->model->get_language( $langSlug );
+        PLL()->curlang = $lang;
+        setcookie(
+            PLL_COOKIE,
+            $langSlug,
+            strtotime('+1 year'),
+            COOKIEPATH,
+            COOKIE_DOMAIN,
+            is_ssl()
+        );
+        wp_redirect('/?lang=' . $langSlug);
+    }
+}
+//add_action( 'init', 'set_pll_preferred_language', 1);
+
+function ajax_add_to_cart_gift_card() {
+    $current_lang = pll_current_language();
+    $productSlug = 'gift-card';
+    $product = null;
+    if ($productObject = get_page_by_path( 'gift-card', OBJECT, 'product' )) {
+        $product = wc_get_product($productObject->ID);
+    }
+    $product_id = $product ? $product->get_id() : 0;
+    $hasError = false;
+    $errorMessage = '';
+    $attributes = [
+        'gift_amount',
+        'gift_currency',
+        'gift_sender_name',
+        'gift_recipient_name',
+        'gift_message',
+    ];
+    $product_attributes = [];
+    foreach ($attributes as $attribute) {
+        $product_attributes[$attribute] = isset($_REQUEST[$attribute]) ? trim($_REQUEST[$attribute]) : null;
+    }
+    if (!$product) {
+        echo json_encode([
+            'has_error' => true,
+            'error_message' => pll__('An error occurred. Product not found.')
+        ]);
+        wp_die();
+    }
+    $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+    $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+    $product_status = get_post_status($product_id);
+
+    $price = 0;
+    if (isset($product_attributes['gift_amount']) && $product_attributes['gift_amount']) {
+        $price = $product_attributes['gift_amount'];
+    }
+    //there will be attributes
+    $cart_item_data['attributes'] = $product_attributes;
+    $cart_item_data['price'] = $price;
+
+    $variation_id = 0;
+    $variation = wc_get_product_variation_attributes( $variation_id );
+
+    if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data) && 'publish' === $product_status) {
+        do_action('woocommerce_ajax_added_to_cart', $product_id);
+    } else {
+        echo json_encode([
+            'has_error' => true,
+            'error_message' => pll__('An error occurred. The product cannot be added to the cart.')
+        ]);
+        wp_die();
+    }
+
+    echo json_encode([
+        'has_error' => false,
+        'redirect_link' => esc_url((get_url_lang_prefix()) . 'cart/'),
+        'total_products' => WC()->cart->get_cart_contents_count(),
+    ]);
+    wp_die();
+}
+add_action('wp_ajax_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
+add_action('wp_ajax_nopriv_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
+
+/*function ajax_add_to_cart2() {
+    test($_REQUEST);
+    $hasError = false;
+    $errorMessage = '';
+    $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : 0;
+    $product_attributes = isset($_POST['product_attribute']) ? $_POST['product_attribute'] : [];
+    $attributes = [];
+    if ($product_id) {
+        if (isset($product_attributes['pa_size']) && $product_attributes['pa_size']) {
+            $attributes['attribute_pa_size'] = $product_attributes['pa_size'];
+        } else if (isset($product_attributes['pa_size2']) && $product_attributes['pa_size2']) {
+            $attributes['attribute_pa_size2'] = $product_attributes['pa_size2'];
+        }
+        $variation_id = custom_find_matching_product_variation(new \WC_Product($product_id), $attributes);
+        if ($variation_id) {
+            //if exist variant used it
+            $variant = wc_get_product($variation_id);
+            $product = wc_get_product($product_id);
+        } else {
+            //if not exist variant then used original troduct
+            $variant = wc_get_product($product_id);
+            $product = wc_get_product($product_id);
+        }
+    } else {
+        echo json_encode([
+            'has_error' => true,
+            'error_message' => pll__('Сталась помилка. Продукт не знайдено.')
+        ]);
+        wp_die();
+    }
+    $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+    $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+    $product_status = get_post_status($product_id);
+
+    //there will be attributes
+    $cart_item_data['attributes'] = $product_attributes;
+    $cart_item_data['price'] = $variant->get_price();
+
+    $variation = wc_get_product_variation_attributes( $variation_id );
+    if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data) && 'publish' === $product_status) {
+        do_action('woocommerce_ajax_added_to_cart', $product_id);
+    } else {
+        echo json_encode([
+            'has_error' => true,
+            'error_message' => pll__('Сталась помилка. Продукт не може бути доданий в корзину.')
+        ]);
+        wp_die();
+    }
+    $args = [
+        'prod_id' => $product_id,
+        'var_id' => $variation_id,
+
+    ];
+    $html = wc_get_template_html('single-product/cart_popup.php', $args, "", get_template_directory_uri() . "/woocommerce/");
+
+    echo json_encode([
+        'has_error' => false,
+        'redirect_link' => esc_url(get_url_lang_prefix() . '/checkout/'),
+        'html' => $html,
+        'total_products' => WC()->cart->get_cart_contents_count(),
+    ]);
+    wp_die();
+}
+add_action('wp_ajax_ajax_add_to_cart2', 'ajax_add_to_cart2');
+add_action('wp_ajax_nopriv_ajax_add_to_cart2', 'ajax_add_to_cart2');*/
+
+
+/*add filter to coupons: coupon_main_type*/
+function add_coupon_main_type() {
+    $screen = get_current_screen();
+    if ( $screen->id != "edit-shop_coupon" ) {   // Only add to coupons page
+        return;
+    }
+    $coupon_main_type = isset($_REQUEST['coupon_main_type']) && $_REQUEST['coupon_main_type'] ? trim($_REQUEST['coupon_main_type']) : '';
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready( function($)
+        {
+            $('#posts-filter #post-query-submit').before('<select name="coupon_main_type" id="dropdown_shop_coupon_main_type">\n' +
+                '\t\t\t<option value="">Show all Main types</option>\n' +
+                '\t\t\t<option value="general" <?php if ($coupon_main_type == 'general'):?>selected<?php endif;?>>General</option>' +
+                '\t\t\t<option value="gift_card" <?php if ($coupon_main_type == 'gift_card'):?>selected<?php endif;?>>Gift Card</option>' +
+                '</select>');
+        });
+    </script>
+    <?php
+}
+add_action('admin_footer', 'add_coupon_main_type');
+function filter_coupon_main_type($query) {
+    if (isset($_REQUEST['coupon_main_type']) && $_REQUEST['coupon_main_type']) {
+        $coupon_main_type = trim($_REQUEST['coupon_main_type']);
+        $query->set('meta_key', 'coupon_main_type');
+        $query->set('meta_value', $coupon_main_type);
+    }
+}
+add_action('pre_get_posts', 'filter_coupon_main_type');
 
 /*gemaiter end*/
 

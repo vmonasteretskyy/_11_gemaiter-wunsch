@@ -22,9 +22,7 @@ get_header();
 
     <!--Start page-->
     <div class="page-wrapper">
-
         <?php get_template_part( 'template-parts/bread'); ?>
-
         <div class="faq">
             <section class="section faq__section section faq__section--main">
                 <div class="container faq__container faq__container--main">
@@ -74,10 +72,8 @@ get_header();
                             <?php endif; ?>
                         </div>
                     </div>
-
                 </div>
             </section>
-
             <?php if ($data['faq']): ?>
                 <?php foreach ($data['faq'] as $faqGroupKey => $faqGroup): ?>
                     <section class="section faq__section <?if ($faqGroupKey % 2 == 0): ?>faq__section--blue<?php endif; ?> <?if ($faqGroupKey == 0): ?>faq__section--order<?php endif; ?>">

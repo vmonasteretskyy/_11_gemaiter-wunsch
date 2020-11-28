@@ -1,3 +1,62 @@
 .form-group--select .option a {
     color: #fff;
 }
+body.blog .gallery-tag svg path {
+    fill: #f9ab97;
+    stroke: #f9ab97;
+}
+
+[data-contact-form_submit],
+[data-refund-form_submit]{
+    cursor: pointer;
+}
+
+.modal__content .error-text,
+.form-errors-wrapper .error-text {
+    display: none;
+    color: #DD4B39;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal__content .success-text,
+.form-errors-wrapper .success-text {
+    display: none;
+    text-align: center;
+    padding: 50px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal__content.busy,
+form.busy {
+    opacity: 0.5 !important;
+    pointer-events: none;
+}
+.card-table__row>*:first-child {
+    min-width: 200px;
+}
+.card-table__row> .widen-label {
+    min-width: 270px;
+}
+.card-table__row .price-wrapper {
+    font-size: 15px;
+    font-weight: 600;
+}
+.card-table__row .price-wrapper .old_price {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8c8c8c;
+    margin-right: 10px;
+    position: relative;
+}
+.card-table__row .price-wrapper .old_price:after {
+    content: "";
+    width: 105%;
+    height: 1px;
+    background-color: #8c8c8c;
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    transform: rotate(-20deg);
+}

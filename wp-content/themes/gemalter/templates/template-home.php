@@ -11,7 +11,6 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
-//test($fields);
 get_header();
 ?>
 
@@ -25,7 +24,8 @@ get_header();
     <div class="preloader__logo">
         <img src="<?php echo the_theme_path(); ?>/img/logo.png" alt="logo">
     </div>
-</div> <!-- End preloader -->
+</div>
+<!-- End preloader -->
 
 <div id="fullpage">
     <!-- Start introduction section -->
@@ -40,7 +40,6 @@ get_header();
                         $image = $main_banner_1['background_image']['sizes']['large'];
                     }
                 }
-
                 ?>
                 <div class="item-bg" <?php if ($image): ?> style="background-image: url('<?php echo $image; ?>');" <?php endif;?> >
                 </div>
@@ -57,7 +56,7 @@ get_header();
                         <?php endforeach;?>
                     </ul>
                     <?php endif; ?>
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border introduction-descr__btn"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border introduction-descr__btn"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
             <div class="introduction__item video-with-control">
@@ -69,7 +68,6 @@ get_header();
                         $image = $main_banner_2['background_image']['sizes']['large'];
                     }
                 }
-
                 ?>
                 <video width="100%" height="100%" <?php if ($image): ?> poster="<?php echo $image; ?>" <?php endif;?> >
                     <?php if (isset($main_banner_2['video']['url']) && !empty($main_banner_2['video']['url'])) : ?>
@@ -91,7 +89,7 @@ get_header();
                             <?php echo $main_banner_1['intro_subtitle_mobile'];?>
                         </p>
                     <?php endif;?>
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
             <div class="introduction__item">
@@ -109,7 +107,6 @@ get_header();
                 <?php endif;?>
             </div>
         </div>
-
         <div class="introduction__scroll">
             <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="10" height="17" rx="3.5" stroke="#333333" />
@@ -187,7 +184,7 @@ get_header();
                                                 <div class="slider_progress_pointer"></div>
                                             </div>
                                         </div>
-                                        <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                                        <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -246,7 +243,7 @@ get_header();
                                             <div class="slider_progress_pointer"></div>
                                         </div>
                                     </div>
-                                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -393,13 +390,12 @@ get_header();
                     </ul>
                 <?php endif; ?>
                 <div class="benefits__actions">
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
         </section>
         <!-- End name section -->
     <?php endif; ?>
-
     <?php
     $ourArtistsSettings = get_field('our_artist_settings_' . $current_lang, 'option');
     $screen6Data = [
@@ -556,11 +552,10 @@ get_header();
                 <?php endif; ?>
 
                 <div class="img-text__actions">
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
         </div>
-
     </section>
 <?php endif; ?>
 

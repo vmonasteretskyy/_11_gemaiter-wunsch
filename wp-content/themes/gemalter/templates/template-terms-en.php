@@ -48,5 +48,4 @@ $data = [
     </div>
     <!--End page-->
 
-
 <?php get_footer(); ?>

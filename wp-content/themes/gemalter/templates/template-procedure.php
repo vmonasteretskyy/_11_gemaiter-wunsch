@@ -11,7 +11,6 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
-//test($fields);
 get_header();
 ?>
 
@@ -25,7 +24,6 @@ get_header();
             'our_steps_title' => isset($fields['our_steps_title']) ? $fields['our_steps_title'] : null,
         ];
         ?>
-
         <?php
         $screen2Data = [
             'title' => isset($fields['screen2_title']) ? $fields['screen2_title'] : null,
@@ -38,7 +36,6 @@ get_header();
             'text' => isset($fields['screen2_text']) ? $fields['screen2_text'] : null,
         ];
         ?>
-
         <?php if ($screen1Data['title'] || !empty($screen1Data['text'])): ?>
             <div class="container-small mx-w-1050">
                 <?php if ($screen1Data['title']): ?>
@@ -116,7 +113,6 @@ get_header();
             </section>
             <!-- End procedure section -->
         <?php endif; ?>
-
         <?php if ($screen2Data['title'] || $screen2Data['section_1_text'] || $screen2Data['section_1_image']): ?>
             <!-- Start img-text-mod section -->
             <section class="section img-text-mod img-text-mod--right-gray img-text-mod--revers" >
@@ -166,7 +162,6 @@ get_header();
             </section>
             <!-- End img-text-mod section -->
         <?php endif; ?>
-
         <?php if ($screen2Data['text'] || $screen2Data['section_2_text'] || $screen2Data['section_2_image']): ?>
             <!-- Start img-text-mod section -->
             <section class="section img-text-mod img-text-mod--gray p-t-120" >
@@ -214,12 +209,11 @@ get_header();
                     </div>
                 <?php endif; ?>
                 <div class="img-text-mod__action">
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now'); ?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now'); ?></a>
                 </div>
             </section>
             <!-- End img-text-mod section -->
         <?php endif; ?>
-
     </div>
     <!--End page-->
 

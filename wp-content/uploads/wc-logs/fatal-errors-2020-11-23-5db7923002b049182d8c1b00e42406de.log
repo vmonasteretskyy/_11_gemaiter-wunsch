@@ -1,0 +1,32 @@
+2020-11-23T14:57:20+00:00 CRITICAL syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1093
+
+2020-11-23T14:57:58+00:00 CRITICAL syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1093
+
+2020-11-23T14:57:59+00:00 CRITICAL syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1093
+
+2020-11-23T14:58:00+00:00 CRITICAL syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1093
+
+2020-11-23T14:58:01+00:00 CRITICAL syntax error, unexpected 'public' (T_PUBLIC), expecting end of file in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1093
+
+2020-11-23T14:58:19+00:00 CRITICAL Uncaught Error: Using $this when not in object context in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php:1100
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\functions.php(521): require()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-settings.php(514): include('D:\\PROGRAMS\\Ope...')
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-config.php(93): require_once('D:\\PROGRAMS\\Ope...')
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-load.php(37): require_once('D:\\PROGRAMS\\Ope...')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-blog-header.php(13): require_once('D:\\PROGRAMS\\Ope...')
+#5 D:\PROGRAMS\OpenServer\domains\gemaiter.me\index.php(18): require('D:\\PROGRAMS\\Ope...')
+#6 {main}
+  thrown in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1100
+
+2020-11-23T14:58:19+00:00 CRITICAL Uncaught Error: Using $this when not in object context in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php:1100
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\functions.php(521): require()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-settings.php(514): include('D:\\PROGRAMS\\Ope...')
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-config.php(93): require_once('D:\\PROGRAMS\\Ope...')
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-load.php(37): require_once('D:\\PROGRAMS\\Ope...')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-blog-header.php(13): require_once('D:\\PROGRAMS\\Ope...')
+#5 D:\PROGRAMS\OpenServer\domains\gemaiter.me\index.php(18): require('D:\\PROGRAMS\\Ope...')
+#6 {main}
+  thrown in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1100
+

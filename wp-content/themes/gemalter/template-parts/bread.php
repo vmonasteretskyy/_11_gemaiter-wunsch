@@ -1,15 +1,4 @@
 <!-- Start breadcrumbs -->
-<!--<ul class="breadcrumbs">
-    <li class="breadcrumbs__item">
-        <a href="#" class="breadcrumbs__link">Home</a>
-    </li>
-    <li class="breadcrumbs__item">
-        <a href="#" class="breadcrumbs__link">Blog</a>
-    </li>
-    <li class="breadcrumbs__item">
-        <p class="breadcrumbs__link breadcrumbs__link--active">Young talents choose...</p>
-    </li>
-</ul>-->
 <ul class="breadcrumbs">
     <?php if( function_exists('kama_breadcrumbs') ){
         $l10n = array(
@@ -25,9 +14,7 @@
             'tag'        => pll__('Records by tag: <b>%s</b>'),
             'tax_tag'    => pll__('%1$s from %2$s by tag: <b>%3$s</b>'),
         );
-        //test(kama_breadcrumbs('', $l10n ));
         kama_breadcrumbs('', $l10n );
-
     }?>
 </ul>
 <!-- End breadcrumbs -->

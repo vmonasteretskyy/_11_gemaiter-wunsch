@@ -77,7 +77,7 @@ function custom_post_types() {
         'exclude_from_search' => true,
         //'capability_type' => ['gallery'],
         //'map_meta_cap' => true,
-        'rewrite' => array('slug' => 'gallery', 'with_front' => true)
+        'rewrite' => array('slug' => 'gallery', 'with_front' => false)
     ));
     flush_rewrite_rules();
 }

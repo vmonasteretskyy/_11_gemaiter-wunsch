@@ -61,7 +61,6 @@ $args = array(
     'type'               => 'array',
 );
 $pagination = paginate_links( $args );
-//test($pagination);
 $data['posts_count'] = empty($data['posts']) ? 0 : count($data['posts']);
 
 $data['filters'] = [
@@ -85,9 +84,7 @@ $data['filters'] = [
     ]
 ];
 
-
 get_header();
-
 ?>
 
     <!--Start page-->
@@ -112,7 +109,6 @@ get_header();
             <h3 class="h5 gallery-filter__title title--under-line">
                 <?php pll_e('Choose Your Favourite Portrait Inspiration'); ?>
             </h3>
-
             <div class="gallery-filter-row">
                 <div class="form-group form-group--select gallery-filter__select form-group--white">
                     <label class="select-label select-label-js">
@@ -143,7 +139,6 @@ get_header();
                             <input class="input input-key-js" data-gallery-filter="" name="gallery_subject" value="" readonly hidden>
                         <?php endif; ?>
                     </label>
-
                     <?php if (isset($data['filters']['subjects']['items']) && !empty($data['filters']['subjects']['items'])): ?>
                         <ul class="options options-js">
                             <?php foreach($data['filters']['subjects']['items'] as $item): ?>
@@ -154,7 +149,6 @@ get_header();
                         </ul>
                     <?php endif; ?>
                 </div>
-
                 <div class="form-group form-group--select gallery-filter__select form-group--white">
                     <label class="select-label select-label-js">
                         <div class="select-label__picture">
@@ -176,7 +170,6 @@ get_header();
                         <?php else: ?>
                             <input class="input input-value-js" type="text" readonly placeholder="<?php pll_e('Style'); ?>" />
                         <?php endif; ?>
-
                         <!-- Value of this input will be sent to back -->
                         <?php if (isset($data['filters']['styles']['active']) && !empty($data['filters']['styles']['active'])): ?>
                             <input class="input input-key-js" data-gallery-filter="" name="gallery_style" value="<?php echo $data['filters']['styles']['active']; ?>" readonly hidden>
@@ -184,7 +177,6 @@ get_header();
                             <input class="input input-key-js" data-gallery-filter="" name="gallery_style" value="" readonly hidden>
                         <?php endif; ?>
                     </label>
-
                     <?php if (isset($data['filters']['styles']['items']) && !empty($data['filters']['styles']['items'])): ?>
                         <ul class="options options-js">
                             <?php foreach($data['filters']['styles']['items'] as $item): ?>
@@ -195,10 +187,8 @@ get_header();
                         </ul>
                     <?php endif; ?>
                 </div>
-
             </div>
         </div>
-
         <?php if (!empty($data['posts'])): ?>
             <?php foreach ($data['posts'] as $key => $post): ?>
             <?php
@@ -286,13 +276,12 @@ get_header();
                         </div>
                     </div>
                 </div>
-
             </section>
             <!-- End img-text-mod section -->
             <?php endforeach; ?>
+        <?php else: ?>
+            <h4 class="p-50" style="text-align: center;"><?php pll_e('No records found.'); ?></h4>
         <?php endif; ?>
-
-
         <?php if (isset($pagination) && !empty($pagination)): ?>
             <!-- Start pagination -->
             <ul class="pagination m-80">
@@ -304,22 +293,10 @@ get_header();
                             <?php echo str_replace(['class="prev', 'class="next', 'current'], ['class="btn-prev-arr', 'class="btn-next-arr', 'active'],$item); ?>
                         <?php endif; ?>
                     </li>
-
-                    <!--
-                    <li> <a class="active" href="">1</a> </li>
-                    <li> <a href="">2</a> </li>
-                    <li> <a href="">3</a> </li>
-                    <li> <span>...</span> </li>
-                    <li> <a href="">80</a> </li>
-                    <li> <a class="btn-next-arr" href="">Next</a> </li>-->
                 <?php endforeach; ?>
             </ul>
             <!-- End pagination -->
         <?php endif; ?>
-
-
-
-
         <!-- The Modal/Lightbox -->
         <div id="myModal" class="modal-lightbox">
             <div class="close cursor modal-lightbox-close js-modal-lightbox-close">
@@ -345,7 +322,6 @@ get_header();
             <a class="modal-lightbox__prev"><?php echo pll_e('prev'); ?></a>
             <a class="modal-lightbox__next"><?php echo pll_e('next'); ?></a>
         </div>
-
         <?php if (isset($data['our_gallery_settings']['our_gallery_benefits_for_you']) && !empty($data['our_gallery_settings']['our_gallery_benefits_for_you'])): ?>
             <!-- Start name section -->
             <section class="section benefits benefits--gallery section--gray p-120" >
@@ -360,7 +336,6 @@ get_header();
                             <?php echo $data['our_gallery_settings']['our_gallery_benefits_for_you']['title'];?>
                         </h2>
                     <?php endif; ?>
-
                     <?php if (isset($data['our_gallery_settings']['our_gallery_benefits_for_you']['benefits']) && !empty($data['our_gallery_settings']['our_gallery_benefits_for_you']['benefits'])): ?>
                         <ul class="benefits__list">
                             <?php foreach ($data['our_gallery_settings']['our_gallery_benefits_for_you']['benefits'] as $benefit): ?>
@@ -374,7 +349,7 @@ get_header();
                         </ul>
                     <?php endif; ?>
                     <div class="benefits__actions">
-                        <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                        <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
                     </div>
                 </div>
             </section>

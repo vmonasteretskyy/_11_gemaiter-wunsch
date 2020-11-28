@@ -11,7 +11,6 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
-//test($fields);
 get_header();
 ?>
 
@@ -40,9 +39,8 @@ get_header();
                                     <?php echo $screen1Data['screen_1_subtitle']; ?>
                                 </p>
                             <?php endif; ?>
-                            <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now'); ?></a>
+                            <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now'); ?></a>
                         </div>
-
                         <?php if (!empty($screen1Data['screen_1_images'])): ?>
                         <div class="about-intro__right">
                             <!-- Slider main container -->
@@ -89,7 +87,6 @@ get_header();
             </section>
             <!-- End about-intro section -->
         <?php endif; ?>
-
         <?php
         $screen2Data = [
             'screen_2_title' => isset($fields['our_story_title']) ? $fields['our_story_title'] : null,
@@ -141,7 +138,6 @@ get_header();
             </section>
             <!-- End img-text-mod section -->
         <?php endif; ?>
-
         <?php
         $screen3Data = [
             'screen_3_title' => isset($fields['our_mission_title']) ? $fields['our_mission_title'] : null,
@@ -198,7 +194,6 @@ get_header();
             </section>
             <!-- End img-text-mod section -->
         <?php endif; ?>
-
         <?php
         $screen4Data = [
             'screen_4_title' => isset($fields['our_plans_title']) ? $fields['our_plans_title'] : null,
@@ -253,12 +248,11 @@ get_header();
                     </div>
                 </div>
                 <div class="img-text-mod__action">
-                    <a href="<?php the_url( ($current_lang == 'de' ? '/de/' : '/') . 'order/');?>" class="btn btn--accent-border"><?php pll_e('I Want It'); ?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('I Want It'); ?></a>
                 </div>
             </section>
             <!-- End img-text-mod section -->
         <?php endif; ?>
-
         <?php
         $ourArtistsSettings = get_field('our_artist_settings_' . $current_lang, 'option');
         $screen5Data = [
