@@ -51409,6 +51409,8 @@ $(document).ready(function () {
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 // @ts-nocheck
 
+//wp-developer -- all initCalender rebuild
+document.addEventListener("initCalendar", initCalender);
 function initCalender() {
     // let date = new Date();
     // let disabledDays = [0, 6];
@@ -51416,7 +51418,21 @@ function initCalender() {
     // days = Number(days);
     var options = {
         // minDate: addDays(date, days), // Now can select only dates, which goes after today
-        dateFormat: 'mm/dd/yyyy',
+        dateFormat: 'yyyy-mm-dd',
+        onSelect: function(date, item) {
+            jQuery('#deliveryDate').val(date).trigger('change');
+        },
+        onRenderCell: function (date, cellType) {
+            if(cellType == 'day'){
+                var day = date.getDay();
+                var disabledDays = [6, 0];
+                var inDateRange = (Date.parse(this.minDate) <= date.getTime()) && (date.getTime() <= Date.parse(this.maxDate));
+                return {
+                    disabled: disabledDays.indexOf(day) !== -1,
+                    classes: inDateRange && disabledDays.indexOf(day) !== -1 ? '-disabled-weekend-' : '',
+                };
+            }
+        },
     };
     // @ts-ignore
     var $picker = $('.datepicker-here-init');
@@ -51441,23 +51457,49 @@ function initCalender() {
     console.log('sdr', sdr);
     var delivery__calendar = document.querySelector('.delivery__calendar');
     if (sdr && delivery__calendar) {
+        var selectedEl = document.querySelector('.select_day_radio:checked');
+        if (selectedEl) {
+            var el = selectedEl;
+            console.log('calendar', calendar);
+            if (calendar == false){
+                initLocalCalendar();
+            }
+            var dateEl = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.from, "YYYY-MM-DD");
+            var maxdays = addMomentDays(dateEl, +el.dataset.count);
+            $picker.attr('class', defaultClassName);
+            console.log(defaultClassName);
+            if (el.dataset.calendar_class)
+                $picker.addClass(el.dataset.calendar_class);
+            $picker.data('datepicker').update({
+                minDate: dateEl.toDate(),
+                maxDate: maxdays.toDate(),
+                defaultDate: dateEl.toDate(),
+            });
+            var selectedDate = $('#deliveryDate').length ? $('#deliveryDate').val() : '';
+            if (selectedDate) {
+                selectedDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(selectedDate, "YYYY-MM-DD").toDate();
+                $picker.data('datepicker').selectDate(selectedDate);
+            }
+        }
         sdr.forEach(function (el) {
             // sdr.forEach(el => {
             // console.log(el);
             el.addEventListener('change', function (e) {
                 console.log('calendar', calendar);
-                if (calendar == false)
+                if (calendar == false){
                     initLocalCalendar();
+                }
                 var dateEl = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.from, "YYYY-MM-DD");
                 var maxdays = addMomentDays(dateEl, +el.dataset.count);
                 $picker.attr('class', defaultClassName);
-                console.log(defaultClassName);
                 if (el.dataset.calendar_class)
                     $picker.addClass(el.dataset.calendar_class);
                 $picker.data('datepicker').update({
                     minDate: dateEl.toDate(),
-                    maxDate: maxdays.toDate()
+                    maxDate: maxdays.toDate(),
+                    defaultDate: dateEl.toDate(),
                 });
+                $picker.data('datepicker').selectDate(dateEl.toDate());
             });
         });
     }
@@ -53203,7 +53245,8 @@ var select_2_Select = /** @class */ (function () {
         // Set value of input equal clicked option textContent and hide list
         this.options.forEach(function (option, index) {
             option.addEventListener('click', function () {
-                var keyNumber = parseInt(option.dataset.key);
+                //var keyNumber = parseInt(option.dataset.key);//wp-developer
+                var keyNumber = option.dataset.key;
                 var key = isNaN(keyNumber) ? option.dataset.key : keyNumber;
                 var text = option.querySelector(SELECT_OPTION_TEXT).textContent;
                 if (_this.isPicture(option)) {
@@ -53234,7 +53277,11 @@ var select_2_Select = /** @class */ (function () {
     Select.HOVERED_CLASS = 'hovered';
     return Select;
 }());
-
+//wp-developer
+document.addEventListener("initCustomSelect", function(){
+    var selects = document.querySelectorAll(".form-group--select");
+    selects.forEach(function (select) { return new select_2_Select(select); });
+});
 
 // CONCATENATED MODULE: ./src/screens/screen-6/slider-team.ts
 //@ts-nocheck
@@ -53468,7 +53515,7 @@ function selectedRadioLabel() {
             getParent(element.parentElement);
         }
     }
-    function clearActive(parent) {
+    function clearActive(parent) {parent
         while (parent.querySelector(RADIO_LABEL + ".active")) {
             parent.querySelector(RADIO_LABEL + ".active").classList.remove('active');
         }
@@ -53745,6 +53792,7 @@ var upload_Upload = /** @class */ (function () {
         this.input.addEventListener('change', function (event) {
             if (event.target instanceof HTMLInputElement && event.target.files) {
                 var files = Array.from(event.target.files);
+                files = files.slice(0, 3);//wp-developer
                 _this.handleFiles(files);
                 _this.renderPreviews(files);
             }
@@ -53760,18 +53808,22 @@ var upload_Upload = /** @class */ (function () {
     Upload.prototype.handleDrop = function (event) {
         var dataTransfer = event.dataTransfer;
         var files = Array.from(dataTransfer.files);
+        files = files.slice(0, 3);//wp-developer
+
         this.handleFiles(files);
         this.renderPreviews(files);
     };
     Upload.prototype.handleFiles = function (files) {
         var _a;
         this.files = __spreadArrays(this.files, files);
+        this.files = this.files.slice(0, 3);//wp-developer
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
             this.options.onChange(this.files);
         }
     };
     Upload.prototype.renderPreviews = function (files) {
         if (files === void 0) { files = this.files; }
+        files = files.slice(0, 3);//wp-developer
         files.forEach(this.renderPreview.bind(this));
     };
     Upload.prototype.renderPreview = function (file) {
@@ -54132,7 +54184,9 @@ function BackStep() {
 }
 function GoToStep(stepNumber) {
     var formData = GetFormData();
-    if (stepNumber < 0 || stepNumber > 2 || formData.step <= stepNumber) {
+
+    //if (stepNumber < 0 || stepNumber > 2 || formData.step <= stepNumber) {
+    if (stepNumber < 0 || stepNumber > 2) {
         return;
     }
     formData.step = stepNumber;
@@ -54202,7 +54256,8 @@ function initSummary() {
     function setSummary(input) {
         if (input.checked) {
             var summaryRow = summaryTable.querySelector("#" + input.dataset.summary);
-            summaryRow.textContent = input.value;
+            //wp-developer
+            summaryRow.textContent = input.dataset.summary_text;
         }
     }
 }
@@ -54226,8 +54281,8 @@ function chooseBg() {
 
 
 var selectedFormats = {
-    subject: '1_person',
-    choose_tech: 'charcoal'
+    subject: document.querySelector('.js-active [name="subject"]') ? document.querySelector('.js-active [name="subject"]').value : 'person_1',
+    choose_tech: document.querySelector('.js-active [name="subject"]') ? document.querySelector('.js-active [name="choose_tech"]').value : 'charcoal'
     // [index: string]: string
 };
 function loadPhotoPreview(name, value) {
@@ -54236,6 +54291,7 @@ function loadPhotoPreview(name, value) {
     if (Object.prototype.hasOwnProperty.call(selectedFormats, name)) {
         selectedFormats[name] = value;
     }
+    console.log(selectedFormats);
     var photo = 'img/' + selectedFormats.subject + '_' + selectedFormats.choose_tech + '.jpg';
     if (selectedFormats.choose_tech == 'charcoal') {
         el.style.filter = 'grayscale(100%)';
@@ -54259,7 +54315,7 @@ function addRadioEvents() {
                     loadPhotoPreview(el.name, el.value);
                     if (el.value != 'Custom') {
                         radio_subject_custom_wrap.querySelectorAll('.input').forEach(function (inp) {
-                            inp.value = '0';
+                            //inp.value = '0';//wp-developer
                         });
                     }
                 }
@@ -54280,6 +54336,7 @@ function Form() {
     var btnBack = document.querySelector(BTN_ORDER_BACK);
     var btnFirst = document.querySelector('.order-steps>.step:nth-child(1)');
     var btnTwo = document.querySelector('.order-steps>.step:nth-child(2)');
+    var btnThree = document.querySelector('.order-steps>.step:nth-child(3)');
     InitCurrentStep();
     InitStepIcon();
     initSummary();
@@ -54296,7 +54353,10 @@ function Form() {
     var choosebg__color_input = document.querySelector('#choose-bg__color_input');
     var choosebg__color = document.querySelector('#choose-bg__color');
     var parent = choosebg__color_input.parentNode;
-    parent.style.display = 'none';
+    //wp-developer
+    if (!choosebg__color_input.checked){
+        parent.style.display = 'none';
+    }
     if (chose_tech_radios) {
         chose_tech_radios.forEach(function (el) {
             el.addEventListener('change', function (e) {
@@ -54308,6 +54368,8 @@ function Form() {
                     }
                     else {
                         parent.style.display = null;
+                        //wp-developer
+                        choosebg__color.classList.remove('hide');
                     }
                 }
             });
@@ -54316,6 +54378,7 @@ function Form() {
     addRadioEvents();
     btnFirst.addEventListener('click', function () { return GoToStep(0); });
     btnTwo.addEventListener('click', function () { return GoToStep(1); });
+    btnThree.addEventListener('click', function () { return GoToStep(2); });
     if (document.querySelector(CHOOSE_BG_PARENT)) {
         chooseBg();
     }
@@ -54326,6 +54389,7 @@ function Form() {
 let widthEl = document.querySelector('.size-preview__picture .js-size-pre__width');
 let heightEl = document.querySelector('.size-line--horizontal .js-size-pre__width');
 let pictureEl = document.querySelector('.js-size-preview__picture.size-preview__picture');
+let sizePreviewBg = document.querySelector('.size-preview');
 
 let coef = 1.5;
 
@@ -54343,6 +54407,18 @@ let initPictureEvent = (el) => {
 
         pictureEl.style.width = w + 'px';
         pictureEl.style.height = h + 'px';
+
+        pictureEl.style.padding = (el.dataset.w / 10) + 'px';
+
+        if (el.dataset.w >= 70) {
+            widthEl.classList.remove('green');
+            heightEl.classList.remove('green');
+            //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_grey.jpg)';
+        } else {
+            widthEl.classList.add('green');
+            heightEl.classList.add('green');
+            //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_green.jpg)';
+        }
     }
 }
 
@@ -54457,7 +54533,26 @@ window.addEventListener('load', function () {
         selectedRadioLabel();
     }
     if (document.querySelector('#drop-area')) {
-        var uploader_1 = new upload_Upload(document.querySelector('#drop-area'));
+        //wp-developer
+        var options = {
+            onChange: function(files) {
+                allFiles = files;
+                document.querySelector('#fileElemCount').value = files.length;
+                var newFiles = [];
+                if (files.length) {
+                    files.forEach(function (file) {
+                        var newFile = {
+                            name: file.name,
+                            size: file.size,
+                            type: file.type,
+                        };
+                        newFiles.push(newFile);
+                    });
+                }
+                document.querySelector('#fileElemInfo').value = JSON.stringify(newFiles);
+            }
+        };
+        var uploader_1 = new upload_Upload(document.querySelector('#drop-area'), options);
         // console.log(uploader);
     }
     // Frames slider

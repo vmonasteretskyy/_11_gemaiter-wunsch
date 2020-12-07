@@ -60,3 +60,57 @@ form.busy {
     bottom: 8px;
     transform: rotate(-20deg);
 }
+
+.choose-subject-inner .form-group--select .select-label:before{
+    content: '';
+    position: absolute;
+    top: 8px;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    right: 10px;
+    left: initial;
+    height: 6px;
+    width: 12px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='19' height='7' viewBox='0 0 19 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 7L0.406735 0.249998L18.5933 0.25L9.5 7Z' fill='gray'/%3E%3C/svg%3E%0A")
+}
+.delivery-inner {
+    flex-direction: row;
+    align-items: center;
+}
+@media (max-width: 767.98px){
+    .delivery-inner{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media (min-width: 767.99px){
+    .datepicker {
+        width: 450px;
+    }
+    .datepicker--cell {
+        height: 42px;
+    }
+}
+.delivery-types-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.delivery-calendar-wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.select-label.readonly:before {
+    display: none;
+}
+
+.cart-head__amount .woocommerce-Price-currencySymbol{
+    display: none;
+}
+.cart-head__amount span {
+    font-size: inherit;
+}

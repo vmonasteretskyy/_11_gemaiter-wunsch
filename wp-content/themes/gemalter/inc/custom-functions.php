@@ -11,7 +11,30 @@ function the_url($url = null) {
 
 function get_url_lang_prefix() {
     $current_lang = pll_current_language();
+    $prefix = '/';
+    switch ($current_lang) {
+        case 'en':
+            $prefix = get_url_de_prefix();
+            break;
+        case 'de':
+            $prefix = get_url_en_prefix();
+            break;
+        default:
+            $prefix = '/';
+            break;
+    }
+    //return $prefix;
     return ($current_lang == 'de' ? '/de/' : '/');
+}
+
+function get_url_en_prefix() {
+    return '/';
+    //return 'https://google.com/';
+}
+
+function get_url_de_prefix() {
+    return '/de/';
+    //return 'https://google.com.ua/';
 }
 
 function get_theme_path() {
@@ -539,4 +562,23 @@ class Kama_Breadcrumbs {
     }
 
 } // Kama_Breadcrumbs
+
+
+/**
+ * get cart Item Record by cart key
+ * @param $cartItemID
+ * @return |null
+ */
+function getCardItemRecord ($cartItemID) {
+    $cartRecord = null;
+    if ($cartItemID && !WC()->cart->is_empty()) {
+        $cartItems = WC()->cart->get_cart();
+        foreach ($cartItems as $cartID => $cartItem) {
+            if ($cartItemID == $cartID) {
+                $cartRecord = $cartItem;
+            }
+        }
+    }
+    return $cartRecord;
+}
 ?>

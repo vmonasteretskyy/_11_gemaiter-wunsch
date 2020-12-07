@@ -53,8 +53,8 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
 	<?php wp_head(); ?>
 
   <!-- Template Basic Images Start -->
-  <!-- <link rel="icon" href="img/favicon.ico" /> -->
-  <!-- <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-180x180.png" /> -->
+  <link rel="icon" href="<?php echo the_theme_path(); ?>/img/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="<?php echo the_theme_path(); ?>/img/logo.png" />
   <!-- Template Basic Images End -->
 
   <!-- Custom Browsers Color Start -->
@@ -174,8 +174,8 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                     <!--Change language and flag after click-->
                     <div class="header__langs_wrap">
                         <?php /*pll_the_languages();*/?>
-                        <a href="<?php echo  '/' . $current_url;?>" class="header__langs_a <?php if ($current_lang == 'en'):?>active<?php endif;?>">EN</a>
-                        <a href="<?php the_url( '/de/' . $current_url);?>" class="header__langs_a <?php if ($current_lang == 'de'):?>active<?php endif;?>">DE</a>
+                        <a href="<?php echo get_url_en_prefix() . $current_url;?>" class="header__langs_a <?php if ($current_lang == 'en'):?>active<?php endif;?>">EN</a>
+                        <a href="<?php echo get_url_de_prefix() . $current_url; ?>" class="header__langs_a <?php if ($current_lang == 'de'):?>active<?php endif;?>">DE</a>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ $prices = [
     'en' => [
         'currency' => 'usd',
         'currency_symbol' => '$',
-        'use_size' => 'inch',// inch or cm
+        'use_size' => 'cm',// inch or cm
         'prices' => [
             'painting_technique' => [
                 'charcoal' => [
@@ -5289,6 +5289,27 @@ function getPricesByTechniqueSubject($locale = 'us', $painting_technique = 'oil'
     global $prices;
     return isset($prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]) ? $prices[$locale]['prices']['painting_technique'][$painting_technique][$subject] : null;
 }
+function getPriceByTechniqueSubjectSizeDuration($locale = 'us', $painting_technique = 'oil', $subject = 'person_1', $size = '25-35', $priceType = 'regular') {
+    global $prices;
+    return isset($prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]['sizes'][$size][$priceType]['price']) ? $prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]['sizes'][$size][$priceType]['price'] : 0;
+}
+
+function getSizesBySubjectTechnique($current_lang = 'us', $paintingTechnique = 'oil', $subject = 'person_1', $priceType = 'regular') {
+    $allPricesData = getPrices();
+    $data['sizes'] = $allPricesData[$current_lang]['sizes'][$paintingTechnique];
+    if (!empty($data['sizes'])) {
+        foreach($data['sizes'] as $size => $item) {
+            $item['available'] = false;
+            $price = isset($allPricesData[$current_lang]['prices']['painting_technique'][$paintingTechnique][$subject]['sizes'][$size][$priceType]) ? $allPricesData[$current_lang]['prices']['painting_technique'][$paintingTechnique][$subject]['sizes'][$size][$priceType]['price'] : null;
+            if (isset($allPricesData[$current_lang]['prices']['painting_technique'][$paintingTechnique][$subject]['sizes'][$size][$priceType])) {
+                $data['sizes'][$size] = array_merge($item, $allPricesData[$current_lang]['prices']['painting_technique'][$paintingTechnique][$subject]['sizes'][$size], ['price' => $price]);
+            } else {
+                $data['sizes'][$size] = $item;
+            }
+        }
+    }
+    return $data['sizes'];
+}
 
 /**
  *  Duration Settings
@@ -5309,65 +5330,106 @@ function getDuration() {
                     'super_express' => pll__('30% Extra'),
                     'request' => pll__('50% Extra'),
                 ],
+                'types_count' => [
+                    'regular' => 100,
+                    'express' => 1,
+                    'super_express' => 2,
+                    'request' => 3,
+                ],
+                'types_calendar_style' => [
+                    'regular' => 'calendar_style_1',
+                    'express' => 'calendar_style_2',
+                    'super_express' => 'calendar_style_3',
+                    'request' => 'calendar_style_4',
+                ],
                 'painting_technique' => [
                     'medium_oil_portraits' => [
+                        'painting_technique' => 'oil',
                         'label' => pll__('Medium oil portraits'),
-                        'sub_label' => '14,8x21 cm - 42x59,4 cm',
+                        'sub_label' => '25x35 cm - 40x60 cm',
+                        'sizes' => [
+                            '25-35',
+                            '30-40',
+                            '35-50',
+                            '40-60',
+                        ],
                         'regular' => [
                             'label' => '19 ' . pll__('days'),
-                            'duration_range' => [19]
+                            'duration_range' => [19],
+                            'count' => 30,
                         ],
                         'express' => [
                             'label' => '16 ' . pll__('days'),
-                            'duration_range' => [16]
+                            'duration_range' => [16],
+                            'count' => 3,
                         ],
                         'super_express' => [
                             'label' => '13 ' . pll__('days'),
-                            'duration_range' => [13]
+                            'duration_range' => [13],
+                            'count' => 3,
                         ],
                         'request' => [
                             'label' => '9-11 ' . pll__('days'),
-                            'duration_range' => [9, 11]
+                            'duration_range' => [9, 11],
+                            'count' => 4,
                         ],
                     ],
                     'large_oil_portraits' => [
+                        'painting_technique' => 'oil',
                         'label' => pll__('Large oil portraits'),
-                        'sub_label' => '50x70 cm - 80x120 cm',
+                        'sub_label' => '50x70 cm - 120x180 cm',
+                        'sizes' => [
+                            '50-70',
+                            '60-80',
+                            '70-100',
+                            '90-120',
+                            '120-180',
+                        ],
                         'regular' => [
                             'label' => '21 ' . pll__('days'),
-                            'duration_range' => [21]
+                            'duration_range' => [21],
+                            'count' => 30,
                         ],
                         'express' => [
                             'label' => '18 ' . pll__('days'),
-                            'duration_range' => [18]
+                            'duration_range' => [18],
+                            'count' => 3,
                         ],
                         'super_express' => [
                             'label' => '15 ' . pll__('days'),
-                            'duration_range' => [15]
+                            'duration_range' => [15],
+                            'count' => 3,
                         ],
                         'request' => [
                             'label' => '11-14 ' . pll__('days'),
-                            'duration_range' => [11, 14]
+                            'duration_range' => [11, 14],
+                            'count' => 4,
                         ],
                     ],
                     'charcoal' => [
+                        'painting_technique' => 'charcoal',
                         'label' => pll__('Charcoal'),
                         'sub_label' => pll__('all sizes'),
+                        'sizes' => [],
                         'regular' => [
                             'label' => '14 ' . pll__('days'),
-                            'duration_range' => [14]
+                            'duration_range' => [14],
+                            'count' => 30,
                         ],
                         'express' => [
                             'label' => '11 ' . pll__('days'),
-                            'duration_range' => [11]
+                            'duration_range' => [11],
+                            'count' => 3,
                         ],
                         'super_express' => [
                             'label' => '9 ' . pll__('days'),
-                            'duration_range' => [9]
+                            'duration_range' => [9],
+                            'count' => 2,
                         ],
                         'request' => [
                             'label' => '5-7 ' . pll__('days'),
-                            'duration_range' => [5, 7]
+                            'duration_range' => [5, 7],
+                            'count' => 4,
                         ],
                     ],
                 ]
@@ -5375,6 +5437,52 @@ function getDuration() {
         ]
     ];
     return $duration;
+}
+
+function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
+    $duration = getDuration();
+    $paintingTechniqueData = null;
+    foreach($duration['all_locales']['durations']['painting_technique'] as $painting_technique_key => $painting_technique_item) {
+        if ($painting_technique_item['painting_technique'] == $paintingTechnique) {
+            if ($paintingTechnique == 'oil') {
+                if (in_array($size, $painting_technique_item['sizes'])) {
+                    $paintingTechniqueData = $painting_technique_item;
+                    break;
+                }
+            } else {
+                $paintingTechniqueData = $painting_technique_item;
+                break;
+            }
+        }
+    }
+    if ($paintingTechniqueData) {
+        $typesAll = array_keys($duration['all_locales']['durations']['types']);
+        foreach($typesAll as $type) {
+            $paintingTechniqueData[$type]['type_label'] = $duration['all_locales']['durations']['types'][$type];
+            $paintingTechniqueData[$type]['type_percent_label'] = $duration['all_locales']['durations']['types_percents'][$type];
+            $paintingTechniqueData[$type]['type_calendar_style'] = $duration['all_locales']['durations']['types_calendar_style'][$type];
+            $paintingTechniqueData[$type]['type_date_from'] = date("Y-m-d");
+            $durationFrom = isset($paintingTechniqueData[$type]['duration_range'][0]) ? $paintingTechniqueData[$type]['duration_range'][0] : 20;
+            $paintingTechniqueData[$type]['type_count'] = isset($paintingTechniqueData[$type]['count']) ? $paintingTechniqueData[$type]['count'] : $duration['all_locales']['durations']['types_count'][$type];
+
+            if ($durationFrom) {
+                $paintingTechniqueData[$type]['type_date_from'] = date("Y-m-d", strtotime('+' . $durationFrom . 'days'));
+                /*$dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_from']));
+                if ($dayN > 5) {
+                    while (1) {
+                        $paintingTechniqueData[$type]['type_date_from'] = date("Y-m-d", strtotime($paintingTechniqueData[$type]['type_date_from'] . ' +1 day'));
+                        $dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_from']));
+                        if ($dayN < 6) {
+                            break;
+                        }
+                    }
+                }*/
+            }
+            $paintingTechniqueData[$type]['type_date'] = pll__(date("l", strtotime($paintingTechniqueData[$type]['type_date_from']))) . ', ' . date("d.m Y", strtotime($paintingTechniqueData[$type]['type_date_from']));
+            $paintingTechniqueData['types'][$type] = $paintingTechniqueData[$type];
+        }
+    }
+    return $paintingTechniqueData;
 }
 
 /**
@@ -5443,14 +5551,16 @@ function getSubjects() {
             'icon' => '',
             'items' => [
                 'persons' => [
-                    'label' => 'Persons',
-                    'from' => 1,
+                    'label' => pll__('Persons'),
+                    'from' => 0,
                     'to' => 16,
+                    'default' => 1,
                 ],
                 'pets' => [
-                    'label' => 'Pets',
-                    'from' => 1,
+                    'label' => pll__('Pets'),
+                    'from' => 0,
                     'to' => 16,
+                    'default' => 0,
                 ],
             ],
             'max_items' => 16,
@@ -5464,30 +5574,30 @@ function getSubjects() {
  * Backgrounds Settings
  */
 
-function getBackgroundSettings() {
+function getBackgroundColorsSettings() {
     $backgrounds = [
         'beige' => [
-            'label' => 'Beige',
+            'label' => pll__('Beige'),
             'hex_color' => '#E8E1D8'
         ],
         'black' => [
-            'label' => 'Black',
+            'label' => pll__('Black'),
             'hex_color' => '#3D3D3D'
         ],
         'blue_bronze' => [
-            'label' => 'Blue Bronze',
+            'label' => pll__('Blue Bronze'),
             'hex_color' => '#B1C4CA'
         ],
         'cold_blue' => [
-            'label' => 'Cold Blue',
+            'label' => pll__('Cold Blue'),
             'hex_color' => '#60A3BF'
         ],
         'warm_green' => [
-            'label' => 'Warm Green',
+            'label' => pll__('Warm Green'),
             'hex_color' => '#8AB997'
         ],
         'white' => [
-            'label' => 'White',
+            'label' => pll__('White'),
             'hex_color' => '#ffffff'
         ],
     ];

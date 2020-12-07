@@ -11,7 +11,31 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
-//test($fields);
+
+$cartItemID = isset($_REQUEST['cart_item_id']) ? trim($_REQUEST['cart_item_id']) : '';
+$cartRecord = getCardItemRecord($cartItemID);
+if ($cartRecord) {
+    if (isset($cartRecord['attributes']['gift_amount']) && $cartRecord['attributes']['gift_amount']){
+        $cartRecord['attributes']['product_type'] = 'gift-card';
+    }
+    if (isset($cartRecord['attributes']['product_type']) && $cartRecord['attributes']['product_type'] != 'gift-card') {
+        $cartRecord = null;
+    }
+    if (isset($cartRecord['attributes']['locale']) && $cartRecord['attributes']['locale'] != $current_lang) {
+        $cartRecord = null;
+    }
+} elseif ($cartItemID) {
+    $location = (get_url_lang_prefix()) . 'gift-cards/';
+    wp_redirect( $location);
+    exit;
+}
+$cartRecord['fields']['gift_amount'] = $cartRecord && isset($cartRecord['attributes']['gift_amount']) ? $cartRecord['attributes']['gift_amount'] : '';
+$cartRecord['fields']['gift_currency'] = $cartRecord && isset($cartRecord['attributes']['gift_currency']) ? $cartRecord['attributes']['gift_currency'] : '';
+$cartRecord['fields']['gift_sender_name'] = $cartRecord && isset($cartRecord['attributes']['gift_sender_name']) ? $cartRecord['attributes']['gift_sender_name'] : '';
+$cartRecord['fields']['gift_recipient_name'] = $cartRecord && isset($cartRecord['attributes']['gift_recipient_name']) ? $cartRecord['attributes']['gift_recipient_name'] : '';
+$cartRecord['fields']['gift_message'] = $cartRecord && isset($cartRecord['attributes']['gift_message']) ? $cartRecord['attributes']['gift_message'] : '';
+$cartRecord['fields']['key'] = $cartItemID;
+
 get_header();
 ?>
 
@@ -60,6 +84,8 @@ get_header();
                             }
                         }
                         $giftSettings = giftCardSettings();
+                        $cartRecord['fields']['gift_currency_value'] = $cartRecord['fields']['gift_currency'] ? $giftSettings['fields']['currency']['options'][$cartRecord['fields']['gift_currency']] : '';
+                        $cartRecord['fields']['gift_amount_value'] = $cartRecord['fields']['gift_amount'] ? $giftSettings['fields']['amount']['options'][$cartRecord['fields']['gift_amount']] : '';
                         ?>
                         <div class="img-text-mod__picture img-text-mod-transform">
                             <?php if ($image): ?>
@@ -77,14 +103,17 @@ get_header();
                                 <div class="error-text error-some-error"><?php pll_e("An error has occurred, please try again or contact us.");?></div>
                             </div>
                             <form data-gift-form="" action="" class="form">
+                                <?php if ($cartRecord['fields']['key']): ?>
+                                    <input type="hidden" name="cart_item_key" value="<?php echo $cartRecord['fields']['key']; ?>">
+                                <?php endif; ?>
                                 <?php if (isset($giftSettings['fields']['amount'])): ?>
                                     <div class="form-group--select form-group--white form-group--05">
                                         <label class="select-label select-label-js">
                                             <div class="select-label__picture">
                                             </div>
-                                            <input class="input input-value-js" type="text" readonly placeholder="<?php echo $giftSettings['fields']['amount']['label']; ?>*" required />
+                                            <input class="input input-value-js" type="text" readonly placeholder="<?php echo $giftSettings['fields']['amount']['label']; ?>*" value="<?php if ($cartRecord['fields']['gift_amount_value']):?><?php echo $cartRecord['fields']['gift_amount_value']; ?><?php else:?><?php endif;?>" required />
                                             <!-- Value of this input will be sent to back -->
-                                            <input class="input input-key-js" name="<?php echo $giftSettings['fields']['amount']['name']; ?>" readonly hidden required>
+                                            <input class="input input-key-js" name="<?php echo $giftSettings['fields']['amount']['name']; ?>" value="<?php if ($cartRecord['fields']['gift_amount']):?><?php echo $cartRecord['fields']['gift_amount']; ?><?php else:?><?php endif;?>" readonly hidden required>
                                         </label>
                                         <?php if (!empty($giftSettings['fields']['amount']['options'])): ?>
                                             <ul class="options options-js">
@@ -103,9 +132,9 @@ get_header();
                                             <label class="select-label select-label-js">
                                                 <div class="select-label__picture">
                                                 </div>
-                                                <input class="input input-value-js" type="text" readonly placeholder="<?php echo $giftSettings['fields']['currency']['label']; ?> *" required />
+                                                <input class="input input-value-js" type="text" readonly placeholder="<?php echo $giftSettings['fields']['currency']['label']; ?> *" value="<?php if ($cartRecord['fields']['gift_currency_value']):?><?php echo $cartRecord['fields']['gift_currency_value']; ?><?php else:?><?php endif;?>" required />
                                                 <!-- Value of this input will be sent to back -->
-                                                <input class="input input-key-js" name="<?php echo $giftSettings['fields']['currency']['name']; ?>" readonly hidden required>
+                                                <input class="input input-key-js" name="<?php echo $giftSettings['fields']['currency']['name']; ?>" value="<?php if ($cartRecord['fields']['gift_currency']):?><?php echo $cartRecord['fields']['gift_currency']; ?><?php else:?><?php endif;?>" readonly hidden required>
                                             </label>
 
                                             <?php if (!empty($giftSettings['fields']['currency']['options'])): ?>
@@ -122,20 +151,20 @@ get_header();
                                 <?php endif; ?>
                                 <?php if (isset($giftSettings['fields']['sender'])): ?>
                                     <div class="form-group--05">
-                                        <input type="text" name="<?php echo $giftSettings['fields']['sender']['name']; ?>" id="sender" class="input-animation" placeholder="<?php echo $giftSettings['fields']['sender']['label']; ?> *" required>
+                                        <input type="text" name="<?php echo $giftSettings['fields']['sender']['name']; ?>" value="<?php echo $cartRecord['fields']['gift_sender_name'];?>" id="sender" class="input-animation" placeholder="<?php echo $giftSettings['fields']['sender']['label']; ?> *" required>
                                         <label for="sender" class="form__label"><?php echo $giftSettings['fields']['sender']['label']; ?> *</label>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (isset($giftSettings['fields']['recipient'])): ?>
                                     <div class="form-group--05">
-                                        <input type="text" name="<?php echo $giftSettings['fields']['recipient']['name']; ?>" id="recipient" class="input-animation" placeholder="<?php echo $giftSettings['fields']['recipient']['label']; ?> *" required>
+                                        <input type="text" name="<?php echo $giftSettings['fields']['recipient']['name']; ?>" value="<?php echo $cartRecord['fields']['gift_recipient_name'];?>" id="recipient" class="input-animation" placeholder="<?php echo $giftSettings['fields']['recipient']['label']; ?> *" required>
                                         <label for="recipient" class="form__label"><?php echo $giftSettings['fields']['recipient']['label']; ?> *</label>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (isset($giftSettings['fields']['message'])): ?>
                                     <div class="form-group">
                                         <label for="message"><?php echo $giftSettings['fields']['message']['label']; ?></label>
-                                        <textarea name="<?php echo $giftSettings['fields']['message']['name']; ?>" id="message" cols="10" rows="2"></textarea>
+                                        <textarea name="<?php echo $giftSettings['fields']['message']['name']; ?>" id="message" cols="10" rows="2"><?php echo $cartRecord['fields']['gift_message'];?></textarea>
                                     </div>
                                 <?php endif; ?>
                                 <button type="submit" class="btn btn--accent-border">

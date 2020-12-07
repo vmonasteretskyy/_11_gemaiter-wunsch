@@ -74,14 +74,15 @@ if ($current_url) {
 
                   <ul class="options options-js">
                     <li class="option option-js" data-key="English">
-                      <a class="option__text" href="<?php echo  '/' . $current_url;?>"><?php pll_e('English'); ?></a>
+                      <a class="option__text" href="<?php echo get_url_en_prefix(); ?>"><?php pll_e('English'); ?></a>
                     </li>
                     <li class="option option-js" data-key="German">
-                      <a class="option__text" href="<?php the_url( '/de/' . $current_url);?>"><?php pll_e('German'); ?></a>
+                      <a class="option__text" href="<?php echo get_url_de_prefix(); ?>"><?php pll_e('German'); ?></a>
                     </li>
                   </ul>
                 </div>
               </li>
+              <?php /*
               <li class="footer-line footer-line--select">
                 <div class="form-group form-group--select">
                   <label class="select-label select-label-js">
@@ -102,7 +103,7 @@ if ($current_url) {
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li>*/ ?>
             </ul>
           </div>
         </div>
