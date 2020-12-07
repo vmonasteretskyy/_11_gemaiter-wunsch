@@ -79,8 +79,8 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', true );
 
-define( 'WP_HOME', 'http://gemaiter.me' );
-define( 'WP_SITEURL', 'http://gemaiter.me' );
+define( 'WP_HOME', 'http://lh.me' );
+define( 'WP_SITEURL', 'http://lh.me' );
 
 /* That's all, stop editing! Happy publishing. */
 

@@ -167,7 +167,8 @@ function ajax_product_remove()
     if (!$cart_item_key) {
         echo json_encode([
             'has_error' => true,
-            'error_message' => pll__('Сталась помилка. Продукт не може бути видалений.')
+            'error_title' => pll__('Error'),
+            'error_message' => pll__('An error occurred. Product cannot be deleted.'),
         ]);
         wp_die();
     }
@@ -211,7 +212,8 @@ function set_quantity() {
     if (!$cart_item_key) {
         echo json_encode([
             'has_error' => true,
-            'error_message' => pll__('Сталась помилка. Неможливо змінити кількість.')
+            'error_title' => pll__('Error'),
+            'error_message' => pll__('An error occurred. Product not found.')
         ]);
         wp_die();
     }
@@ -223,7 +225,6 @@ function set_quantity() {
     if ($cart_item) {
         $item_total_price = $cart_item['line_total'];
     }
-
 
     WC()->cart->calculate_totals();
     WC()->cart->maybe_set_cart_cookies();
@@ -357,6 +358,9 @@ function set_pll_preferred_language() {
 
 function ajax_add_to_cart_gift_card() {
     $current_lang = pll_current_language();
+    $allPricesData = getPrices();
+    $site_currency = $allPricesData[$current_lang]['currency'];
+    
     $productSlug = 'gift-card';
     $product = null;
     if ($productObject = get_page_by_path( 'gift-card', OBJECT, 'product' )) {
@@ -390,7 +394,16 @@ function ajax_add_to_cart_gift_card() {
     $price = 0;
     if (isset($product_attributes['gift_amount']) && $product_attributes['gift_amount']) {
         $price = $product_attributes['gift_amount'];
-        //need add coeficient logic
+        //coef (usd to eur) logic
+        $currency_coef = get_field('currency_usd_to_eur', 'option');
+        if (isset($product_attributes['gift_currency']) && $product_attributes['gift_currency'] && $product_attributes['gift_currency'] != $site_currency) {
+            if ($site_currency == 'usd') {
+                $price = $price * $currency_coef;
+            } else if ($site_currency == 'eur') {
+                $price = $price / $currency_coef;
+            }
+            $price = intval($price);
+        }
     }
     //there will be attributes
     $product_attributes['product_type'] = 'gift-card';
@@ -429,6 +442,7 @@ function ajax_get_sizes() {
     $current_lang = pll_current_language();
     $allPricesData = getPrices();
     $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
+    $data['currency'] = $allPricesData[$current_lang]['currency'];
     $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 
     $priceType = 'regular';
@@ -441,6 +455,29 @@ function ajax_get_sizes() {
     $subjectType = 'person_1';
     $subject = isset($_REQUEST['subject']) ? trim($_REQUEST['subject']) : '';
     $subjectType = $subject;
+    
+    $chooseTech = isset($_REQUEST['choose_tech']) ? trim($_REQUEST['choose_tech']) : '';
+    
+    $cartDiscountedHash = isset($_REQUEST['discount_hash']) ? trim($_REQUEST['discount_hash']) : '';
+    $cartDiscountedRecord = getCardItemRecord($cartDiscountedHash);
+    if ($cartDiscountedRecord) {
+        if (isset($cartDiscountedRecord['attributes']['product_type']) && $cartDiscountedRecord['attributes']['product_type'] != 'picture') {
+            $cartDiscountedRecord = null;
+        }
+        if (isset($cartDiscountedRecord['attributes']['locale']) && $cartDiscountedRecord['attributes']['locale'] != $current_lang) {
+            $cartDiscountedRecord = null;
+        }
+    }
+    if (!$cartDiscountedRecord) {
+        $cartDiscountedHash = '';
+    }
+    $discount = null;
+    if ($cartDiscountedRecord) {
+        $baseDiscountPrice = $cartDiscountedRecord['price'];
+        $currency = $allPricesData[$current_lang]['currency'];
+        $discount = getDiscount($baseDiscountPrice, $currency);
+    }
+    
     if ($subject == 'custom') {
         $countSubjects = 0;
         $customPersons = isset($_REQUEST['subject_custom']['persons']) ? trim($_REQUEST['subject_custom']['persons']) : 0;
@@ -454,13 +491,31 @@ function ajax_get_sizes() {
             $countSubjects = 1;
         }
         $subjectType = 'person_' . $countSubjects;
+        
+        if ($chooseTech) {
+            if ($chooseTech == 'oil' && $countSubjects > 16) {
+                echo json_encode([
+                    'has_error' => true,
+                    'error_title' => pll__('Error'),
+                    'error_message' => pll__('Only 16 persons are possible for oil.')
+                ]);
+                wp_die();
+            }
+            if ($chooseTech == 'charcoal' && $countSubjects > 7) {
+                echo json_encode([
+                    'has_error' => true,
+                    'error_title' => pll__('Error'),
+                    'error_message' => pll__('Only 7 persons are possible for charcoal.')
+                ]);
+                wp_die();
+            }
+        }
     } else {
         $subjects = getSubjects();
         if (isset($subjects[$subject])) {
             $subjectType = $subjects[$subject]['price_type'];
         }
     }
-    $chooseTech = isset($_REQUEST['choose_tech']) ? trim($_REQUEST['choose_tech']) : '';
 
     $data['sizes'] = getSizesBySubjectTechnique($current_lang, $chooseTech, $subjectType, $priceType);
     $data['default_size'] = null;
@@ -483,6 +538,8 @@ function ajax_get_sizes() {
     if (!isset($data['sizes'][$size]) || (isset($data['sizes'][$size]['available']) && !$data['sizes'][$size]['available'])) {
         $size = $data['default_size'];
     }
+    $price = $data['sizes'][$size]['price'];
+    $discount = getDiscount($price, $data['currency']);
 
     $html = '';
     ob_start();
@@ -503,9 +560,15 @@ function ajax_get_sizes() {
                             <?php echo $itemSize['label']; ?>
                         <?php endif; ?>
                         <?php if ($itemSize['available'] && isset($itemSize['price']) && $itemSize['price']):?>
-                            <span>
-                                <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>
-                            </span>
+                            <?php if ($discount): ?>
+                                <span title="<?php pll_e('Old price');?> <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>">
+                                    <?php echo $data['currency_symbol'] . ' ' . ($itemSize['price'] - $discount['value']); ?>**
+                                </span>
+                            <?php else:?>
+                                <span>
+                                    <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>
+                                </span>
+                            <?php endif;?>
                         <?php endif; ?>
                     </p>
                     <span class="r-size-card__descr">
@@ -566,6 +629,7 @@ function ajax_get_sizes() {
         'has_error' => false,
         'html' => $htmlSizes,
         'delivery_html' => $deliveryHtml,
+        'discount' => $discount,
     ]);
     wp_die();
 
@@ -592,6 +656,7 @@ function ajax_add_to_cart_main_product() {
         wp_die();
     }
     $attributes = [
+        'cart_discounted_hash',
         'subject',
         'subject_custom',
         'subject_custom_max_elements',
@@ -754,11 +819,38 @@ function ajax_add_to_cart_main_product() {
 
     $price = 0;
     $basePrice = 0;
+    $baseDiscountPrice = 0;
     $framePrice = 0;
     if (isset($product_attributes['subject_price_type']) && $product_attributes['subject_price_type'] && isset($product_attributes['choose_tech']) && $product_attributes['choose_tech'] && isset($product_attributes['size']) && $product_attributes['size'] && isset($product_attributes['duration_type']) && $product_attributes['duration_type']) {
         //calculate price
         $basePrice = getPriceByTechniqueSubjectSizeDuration($current_lang, $product_attributes['choose_tech'], $product_attributes['subject_price_type'], $product_attributes['size'], $product_attributes['duration_type']);
+        //logic for discounted hash
+        $baseDiscountPrice = 0;
+        if (isset($product_attributes['cart_discounted_hash']) && $product_attributes['cart_discounted_hash']) {
+            $cartDiscountedHash = $product_attributes['cart_discounted_hash'];
+            $cartDiscountedRecord = getCardItemRecord($cartDiscountedHash);
+            if (isset($cartDiscountedRecord['attributes']['product_type']) && $cartDiscountedRecord['attributes']['product_type'] != 'picture') {
+                $cartDiscountedRecord = null;
+            }
+            if (isset($cartDiscountedRecord['attributes']['locale']) && $cartDiscountedRecord['attributes']['locale'] != $current_lang) {
+                $cartDiscountedRecord = null;
+            }
+            if (!$cartDiscountedRecord) {
+                $cartDiscountedHash = '';
+            }
+            $discount = null;
+            if ($cartDiscountedRecord) {
+                $baseDiscountPriceItem = $cartDiscountedRecord['price'];
+                $allPricesData = getPrices();
+                $currency = $allPricesData[$current_lang]['currency'];
+                $discount = getDiscount($baseDiscountPriceItem, $currency);
+                if ($discount) {
+                    $baseDiscountPrice = $discount['value'];
+                }
+            }
+        }
         $price += $basePrice;
+        $price -= $baseDiscountPrice;
     }
     if ($product_attributes['frame_selected']) {
         $frame = get_term_by('slug', $product_attributes['frame_selected'], 'pa_frames');
@@ -773,6 +865,7 @@ function ajax_add_to_cart_main_product() {
     $product_attributes['locale'] = $current_lang;
     $product_attributes['base_price'] = $basePrice;
     $product_attributes['frame_price'] = $framePrice;
+    $product_attributes['base_discount_price'] = $baseDiscountPrice;
     $cart_item_data['attributes'] = $product_attributes;
     $cart_item_data['price'] = $price;
 
@@ -780,7 +873,8 @@ function ajax_add_to_cart_main_product() {
     $variation_id = 0;
     $variation = wc_get_product_variation_attributes( $variation_id );
 
-    if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data) && 'publish' === $product_status) {
+    $cart_item_key_new = WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data);
+    if ($passed_validation && $cart_item_key_new && 'publish' === $product_status) {
         do_action('woocommerce_ajax_added_to_cart', $product_id);
         if ($cart_item_key) {
             $delete = WC()->cart->remove_cart_item($cart_item_key);
@@ -796,7 +890,7 @@ function ajax_add_to_cart_main_product() {
 
     echo json_encode([
         'has_error' => false,
-        'redirect_link' => esc_url((get_url_lang_prefix()) . $mode . '/'),
+        'redirect_link' => esc_url((get_url_lang_prefix()) . $mode . '/' . ($mode == 'order' && $cart_item_key_new ? ('?discount_hash=' . $cart_item_key_new) : '')),
         'total_products' => WC()->cart->get_cart_contents_count(),
     ]);
     wp_die();
@@ -1078,6 +1172,20 @@ function woocommerce_currency($currency){
     return $currency;
 }
 add_filter('woocommerce_currency', 'woocommerce_currency');
+
+function woocommerce_cart_item_removed_callback($cart_item_key, $cartObject){
+    $cartContents = $cartObject->get_cart_contents();
+    if ($cartContents) {
+        foreach ($cartContents as $key => $item) {
+            // update price and base_discount_price
+            // cart_discounted_hash
+            $cartContents[$key]['attributes']['test'] = 1;
+        }
+    }
+    $cartObject->set_cart_contents($cartContents);
+}
+add_action('woocommerce_cart_item_removed', 'woocommerce_cart_item_removed_callback', 10, 2);
+//add_action('woocommerce_remove_cart_item', 'woocommerce_cart_item_removed_callback', 10, 2);
 
 /*gemaiter end*/
 

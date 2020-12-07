@@ -172,7 +172,7 @@ jQuery(document).ready(function ($) {
                 },
                 complete: function(){
                     form.data("busy", false).removeClass("busy");
-                }, 
+                },
                 error: function(){
                     formMessageWrapper.find('.error-some-error').show();
                     form.data("busy", false).removeClass("busy");
@@ -273,11 +273,14 @@ jQuery(document).ready(function ($) {
             success: function(data) {
                 form.find('.error-response').remove();
                 if (data.has_error) {
-                    form.prepend('<div class="error-text error-response">' + data.error_message + '</div>');
+                    showInfoPopup(data.error_title, data.error_message);
                 } else if (data.delivery_html != undefined) {
                     $('[data-deliveries]').html(data.delivery_html);
                     document.dispatchEvent(new Event('initCalendar'));
                     initSummary();
+                    if (data.discount != undefined) {
+                        $('[data-discount]').html(data.discount.label);
+                    }
                 }
             },
             complete: function(){
@@ -309,9 +312,12 @@ jQuery(document).ready(function ($) {
             success: function(data) {
                 form.find('.error-response').remove();
                 if (data.has_error) {
-                    form.prepend('<div class="error-text error-response">' + data.error_message + '</div>');
+                    showInfoPopup(data.error_title, data.error_message);
                 } else if (data.html != undefined) {
                     $('[data-sizes]').html(data.html);
+                    if (data.discount != undefined) {
+                        $('[data-discount]').html(data.discount.label);
+                    }
                     PictureLoad();
                     initSummary();
                 }
@@ -345,13 +351,16 @@ jQuery(document).ready(function ($) {
             success: function(data) {
                 form.find('.error-response').remove();
                 if (data.has_error) {
-                    form.prepend('<div class="error-text error-response">' + data.error_message + '</div>');
+                    showInfoPopup(data.error_title, data.error_message);
                 } else if (data.html != undefined) {
                     $('[data-sizes]').html(data.html);
                     PictureLoad();
                     if (data.delivery_html != undefined) {
                         $('[data-deliveries]').html(data.delivery_html);
                         document.dispatchEvent(new Event('initCalendar'));
+                    }
+                    if (data.discount != undefined) {
+                        $('[data-discount]').html(data.discount.label);
                     }
                     initSummary();
                 }
@@ -619,6 +628,97 @@ jQuery(document).ready(function ($) {
         }
     }
     /*order page end*/
+
+    /*cart page start*/
+    $(document).on('click', '.card-number [data-quantity-cart-item]', function(e) {
+        var btn = $(this);
+        var cart_item_key = btn.data('cart-item-key');
+        var quantity = parseInt(btn.data('quantity-cart-item'));
+        var mode = btn.data('mode');
+        var wrapper = $('.cart-wrap');
+        if (quantity < 1) return;
+
+        if (wrapper.data("busy")) return;
+        wrapper.data("busy", true).addClass("busy");
+
+        data = {
+            action: 'set_quantity',
+            cart_item_key: cart_item_key,
+            quantity: quantity,
+        };
+        $.ajax({
+            url: "/wp-admin/admin-ajax.php",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                wrapper.find('.woocommerce-NoticeGroup-checkout').remove();
+                if (data.has_error) {
+                    showInfoPopup(data.error_title, data.error_message);
+                } else {
+                    wrapper.find('[data-cart-total-amount]').html(data.total);
+                    //update prices in right section too
+
+                    //update quantities
+                    quantity = parseInt(quantity);
+                    btn.closest('.card-number').find('[data-mode="minus"]').data('quantity-cart-item', (quantity-1)).attr('data-quantity-cart-item', (quantity-1));
+                    btn.closest('.card-number').find('[data-mode="plus"]').data('quantity-cart-item', (quantity+1)).attr('data-quantity-cart-item', (quantity+1));
+                    btn.closest('.card-number').find('.card-number__field').val(quantity);
+                    if (quantity < 2) {
+                        btn.closest('.card-number').find('[data-mode="minus"]').addClass('hide');
+                    } else {
+                        btn.closest('.card-number').find('[data-mode="minus"]').removeClass('hide');
+                    }
+                }
+            },
+            complete: function(){
+                wrapper.data("busy", false).removeClass("busy");
+            }
+        });
+    });
+
+    $(document).on('click', '.cards .card [data-delete-item]', function(e) {
+        var btn = $(this);
+        var line = btn.closest('.card');
+        var cart_item_key = btn.data('delete-item');
+        var wrapper = $('.cart-wrap');
+        if (wrapper.data("busy")) return;
+        wrapper.data("busy", true).addClass("busy");
+        data = {
+            action: 'product_remove',
+            cart_item_key: cart_item_key,
+        };
+        $.ajax({
+            url: "/wp-admin/admin-ajax.php",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                wrapper.find('.woocommerce-NoticeGroup-checkout').remove();
+                if (data.has_error) {
+                    showInfoPopup(data.error_title, data.error_message);
+                } else {
+                    wrapper.find('[data-cart-total-amount]').html(data.total);
+                    //update prices in right section too
+
+                    line.remove();
+                    if (data.total_products < 1) {
+                        window.location = window.location;
+                    }
+                }
+            },
+            complete: function(){
+                wrapper.data("busy", false).removeClass("busy");
+            }
+        });
+    });
+    /*cart page end*/
 
 });
 

@@ -48,7 +48,7 @@ get_header();
                     <h2><?php pll_e('Cart');?></h2>
                     <div class="cart-head__amount">
                         <p><?php pll_e('Total Amount');?>: <span><?php echo $data['currency_symbol'];?></span></p>
-                        <div class="cart-amount h1">
+                        <div class="cart-amount h1" data-cart-total-amount="">
                             <?php echo WC()->cart->get_cart_total();?>
                         </div>
                     </div>
@@ -124,6 +124,10 @@ get_header();
                                     $sender = isset($cart_item['attributes']['gift_sender_name']) ? $cart_item['attributes']['gift_sender_name'] : '';
                                     $recipient = isset($cart_item['attributes']['gift_recipient_name']) ? $cart_item['attributes']['gift_recipient_name'] : '';
                                     $message = isset($cart_item['attributes']['gift_message']) ? $cart_item['attributes']['gift_message'] : '';
+    
+                                    $currency = isset($cart_item['attributes']['gift_currency']) ? $cart_item['attributes']['gift_currency'] : '';
+                                    $currencySymbol = $currency == 'eur'? '€' : '$';
+                                    $amount = isset($cart_item['attributes']['gift_amount']) ? $cart_item['attributes']['gift_amount'] : '';
                                 }
                         ?>
                         <?php if ($cartItemType == 'picture'): ?>
@@ -172,13 +176,13 @@ get_header();
                                     </div>
 
                                     <div class="card-number">
-                                        <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']-1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="minus" class="card-number__minus">-</button>
+                                        <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']-1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="minus" class="card-number__minus <?php if ($cart_item['quantity'] < 2):?>hide<?php endif;?>">-</button>
                                         <input type="number" class="card-number__field" readonly placeholder="<?php echo $cart_item['quantity']; ?>" value="<?php echo $cart_item['quantity']; ?>">
                                         <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']+1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="plus" class="card-number__plus">+</button>
                                     </div>
                                 </div>
                                 <div class="card__actions">
-                                    <a href="#" class="card-cross" data-delete-item="<?php echo $cart_item_key;?>">
+                                    <a href="javascript:void(0);" class="card-cross" data-delete-item="<?php echo $cart_item_key;?>">
                                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M13.8811 12.5L24.714 1.66715C25.0954 1.28575 25.0954 0.667394 24.714 0.286047C24.3326 -0.0953001 23.7142 -0.0953489 23.3329 0.286047L12.5 11.1189L1.66715 0.286047C1.28575 -0.0953489 0.667394 -0.0953489 0.286047 0.286047C-0.0953001 0.667442 -0.0953489 1.2858 0.286047 1.66715L11.1189 12.5L0.286047 23.3329C-0.0953489 23.7143 -0.0953489 24.3326 0.286047 24.714C0.47672 24.9046 0.726671 25 0.976622 25C1.22657 25 1.47647 24.9046 1.6672 24.714L12.5 13.8811L23.3328 24.714C23.5235 24.9046 23.7735 25 24.0234 25C24.2734 25 24.5233 24.9046 24.714 24.714C25.0954 24.3326 25.0954 23.7142 24.714 23.3329L13.8811 12.5Z" fill="#545454"/>
                                         </svg>
@@ -217,6 +221,12 @@ get_header();
                                             <p><span><?php pll_e('Message');?>: </span>
                                             <p><?php echo $message;?></p>
                                         </div>
+                                        <?php if ($currency != $data['currency']):?>
+                                        <div class="card-descr-row">
+                                            <p><span><?php pll_e('Amount');?>: </span>
+                                            <p><?php echo $currencySymbol . ' ' . $amount;?></p>
+                                        </div>
+                                        <?php endif;?>
                                         <div class="card-amount">
                                             <p>
                                               <span class="f-16">
@@ -226,13 +236,13 @@ get_header();
                                             </p>
                                         </div>
                                         <div class="card-number">
-                                            <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']-1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="minus" class="card-number__minus">-</button>
+                                            <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']-1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="minus" class="card-number__minus <?php if ($cart_item['quantity'] < 2):?>hide<?php endif;?>">-</button>
                                             <input type="number" class="card-number__field" readonly placeholder="<?php echo $cart_item['quantity']; ?>" value="<?php echo $cart_item['quantity']; ?>">
                                             <button data-field="quantity" data-quantity-cart-item="<?php echo $cart_item['quantity']+1; ?>" data-cart-item-key="<?php echo $cart_item_key; ?>" data-mode="plus" class="card-number__plus">+</button>
                                         </div>
                                     </div>
                                     <div class="card__actions">
-                                        <a href="#" class="card-cross" data-delete-item="<?php echo $cart_item_key;?>">
+                                        <a href="javascript:void(0);" class="card-cross" data-delete-item="<?php echo $cart_item_key;?>">
                                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M13.8811 12.5L24.714 1.66715C25.0954 1.28575 25.0954 0.667394 24.714 0.286047C24.3326 -0.0953001 23.7142 -0.0953489 23.3329 0.286047L12.5 11.1189L1.66715 0.286047C1.28575 -0.0953489 0.667394 -0.0953489 0.286047 0.286047C-0.0953001 0.667442 -0.0953489 1.2858 0.286047 1.66715L11.1189 12.5L0.286047 23.3329C-0.0953489 23.7143 -0.0953489 24.3326 0.286047 24.714C0.47672 24.9046 0.726671 25 0.976622 25C1.22657 25 1.47647 24.9046 1.6672 24.714L12.5 13.8811L23.3328 24.714C23.5235 24.9046 23.7735 25 24.0234 25C24.2734 25 24.5233 24.9046 24.714 24.714C25.0954 24.3326 25.0954 23.7142 24.714 23.3329L13.8811 12.5Z" fill="#545454"/>
                                             </svg>

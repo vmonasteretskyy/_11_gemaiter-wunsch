@@ -36,6 +36,7 @@ $fields = get_fields($post->ID);
 //test(WC()->cart->get_cart());
 
 $cartItemID = isset($_REQUEST['cart_item_id']) ? trim($_REQUEST['cart_item_id']) : '';
+$cartDiscountedHash = isset($_REQUEST['discount_hash']) ? trim($_REQUEST['discount_hash']) : '';
 $cartRecord = getCardItemRecord($cartItemID);
 if ($cartRecord) {
     if (isset($cartRecord['attributes']['product_type']) && $cartRecord['attributes']['product_type'] != 'picture') {
@@ -48,6 +49,27 @@ if ($cartRecord) {
     $location = (get_url_lang_prefix()) . 'order/';
     wp_redirect( $location);
     exit;
+}
+
+$allPricesData = getPrices();
+
+$cartDiscountedRecord = getCardItemRecord($cartDiscountedHash);
+if ($cartDiscountedRecord) {
+    if (isset($cartDiscountedRecord['attributes']['product_type']) && $cartDiscountedRecord['attributes']['product_type'] != 'picture') {
+        $cartDiscountedRecord = null;
+    }
+    if (isset($cartDiscountedRecord['attributes']['locale']) && $cartDiscountedRecord['attributes']['locale'] != $current_lang) {
+        $cartDiscountedRecord = null;
+    }
+}
+if (!$cartDiscountedRecord) {
+    $cartDiscountedHash = '';
+}
+$discount = null;
+if ($cartDiscountedRecord) {
+    $baseDiscountPrice = $cartDiscountedRecord['price'];
+    $currency = $allPricesData[$current_lang]['currency'];
+    $discount = getDiscount($baseDiscountPrice, $currency);
 }
 
 $data = [];
@@ -76,7 +98,7 @@ $paintingTechnique = $data['default_painting_technique'];
 if ($cartRecord && isset($cartRecord['attributes']['choose_tech']) && $cartRecord['attributes']['choose_tech']) {
     $paintingTechnique = $cartRecord['attributes']['choose_tech'];
 }
-$allPricesData = getPrices();
+
 $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
 $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 $data['sizes'] = $allPricesData[$current_lang]['sizes'][$paintingTechnique];
@@ -162,6 +184,10 @@ get_header();
         <?php if ($cartItemID):?>
             <input type="hidden" name="cart_item_key" value="<?php echo $cartItemID; ?>">
         <?php endif;?>
+        <?php if ($cartDiscountedHash):?>
+            <input type="hidden" name="cart_discounted_hash" value="<?php echo $cartDiscountedHash; ?>">
+        <?php endif;?>
+        
         <div class="container-small">
             <div class="title-wrap m-b-90 p-t-65">
                 <h2 class="js-order-title text--center">
@@ -385,9 +411,15 @@ get_header();
                                                 <?php echo $itemSize['label']; ?>
                                             <?php endif; ?>
                                             <?php if ($itemSize['available'] && isset($itemSize['price']) && $itemSize['price']):?>
-                                            <span>
-                                                <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>
-                                            </span>
+                                                <?php if ($discount): ?>
+                                                    <span title="<?php pll_e('Old price');?> <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>">
+                                                        <?php echo $data['currency_symbol'] . ' ' . ($itemSize['price'] - $discount['value']); ?>**
+                                                    </span>
+                                                <?php else:?>
+                                                    <span>
+                                                        <?php echo $data['currency_symbol'] . ' ' . $itemSize['price']; ?>
+                                                    </span>
+                                                <?php endif;?>
                                             <?php endif; ?>
                                         </p>
                                         <span class="r-size-card__descr">
@@ -551,12 +583,12 @@ get_header();
                         </div>
 
                         <label class="checkbox-button fz-18 text--w-500 js-upload-accordion">
-                            <input type="checkbox" <?php if ($secondOptionToSendPhoto):?>checked="checked"<?endif;?> name="second_option_to_send_photo" value="1">
+                            <input type="checkbox" <?php if ($secondOptionToSendPhoto):?>checked="checked"<?php endif;?> name="second_option_to_send_photo" value="1">
                             <p><?php pll_e('Second option to send us the Photo');?></p>
                             <span class="checkmark-checkbox"></span>
                         </label>
 
-                        <ul class="upload-accordion text--ls-05 <?php if ($secondOptionToSendPhoto):?>active<?endif;?>" <?php if ($secondOptionToSendPhoto):?>style="display: block;"<?endif;?>>
+                        <ul class="upload-accordion text--ls-05 <?php if ($secondOptionToSendPhoto):?>active<?php endif;?>" <?php if ($secondOptionToSendPhoto):?>style="display: block;"<?php endif;?>>
                             <?php
                                 $send_us_photo_settings = isset($fields['send_us_photo_settings']) ? $fields['send_us_photo_settings'] : '';
                             ?>
@@ -595,7 +627,7 @@ get_header();
                             <?php endif; ?>
                         </ul>
                         <label class="checkbox-button fz-18 text--w-500">
-                            <input type="checkbox" <?php if ($artistAdvice):?>checked="checked"<?endif;?> name="artist_advice" value="1" >
+                            <input type="checkbox" <?php if ($artistAdvice):?>checked="checked"<?php endif;?> name="artist_advice" value="1" >
                             <p><?php pll_e('Get the artistis advice on which Photos will be Best for my Painting');?></p>
                             <span class="checkmark-checkbox"></span>
                         </label>
@@ -759,7 +791,7 @@ get_header();
                         </div>
                     </div>
                     <div class="result-bottom">
-                        <p><?php pll_e('Add an additional Painting to your order and get');?> <a href="#"><span id="result-discount">30$</span> <?php pll_e('Discount');?>!</a></p>
+                        <p><?php pll_e('Add an additional Painting to your order and get');?> <a href="javascript:void(0);"><span data-discount="" id="result-discount">20$</span> <?php pll_e('Discount');?>!</a></p>
                         <button data-add-picture-product-to-cart="order" class="btn btn--accent-border">+ <?php pll_e('Add an extra photo'); ?></button>
                     </div>
                 </div>

@@ -29,7 +29,8 @@ body.blog .gallery-tag svg path {
 }
 
 .modal__content.busy,
-form.busy {
+form.busy,
+.cart-wrap.busy{
     opacity: 0.5 !important;
     pointer-events: none;
 }

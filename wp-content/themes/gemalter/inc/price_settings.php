@@ -5439,6 +5439,8 @@ function getDuration() {
     return $duration;
 }
 
+
+
 function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
     $duration = getDuration();
     $paintingTechniqueData = null;
@@ -5602,4 +5604,61 @@ function getBackgroundColorsSettings() {
         ],
     ];
     return $backgrounds;
+}
+
+/**
+ * Discount Settings
+ */
+function getDiscounts() {
+    $discounts = [
+        'usd' => [
+            '20' => [
+                'price_range' => [0, 190],
+                'currency_symbol' => '$',
+            ],
+            '30' => [
+                'price_range' => [191, 320],
+                'currency_symbol' => '$',
+            ],
+            '40' => [
+                'price_range' => [321, 1000000],
+                'currency_symbol' => '$',
+            ],
+        ],
+        'eur' => [
+            '10' => [
+                'price_range' => [0, 150],
+                'currency_symbol' => '$',
+            ],
+            '20' => [
+                'price_range' => [151, 280],
+                'currency_symbol' => '$',
+            ],
+            '30' => [
+                'price_range' => [281, 1000000],
+                'currency_symbol' => '$',
+            ],
+        ],
+    ];
+    return $discounts;
+}
+
+function getDiscount($price = 0, $currency = 'usd') {
+    $discount = null;
+    $discounts = getDiscounts();
+    $prices = isset($discounts[$currency]) ? $discounts[$currency] : [];
+    
+    if (!empty($prices)) {
+        foreach($prices as $discountKey => $discountItem) {
+            if ($discountItem['price_range'][0] <= $price && $price <= $discountItem['price_range'][1]) {
+                $discount = [
+                    'value' => $discountKey,
+                    'currency_symbol' => $discountItem['currency_symbol'],
+                    'label' => $discountItem['currency_symbol'] . ' ' . $discountKey,
+                ];
+                break;
+            }
+        }
+    }
+    return $discount;
 }
