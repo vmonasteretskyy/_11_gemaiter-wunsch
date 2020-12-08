@@ -171,6 +171,26 @@ function ajax_product_remove()
             'error_message' => pll__('An error occurred. Product cannot be deleted.'),
         ]);
         wp_die();
+    } else {
+        $cartItems = WC()->cart->get_cart();
+        $hasRelated = false;
+        foreach($cartItems as $key => $item) {
+            if ($key == $cart_item_key) {
+                continue;
+            }
+            if (isset($item['attributes']['cart_discounted_hash']) && $item['attributes']['cart_discounted_hash'] == $cart_item_key) {
+                $hasRelated = true;
+                break;
+            }
+        }
+        if ($hasRelated) {
+            echo json_encode([
+                'has_error' => true,
+                'error_title' => pll__('Error'),
+                'error_message' => pll__('Product cannot be deleted. This Product has discount related products.'),
+            ]);
+            wp_die();
+        }
     }
     $delete = WC()->cart->remove_cart_item($cart_item_key);
 
@@ -197,13 +217,143 @@ function ajax_product_remove()
         ),
         'cart_hash' => apply_filters( 'woocommerce_add_to_cart_hash', WC()->cart->get_cart_for_session() ? md5( json_encode( WC()->cart->get_cart_for_session() ) ) : '', WC()->cart->get_cart_for_session() ),
         'total_products' => WC()->cart->get_cart_contents_count(),
-        'total' => WC()->cart->get_total()
+        'total' => WC()->cart->get_total(),
+        'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'discount' => wc_price(WC()->cart->get_discount_total()),
+        'discount_main' => WC()->cart->get_discount_total(),
     );
     wp_send_json( $data );
     die();
 }
 add_action( 'wp_ajax_product_remove', 'ajax_product_remove' );
 add_action( 'wp_ajax_nopriv_product_remove', 'ajax_product_remove' );
+
+function ajax_apply_coupon()
+{
+    ob_start();
+    $coupon = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
+    if (!$coupon) {
+        echo json_encode([
+            'has_error' => true,
+            'error_title' => pll__('Error'),
+            'error_message' => pll__('Gift Card is empty.'),
+        ]);
+        wp_die();
+    } else {
+        $applied = WC()->cart->apply_coupon($coupon);
+        $errors = wc_print_notices(true);
+        $errors = strip_tags($errors);
+        if ($errors) {
+            $errorWithoutCoupon = str_replace($coupon, "___", $errors);
+            $errorWithoutCoupon = pll__($errorWithoutCoupon);
+            $errors = str_replace("___", $coupon, $errorWithoutCoupon);
+        }
+        if (!$applied) {
+            echo json_encode([
+                'has_error' => true,
+                'error_title' => pll__('Error'),
+                'error_message' => $errors,
+            ]);
+            wp_die();
+        }
+    }
+
+    WC()->cart->calculate_totals();
+    WC()->cart->maybe_set_cart_cookies();
+    // Get order review fragment.
+    ob_start();
+    woocommerce_order_review();
+    $woocommerce_order_review = ob_get_clean();
+    // Get checkout payment fragment.
+    ob_start();
+    woocommerce_checkout_payment();
+    $woocommerce_checkout_payment = ob_get_clean();
+    woocommerce_mini_cart();
+    $mini_cart = ob_get_clean();
+    // Fragments and mini cart are returned
+    $data = array(
+        'fragments' => apply_filters(
+            'woocommerce_update_order_review_fragments',
+            array(
+                '.woocommerce-checkout-review-order-table' => $woocommerce_order_review,
+                '.woocommerce-checkout-payment' => $woocommerce_checkout_payment,
+            )
+        ),
+        'cart_hash' => apply_filters( 'woocommerce_add_to_cart_hash', WC()->cart->get_cart_for_session() ? md5( json_encode( WC()->cart->get_cart_for_session() ) ) : '', WC()->cart->get_cart_for_session() ),
+        'total_products' => WC()->cart->get_cart_contents_count(),
+        'total' => WC()->cart->get_total(),
+        'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'discount' => wc_price(WC()->cart->get_discount_total()),
+        'discount_main' => WC()->cart->get_discount_total(),
+    );
+    wp_send_json( $data );
+    die();
+}
+add_action( 'wp_ajax_apply_coupon', 'ajax_apply_coupon' );
+add_action( 'wp_ajax_nopriv_apply_coupon', 'ajax_apply_coupon' );
+
+function ajax_cancel_coupon()
+{
+    ob_start();
+    $coupon = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
+    if (!$coupon) {
+        echo json_encode([
+            'has_error' => true,
+            'error_title' => pll__('Error'),
+            'error_message' => pll__('Gift Card is empty.'),
+        ]);
+        wp_die();
+    } else {
+        $removed = WC()->cart->remove_coupon($coupon);
+        $errors = wc_print_notices(true);
+        $errors = strip_tags($errors);
+        if ($errors) {
+            $errorWithoutCoupon = str_replace($coupon, "___", $errors);
+            $errorWithoutCoupon = pll__($errorWithoutCoupon);
+            $errors = str_replace("___", $coupon, $errorWithoutCoupon);
+        }
+        if (!$removed) {
+            echo json_encode([
+                'has_error' => true,
+                'error_title' => pll__('Error'),
+                'error_message' => $errors,
+            ]);
+            wp_die();
+        }
+    }
+    WC()->cart->calculate_totals();
+    WC()->cart->maybe_set_cart_cookies();
+    // Get order review fragment.
+    ob_start();
+    woocommerce_order_review();
+    $woocommerce_order_review = ob_get_clean();
+    // Get checkout payment fragment.
+    ob_start();
+    woocommerce_checkout_payment();
+    $woocommerce_checkout_payment = ob_get_clean();
+    woocommerce_mini_cart();
+    $mini_cart = ob_get_clean();
+    // Fragments and mini cart are returned
+    $data = array(
+        'fragments' => apply_filters(
+            'woocommerce_update_order_review_fragments',
+            array(
+                '.woocommerce-checkout-review-order-table' => $woocommerce_order_review,
+                '.woocommerce-checkout-payment' => $woocommerce_checkout_payment,
+            )
+        ),
+        'cart_hash' => apply_filters( 'woocommerce_add_to_cart_hash', WC()->cart->get_cart_for_session() ? md5( json_encode( WC()->cart->get_cart_for_session() ) ) : '', WC()->cart->get_cart_for_session() ),
+        'total_products' => WC()->cart->get_cart_contents_count(),
+        'total' => WC()->cart->get_total(),
+        'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'discount' => wc_price(WC()->cart->get_discount_total()),
+        'discount_main' => WC()->cart->get_discount_total(),
+    );
+    wp_send_json( $data );
+    die();
+}
+add_action( 'wp_ajax_cancel_coupon', 'ajax_cancel_coupon' );
+add_action( 'wp_ajax_nopriv_cancel_coupon', 'ajax_cancel_coupon' );
 
 function set_quantity() {
     $cart_item_key = isset($_POST['cart_item_key']) ? trim($_POST['cart_item_key']) : '';
@@ -249,8 +399,11 @@ function set_quantity() {
         ),
         'cart_hash' => apply_filters( 'woocommerce_add_to_cart_hash', WC()->cart->get_cart_for_session() ? md5( json_encode( WC()->cart->get_cart_for_session() ) ) : '', WC()->cart->get_cart_for_session() ),
         'total_products' => WC()->cart->get_cart_contents_count(),
-        'total' => WC()->cart->get_total(),
         'item_total_price' => wc_price($item_total_price),
+        'total' => WC()->cart->get_total(),
+        'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'discount' => wc_price(WC()->cart->get_discount_total()),
+        'discount_main' => WC()->cart->get_discount_total(),
     );
     wp_send_json( $data );
     die();
@@ -360,7 +513,7 @@ function ajax_add_to_cart_gift_card() {
     $current_lang = pll_current_language();
     $allPricesData = getPrices();
     $site_currency = $allPricesData[$current_lang]['currency'];
-    
+
     $productSlug = 'gift-card';
     $product = null;
     if ($productObject = get_page_by_path( 'gift-card', OBJECT, 'product' )) {
@@ -455,10 +608,10 @@ function ajax_get_sizes() {
     $subjectType = 'person_1';
     $subject = isset($_REQUEST['subject']) ? trim($_REQUEST['subject']) : '';
     $subjectType = $subject;
-    
+
     $chooseTech = isset($_REQUEST['choose_tech']) ? trim($_REQUEST['choose_tech']) : '';
-    
-    $cartDiscountedHash = isset($_REQUEST['discount_hash']) ? trim($_REQUEST['discount_hash']) : '';
+
+    $cartDiscountedHash = isset($_REQUEST['cart_discounted_hash']) ? trim($_REQUEST['cart_discounted_hash']) : '';
     $cartDiscountedRecord = getCardItemRecord($cartDiscountedHash);
     if ($cartDiscountedRecord) {
         if (isset($cartDiscountedRecord['attributes']['product_type']) && $cartDiscountedRecord['attributes']['product_type'] != 'picture') {
@@ -477,7 +630,7 @@ function ajax_get_sizes() {
         $currency = $allPricesData[$current_lang]['currency'];
         $discount = getDiscount($baseDiscountPrice, $currency);
     }
-    
+
     if ($subject == 'custom') {
         $countSubjects = 0;
         $customPersons = isset($_REQUEST['subject_custom']['persons']) ? trim($_REQUEST['subject_custom']['persons']) : 0;
@@ -491,7 +644,7 @@ function ajax_get_sizes() {
             $countSubjects = 1;
         }
         $subjectType = 'person_' . $countSubjects;
-        
+
         if ($chooseTech) {
             if ($chooseTech == 'oil' && $countSubjects > 16) {
                 echo json_encode([
@@ -539,7 +692,7 @@ function ajax_get_sizes() {
         $size = $data['default_size'];
     }
     $price = $data['sizes'][$size]['price'];
-    $discount = getDiscount($price, $data['currency']);
+    $discountOutput = getDiscount($price, $data['currency']);
 
     $html = '';
     ob_start();
@@ -629,7 +782,7 @@ function ajax_get_sizes() {
         'has_error' => false,
         'html' => $htmlSizes,
         'delivery_html' => $deliveryHtml,
-        'discount' => $discount,
+        'discount' => $discountOutput,
     ]);
     wp_die();
 
@@ -698,7 +851,7 @@ function ajax_add_to_cart_main_product() {
     $product_attributes['subject_price_type'] = 'person_1';
     if (!$product_attributes['subject']) {
         $hasError = true;
-        $errorMessage = pll__('Number of subject is empty.') . '<br>';
+        $errorMessage .= pll__('Number of subject is empty.') . '<br>';
     } else {
         if ($product_attributes['subject'] == 'custom') {
             $countSubjects = 0;
@@ -716,10 +869,10 @@ function ajax_add_to_cart_main_product() {
             $product_attributes['subject_price_type'] = $subjectType;
             if ($product_attributes['choose_tech'] == 'oil' && $countSubjects > 16) {
                 $hasError = true;
-                $errorMessage = pll__('You choose too many number of subjects. Please change number of subjects.') . '<br>';
+                $errorMessage .= pll__('You choose too many number of subjects. Please change number of subjects.') . '<br>';
             } else if ($product_attributes['choose_tech'] == 'charcoal' && $countSubjects > 7) {
                 $hasError = true;
-                $errorMessage = pll__('You choose too many number of subjects. Please change number of subjects.') . '<br>';
+                $errorMessage .= pll__('You choose too many number of subjects. Please change number of subjects.') . '<br>';
             }
         } else {
             $subjects = getSubjects();
@@ -731,15 +884,15 @@ function ajax_add_to_cart_main_product() {
     }
     if (!$product_attributes['choose_tech']) {
         $hasError = true;
-        $errorMessage = pll__('Painting Technique is empty.') . '<br>';
+        $errorMessage .= pll__('Painting Technique is empty.') . '<br>';
     }
     if (!$product_attributes['size']) {
         $hasError = true;
-        $errorMessage = pll__('Size is empty.') . '<br>';
+        $errorMessage .= pll__('Size is empty.') . '<br>';
     }
     if (!$product_attributes['background_type']) {
         $hasError = true;
-        $errorMessage = pll__('Background is empty.');
+        $errorMessage .= pll__('Background is empty.');
     } else if ($product_attributes['background_type'] != 'background_color') {
         $product_attributes['color'] = null;
     }
@@ -750,6 +903,10 @@ function ajax_add_to_cart_main_product() {
         $product_attributes['photos_count'] = null;
         $product_attributes['photos_info'] = null;
     } else {
+        if (!intval($product_attributes['photos_count'])) {
+            $hasError = true;
+            $errorMessage .= pll__("Photos are missing.") . '<br>';
+        }
     }
 
     if ($product_attributes['frame'] == 'not_need_frame') {
@@ -757,11 +914,11 @@ function ajax_add_to_cart_main_product() {
     }
     if (!$product_attributes['duration_type']) {
         $hasError = true;
-        $errorMessage = pll__('Delivery Type is empty.') . '<br>';
+        $errorMessage .= pll__('Delivery Type is empty.') . '<br>';
     }
     if (!$product_attributes['delivery_date']) {
         $hasError = true;
-        $errorMessage = pll__('Delivery Date is empty.') . '<br>';
+        $errorMessage .= pll__('Delivery Date is empty.') . '<br>';
     }
     if ($hasError) {
         echo json_encode([
@@ -790,7 +947,7 @@ function ajax_add_to_cart_main_product() {
                             $upload = wp_upload_bits($name, null, @file_get_contents($_FILES['photos']['tmp_name'][$f]));
                             if (!isset($upload['url']) || !$upload['url']) {
                                 $hasError = true;
-                                $errorMessage = pll__("An error occurred while uploading image.") . ' (' . $name . ')' . '<br>';
+                                $errorMessage .= pll__("An error occurred while uploading image.") . ' (' . $name . ')' . '<br>';
                             } else {
                                 $photos[] = [
                                     'name'=> $name,
@@ -810,11 +967,20 @@ function ajax_add_to_cart_main_product() {
             }
             if (!empty($photos)) {
                 $hasError = true;
-                $errorMessage = pll__("Photos are missing.") . '<br>';
+                $errorMessage .= pll__("Photos are missing.") . '<br>';
             }
             $product_attributes['photos'] = $photos;
         }
 
+    }
+
+    if ($hasError) {
+        echo json_encode([
+            'has_error' => true,
+            'error_title' => pll__('Error'),
+            'error_message' => $errorMessage
+        ]);
+        wp_die();
     }
 
     $price = 0;
@@ -1173,18 +1339,22 @@ function woocommerce_currency($currency){
 }
 add_filter('woocommerce_currency', 'woocommerce_currency');
 
-function woocommerce_cart_item_removed_callback($cart_item_key, $cartObject){
+function woocommerce_cart_item_removed_callback($cart_item_key, $cartObject) {
+    //???????
     $cartContents = $cartObject->get_cart_contents();
     if ($cartContents) {
         foreach ($cartContents as $key => $item) {
             // update price and base_discount_price
-            // cart_discounted_hash
-            $cartContents[$key]['attributes']['test'] = 1;
+            if (isset($item['attributes']['cart_discounted_hash']) && $item['attributes']['cart_discounted_hash'] == $cart_item_key) {
+                $cartContents[$key]['attributes']['cart_discounted_hash'] = '';
+                $cartContents[$key]['attributes']['base_discount_price'] = 0;
+                $cartContents[$key]['price'] = $cartContents[$key]['attributes']['base_price'] + $cartContents[$key]['attributes']['frame_price'];
+            }
         }
     }
     $cartObject->set_cart_contents($cartContents);
 }
-add_action('woocommerce_cart_item_removed', 'woocommerce_cart_item_removed_callback', 10, 2);
+//add_action('woocommerce_cart_item_removed', 'woocommerce_cart_item_removed_callback', 10, 2);
 //add_action('woocommerce_remove_cart_item', 'woocommerce_cart_item_removed_callback', 10, 2);
 
 /*gemaiter end*/

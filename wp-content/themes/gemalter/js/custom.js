@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
                     popup.find('[data-contact-form_submit]').hide();
                     popup.find('.success-text').show();
                     setTimeout(function(){
-                        window.location = window.location;
+                        document.location.reload()
                     }, 3000);
                 } else {
                     popup.find('.error-some-error').show();
@@ -116,7 +116,7 @@ jQuery(document).ready(function ($) {
                     popup.find('[data-refund-form_submit]').hide();
                     popup.find('.success-text').show();
                     setTimeout(function(){
-                        window.location = window.location;
+                        document.location.reload()
                     }, 3000);
                 } else {
                     popup.find('.error-some-error').show();
@@ -660,6 +660,13 @@ jQuery(document).ready(function ($) {
                     showInfoPopup(data.error_title, data.error_message);
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
+                    wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-discount-amount]').html(data.discount);
+                    if (data.discount_main) {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
+                    } else {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").hide();
+                    }
                     //update prices in right section too
 
                     //update quantities
@@ -705,12 +712,107 @@ jQuery(document).ready(function ($) {
                     showInfoPopup(data.error_title, data.error_message);
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
+                    wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-discount-amount]').html(data.discount);
+                    if (data.discount_main) {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
+                    } else {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").hide();
+                    }
                     //update prices in right section too
 
                     line.remove();
                     if (data.total_products < 1) {
-                        window.location = window.location;
+                        document.location.reload();
                     }
+                }
+            },
+            complete: function(){
+                wrapper.data("busy", false).removeClass("busy");
+            }
+        });
+    });
+
+    $(document).on('click', '[data-apply-coupon]', function(e) {
+        var btn = $(this);
+        var coupon = btn.parent().find('[name="coupon"]').val();
+        var wrapper = $('.cart-wrap');
+        if (wrapper.data("busy")) return;
+        wrapper.data("busy", true).addClass("busy");
+        data = {
+            action: 'apply_coupon',
+            coupon: coupon,
+        };
+        $.ajax({
+            url: "/wp-admin/admin-ajax.php",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                wrapper.find('.woocommerce-NoticeGroup-checkout').remove();
+                if (data.has_error) {
+                    showInfoPopup(data.error_title, data.error_message);
+                } else {
+                    wrapper.find('[data-cart-total-amount]').html(data.total);
+                    wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-discount-amount]').html(data.discount);
+                    if (data.discount_main) {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
+                    } else {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").hide();
+                    }
+                    //update prices in right section too
+                    $('[cancel-coupon-wrapper] [data-coupon-val]').text('(' + coupon + ')');
+                    $('[cancel-coupon-wrapper] [data-coupon-val]').data('coupon-val', coupon);
+                    $('[cancel-coupon-wrapper]').show();
+                    $('[apply-coupon-wrapper]').hide();
+                }
+            },
+            complete: function(){
+                wrapper.data("busy", false).removeClass("busy");
+            }
+        });
+    });
+
+    $(document).on('click', '[data-cancel-coupon]', function(e) {
+        var btn = $(this);
+        var coupon = btn.closest('.c-form-coupon').find('[data-coupon-val]').data('coupon-val');
+        var wrapper = $('.cart-wrap');
+        if (wrapper.data("busy")) return;
+        wrapper.data("busy", true).addClass("busy");
+        data = {
+            action: 'cancel_coupon',
+            coupon: coupon,
+        };
+        $.ajax({
+            url: "/wp-admin/admin-ajax.php",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                wrapper.find('.woocommerce-NoticeGroup-checkout').remove();
+                if (data.has_error) {
+                    showInfoPopup(data.error_title, data.error_message);
+                } else {
+                    wrapper.find('[data-cart-total-amount]').html(data.total);
+                    wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-discount-amount]').html(data.discount);
+                    if (data.discount_main) {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
+                    } else {
+                        wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").hide();
+                    }
+                    //update prices in right section too
+                    $('[cancel-coupon-wrapper] [data-coupon-val]').text('(' + '' + ')');
+                    $('[cancel-coupon-wrapper] [data-coupon-val]').data('coupon-val', '');
+                    $('[cancel-coupon-wrapper]').hide();
+                    $('[apply-coupon-wrapper]').show();
                 }
             },
             complete: function(){

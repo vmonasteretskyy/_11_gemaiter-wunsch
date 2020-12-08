@@ -109,9 +109,11 @@ form.busy,
     display: none;
 }
 
-.cart-head__amount .woocommerce-Price-currencySymbol{
+.cart-head__amount .woocommerce-Price-currencySymbol,
+.c-table .woocommerce-Price-currencySymbol{
     display: none;
 }
+
 .cart-head__amount span {
     font-size: inherit;
 }
