@@ -820,6 +820,68 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
+    $document.on('click change', '[data-proceed-to-checkout]', function(e){
+        e.preventDefault();
+        $('[data-shipping-cart-form]').submit();
+    });
+    $document.on('submit', '[data-shipping-cart-form]', function(e){
+        e.preventDefault();
+        let form = $(this);
+        var wrapper = $('.cart-wrap');
+
+        if (wrapper.data("busy")) return;
+        wrapper.data("busy", true).addClass("busy");
+        //get user data from form
+        let first_name = $('[data-shipping-cart-form] input[name="first_name"]').val();//*
+        let last_name = $('[data-shipping-cart-form] input[name="last_name"]').val();//*
+        let address = $('[data-shipping-cart-form] input[name="address"]').val();//*
+        let address2 = $('[data-shipping-cart-form] input[name="address2"]').val();
+        let city = $('[data-shipping-cart-form] input[name="city"]').val();//*
+        let state = $('[data-shipping-cart-form] input[name="state"]').val();//*
+        let postal_code = $('[data-shipping-cart-form] input[name="postal_code"]').val();//*
+        let country = $('[data-shipping-cart-form] input[name="country"]').val();//*
+        let phone = $('[data-shipping-cart-form] input[name="phone"]').val();//*
+        let email = $('[data-shipping-cart-form] input[name="email"]').val();//*
+        let message = $('[data-shipping-cart-form] [name="message"]').val();
+
+        var data = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'address': address,
+            'address2': address2,
+            'city': city,
+            'state': state,
+            'postal_code': postal_code,
+            'country': country,
+            'phone': phone,
+            'email': email,
+            'message': message,
+            'action': 'ajax_add_shipping_data',
+        };
+        //send data to admin when user put data
+        $.ajax({
+            url: "/wp-admin/admin-ajax.php",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function() {
+            },
+            success: function(data) {
+                wrapper.find('.woocommerce-NoticeGroup-checkout').remove();
+                if (data.has_error) {
+                    showInfoPopup(data.error_title, data.error_message);
+                } else {
+                    //redirect to checkout;
+                    window.location = data.redirect_link;
+                }
+            },
+            complete: function(){
+                wrapper.data("busy", false).removeClass("busy");
+            }
+        });
+
+    });
     /*cart page end*/
 
 });

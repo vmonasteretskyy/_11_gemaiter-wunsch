@@ -533,6 +533,7 @@ function ajax_add_to_cart_gift_card() {
     foreach ($attributes as $attribute) {
         $product_attributes[$attribute] = isset($_REQUEST[$attribute]) ? trim($_REQUEST[$attribute]) : null;
     }
+    $product_attributes['gift_id'] = getRandString(8);
     if (!$product) {
         echo json_encode([
             'has_error' => true,
@@ -1297,6 +1298,80 @@ function ajax_get_edit_order_form_html() {
 }
 add_action('wp_ajax_ajax_get_edit_order_form_html', 'ajax_get_edit_order_form_html');
 add_action('wp_ajax_nopriv_ajax_get_edit_order_form_html', 'ajax_get_edit_order_form_html');
+
+function ajax_add_shipping_data() {
+    // save field to session
+    $shippingFields = [];
+    $shippingFields['first_name'] = isset($_REQUEST['first_name']) ? trim($_REQUEST['first_name']) : '';
+    $shippingFields['last_name'] = isset($_REQUEST['last_name']) ? trim($_REQUEST['last_name']) : '';
+    $shippingFields['address'] = isset($_REQUEST['address']) ? trim($_REQUEST['address']) : '';
+    $shippingFields['address2'] = isset($_REQUEST['address2']) ? trim($_REQUEST['address2']) : '';
+    $shippingFields['city'] = isset($_REQUEST['city']) ? trim($_REQUEST['city']) : '';
+    $shippingFields['state'] = isset($_REQUEST['state']) ? trim($_REQUEST['state']) : '';
+    $shippingFields['postal_code'] = isset($_REQUEST['postal_code']) ? trim($_REQUEST['postal_code']) : '';
+    $shippingFields['country'] = isset($_REQUEST['country']) ? trim($_REQUEST['country']) : '';
+    $shippingFields['phone'] = isset($_REQUEST['phone']) ? trim($_REQUEST['phone']) : ''; // check this field
+    $shippingFields['email'] = isset($_REQUEST['email']) ? trim($_REQUEST['email']) : '';
+    $shippingFields['message'] = isset($_REQUEST['message']) ? trim($_REQUEST['message']) : '';
+    
+    $hasError = false;
+    $errorMessage = '';
+    if (!$shippingFields['first_name']) {
+        $hasError = true;
+        $errorMessage .= pll__("First Name is missing.") . "<br>";
+    }
+    if (!$shippingFields['last_name']) {
+        $hasError = true;
+        $errorMessage .= pll__("Last Name is missing.") . "<br>";
+    }
+    if (!$shippingFields['address']) {
+        $hasError = true;
+        $errorMessage .= pll__("Address is missing.") . "<br>";
+    }
+    if (!$shippingFields['city']) {
+        $hasError = true;
+        $errorMessage .= pll__("City is missing.") . "<br>";
+    }
+    if (!$shippingFields['state']) {
+        $hasError = true;
+        $errorMessage .= pll__("State is missing.") . "<br>";
+    }
+    if (!$shippingFields['postal_code']) {
+        $hasError = true;
+        $errorMessage .= pll__("Postal Code is missing.") . "<br>";
+    }
+    if (!$shippingFields['country']) {
+        $hasError = true;
+        $errorMessage .= pll__("Country is missing.") . "<br>";
+    }
+    if (!$shippingFields['phone']) {
+        $hasError = true;
+        $errorMessage .= pll__("Phone is missing.") . "<br>";
+    }
+    if (!$shippingFields['email']) {
+        $hasError = true;
+        $errorMessage .= pll__("Email is missing.") . "<br>";
+    }
+    
+    if ($hasError) {
+        echo json_encode([
+            'has_error' => true,
+            'error_title' => pll__('Error'),
+            'error_message' => $errorMessage
+        ]);
+        wp_die();
+    }
+    session_start();
+    $_SESSION['shipping_fields'] = $shippingFields;
+    
+    echo json_encode([
+        'has_error' => false,
+        'redirect_link' => esc_url((get_url_lang_prefix()) . 'checkout/'),
+    ]);
+    wp_die();
+}
+add_action('wp_ajax_ajax_add_shipping_data', 'ajax_add_shipping_data');
+add_action('wp_ajax_nopriv_ajax_add_shipping_data', 'ajax_add_shipping_data');
 
 /*add filter to coupons: coupon_main_type*/
 function add_coupon_main_type() {

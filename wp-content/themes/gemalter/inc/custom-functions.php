@@ -581,4 +581,33 @@ function getCardItemRecord ($cartItemID) {
     }
     return $cartRecord;
 }
+
+function getRandString($stringLength, $includeNumbers = true) {
+    $allowedChars = array();
+    
+    $i = 64;
+    while ($i++ < 122) {
+        // 65-90 : A-Z
+        // 97-122 : a-z
+        if (!($i > 90 && $i < 97)) {
+            $allowedChars[] = chr($i);
+        }
+    }
+    
+    if ($includeNumbers) {
+        for ($i = 0; $i <= 9; $i++) {
+            $allowedChars[] = $i;
+        }
+    }
+    
+    $num = count($allowedChars);
+    
+    $string = '';
+    while ($stringLength-- > 0) {
+        $rand = mt_rand(0, $num - 1);
+        $string .= $allowedChars[$rand];
+    }
+    
+    return $string;
+}
 ?>
