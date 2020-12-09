@@ -1717,10 +1717,36 @@ function woocommerce_method_create_order($order) {
     $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
     $order->set_currency($site_currency);
     //create coupons from gift cards
+    test($order);
+    $items = $order->get_items();
+    foreach($items as $item) {
+        $attr = $item->get_meta_data();
+        foreach($attr as $itemattr) {
+            test([$itemattr->key, $itemattr->value]);
+        }
+    }
+    
+    
 }
 add_action('woocommerce_checkout_create_order', 'woocommerce_method_create_order', 10, 2);
 //add_action('woocommerce_checkout_order_created', 'woocommerce_method_create_order', 10, 2);
 
+add_filter( 'woocommerce_currency', 'filter_function_name_8288' );
+function filter_function_name_8288( $option ){
+    $current_lang = pll_current_language();
+    $allPricesData = getPrices();
+    $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
+    $option = $site_currency;
+    return $option;
+}
+
+//function test_init() {
+//    $current_lang = pll_current_language();
+//    $allPricesData = getPrices();
+//    $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
+//    test([$site_currency, get_woocommerce_currency()]);
+//}
+//add_action( 'init', 'test_init', 1);
 
 
 /*gemaiter end*/
