@@ -1,0 +1,15 @@
+2020-12-09T09:47:28+00:00 CRITICAL syntax error, unexpected ')' in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php on line 1502
+
+2020-12-09T09:49:28+00:00 CRITICAL syntax error, unexpected 'if' (T_IF) in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php on line 1505
+
+2020-12-09T10:51:29+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Order_Item_Product::get() in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php:1484
+Stack trace:
+#0 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(287): change_order_item_meta_value('100', Object(WC_Meta_Data), Object(WC_Order_Item_Product))
+#1 /home/me/domains/lh.me/public_html/wp-includes/plugin.php(206): WP_Hook->apply_filters('100', Array)
+#2 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/class-wc-order-item.php(291): apply_filters('woocommerce_ord...', '100', Object(WC_Meta_Data), Object(WC_Order_Item_Product))
+#3 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-item-meta.php(23): WC_Order_Item->get_formatted_meta_data('')
+#4 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-item.php(44): require('/home/me/domain...')
+#5 /home/me/domains/lh.me/public_html/wp-content/plug in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php on line 1484
+
+2020-12-09T12:40:21+00:00 CRITICAL syntax error, unexpected 'break' (T_BREAK) in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php on line 1614
+

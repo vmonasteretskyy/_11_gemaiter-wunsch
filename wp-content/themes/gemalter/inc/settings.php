@@ -966,15 +966,14 @@ function ajax_add_to_cart_main_product() {
             } elseif ($photosPrevElement) {
                 $photos = $photosPrevElement;
             }
-            if (!empty($photos)) {
+            if (empty($photos)) {
                 $hasError = true;
                 $errorMessage .= pll__("Photos are missing.") . '<br>';
             }
-            $product_attributes['photos'] = $photos;
+            $product_attributes['photos'] = json_encode($photos);
         }
-
     }
-
+    
     if ($hasError) {
         echo json_encode([
             'has_error' => true,
@@ -1449,18 +1448,39 @@ add_action('woocommerce_checkout_create_order_line_item', 'add_order_item_custom
 function change_order_item_meta_title( $key, $meta, $item ) {
 
     // By using $meta-key we are sure we have the correct one.
-    if ( '_product_price' == $key ) { $key = 'Ціна'; }
-    if ( '_product_width' == $key ) { $key = 'Ширина'; }
-    if ( '_product_height' == $key ) { $key = 'Висота'; }
-    if ( '_product_pa_kolory-modeli' == $key ) { $key = 'Колір моделі'; }
-    if ( '_product_pa_storona-upravlinnya' == $key ) { $key = 'Сторона управління'; }
-    if ( '_product_pa_kolory-systemy' == $key ) { $key = 'Колір системи'; }
+    // gift
+    if ( '_product_price' == $key ) { $key = 'Price'; }
+    if ( '_product_gift_amount' == $key ) { $key = 'Gift Amount'; }
+    if ( '_product_gift_currency' == $key ) { $key = 'Gift Currency'; }
+    if ( '_product_gift_sender_name' == $key ) { $key = 'Gift Sender Name'; }
+    if ( '_product_gift_recipient_name' == $key ) { $key = 'Gift Recipient Name'; }
+    if ( '_product_gift_message' == $key ) { $key = 'Gift Message'; }
+    if ( '_product_gift_id' == $key ) { $key = 'Gift ID'; }
+    // picture
+    if ( '_product_subject' == $key ) { $key = 'Subject'; }
+    if ( '_product_choose_tech' == $key ) { $key = 'Painting technique'; }
+    if ( '_product_size' == $key ) { $key = 'Size'; }
+    if ( '_product_background_type' == $key ) { $key = 'Background type'; }
+    if ( '_product_color' == $key ) { $key = 'Background Color'; }
+    if ( '_product_photos' == $key ) { $key = 'Photos'; }
+    if ( '_product_photos_count' == $key ) { $key = 'Photos count'; }
+    if ( '_product_frame' == $key ) { $key = 'Frame'; }
+    if ( '_product_frame_selected' == $key ) { $key = 'Frame selected'; }
+    if ( '_product_second_option_to_send_photo' == $key ) { $key = 'Second option to send us the photo'; }
+    if ( '_product_artist_advice' == $key ) { $key = 'Artist advice'; }
+    if ( '_product_upload_comment' == $key ) { $key = 'Comment'; }
+    if ( '_product_duration_type' == $key ) { $key = 'Duration type'; }
+    if ( '_product_delivery_date' == $key ) { $key = 'Delivery date'; }
+    //_product_subject_price_type
+    if ( '_product_base_price' == $key ) { $key = 'Base price'; }
+    if ( '_product_frame_price' == $key ) { $key = 'Frame price'; }
+    if ( '_product_base_discount_price' == $key ) { $key = 'Discount price'; }
+
     return $key;
 }
 add_filter( 'woocommerce_order_item_display_meta_key', 'change_order_item_meta_title', 20, 3 );
 
 function change_order_item_meta_value( $value, $meta, $item ) {
-
     // By using $meta-key we are sure we have the correct one.
     if ( '_product_attribute_width' === $meta->key ) { $value = $value . ' мм'; }
     if ( '_product_attribute_height' === $meta->key ) { $value = $value . ' мм'; }
@@ -1483,13 +1503,161 @@ function change_order_item_meta_value( $value, $meta, $item ) {
     }
     return $value;
 }
-add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
+//add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
 
 function hide_my_item_meta( $hidden_meta ) {
     $hidden_meta[] = '_product_price';
+    $hidden_meta[] = '_product_locale';
+    $hidden_meta[] = '_product_product_type';
+    $hidden_meta[] = '_product_photos_info';
     return $hidden_meta;
 }
-add_filter( 'woocommerce_hidden_order_itemmeta', 'hide_my_item_meta' );
+//add_filter( 'woocommerce_hidden_order_itemmeta', 'hide_my_item_meta' );
+
+add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatted_meta, $instance){
+    $item_id = $instance->get_id();
+    $hidden_meta = [];
+    $hidden_meta[] = '_product_price';
+    $hidden_meta[] = '_product_attribute_locale';
+    $hidden_meta[] = '_product_attribute_product_type';
+    $hidden_meta[] = '_product_attribute_photos_info';
+    $hidden_meta[] = '_product_attribute_subject_custom_max_elements';
+    $hidden_meta[] = '_product_attribute_subject_price_type';
+    $hidden_meta[] = '_product_attribute_cart_discounted_hash';
+    $attributes = [];
+    if (!empty($formatted_meta)) {
+        foreach($formatted_meta as $key => $item) {
+            $attrKey = $formatted_meta[$key]->key;
+            $attrKeyKey = str_replace("_product_attribute_","", $attrKey);
+            $attrKeyKey = str_replace("_product_","", $attrKey);
+            $attributes[$attrKeyKey] = $formatted_meta[$key]->value;
+        }
+    }
+    $attributes['subject_custom'] = wc_get_order_item_meta( $item_id, '_product_attribute_subject_custom', true );
+    
+    $locale = isset($attributes['attribute_locale']) ? $attributes['attribute_locale'] : 'en';
+    $type = isset($attributes['attributetype']) ? $attributes['attributetype'] : '';
+    $new_formatted_meta = [];
+    
+    $allPrices = getPrices();
+    $allSubjects = getSubjects();
+    $allDurations = getDuration();
+    if (!empty($formatted_meta)) {
+        foreach($formatted_meta as $key => $item) {
+            $attrKey = $formatted_meta[$key]->key;
+            if (in_array($attrKey, $hidden_meta)) {
+                continue;
+            }
+            $skipMetadata = false;
+            $metaValue = $item->value;
+            if ($type == 'gift-card') {
+                if ($attrKey) {
+                    switch ($attrKey) {
+                        default:
+                            break;
+                    }
+                }
+            } else if ($type == 'picture') {
+                if ($attrKey) {
+                    /*_product_attribute_subject +
+                    _product_attribute_subject_custom
+                    _product_attribute_choose_tech +
+                    _product_attribute_size +
+                    _product_attribute_background_type +
+                    _product_attribute_photos +
+                    _product_attribute_photos_count +
+                    _product_attribute_frame +
+                    _product_attribute_frame_selected +
+                    _product_attribute_duration_type +
+                    _product_attribute_delivery_date +
+                    _product_attribute_base_price +
+                    _product_attribute_frame_price +
+                    _product_attribute_base_discount_price +*/
+                    switch ($attrKey) {
+                        case "_product_attribute_subject":
+                            if ($metaValue == 'custom') {
+                                $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
+                                // append TODO
+                                //$attributes['subject_custom'];
+                            } else {
+                                $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
+                            }
+                            break;
+                        case "_product_attribute_choose_tech":
+                            $metaValue = $metaValue == 'oil' ? "Oil" : "Charcoal";
+                            break;
+                        case "_product_attribute_size":
+                            $choose_tech = isset($attributes['attribute_choose_tech']) ? $attributes['attribute_choose_tech'] : '';
+                            $size = isset($allPrices[$locale]['sizes'][$choose_tech][$metaValue]) ? $allPrices[$locale]['sizes'][$choose_tech][$metaValue] : null;
+                            if ($size) {
+                                $use_size = $allPrices[$locale]['use_size'];
+                                $size = $use_size == 'inch' ? $size['label_inch'] : $size['label'];
+                            }
+                            $metaValue = $size ? $size : $metaValue;
+                            break;
+                        case "_product_attribute_background_type":
+                            if ($metaValue == 'background_artist') {
+                                $metaValue = 'Artist to choose background (popular)';
+                            } else if ($metaValue == 'background_photo') {
+                                $metaValue = 'Photo background';
+                            }  else if ($metaValue == 'background_color') {
+                                $metaValue = 'Background colour';
+                            }
+                            break;
+                        case "_product_attribute_color":
+                            $metaValue = ucfirst(str_replace(['_', '-'], ' ', $metaValue));
+                            break;
+                        case "_product_attribute_photos":
+                            $photos = json_decode(str_replace('\"', '"', $metaValue), 1);
+                            if ($photos) {
+                                $html = '';
+                                foreach($photos as $photo) {
+                                    $html .= '<a style="margin: 5px;" href="' . $photo['path'] . '" target="_blank"><img style="width: 100px;" src="' . $photo['path'] . '"></a>';
+                                }
+                                $metaValue = $html;
+                            } else {
+                                $metaValue = '-';
+                            }
+                            break;
+                        case "_product_attribute_second_option_to_send_photo":
+                        case "_product_attribute_artist_advice":
+                            $metaValue = $metaValue ? "Yes" : "No";
+                            break;
+                        case "_product_attribute_frame":
+                            if ($metaValue == 'need_frame') {
+                                $metaValue = 'Yes, I need a frame for My Portrait';
+                            } else if ($metaValue == 'not_need_frame') {
+                                $metaValue = 'I buy myself a picture frame';
+                            }
+                            break;
+                        case "_product_attribute_frame_selected":
+                            $metaValue = ucfirst(str_replace(['_', '-'], ' ', $metaValue));
+                            break;
+                        case "_product_attribute_duration_type":
+                            $metaValue = isset($allDurations['all_locales']['durations']['types'][$metaValue]) ? $allDurations['all_locales']['durations']['types'][$metaValue] : ucfirst(str_replace('_', ' ', $metaValue));
+                            break;
+                        case "_product_attribute_base_price":
+                        case "_product_attribute_frame_price":
+                        case "_product_attribute_base_discount_price":
+                            $currencySymbol = $allPrices[$locale]['currency_symbol'];
+                            $metaValue = $currencySymbol . number_format($metaValue);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            if (!$skipMetadata) {
+                $item->display_value = $metaValue;
+                $new_formatted_meta[$key] = $item;
+            }
+        }
+    }
+    
+    // update fields
+    
+    return $new_formatted_meta;
+}, 20, 3);
 
 //https://wp-kama.ru/plugin/woocommerce/function/WC_Order_Item::get_formatted_meta_data ???
 //woocommerce_order_item_get_formatted_meta_data
@@ -1542,13 +1710,18 @@ function wc_display_item_meta_custom( $item, $args = array() ) {
     }
 }
 
-add_action('woocommerce_checkout_create_order', 'woocommerce_method_create_order', 10, 2);
-
 function woocommerce_method_create_order($order) {
-    global $wpdb;
+    //set order currency
+    $current_lang = pll_current_language();
+    $allPricesData = getPrices();
+    $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
+    $order->set_currency($site_currency);
     //create coupons from gift cards
-    //test($order);
 }
+add_action('woocommerce_checkout_create_order', 'woocommerce_method_create_order', 10, 2);
+//add_action('woocommerce_checkout_order_created', 'woocommerce_method_create_order', 10, 2);
+
+
 
 /*gemaiter end*/
 
