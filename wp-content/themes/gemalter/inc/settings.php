@@ -1432,6 +1432,124 @@ function woocommerce_cart_item_removed_callback($cart_item_key, $cartObject) {
 //add_action('woocommerce_cart_item_removed', 'woocommerce_cart_item_removed_callback', 10, 2);
 //add_action('woocommerce_remove_cart_item', 'woocommerce_cart_item_removed_callback', 10, 2);
 
+
+function add_order_item_custom_meta($item, $cart_item_key, $cart_item, $order) {
+    if (isset($cart_item['price'])) {
+        $item->update_meta_data( '_product_price', $cart_item['price'] );
+    }
+    if (isset($cart_item['attributes'])) {
+        $item->update_meta_data( '_product_attributes', $cart_item['attributes'] );
+        foreach($cart_item['attributes'] as $key => $attribute) {
+            $item->update_meta_data( '_product_attribute_' . $key,  $attribute);
+        }
+    }
+}
+add_action('woocommerce_checkout_create_order_line_item', 'add_order_item_custom_meta', 10, 4 );
+
+function change_order_item_meta_title( $key, $meta, $item ) {
+
+    // By using $meta-key we are sure we have the correct one.
+    if ( '_product_price' == $key ) { $key = 'Ціна'; }
+    if ( '_product_width' == $key ) { $key = 'Ширина'; }
+    if ( '_product_height' == $key ) { $key = 'Висота'; }
+    if ( '_product_pa_kolory-modeli' == $key ) { $key = 'Колір моделі'; }
+    if ( '_product_pa_storona-upravlinnya' == $key ) { $key = 'Сторона управління'; }
+    if ( '_product_pa_kolory-systemy' == $key ) { $key = 'Колір системи'; }
+    return $key;
+}
+add_filter( 'woocommerce_order_item_display_meta_key', 'change_order_item_meta_title', 20, 3 );
+
+function change_order_item_meta_value( $value, $meta, $item ) {
+
+    // By using $meta-key we are sure we have the correct one.
+    if ( '_product_attribute_width' === $meta->key ) { $value = $value . ' мм'; }
+    if ( '_product_attribute_height' === $meta->key ) { $value = $value . ' мм'; }
+    if ( '_product_attribute_pa_kolory-modeli' === $meta->key ) {
+        $term_obj = get_term_by('slug', $value, "pa_kolory-modeli");
+        if ($term_obj) {
+            $value = $term_obj->name;
+        }
+    }
+    if ( '_product_attribute_pa_kolory-systemy' === $meta->key ) {
+        $term_obj = get_term_by('slug', $value, "pa_kolory-systemy");
+        if ($term_obj) {
+            $value = $term_obj->name;
+        } }
+    if ( '_product_attribute_pa_storona-upravlinnya' === $meta->key ) {
+        $term_obj = get_term_by('slug', $value, "pa_storona-upravlinnya");
+        if ($term_obj) {
+            $value = $term_obj->name;
+        }
+    }
+    return $value;
+}
+add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
+
+function hide_my_item_meta( $hidden_meta ) {
+    $hidden_meta[] = '_product_price';
+    return $hidden_meta;
+}
+add_filter( 'woocommerce_hidden_order_itemmeta', 'hide_my_item_meta' );
+
+//https://wp-kama.ru/plugin/woocommerce/function/WC_Order_Item::get_formatted_meta_data ???
+//woocommerce_order_item_get_formatted_meta_data
+
+add_filter('woocommerce_add_error', function ($message){
+    /*if ($message == 'Укажите отделение Новой Почты') {
+        $currentLanguage = wp_doing_ajax() ? $_COOKIE['pll_language'] : pll_current_language();
+        if ($currentLanguage === 'uk') {
+            $message = 'Вкажіть відділення Нової Пошти';
+        }
+    }*/
+    return $message;
+}, 20, 3);
+
+//used for email
+function wc_display_item_meta_custom( $item, $args = array() ) {
+    $strings = array();
+    $html    = '';
+    $args    = wp_parse_args(
+        $args,
+        array(
+            'before'       => '<ul class="wc-item-meta"><li>',
+            'after'        => '</li></ul>',
+            'separator'    => '</li><li>',
+            'echo'         => true,
+            'autop'        => false,
+            'label_before' => '<strong class="wc-item-meta-label">',
+            'label_after'  => ':</strong> ',
+        )
+    );
+    $skipKeys = ['_product_price', '_product_attribute_pa_kolory-modeli'];
+    foreach ( $item->get_formatted_meta_data("", true) as $meta_id => $meta ) {
+        if (in_array($meta->key, $skipKeys)) continue;
+        $meta->display_value = trim($meta->display_value);
+        $meta->display_value = '<p2>' . pll__(strip_tags($meta->display_value)) . '</p2>';
+        $meta->display_key = pll__($meta->display_key);
+        $value     = $args['autop'] ? wp_kses_post( $meta->display_value ) : wp_kses_post( make_clickable( trim( $meta->display_value ) ) );
+        $strings[] = $args['label_before'] . wp_kses_post( $meta->display_key ) . $args['label_after'] . $value;
+    }
+    if ( $strings ) {
+        $html = $args['before'] . implode( $args['separator'], $strings ) . $args['after'];
+    }
+
+    $html = apply_filters( 'woocommerce_display_item_meta', $html, $item, $args );
+
+    if ( $args['echo'] ) {
+        echo $html; // WPCS: XSS ok.
+    } else {
+        return $html;
+    }
+}
+
+add_action('woocommerce_checkout_create_order', 'woocommerce_method_create_order', 10, 2);
+
+function woocommerce_method_create_order($order) {
+    global $wpdb;
+    //create coupons from gift cards
+    //test($order);
+}
+
 /*gemaiter end*/
 
 ?>

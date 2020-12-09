@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
             $('[data-gallery-filter]').each(function(){
                 const element = $(this);
                 if (element.val()) {
-                    var item = element.attr('name') + '=' + element.val();
+                    let item = element.attr('name') + '=' + element.val();
                     params.push(item);
                 }
             });
@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
     /*our gallery filters start*/
 
     /*contact form start*/
-    var contactFormId = 420;
+    const contactFormId = 420;
     $document.on('click', '[data-contact-form_submit]', function(e){
         e.preventDefault();
         $('#modal-contact form.form').submit();
@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
     /*contact form end*/
 
     /*refund form start*/
-    var refundFormId = 424;
+    const refundFormId = 424;
     $document.on('click', '[data-refund-form_submit]', function(e){
         e.preventDefault();
         $('#modal-money form.form').submit();
@@ -185,7 +185,7 @@ jQuery(document).ready(function ($) {
     });
 
     function cf7CalculatorSubmit($formId , $args, callback) {
-        var url = '/wp-json/contact-form-7/v1/contact-forms/' + $formId + '/feedback';
+        const url = '/wp-json/contact-form-7/v1/contact-forms/' + $formId + '/feedback';
         $.ajax({
                 url: url,
                 type: "post",
@@ -230,20 +230,20 @@ jQuery(document).ready(function ($) {
 
     /*order page start*/
     $document.on('click', '[data-custom-subject-select] .option-js', function(e){
-        var max_items = 16;
-        var item = $(this).closest('[data-custom-subject-select]').find('.input-key-js');
+        let max_items = 16;
+        let item = $(this).closest('[data-custom-subject-select]').find('.input-key-js');
         $('[name="subject"][value="custom"]').prop('checked', true).trigger('change');
         item.trigger('change');
 
-        var val = parseInt(item.val());
-        var subject_type = item.data('custom-subject-type-value');
-        var subjectTypes = ['persons', 'pets'];
+        let val = parseInt(item.val());
+        let subject_type = item.data('custom-subject-type-value');
+        let subjectTypes = ['persons', 'pets'];
         $.each( subjectTypes, function( key, type ) {
             if (type != subject_type) {
-                var max_type_items = max_items - val;
-                var type_options = $('.option-js[data-subject="' + type + '"]');
+                let max_type_items = max_items - val;
+                let type_options = $('.option-js[data-subject="' + type + '"]');
                 type_options.each(function(item){
-                    var item_val = parseInt($(this).data('key'));
+                    let item_val = parseInt($(this).data('key'));
                     if (item_val <= max_type_items) {
                         $(this).show();
                     } else {
@@ -255,13 +255,13 @@ jQuery(document).ready(function ($) {
     });
     /*update delivery section when size changed*/
     $document.on('change', '[name="size"]', function(e){
-        var form = $(this).closest('form');
+        let form = $(this).closest('form');
 
         if (form.data("busy")) return;
         form.data("busy", true).addClass("busy");
         form.find('.error-text').hide();
 
-        var data = form.serialize() + '&action=ajax_get_sizes';
+        let data = form.serialize() + '&action=ajax_get_sizes';
         //send data to admin when user put data
         $.ajax({
             url: "/wp-admin/admin-ajax.php",
@@ -294,13 +294,13 @@ jQuery(document).ready(function ($) {
     });
     /*update sizes section when delivery date&type changed*/
     $document.on('change', '#deliveryDate', function(e){
-        var form = $(this).closest('form');
+        let form = $(this).closest('form');
 
         if (form.data("busy")) return;
         form.data("busy", true).addClass("busy");
         form.find('.error-text').hide();
 
-        var data = form.serialize() + '&action=ajax_get_sizes';
+        let data = form.serialize() + '&action=ajax_get_sizes';
         //send data to admin when user put data
         $.ajax({
             url: "/wp-admin/admin-ajax.php",
@@ -333,13 +333,13 @@ jQuery(document).ready(function ($) {
     });
     /*update sizes & delivery sections when changed subject and painting technique*/
     $document.on('change', '[data-size-related]', function(e){
-        var form = $(this).closest('form');
+        let form = $(this).closest('form');
 
         if (form.data("busy")) return;
         form.data("busy", true).addClass("busy");
         form.find('.error-text').hide();
 
-        var data = form.serialize() + '&action=ajax_get_sizes';
+        let data = form.serialize() + '&action=ajax_get_sizes';
         //send data to admin when user put data
         $.ajax({
             url: "/wp-admin/admin-ajax.php",
@@ -421,17 +421,17 @@ jQuery(document).ready(function ($) {
     /*PictureLoad end*/
     /*add picture product to cart*/
     $document.on('change click', '[data-add-picture-product-to-cart]', function(e){
-        var form = $(this).closest('form');
-        var mode = $(this).data('add-picture-product-to-cart');
-        var action = 'ajax_add_to_cart_main_product';
+        let form = $(this).closest('form');
+        let mode = $(this).data('add-picture-product-to-cart');
+        let action = 'ajax_add_to_cart_main_product';
         if (form.data("busy")) return;
-        //form.data("busy", true).addClass("busy");
+        form.data("busy", true).addClass("busy");
         form.find('.error-text').hide();
 
-        var formData = new FormData(form[0]);
+        let formData = new FormData(form[0]);
         formData.append('mode', mode);
         formData.append('action', action);
-        //var files = form.find('[name="photos"]')[0].files;
+        //let files = form.find('[name="photos"]')[0].files;
         if (allFiles.length){
             $.each(allFiles, function(key, file){
                 formData.append('photos[]', file);
@@ -470,7 +470,7 @@ jQuery(document).ready(function ($) {
         });
     });
     $document.on('change', '[name="photos"]', function(e){
-        var fileElemInfoPrev = $("#fileElemInfoPrev");
+        let fileElemInfoPrev = $("#fileElemInfoPrev");
         if (fileElemInfoPrev.length && fileElemInfoPrev.val()) {
             fileElemInfoPrev.remove();
             $('.gallery .gallery__image').remove();
@@ -479,9 +479,9 @@ jQuery(document).ready(function ($) {
 
 
     $document.on('change', '[name="subject"]', function(e){
-        var val = $(this).val();
-        var labelObject = $(this).closest('label');
-        var text = labelObject.find(' > p').text();
+        let val = $(this).val();
+        let labelObject = $(this).closest('label');
+        let text = labelObject.find(' > p').text();
         $('[data-edit-order-form] [name="edit_subject"]').val(val);
         $('[data-edit-order-form] [name="edit_subject_text"]').val(text);
     });
@@ -490,23 +490,23 @@ jQuery(document).ready(function ($) {
     });
     /*change result image based on paint technique*/
     $document.on('change', '[name="choose_tech"]', function(e){
-        var val = $(this).val();
+        let val = $(this).val();
         //image
-        var imgSrc = $(this).closest('label').find('.choose-card__picture img').attr('src');
+        let imgSrc = $(this).closest('label').find('.choose-card__picture img').attr('src');
         $('.result__picture img').attr('src', imgSrc);
 
         //edit popup
-        var text = $(this).closest('.radio-wrap').find('p').text();
+        let text = $(this).closest('.radio-wrap').find('p').text();
         $('[data-edit-order-form] [name="edit_choose_tech"]').val(val);
         $('[data-edit-order-form] [name="edit_choose_tech_text"]').val(text);
     });
     $document.on('click', '[data-edit-order-form] .option-js', function(e){
-        var max_items = 16;
-        var item = $(this).closest('.form-group--select').find('.input-key-js');
+        let max_items = 16;
+        let item = $(this).closest('.form-group--select').find('.input-key-js');
         item.trigger('change');
 
-        var val = item.val();
-        var name = item.attr('name');
+        let val = item.val();
+        let name = item.attr('name');
         if (name == 'edit_choose_tech') {
             //sizes
             $('[data-edit-order-form] [name="edit_size"]').val('');
@@ -530,16 +530,16 @@ jQuery(document).ready(function ($) {
 
     $document.on('click', '[data-edit-order-btn]', function(e){
         e.preventDefault();
-        var form = $(this).closest('form');
+        let form = $(this).closest('form');
 
-        var formPopup = $('[data-edit-order-form]');
+        let formPopup = $('[data-edit-order-form]');
         let popup = formPopup.closest('.modal__content');
 
         if (popup.data("busy")) return;
         popup.data("busy", true).addClass("busy");
         popup.find('.error-text').hide();
 
-        var data = form.serialize() + '&action=ajax_get_edit_order_form_html';
+        let data = form.serialize() + '&action=ajax_get_edit_order_form_html';
         //send data to admin when user put data
         $.ajax({
             url: "/wp-admin/admin-ajax.php",
@@ -577,12 +577,12 @@ jQuery(document).ready(function ($) {
     $document.on('submit', '[data-edit-order-form]', function(e){
         e.preventDefault();
         console.log('submit_edit');
-        var form = $(this);
+        let form = $(this);
 
 
-        var choose_tech = form.find('[name="edit_choose_tech"]').val();
+        let choose_tech = form.find('[name="edit_choose_tech"]').val();
 
-        var size = form.find('[name="edit_size"]').val();
+        let size = form.find('[name="edit_size"]').val();
         if (size) {
             $('[name="hidden_size"]').val(size).change();
         }
@@ -596,7 +596,7 @@ jQuery(document).ready(function ($) {
             $('[name="size"][value="' + size + '"]').prop('checked', true).trigger('change');
             $('[name="size"][value="' + size + '"]')[0].dispatchEvent(new Event('change'));
         }
-        var background = form.find('[name="edit_background"]').val();
+        let background = form.find('[name="edit_background"]').val();
         if (background) {
             if (background == 'background_artist' || background == 'background_photo') {
                 $('[name="background_type"][value="' + background + '"]').prop('checked', true).change().trigger("change");
@@ -614,15 +614,15 @@ jQuery(document).ready(function ($) {
 
     /*init summary*/
     function initSummary() {
-        var summaryListeners = document.querySelectorAll('.js-radio-summary input');
-        var summaryTable = document.querySelector('.result');
+        let summaryListeners = document.querySelectorAll('.js-radio-summary input');
+        let summaryTable = document.querySelector('.result');
         summaryListeners.forEach(function (input) {
             setSummary(input);
             input.addEventListener('change', function () { return setSummary(input); });
         });
         function setSummary(input) {
             if (input.checked) {
-                var summaryRow = summaryTable.querySelector("#" + input.dataset.summary);
+                let summaryRow = summaryTable.querySelector("#" + input.dataset.summary);
                 summaryRow.textContent = input.dataset.summary_text;
             }
         }
@@ -631,11 +631,11 @@ jQuery(document).ready(function ($) {
 
     /*cart page start*/
     $(document).on('click', '.card-number [data-quantity-cart-item]', function(e) {
-        var btn = $(this);
-        var cart_item_key = btn.data('cart-item-key');
-        var quantity = parseInt(btn.data('quantity-cart-item'));
-        var mode = btn.data('mode');
-        var wrapper = $('.cart-wrap');
+        let btn = $(this);
+        let cart_item_key = btn.data('cart-item-key');
+        let quantity = parseInt(btn.data('quantity-cart-item'));
+        let mode = btn.data('mode');
+        let wrapper = $('.cart-wrap');
         if (quantity < 1) return;
 
         if (wrapper.data("busy")) return;
@@ -688,10 +688,10 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click', '.cards .card [data-delete-item]', function(e) {
-        var btn = $(this);
-        var line = btn.closest('.card');
-        var cart_item_key = btn.data('delete-item');
-        var wrapper = $('.cart-wrap');
+        let btn = $(this);
+        let line = btn.closest('.card');
+        let cart_item_key = btn.data('delete-item');
+        let wrapper = $('.cart-wrap');
         if (wrapper.data("busy")) return;
         wrapper.data("busy", true).addClass("busy");
         data = {
@@ -734,9 +734,9 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click', '[data-apply-coupon]', function(e) {
-        var btn = $(this);
-        var coupon = btn.parent().find('[name="coupon"]').val();
-        var wrapper = $('.cart-wrap');
+        let btn = $(this);
+        let coupon = btn.parent().find('[name="coupon"]').val();
+        let wrapper = $('.cart-wrap');
         if (wrapper.data("busy")) return;
         wrapper.data("busy", true).addClass("busy");
         data = {
@@ -778,9 +778,9 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click', '[data-cancel-coupon]', function(e) {
-        var btn = $(this);
-        var coupon = btn.closest('.c-form-coupon').find('[data-coupon-val]').data('coupon-val');
-        var wrapper = $('.cart-wrap');
+        let btn = $(this);
+        let coupon = btn.closest('.c-form-coupon').find('[data-coupon-val]').data('coupon-val');
+        let wrapper = $('.cart-wrap');
         if (wrapper.data("busy")) return;
         wrapper.data("busy", true).addClass("busy");
         data = {
@@ -828,7 +828,7 @@ jQuery(document).ready(function ($) {
     $document.on('submit', '[data-shipping-cart-form]', function(e){
         e.preventDefault();
         let form = $(this);
-        var wrapper = $('.cart-wrap');
+        let wrapper = $('.cart-wrap');
 
         if (wrapper.data("busy")) return;
         wrapper.data("busy", true).addClass("busy");
@@ -845,7 +845,7 @@ jQuery(document).ready(function ($) {
         let email = $('[data-shipping-cart-form] input[name="email"]').val();//*
         let message = $('[data-shipping-cart-form] [name="message"]').val();
 
-        var data = {
+        let data = {
             'first_name': first_name,
             'last_name': last_name,
             'address': address,
@@ -881,6 +881,15 @@ jQuery(document).ready(function ($) {
             }
         });
 
+    });
+    //update data-amount-shipping-country
+    $document.on('click', '[data-shipping-cart-form] .option-js', function(e){
+        let item = $(this).closest('.form-group--select').find('.input-key-js');
+        item.trigger('change');
+    });
+    $document.on('change', '[data-shipping-cart-form] [name="country"]', function(e){
+        let val = $(this).val();
+        $('[data-amount-shipping-country]').val(val);
     });
     /*cart page end*/
 

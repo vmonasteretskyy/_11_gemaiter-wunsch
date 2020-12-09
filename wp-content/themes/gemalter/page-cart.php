@@ -39,7 +39,7 @@ if (WC()->cart->is_empty()) {
 }
 $cartItems = WC()->cart->get_cart();
 
-$shippingFields = isset($_REQUEST['shipping_fields']) ? $_REQUEST['shipping_fields'] : [];
+$shippingFields = isset($_SESSION['shipping_fields']) ? $_SESSION['shipping_fields'] : [];
 $allFields = [
     'first_name',
     'last_name',
