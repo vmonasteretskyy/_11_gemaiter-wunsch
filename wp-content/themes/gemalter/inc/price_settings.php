@@ -5662,3 +5662,20 @@ function getDiscount($price = 0, $currency = 'usd') {
     }
     return $discount;
 }
+
+function getOrderPreviewImg($paintingTechnique = 'charcoal', $subject = 'person_1', $customSubject = [], $size = '25-35') {
+    //TODO - update function
+    $imgPath = '';
+    if ($paintingTechnique && $subject && $size) {
+        $imgPath .= '/' . $paintingTechnique;
+        if ($subject != 'custom') {
+            $imgPath.= '_' . $subject . '/';
+        }
+        if ($size) {
+            $imgPath .= $size . '.jpg';
+        }
+    } else {
+        $imgPath = 'default';
+    }
+    return $imgPath;
+}

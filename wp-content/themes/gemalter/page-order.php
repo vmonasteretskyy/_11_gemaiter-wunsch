@@ -176,6 +176,7 @@ if ($cartRecord && isset($cartRecord['attributes']['frame_selected']) && $cartRe
     $frameSelected = $cartRecord['attributes']['frame_selected'];
 }
 
+//$previewImg = getOrderPreviewImg($paintingTechnique, $subject, [], $size); - TODO
 get_header();
 ?>
     <script>var allFiles = [];</script>

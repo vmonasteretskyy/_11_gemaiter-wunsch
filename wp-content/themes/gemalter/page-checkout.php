@@ -20,6 +20,7 @@ $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
 $data['currency'] = $allPricesData[$current_lang]['currency'];
 $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 
+//TODO - check require fields and redirect to cart page if empty
 ?>
 
     <!--Start page-->

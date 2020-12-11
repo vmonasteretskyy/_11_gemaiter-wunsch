@@ -54,6 +54,7 @@ foreach ($allFields as $field) {
         $shippingFields[$field] = '';
     }
 }
+//TODO - SET customer data
 WC()->customer->set_billing_first_name($shippingFields['first_name']);
 
 
