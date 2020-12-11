@@ -13,19 +13,39 @@
  */
 global $post;
 get_header();
+
+$current_lang = pll_current_language();
+$allPricesData = getPrices();
+$data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
+$data['currency'] = $allPricesData[$current_lang]['currency'];
+$data['use_size'] = $allPricesData[$current_lang]['use_size'];
+
 ?>
+
     <!--Start page-->
     <div class="page-wrapper">
-        <?php get_template_part( 'template-parts/bread'); ?>
-        <div class="container-small mx-w-1050">
-            <div class="title-wrap m-b-90">
-                <h2 class="">
-                    <?php echo $post->post_title; ?>
-                </h2>
+        <div class="cart-wrap">
+            <div class="cart">
+                <div class="cart-head">
+                    <h2><?php pll_e('Checkout'); ?></h2>
+                    <div class="cart-head__amount">
+                        <p><?php pll_e('Total Amount'); ?>: <span><?php echo $data['currency_symbol'];?> </span> </p>
+                        <div class="cart-amount h1" data-cart-total-amount="">
+                            <?php echo WC()->cart->get_cart_total();?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                    while ( have_posts() ) :
+                        the_post();
+                        the_content();
+                    endwhile; // End of the loop.
+                ?>
+
             </div>
         </div>
-        <?php the_content(); ?>
     </div>
     <!--End page-->
+
 <?php
 get_footer();

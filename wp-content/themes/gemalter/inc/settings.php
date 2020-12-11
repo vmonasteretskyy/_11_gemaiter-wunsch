@@ -1450,12 +1450,12 @@ function change_order_item_meta_title( $key, $meta, $item ) {
     // By using $meta-key we are sure we have the correct one.
     // gift
     if ( '_product_price' == $key ) { $key = 'Price'; }
-    if ( '_product_gift_amount' == $key ) { $key = 'Gift Amount'; }
-    if ( '_product_gift_currency' == $key ) { $key = 'Gift Currency'; }
-    if ( '_product_gift_sender_name' == $key ) { $key = 'Gift Sender Name'; }
-    if ( '_product_gift_recipient_name' == $key ) { $key = 'Gift Recipient Name'; }
-    if ( '_product_gift_message' == $key ) { $key = 'Gift Message'; }
-    if ( '_product_gift_id' == $key ) { $key = 'Gift ID'; }
+    if ( '_product_gift_amount' == $key ) { $key = 'Amount'; }
+    if ( '_product_gift_currency' == $key ) { $key = 'Currency'; }
+    if ( '_product_gift_sender_name' == $key ) { $key = 'Sender Name'; }
+    if ( '_product_gift_recipient_name' == $key ) { $key = 'Recipient Name'; }
+    if ( '_product_gift_message' == $key ) { $key = 'Message'; }
+    if ( '_product_gift_id' == $key ) { $key = 'Gift Card ID'; }
     // picture
     if ( '_product_subject' == $key ) { $key = 'Subject'; }
     if ( '_product_choose_tech' == $key ) { $key = 'Painting technique'; }
@@ -1484,23 +1484,6 @@ function change_order_item_meta_value( $value, $meta, $item ) {
     // By using $meta-key we are sure we have the correct one.
     if ( '_product_attribute_width' === $meta->key ) { $value = $value . ' мм'; }
     if ( '_product_attribute_height' === $meta->key ) { $value = $value . ' мм'; }
-    if ( '_product_attribute_pa_kolory-modeli' === $meta->key ) {
-        $term_obj = get_term_by('slug', $value, "pa_kolory-modeli");
-        if ($term_obj) {
-            $value = $term_obj->name;
-        }
-    }
-    if ( '_product_attribute_pa_kolory-systemy' === $meta->key ) {
-        $term_obj = get_term_by('slug', $value, "pa_kolory-systemy");
-        if ($term_obj) {
-            $value = $term_obj->name;
-        } }
-    if ( '_product_attribute_pa_storona-upravlinnya' === $meta->key ) {
-        $term_obj = get_term_by('slug', $value, "pa_storona-upravlinnya");
-        if ($term_obj) {
-            $value = $term_obj->name;
-        }
-    }
     return $value;
 }
 //add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
@@ -1533,7 +1516,7 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
             $attributes[$attrKeyKey] = $formatted_meta[$key]->value;
         }
     }
-    $attributes['subject_custom'] = wc_get_order_item_meta( $item_id, '_product_attribute_subject_custom', true );
+    $attributes['attribute_subject_custom'] = wc_get_order_item_meta( $item_id, '_product_attribute_subject_custom', true );
     
     $locale = isset($attributes['attribute_locale']) ? $attributes['attribute_locale'] : 'en';
     $type = isset($attributes['attributetype']) ? $attributes['attributetype'] : '';
@@ -1553,6 +1536,9 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
             if ($type == 'gift-card') {
                 if ($attrKey) {
                     switch ($attrKey) {
+                        case "_product_attribute_gift_currency":
+                            $metaValue = strtoupper($metaValue);
+                            break;
                         default:
                             break;
                     }
@@ -1560,7 +1546,7 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
             } else if ($type == 'picture') {
                 if ($attrKey) {
                     /*_product_attribute_subject +
-                    _product_attribute_subject_custom
+                    _product_attribute_subject_custom +
                     _product_attribute_choose_tech +
                     _product_attribute_size +
                     _product_attribute_background_type +
@@ -1577,8 +1563,20 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                         case "_product_attribute_subject":
                             if ($metaValue == 'custom') {
                                 $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
-                                // append TODO
-                                //$attributes['subject_custom'];
+                                $persons = isset($attributes['attribute_subject_custom']['persons']) ? $attributes['attribute_subject_custom']['persons'] : 1;
+                                $pets = isset($attributes['attribute_subject_custom']['pets']) ? $attributes['attribute_subject_custom']['pets'] : 0;
+                                if ($persons || $pets) {
+                                    $metaValue .= ': ';
+                                    if ($persons) {
+                                        $metaValue .= $persons . ' Persons';
+                                    }
+                                    if ($persons && $pets) {
+                                        $metaValue .= ' / ';
+                                    }
+                                    if ($pets) {
+                                        $metaValue .= $pets . ' Pets';
+                                    }
+                                }
                             } else {
                                 $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
                             }
@@ -1653,9 +1651,7 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
             }
         }
     }
-    
     // update fields
-    
     return $new_formatted_meta;
 }, 20, 3);
 
@@ -1716,27 +1712,86 @@ function woocommerce_method_create_order($order) {
     $allPricesData = getPrices();
     $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
     $order->set_currency($site_currency);
-    //create coupons from gift cards
-    test($order);
-    $items = $order->get_items();
-    foreach($items as $item) {
-        $attr = $item->get_meta_data();
-        foreach($attr as $itemattr) {
-            test([$itemattr->key, $itemattr->value]);
-        }
-    }
-    
-    
 }
 add_action('woocommerce_checkout_create_order', 'woocommerce_method_create_order', 10, 2);
-//add_action('woocommerce_checkout_order_created', 'woocommerce_method_create_order', 10, 2);
+function woocommerce_method_order_created($order) {
+    //create coupons from gift cards
+    $orderID = $order->get_id();
+    $giftIDS = [];
+    $items = $order->get_items();
+    if ($items) {
+        foreach ($items as $item) {
+            $attr = $item->get_meta_data();
+            $giftID = '';
+            $amount = 0;
+            foreach ($attr as $itemattr) {
+                if ($itemattr->key == '_product_attribute_gift_id') {
+                    $giftID = $itemattr->value;
+                }
+                if ($itemattr->key == '_product_price') {
+                    $amount = $itemattr->value;
+                }
+            }
+            if ($giftID && $amount) {
+                $giftIDS[$giftID] = $amount;
+            }
+        }
+    }
+    if (!empty($giftIDS)) {
+        foreach ($giftIDS as $giftID => $amount) {
+            createCouponGiftCardID($giftID, $amount, $orderID);
+        }
+    }
+}
+add_action('woocommerce_checkout_order_created', 'woocommerce_method_order_created', 10, 2);
+
+function createCouponGiftCardID($giftID = '', $amount = 0, $orderID = '') {
+    if (!$giftID || !$amount) {
+        return;
+    }
+
+    /**
+     * Create a coupon programatically
+     */
+    $coupon_code = $giftID; // Code
+    $discount_type = 'fixed_cart'; // Type: fixed_cart, percent, fixed_product, percent_product
+
+    $coupon = array(
+        'post_title' => $coupon_code,
+        'post_name' => $coupon_code,
+        'post_content' => '',
+        'post_status' => 'publish',
+        'post_author' => 1,
+        'post_type' => 'shop_coupon');
+
+    $new_coupon_id = wp_insert_post( $coupon );
+
+    // Add meta
+    update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
+    update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+    update_post_meta( $new_coupon_id, 'individual_use', 'no' );
+    update_post_meta( $new_coupon_id, 'product_ids', '' );
+    update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
+    update_post_meta( $new_coupon_id, 'usage_limit', '1' );
+    update_post_meta( $new_coupon_id, 'usage_limit_per_user', '0' );
+    update_post_meta( $new_coupon_id, 'limit_usage_to_x_items', '0' );
+    update_post_meta( $new_coupon_id, 'usage_count', '0' );
+    update_post_meta( $new_coupon_id, 'date_expires', null );
+    update_post_meta( $new_coupon_id, 'free_shipping', 'yes' );
+    update_post_meta( $new_coupon_id, 'exclude_sale_items', 'no' );
+
+    update_field('coupon_main_type', 'gift_card', $new_coupon_id);
+    update_field('order_id', $orderID, $new_coupon_id);
+}
 
 add_filter( 'woocommerce_currency', 'filter_function_name_8288' );
-function filter_function_name_8288( $option ){
-    $current_lang = pll_current_language();
-    $allPricesData = getPrices();
-    $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
-    $option = $site_currency;
+function filter_function_name_8288($option) {
+    if ( ! is_admin()) {
+        $current_lang = pll_current_language();
+        $allPricesData = getPrices();
+        $site_currency = strtoupper($allPricesData[$current_lang]['currency']);
+        $option = $site_currency;
+    }
     return $option;
 }
 

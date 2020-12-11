@@ -13,3 +13,15 @@ Stack trace:
 
 2020-12-09T12:40:21+00:00 CRITICAL syntax error, unexpected 'break' (T_BREAK) in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/inc/settings.php on line 1614
 
+2020-12-09T20:05:53+00:00 CRITICAL syntax error, unexpected '}' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1584
+
+2020-12-09T20:38:27+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Order_Item_Product::get_price() in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php:1739
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(287): woocommerce_method_order_created(Object(WC_Order))
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\plugin.php(478): WP_Hook->do_action(Array)
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-checkout.php(403): do_action('woocommerce_che...', Object(WC_Order))
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-checkout.php(1148): WC_Checkout->create_order(Array)
+#5 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-ajax.php(465): WC_Checkout->process_checkout()
+#6 D:\PROGRAMS\OpenServer\domains\ in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc\settings.php on line 1739
+

@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/form-checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/form-checkout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-09-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-09-5db7923002b049182d8c1b00e42406de.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,25 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="900" column="54" selection-start-line="900" selection-start-column="51" selection-end-line="900" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="560" column="5" selection-start-line="560" selection-start-column="5" selection-end-line="560" selection-end-column="5" />
+            <state relative-caret-position="256">
+              <caret line="1777" column="35" lean-forward="true" selection-start-line="1777" selection-start-column="35" selection-end-line="1777" selection-end-column="35" />
               <folding>
                 <element signature="n#ajax_product_remove#0;n#!!top" />
               </folding>
@@ -43,19 +34,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/plugins/woocommerce/includes/class-wc-cart.php">
+        <entry file="file://$PROJECT_DIR$/wp-content/plugins/acf/includes/api/api-template.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36440">
-              <caret line="1830" column="33" selection-start-line="1830" selection-start-column="20" selection-end-line="1830" selection-end-column="33" />
+            <state relative-caret-position="6440">
+              <caret line="944" selection-start-line="944" selection-end-line="944" />
+              <folding>
+                <element signature="n#get_field#0;n#!!top" />
+                <element signature="n#the_field#0;n#!!top" />
+                <element signature="n#get_field_object#0;n#!!top" />
+                <element signature="n#acf_maybe_get_field#0;n#!!top" />
+                <element signature="n#acf_maybe_get_sub_field#0;n#!!top" />
+                <element signature="n#get_fields#0;n#!!top" />
+                <element signature="n#get_field_objects#0;n#!!top" />
+                <element signature="n#have_rows#0;n#!!top" />
+                <element signature="n#the_row#0;n#!!top" />
+                <element signature="n#get_row#0;n#!!top" />
+                <element signature="n#get_row_index#0;n#!!top" />
+                <element signature="n#the_row_index#0;n#!!top" />
+                <element signature="n#get_row_sub_field#0;n#!!top" />
+                <element signature="n#get_row_sub_value#0;n#!!top" />
+                <element signature="n#reset_rows#0;n#!!top" />
+                <element signature="n#has_sub_field#0;n#!!top" />
+                <element signature="n#get_sub_field#0;n#!!top" />
+                <element signature="n#the_sub_field#0;n#!!top" />
+                <element signature="n#get_sub_field_object#0;n#!!top" />
+                <element signature="n#get_row_layout#0;n#!!top" />
+                <element signature="n#acf_shortcode#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/plugins/woocommerce/includes/wc-notice-functions.php">
+        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2520">
-              <caret line="133" column="34" selection-start-line="133" selection-start-column="27" selection-end-line="133" selection-end-column="34" />
+            <state relative-caret-position="112220">
+              <caret line="5645" column="26" selection-start-line="5645" selection-start-column="26" selection-end-line="5645" selection-end-column="26" />
+              <folding>
+                <element signature="n#getDiscounts#0;n#!!top" />
+                <element signature="n#getDiscount#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wp-config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1280">
+              <caret line="81" column="2" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -63,8 +90,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+            <state relative-caret-position="9580">
+              <caret line="490" column="22" selection-start-line="490" selection-start-column="22" selection-end-line="490" selection-end-column="22" />
+              <folding>
+                <element signature="e#6#362#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="26" column="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -72,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../swd.me/wp-content/themes/swd_rollo/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="4080">
               <caret line="1830" selection-start-line="1830" selection-end-line="1863" selection-end-column="1" />
               <folding>
                 <element signature="e#491#2429#1#PHP" />
@@ -133,9 +172,7 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11100" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -160,10 +197,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>remove</find>
-      <find>cart_discounted_hash</find>
-      <find>coupon</find>
-      <find>Gift Card</find>
       <find>Cancel</find>
       <find>Text</find>
       <find>Total Amount</find>
@@ -190,6 +223,10 @@
       <find>woocommerce_u_poshta_shipping_method_create_order</find>
       <find>woocommerce_hidden_order_itemmeta</find>
       <find>currency</find>
+      <find>is_admin</find>
+      <find>subject_custom</find>
+      <find>get_fiel</find>
+      <find>update_field</find>
     </findStrings>
     <replaceStrings>
       <replace>utf8mb4_unicode_ci</replace>
@@ -214,9 +251,9 @@
       <list>
         <option value="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" />
+        <option value="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" />
         <option value="$PROJECT_DIR$/wp-config.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" />
-        <option value="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" />
         <option value="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" />
       </list>
     </option>
@@ -232,6 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -269,21 +307,12 @@
               <item name="wp-content" type="462c0819:PsiDirectoryNode" />
               <item name="themes" type="462c0819:PsiDirectoryNode" />
               <item name="gemalter" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gemaiter.me" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gemaiter.me" type="462c0819:PsiDirectoryNode" />
-              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="gemalter" type="462c0819:PsiDirectoryNode" />
               <item name="inc" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -291,6 +320,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -298,11 +329,11 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/wp-content/themes/gemalter/footer-home.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="ts.external.directory.path" value="D:\PROGRAMS\PhpStorm 2018.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/wp-content/themes/gemalter/footer-home.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -387,17 +418,23 @@
       <workItem from="1607494341419" duration="4113000" />
       <workItem from="1607516164223" duration="3891000" />
       <workItem from="1607528519262" duration="1900000" />
+      <workItem from="1607542400629" duration="4942000" />
+      <workItem from="1607631910140" duration="1005000" />
+      <workItem from="1607633511518" duration="31000" />
+      <workItem from="1607633581268" duration="540000" />
+      <workItem from="1607634195453" duration="337000" />
+      <workItem from="1607634569652" duration="1839000" />
+      <workItem from="1607665993154" duration="5646000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16517000" />
+    <option name="totallyTimeSpent" value="22464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49839228" visible="true" weight="0.22390318" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49839228" visible="true" weight="0.22995462" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
       <window_info id="npm" order="2" sideWeight="0.5016077" side_tool="true" weight="0.24659607" />
       <window_info id="Favorites" order="3" sideWeight="0.5016077" side_tool="true" weight="0.24659607" />
@@ -411,7 +448,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32730263" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32730263" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32852563" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32843137" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32852563" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -424,16 +461,13 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1030">
-          <caret line="5664" lean-forward="true" selection-start-line="5664" selection-end-line="5664" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/html/checkout.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -442,15 +476,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18000">
+          <caret line="900" column="54" selection-start-line="900" selection-start-column="51" selection-end-line="900" selection-end-column="54" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/plugins/woocommerce/includes/class-wc-cart.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -466,42 +500,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2240">
-          <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+        <state relative-caret-position="256">
+          <caret line="1777" column="35" lean-forward="true" selection-start-line="1777" selection-start-column="35" selection-end-line="1777" selection-end-column="35" />
+          <folding>
+            <element signature="n#ajax_product_remove#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php">
+    <entry file="file://$PROJECT_DIR$/wp-content/plugins/acf/includes/api/api-template.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4900">
-          <caret line="247" column="25" selection-start-line="247" selection-start-column="21" selection-end-line="247" selection-end-column="25" />
+        <state relative-caret-position="6440">
+          <caret line="944" selection-start-line="944" selection-end-line="944" />
+          <folding>
+            <element signature="n#get_field#0;n#!!top" />
+            <element signature="n#the_field#0;n#!!top" />
+            <element signature="n#get_field_object#0;n#!!top" />
+            <element signature="n#acf_maybe_get_field#0;n#!!top" />
+            <element signature="n#acf_maybe_get_sub_field#0;n#!!top" />
+            <element signature="n#get_fields#0;n#!!top" />
+            <element signature="n#get_field_objects#0;n#!!top" />
+            <element signature="n#have_rows#0;n#!!top" />
+            <element signature="n#the_row#0;n#!!top" />
+            <element signature="n#get_row#0;n#!!top" />
+            <element signature="n#get_row_index#0;n#!!top" />
+            <element signature="n#the_row_index#0;n#!!top" />
+            <element signature="n#get_row_sub_field#0;n#!!top" />
+            <element signature="n#get_row_sub_value#0;n#!!top" />
+            <element signature="n#reset_rows#0;n#!!top" />
+            <element signature="n#has_sub_field#0;n#!!top" />
+            <element signature="n#get_sub_field#0;n#!!top" />
+            <element signature="n#the_sub_field#0;n#!!top" />
+            <element signature="n#get_sub_field_object#0;n#!!top" />
+            <element signature="n#get_row_layout#0;n#!!top" />
+            <element signature="n#acf_shortcode#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112220">
+          <caret line="5645" column="26" selection-start-line="5645" selection-start-column="26" selection-end-line="5645" selection-end-column="26" />
+          <folding>
+            <element signature="n#getDiscounts#0;n#!!top" />
+            <element signature="n#getDiscount#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1280">
+          <caret line="81" column="2" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        <state relative-caret-position="9580">
+          <caret line="490" column="22" selection-start-line="490" selection-start-column="22" selection-end-line="490" selection-end-column="22" />
+          <folding>
+            <element signature="e#6#362#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/functions.php">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11100" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="900" column="54" selection-start-line="900" selection-start-column="51" selection-end-line="900" selection-end-column="54" />
+        <state relative-caret-position="300">
+          <caret line="26" column="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../swd.me/wp-content/themes/swd_rollo/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="4080">
           <caret line="1830" selection-start-line="1830" selection-end-line="1863" selection-end-column="1" />
           <folding>
             <element signature="e#491#2429#1#PHP" />
@@ -559,13 +635,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/functions.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="560" column="5" selection-start-line="560" selection-start-column="5" selection-end-line="560" selection-end-column="5" />
-          <folding>
-            <element signature="n#ajax_product_remove#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="2240">
+          <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4900">
+          <caret line="247" column="25" selection-start-line="247" selection-start-column="21" selection-end-line="247" selection-end-column="25" />
         </state>
       </provider>
     </entry>

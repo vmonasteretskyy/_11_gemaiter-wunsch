@@ -117,3 +117,7 @@ form.busy,
 .cart-head__amount span {
     font-size: inherit;
 }
+
+.woocommerce-checkout .woocommerce-form-coupon-toggle {
+    display: none;
+}
