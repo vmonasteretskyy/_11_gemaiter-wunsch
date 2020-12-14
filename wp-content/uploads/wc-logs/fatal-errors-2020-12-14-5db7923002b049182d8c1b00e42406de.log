@@ -1,0 +1,18 @@
+2020-12-14T06:07:12+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Customer::set_shipping_phone() in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-checkout.php:58
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(293): wc_get_template('checkout/form-c...', Array)
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(67): WC_Shortcode_Checkout::checkout()
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-shortcodes.php(72): WC_Shortcode_Checkout::output('')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-shortcodes.php(95): WC_Shortcodes::shortcode_wrapper(Array, '')
+#5 D:\PROGRAMS\OpenServer\domains\gemaite in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-checkout.php on line 58
+
+2020-12-14T06:07:18+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Customer::set_shipping_phone() in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-checkout.php:58
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(293): wc_get_template('checkout/form-c...', Array)
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(67): WC_Shortcode_Checkout::checkout()
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-shortcodes.php(72): WC_Shortcode_Checkout::output('')
+#4 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-shortcodes.php(95): WC_Shortcodes::shortcode_wrapper(Array, '')
+#5 D:\PROGRAMS\OpenServer\domains\gemaite in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-checkout.php on line 58
+

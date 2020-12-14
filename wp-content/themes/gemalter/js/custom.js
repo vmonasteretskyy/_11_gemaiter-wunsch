@@ -281,6 +281,9 @@ jQuery(document).ready(function ($) {
                     if (data.discount != undefined) {
                         $('[data-discount]').html(data.discount.label);
                     }
+                    if (data.preview_img_path != undefined) {
+                        $('[data-size-preview]').css('background-image', 'url(' + data.preview_img_path +')');
+                    }
                 }
             },
             complete: function(){
@@ -319,6 +322,9 @@ jQuery(document).ready(function ($) {
                         $('[data-discount]').html(data.discount.label);
                     }
                     PictureLoad();
+                    if (data.preview_img_path != undefined) {
+                        $('[data-size-preview]').css('background-image', 'url(' + data.preview_img_path +')');
+                    }
                     initSummary();
                 }
             },
@@ -362,6 +368,9 @@ jQuery(document).ready(function ($) {
                     if (data.discount != undefined) {
                         $('[data-discount]').html(data.discount.label);
                     }
+                    if (data.preview_img_path != undefined) {
+                        $('[data-size-preview]').css('background-image', 'url(' + data.preview_img_path +')');
+                    }
                     initSummary();
                 }
             },
@@ -397,15 +406,15 @@ jQuery(document).ready(function ($) {
 
             pictureEl.style.padding = (el.dataset.w / 10) + 'px';
 
-            if (el.dataset.w >= 70) {
-                widthEl.classList.remove('green');
-                heightEl.classList.remove('green');
-                sizePreviewBg.style.backgroundImage = 'url(/wp-content/themes/gemalter/img/order_bg/bg_grey.jpg)';
-            } else {
-                widthEl.classList.add('green');
-                heightEl.classList.add('green');
-                sizePreviewBg.style.backgroundImage = 'url(/wp-content/themes/gemalter/img/order_bg/bg_green.jpg)';
-            }
+            // if (el.dataset.w >= 70) {
+            //     widthEl.classList.remove('green');
+            //     heightEl.classList.remove('green');
+            //     sizePreviewBg.style.backgroundImage = 'url(/wp-content/themes/gemalter/img/order_bg/bg_grey.jpg)';
+            // } else {
+            //     widthEl.classList.add('green');
+            //     heightEl.classList.add('green');
+            //     sizePreviewBg.style.backgroundImage = 'url(/wp-content/themes/gemalter/img/order_bg/bg_green.jpg)';
+            // }
         }
     }
 

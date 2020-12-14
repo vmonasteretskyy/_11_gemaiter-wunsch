@@ -610,4 +610,27 @@ function getRandString($stringLength, $includeNumbers = true) {
     
     return $string;
 }
+
+function getShippingFieldsFromSession() {
+    $shippingFields = isset($_SESSION['shipping_fields']) ? $_SESSION['shipping_fields'] : [];
+    $allFields = [
+        'first_name',
+        'last_name',
+        'address',
+        'address2',
+        'city',
+        'state',
+        'postal_code',
+        'country',
+        'phone',
+        'email',
+        'message',
+    ];
+    foreach ($allFields as $field) {
+        if (!isset($shippingFields[$field])) {
+            $shippingFields[$field] = '';
+        }
+    }
+    return $shippingFields;
+}
 ?>

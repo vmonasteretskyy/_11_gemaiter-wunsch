@@ -11,25 +11,6 @@
  *
  * @package Gemalter
  */
-/* coupons list
-$coupons = [];
-
-$args = array(
-    'posts_per_page'   => -1,
-    'orderby'          => 'title',
-    'order'            => 'asc',
-    'post_type'        => 'shop_coupon',
-    'post_status'      => 'publish',
-);
-
-$couponsPosts = get_posts( $args );
-foreach ( $couponsPosts as $coupon ) {
-    // Get the name for each coupon post
-    $coupon_name = $coupon->post_title;
-    array_push( $coupons, $coupon_name );
-}
-test($coupons);*/
-
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
@@ -176,7 +157,8 @@ if ($cartRecord && isset($cartRecord['attributes']['frame_selected']) && $cartRe
     $frameSelected = $cartRecord['attributes']['frame_selected'];
 }
 
-//$previewImg = getOrderPreviewImg($paintingTechnique, $subject, [], $size); - TODO
+$customSubject = isset($cartRecord['attributes']['subject_custom']) ? $cartRecord['attributes']['subject_custom'] : [];
+$previewImgPath = getOrderPreviewImg($paintingTechnique, $subject, $customSubject, $size);
 get_header();
 ?>
     <script>var allFiles = [];</script>
@@ -442,9 +424,8 @@ get_header();
                 </div>
             </div>
 
-
-            <div class="size-preview" style="background-image: url(<?php echo the_theme_path(); ?>/img/order-preview-bg-min.jpg);">
-                <div class="js-size-preview__picture size-preview__picture">
+            <div data-size-preview="" class="size-preview" style="background-image: url(<?php if ($previewImgPath):?><?php echo $previewImgPath; ?><?php else:?><?php echo the_theme_path(); ?>/img/order-preview-bg-min.jpg<?php endif;?>);">
+                <div class="js-size-preview__picture size-preview__picture hide">
                     <div class="size-preview__width size-line">
                       <span class="js-size-pre__width">
                         90

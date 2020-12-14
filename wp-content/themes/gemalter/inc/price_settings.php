@@ -5536,7 +5536,7 @@ function getSubjects() {
         ],
         'landscape' => [
             'price_type' => 'person_1',
-            'label' => pll__('Landscape'),
+            'label' => pll__('Abstract / Landscape'),
             'icon' => '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M47.0624 46.1249H42.9375V38.7187C42.9375 38.2009 42.5176 37.7812 42 37.7812C41.4823 37.7812 41.0625 38.2009 41.0625 38.7187V46.1249H29.8125V28.3125C29.8125 27.7947 29.3927 27.375 28.875 27.375H19.125C18.6074 27.375 18.1876 27.7947 18.1876 28.3125V46.1249H6.93759V24.9374H7.29834C7.54697 24.9374 7.78537 24.8386 7.96125 24.6628L24 8.62401L40.0388 24.6628C40.2147 24.8386 40.4531 24.9374 40.7017 24.9374H41.0625V31.9686C41.0625 32.4864 41.4823 32.9061 42 32.9061C42.5176 32.9061 42.9375 32.4864 42.9375 31.9686V24.9374H47.0624C47.4417 24.9374 47.7835 24.7089 47.9286 24.3587C48.0737 24.0084 47.9934 23.6051 47.7253 23.337L24.6629 0.274569C24.2967 -0.0915231 23.7033 -0.0915231 23.337 0.274569L14.5246 9.08704C14.1585 9.45313 14.1585 10.0468 14.5246 10.4128C14.8908 10.779 15.4844 10.779 15.8505 10.4128L24 2.26328L44.799 23.0624H41.09L24.6629 6.6353C24.2967 6.2692 23.7033 6.2692 23.337 6.6353L6.90994 23.0624H3.20092L10.6005 15.6629C10.9666 15.2968 10.9666 14.7032 10.6005 14.337C10.2344 13.971 9.64077 13.9709 9.27459 14.337L0.27462 23.337C0.00659023 23.6051 -0.0737532 24.0083 0.0713712 24.3587C0.216496 24.709 0.558401 24.9374 0.937618 24.9374H5.0626V46.1248H0.937618C0.419932 46.1248 0.000121507 46.5445 0.000121507 47.0623C0.000121507 47.5801 0.419932 47.9998 0.937618 47.9998H6.0001H19.125H28.875H42H47.0624C47.5801 47.9998 47.9999 47.5801 47.9999 47.0623C47.9999 46.5445 47.5801 46.1249 47.0624 46.1249ZM27.9375 46.1249H20.0625V29.25H27.9375V46.1249Z" fill="#F9AB97"/>
                             <path d="M38.0625 27.375H32.8125C32.2948 27.375 31.875 27.7947 31.875 28.3125V37.6875C31.875 38.2052 32.2948 38.625 32.8125 38.625H38.0625C38.5802 38.625 39 38.2052 39 37.6875V28.3125C39 27.7947 38.5802 27.375 38.0625 27.375ZM37.125 36.75H33.75V29.25H37.125V36.75Z" fill="#F9AB97"/>
@@ -5664,18 +5664,67 @@ function getDiscount($price = 0, $currency = 'usd') {
 }
 
 function getOrderPreviewImg($paintingTechnique = 'charcoal', $subject = 'person_1', $customSubject = [], $size = '25-35') {
-    //TODO - update function
-    $imgPath = '';
+    $imgPath = '/img/order_preview';
     if ($paintingTechnique && $subject && $size) {
+        $availableFolders = [
+            'charcoal_landscape','charcoal_person_1_pet_1',
+            'charcoal_person_1','charcoal_person_2','charcoal_person_3','charcoal_person_4',
+            'charcoal_pet_1','charcoal_pet_2','charcoal_pet_3',
+            'oil_landscape','oil_person_1_pet_1','oil_person_1','oil_person_2','oil_person_3','oil_person_4','oil_pet_1',
+        ];
         $imgPath .= '/' . $paintingTechnique;
         if ($subject != 'custom') {
+            $imgPath.= '_' . $subject . '/';
+        } else {
+            $persons = isset($customSubject['persons']) ? $customSubject['persons'] : 1;
+            $pets = isset($customSubject['pets']) ? $customSubject['pets'] : 0;
+            if (!$persons && !$pets) {
+                $persons = 1;
+            }
+            if ($paintingTechnique == 'oil') {
+                if ($persons && $pets) {
+                    $subject = 'person_1_pet_1';
+                } else if ($persons) {
+                    if (in_array($persons, ['1', '2', '3', '4'])) {
+                        $subject = 'person_' . $persons;
+                    } else {
+                        $subject = 'person_1';
+                    }
+                } else if ($pets) {
+                    if (in_array($pets, ['1'])) {
+                        $subject = 'pet_' . $pets;
+                    } else {
+                        $subject = 'pet_1';
+                    }
+                }
+            } else if ($paintingTechnique == 'charcoal') {
+                if ($persons && $pets) {
+                    $subject = 'person_1_pet_1';
+                } else if ($persons) {
+                    if (in_array($persons, ['1', '2', '3', '4'])) {
+                        $subject = 'person_' . $persons;
+                    } else {
+                        $subject = 'person_1';
+                    }
+                } else if ($pets) {
+                    if (in_array($pets, ['1', '2', '3'])) {
+                        $subject = 'pet_' . $pets;
+                    } else {
+                        $subject = 'pet_1';
+                    }
+                }
+            }
             $imgPath.= '_' . $subject . '/';
         }
         if ($size) {
             $imgPath .= $size . '.jpg';
         }
     } else {
-        $imgPath = 'default';
+        if (!$paintingTechnique) {
+            $paintingTechnique = 'oil';
+        }
+        $imgPath .= '/default/' . $paintingTechnique . '.jpg';
     }
+    $imgPath = the_theme_path() . $imgPath;
     return $imgPath;
 }

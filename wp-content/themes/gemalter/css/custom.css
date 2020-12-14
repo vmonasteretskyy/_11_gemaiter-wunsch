@@ -121,3 +121,6 @@ form.busy,
 .woocommerce-checkout .woocommerce-form-coupon-toggle {
     display: none;
 }
+.choose-subject-inner label p {
+    text-align: center;
+}

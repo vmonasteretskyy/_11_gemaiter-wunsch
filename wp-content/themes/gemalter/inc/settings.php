@@ -779,11 +779,15 @@ function ajax_get_sizes() {
     $deliveryHtml = ob_get_contents();
     ob_end_clean();
 
+    $customSubject = isset($_REQUEST['subject_custom']) ? $_REQUEST['subject_custom'] : [];
+    $previewImgPath = getOrderPreviewImg($chooseTech, $subject, $customSubject, $size);
+
     echo json_encode([
         'has_error' => false,
         'html' => $htmlSizes,
         'delivery_html' => $deliveryHtml,
         'discount' => $discountOutput,
+        'preview_img_path' => $previewImgPath,
     ]);
     wp_die();
 

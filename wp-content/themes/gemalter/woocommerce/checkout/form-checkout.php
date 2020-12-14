@@ -29,35 +29,46 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 
 $current_lang = pll_current_language();
+
+$postItem = get_page_by_path('order',OBJECT,'page');
+$fields = $postItem ? get_fields($postItem->ID) : null;
+$postGift = get_page_by_path('gift-cards',OBJECT,'page');
+$fields2 = get_fields($postGift->ID);
+
 $allPricesData = getPrices();
 $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
 $data['currency'] = $allPricesData[$current_lang]['currency'];
 $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 
-session_start();
-$shippingFields = isset($_SESSION['shipping_fields']) ? $_SESSION['shipping_fields'] : [];
-$allFields = [
-    'first_name',
-    'last_name',
-    'address',
-    'address2',
-    'city',
-    'state',
-    'postal_code',
-    'country',
-    'phone',
-    'email',
-    'message',
+$data['subjects'] = getSubjects();
+$data['painting_techniques'] = [
+    'charcoal' => isset($fields['choose_1']) ? $fields['choose_1'] : null,
+    'oil' => isset($fields['choose_2']) ? $fields['choose_2'] : null,
 ];
-foreach ($allFields as $field) {
-    if (!isset($shippingFields[$field])) {
-        $shippingFields[$field] = '';
-    }
-}
+$data['background_colors'] = getBackgroundColorsSettings();
+
+$shippingFields = getShippingFieldsFromSession();
+//test($shippingFields);
 //TODO - SET customer data
 WC()->customer->set_billing_first_name($shippingFields['first_name']);
-
-
+WC()->customer->set_billing_last_name($shippingFields['last_name']);
+WC()->customer->set_billing_address_1($shippingFields['address']);
+WC()->customer->set_billing_address_2($shippingFields['address2']);
+WC()->customer->set_billing_city($shippingFields['city']);
+WC()->customer->set_billing_state($shippingFields['state']);
+WC()->customer->set_billing_postcode($shippingFields['postal_code']);
+WC()->customer->set_billing_country($shippingFields['country']);
+WC()->customer->set_billing_phone($shippingFields['phone']);
+WC()->customer->set_billing_email($shippingFields['email']);
+WC()->customer->set_shipping_first_name($shippingFields['first_name']);
+WC()->customer->set_shipping_last_name($shippingFields['last_name']);
+WC()->customer->set_shipping_address_1($shippingFields['address']);
+WC()->customer->set_shipping_address_2($shippingFields['address2']);
+WC()->customer->set_shipping_city($shippingFields['city']);
+WC()->customer->set_shipping_state($shippingFields['state']);
+WC()->customer->set_shipping_postcode($shippingFields['postal_code']);
+WC()->customer->set_shipping_country($shippingFields['country']);
+//message
 ?>
 
     <form name="checkout" method="post" class=" checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
@@ -97,70 +108,168 @@ WC()->customer->set_billing_first_name($shippingFields['first_name']);
                         <?php pll_e('Cart Details'); ?>
                     </h6>
                     <div class="c-order-summary">
-                        <div class="small-card">
-                            <div class="small-card__picture">
-                                <img src="img/chose-3-min.jpg" alt="">
-                                <div class="small-card__label">
-                                    1
+                        <?php
+                        foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ):
+                        $cartItemType = isset($cart_item['attributes']['product_type']) ? $cart_item['attributes']['product_type'] : '';
+                        $quantity = $cart_item['quantity'];
+                        if ($cartItemType == 'picture') {
+                            $frame_selected = isset($cart_item['attributes']['frame_selected']) ? $cart_item['attributes']['frame_selected'] : '';
+                            $frame = get_term_by('slug', $frame_selected, 'pa_frames');
+                            $choose_tech = isset($cart_item['attributes']['choose_tech']) ? $cart_item['attributes']['choose_tech'] : '';
+
+                            $productTitle = $data['painting_techniques'][$choose_tech]['title'];
+                            if ($frame) {
+                                $productTitle .= ' ( +' . $frame->name . ')';
+                            }
+                            $subject = isset($cart_item['attributes']['subject']) ? $cart_item['attributes']['subject'] : '';
+                            $subjectTitle = $data['subjects'][$subject]['label'];
+                            if ($subject == 'custom') {
+                                //$pets
+                                $persons = $cart_item['attributes']['subject_custom']['persons'];
+                                $pets = $cart_item['attributes']['subject_custom']['pets'];
+                                $subjectTitle .= ': ' . ($persons ?  $persons . ' ' .  pll__('Persons') : '') . ($persons && $pets ? ", " : "") . ($pets ?  $pets . ' ' .  pll__('Pets') : '');
+                            }
+                            $backgroundTitle = '';
+                            $backgroundColor = '';
+                            $backgroud = isset($cart_item['attributes']['background_type']) ? $cart_item['attributes']['background_type'] : '';
+                            if ($backgroud == 'background_color') {
+                                $color = isset($cart_item['attributes']['color']) ? $cart_item['attributes']['color'] : '';
+                                if (isset($data['background_colors'][$color])) {
+                                    $backgroundTitle = $data['background_colors'][$color]['label'];
+                                    $backgroundColor = $data['background_colors'][$color]['hex_color'];
+                                } else {
+                                    $backgroundTitle = pll__('Background colour (pick yours next)');
+                                }
+                            } else if ($backgroud == 'background_artist') {
+                                $backgroundTitle = pll__('Artist to choose background (popular)');
+                            } else if ($backgroud == 'background_photo') {
+                                $backgroundTitle = pll__('Photo background');
+                            }
+                            $image = $data['painting_techniques'][$choose_tech]['image'];
+                            if ($image) {
+                                $image = $image['url'];
+                            } else {
+                                $image = wp_get_attachment_image_src($image, 'full');
+                                if (isset($image[0]) && $image[0]) {
+                                    $image = $image[0];
+                                } else {
+                                    $image = null;
+                                }
+                            }
+                            $size = isset($cart_item['attributes']['size']) ? $cart_item['attributes']['size'] : '';
+                            $sizeTitle = isset($allPricesData[$current_lang]['sizes'][$choose_tech][$size]) ? ($data['use_size'] == 'inch' ? $allPricesData[$current_lang]['sizes'][$choose_tech][$size]['label_inch'] : $allPricesData[$current_lang]['sizes'][$choose_tech][$size]['label']) : "-";
+                            $price = number_format($quantity * $cart_item['price'], 0);
+                            $basePrice = isset($cart_item['attributes']['base_price']) ? number_format($quantity * $cart_item['attributes']['base_price']) : 0;
+                            $framePrice = isset($cart_item['attributes']['frame_price']) ? number_format($quantity * $cart_item['attributes']['frame_price']) : 0;
+                            $baseDiscountPrice = isset($cart_item['attributes']['base_discount_price']) ? number_format($quantity * $cart_item['attributes']['base_discount_price']) : 0;
+                        } else {
+                            $productTitle = pll__("Gift Card");
+                            $price = number_format($quantity * $cart_item['price'], 0);
+                            $image = $fields2['form_image'];
+                            if ($image) {
+                                $image = $image['url'];
+                            } else {
+                                $image = wp_get_attachment_image_src($image, 'full');
+                                if (isset($image[0]) && $image[0]) {
+                                    $image = $image[0];
+                                } else {
+                                    $image = null;
+                                }
+                            }
+                            $sender = isset($cart_item['attributes']['gift_sender_name']) ? $cart_item['attributes']['gift_sender_name'] : '';
+                            $recipient = isset($cart_item['attributes']['gift_recipient_name']) ? $cart_item['attributes']['gift_recipient_name'] : '';
+                            $message = isset($cart_item['attributes']['gift_message']) ? $cart_item['attributes']['gift_message'] : '';
+
+                            $currency = isset($cart_item['attributes']['gift_currency']) ? $cart_item['attributes']['gift_currency'] : '';
+                            $currencySymbol = $currency == 'eur'? '€' : '$';
+                            $amount = isset($cart_item['attributes']['gift_amount']) ? $cart_item['attributes']['gift_amount'] : '';
+                        }
+                        $iteration = !isset($iteration) ? 1 : $iteration+1;
+                        ?>
+                        <?php if ($cartItemType == 'picture'): ?>
+                            <div class="small-card">
+                                <div class="small-card__picture">
+                                    <?php if ($image): ?>
+                                        <img src="<?php echo $image; ?>" alt="">
+                                    <?php else: ?>
+                                        <img src="<?php echo the_theme_path(); ?>/img/chose-3-min.jpg" alt="">
+                                    <?php endif;?>
+                                    <div class="small-card__label">
+                                        <?php echo $iteration; ?>
+                                    </div>
+                                </div>
+                                <div class="small-card__text">
+                                    <h6 class="text--ls-05">
+                                        <?php echo $productTitle; ?>
+                                    </h6>
+                                    <div class="small-card__descr">
+                                        <p><?php echo $sizeTitle; ?>;</p>
+                                        <p><?php echo $sizeTitle; ?>;</p>
+                                        <p>
+                                            <?php if ($backgroundColor):?><span class="card-bg-color" style="background-color:  <?php echo $backgroundColor;?>"></span><?php endif; ?>
+                                            <?php echo $backgroundTitle;?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="small-card__price f-22">
+                                    <span class="f-16">
+                                    <?php echo $data['currency_symbol'];?>
+                                    </span>
+                                    <?php echo $price;?>
+                                    <?php if ($framePrice || $baseDiscountPrice): ?>
+                                        <span class="f-16 color-gray">
+                                            (
+                                            <span class="f-12"><?php echo $data['currency_symbol'];?></span>
+                                            <?php echo $basePrice;?>
+                                            <?php if ($framePrice): ?>
+                                                +
+                                                <span class="f-12"><?php echo $data['currency_symbol'];?></span>
+                                                <?php echo $framePrice;?>
+                                            <?php endif; ?>
+                                            <?php if ($baseDiscountPrice): ?>
+                                                -
+                                                <span class="f-12"><?php echo $data['currency_symbol'];?></span>
+                                                <?php echo $baseDiscountPrice;?>
+                                            <?php endif; ?>
+                                            )
+                                        </span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="small-card__text">
-                                <h6 class="text--ls-05">
-                                    Oil Portrait ( + Black frame )
-                                </h6>
-                                <div class="small-card__descr">
-                                    <p>1 person;</p>
-                                    <p>120x180 cm;</p>
-                                    <p>
-                                        <span class="card-bg-color" style="background-color:  #B1C4CA;"></span>
-                                        Blue Bronze
-                                    </p>
+                        <?php else: ?>
+                            <div class="small-card">
+                                <div class="small-card__picture">
+                                    <?php if ($image): ?>
+                                        <img src="<?php echo $image; ?>" alt="">
+                                    <?php else: ?>
+                                        <img src="<?php echo the_theme_path(); ?>/img/gift-card-min.jpg" alt="">
+                                    <?php endif;?>
+                                    <div class="small-card__label">
+                                        <?php echo $iteration; ?>
+                                    </div>
+                                </div>
+                                <div class="small-card__text">
+                                    <h6 class="text--ls-05">
+                                        <?php echo $productTitle; ?>
+                                    </h6>
+                                    <div class="small-card__descr">
+                                        <p><?php pll_e('From');?>: <span><?php echo $sender;?></span></p>
+                                        <p><?php pll_e('To');?>: <span><?php echo $recipient;?></span></p>
+                                        <span><?php pll_e('Message');?>: <?php echo $message;?></span>
+                                    </div>
+                                </div>
 
+                                <div class="small-card__price f-22">
+                                    <span class="f-16">
+                                    <?php echo $data['currency_symbol'];?>
+                                    </span>
+                                    <?php echo $price;?>
                                 </div>
                             </div>
-
-                            <div class="small-card__price f-22">
-                              <span class="f-16">
-                                $
-                              </span>
-                                            1,468
-                                            <span class="f-16 color-gray">
-                                (
-                                <span class="f-12">$</span>
-                                1,289 +
-                                <span class="f-12">$</span>
-                                179
-                                )
-                              </span>
-                            </div>
-                        </div>
-                        <div class="small-card">
-                            <div class="small-card__picture">
-                                <img src="img/gift-card-min.jpg" alt="">
-                                <div class="small-card__label">
-                                    2
-                                </div>
-                            </div>
-                            <div class="small-card__text">
-                                <h6 class="text--ls-05">
-                                    Gift Card
-                                </h6>
-                                <div class="small-card__descr">
-
-                                    <p>From: <span>John Snow</span></p>
-                                    <p>To: <span>Daenerys</span></p>
-                                    <span>Stormborn of House Targaryen</span>
-                                </div>
-                            </div>
-
-                            <div class="small-card__price f-22">
-                              <span class="f-16">
-                                $
-                              </span>
-                                1,468
-                            </div>
-                        </div>  </div>
-
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
 
                     <h6 class="c-form__title">
                         <?php pll_e('Amount Details');?>
@@ -206,8 +315,8 @@ WC()->customer->set_billing_first_name($shippingFields['first_name']);
                                 <div class="c-table-right f-22">
                                     <span class="f-16"><?php echo $data['currency_symbol'];?></span>
                                     <span data-cart-subtotal-amount="">
-                                                <?php echo wc_price(WC()->cart->get_subtotal());?>
-                                            </span>
+                                        <?php echo wc_price(WC()->cart->get_subtotal());?>
+                                    </span>
                                 </div>
                             </div>
 
@@ -240,8 +349,8 @@ WC()->customer->set_billing_first_name($shippingFields['first_name']);
                                 <div class="c-table-right f-30">
                                     <span class="f-20"><?php echo $data['currency_symbol'];?></span>
                                     <span data-cart-discount-amount="">
-                                                <?php echo wc_price(WC()->cart->get_discount_total());?>
-                                            </span>
+                                        <?php echo wc_price(WC()->cart->get_discount_total());?>
+                                    </span>
                                 </div>
                             </div>
 
@@ -252,8 +361,8 @@ WC()->customer->set_billing_first_name($shippingFields['first_name']);
                                 <div class="c-table-right f-30">
                                     <span class="f-20"><?php echo $data['currency_symbol'];?></span>
                                     <span data-cart-total-amount="">
-                                                <?php echo WC()->cart->get_cart_total();?>
-                                            </span>
+                                        <?php echo WC()->cart->get_cart_total();?>
+                                    </span>
                                 </div>
                             </div>
                         </div>

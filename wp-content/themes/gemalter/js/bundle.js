@@ -54369,7 +54369,7 @@ function Form() {
                     else {
                         parent.style.display = null;
                         //wp-developer
-                        choosebg__color.classList.remove('hide');
+                        //choosebg__color.classList.remove('hide');
                     }
                 }
             });
@@ -54410,15 +54410,15 @@ let initPictureEvent = (el) => {
 
         pictureEl.style.padding = (el.dataset.w / 10) + 'px';
 
-        if (el.dataset.w >= 70) {
-            widthEl.classList.remove('green');
-            heightEl.classList.remove('green');
-            //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_grey.jpg)';
-        } else {
-            widthEl.classList.add('green');
-            heightEl.classList.add('green');
-            //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_green.jpg)';
-        }
+        // if (el.dataset.w >= 70) {
+        //     widthEl.classList.remove('green');
+        //     heightEl.classList.remove('green');
+        //     //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_grey.jpg)';
+        // } else {
+        //     widthEl.classList.add('green');
+        //     heightEl.classList.add('green');
+        //     //sizePreviewBg.style.backgroundImage = 'url(./img/order_bg/bg_green.jpg)';
+        // }
     }
 }
 

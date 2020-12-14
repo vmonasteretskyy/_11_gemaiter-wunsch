@@ -11,7 +11,6 @@
  *
  * @package Gemalter
  */
-session_start();
 global $post;
 
 $postItem = get_page_by_path('order',OBJECT,'page');
@@ -39,25 +38,8 @@ if (WC()->cart->is_empty()) {
 }
 $cartItems = WC()->cart->get_cart();
 
-$shippingFields = isset($_SESSION['shipping_fields']) ? $_SESSION['shipping_fields'] : [];
-$allFields = [
-    'first_name',
-    'last_name',
-    'address',
-    'address2',
-    'city',
-    'state',
-    'postal_code',
-    'country',
-    'phone',
-    'email',
-    'message',
-];
-foreach ($allFields as $field) {
-    if (!isset($shippingFields[$field])) {
-        $shippingFields[$field] = '';
-    }
-}
+session_start();
+$shippingFields = getShippingFieldsFromSession();
 get_header();
 ?>
     <!--Start page-->

@@ -12,7 +12,6 @@
  * @package Gemalter
  */
 global $post;
-get_header();
 
 $current_lang = pll_current_language();
 $allPricesData = getPrices();
@@ -20,7 +19,20 @@ $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
 $data['currency'] = $allPricesData[$current_lang]['currency'];
 $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 
-//TODO - check require fields and redirect to cart page if empty
+
+session_start();
+$shippingFields = getShippingFieldsFromSession();
+$hasRequireFields = true;
+if (!$shippingFields['first_name'] || !$shippingFields['last_name'] || !$shippingFields['address'] || !$shippingFields['city'] || !$shippingFields['state'] || !$shippingFields['postal_code'] || !$shippingFields['country'] || !$shippingFields['phone'] || !$shippingFields['email']) {
+    $hasRequireFields = false;
+}
+if (!$hasRequireFields) {
+    $location = (get_url_lang_prefix()) . 'cart/';
+    wp_redirect($location);
+    exit;
+}
+
+get_header();
 ?>
 
     <!--Start page-->
