@@ -3,10 +3,11 @@
 add_action( 'init', 'custom_taxonomies' );
 
 function custom_taxonomies() {
+    //taxonomy for gallery subjects
     register_taxonomy(
-        'gallery_subject', //taxonomy name
-        'gallery', //object for which the taxonomy is created
-        array( //taxonomy details
+        'gallery_subject',
+        'gallery',
+        array(
             'public' => true,
             'labels' => array(
                 'name'		=> 'Gallery Subjects',
@@ -21,15 +22,13 @@ function custom_taxonomies() {
                 'new_item_name'	=> 'New Item',
             ),
             'update_count_callback' => '_update_post_term_count',
-            /*'update_count_callback' => function() {
-                return; //important
-            },*/
         )
     );
+    //taxonomy for gallery styles
     register_taxonomy(
-        'gallery_style', //taxonomy name
-        'gallery', //object for which the taxonomy is created
-        array( //taxonomy details
+        'gallery_style',
+        'gallery',
+        array(
             'public' => true,
             'labels' => array(
                 'name'		=> 'Gallery Styles',
@@ -44,15 +43,12 @@ function custom_taxonomies() {
                 'new_item_name'	=> 'New Item',
             ),
             'update_count_callback' => '_update_post_term_count',
-            /*'update_count_callback' => function() {
-                return; //important
-            },*/
         )
     );
 }
 
 function custom_post_types() {
-
+    //ctp for gallery
     register_post_type('gallery', array(
         'labels' => array(
             'name' => _x('Gallery', 'Post Type General Name'),
@@ -75,8 +71,6 @@ function custom_post_types() {
         'menu_icon' => 'dashicons-format-gallery',
         'supports'=> array('title', 'editor', 'thumbnail', 'revisions'),
         'exclude_from_search' => true,
-        //'capability_type' => ['gallery'],
-        //'map_meta_cap' => true,
         'rewrite' => array('slug' => 'gallery', 'with_front' => false)
     ));
     flush_rewrite_rules();

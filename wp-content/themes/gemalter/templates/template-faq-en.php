@@ -17,6 +17,7 @@ $data = [
     'vertical_title' => isset($fields['vertical_title']) ? $fields['vertical_title'] : null,
     'faq' => isset($fields['faq']) ? $fields['faq'] : null,
 ];
+
 get_header();
 ?>
 

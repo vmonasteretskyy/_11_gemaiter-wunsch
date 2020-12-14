@@ -7,6 +7,7 @@
  * @package Gemalter
  */
 $current_lang = pll_current_language();
+
 get_header();
 ?>
 

@@ -40,6 +40,7 @@ $cartItems = WC()->cart->get_cart();
 
 session_start();
 $shippingFields = getShippingFieldsFromSession();
+
 get_header();
 ?>
     <!--Start page-->

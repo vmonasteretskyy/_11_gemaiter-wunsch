@@ -10,6 +10,7 @@ $current_lang = pll_current_language();
 global $post;
 global $wp;
 $fields = get_fields($post->ID);
+
 get_header();
 ?>
 
@@ -44,7 +45,7 @@ get_header();
                                 </li>
                                 <li class="article__socials-item article__socials-item--facebook"
                                     aria-label="facebook">
-                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_url( (get_url_lang_prefix()) . $wp->request . '/'); ?>" class="article__socials-link">
+                                    <a target="_blank" href="<?php echo ('https://www.facebook.com/sharer/sharer.php?u=');?><?php the_url( (get_url_lang_prefix()) . $wp->request . '/'); ?>" class="article__socials-link">
                                         <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8.07983 9H5.73608V16H2.61108V9H0.079834V6.09375H2.61108V3.90625C2.61108 3.07292 2.76733 2.36458 3.07983 1.78125C3.39233 1.19792 3.82983 0.760417 4.39233 0.46875C4.97567 0.15625 5.64233 0 6.39233 0C6.72567 0 7.07983 0.0208333 7.45483 0.0625C7.82983 0.0833333 8.1215 0.114583 8.32983 0.15625L8.64233 0.1875V2.65625H7.39233C6.809 2.65625 6.38192 2.8125 6.11108 3.125C5.86108 3.41667 5.73608 3.78125 5.73608 4.21875V6.09375H8.51733L8.07983 9Z" fill="#929292"/>
                                         </svg>

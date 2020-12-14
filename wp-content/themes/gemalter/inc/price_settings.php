@@ -3,7 +3,8 @@
  * Price Settings
  */
 
-//тварини = людям, пейзаж = 1 людині по розміру, кастомні = є обмеження, скину нову табличку)
+//pets = persons, landscape = 1 person, custom = condition from excel)
+//general prices settings for two langs
 $prices = [
     'en' => [
         'currency' => 'usd',
@@ -20,7 +21,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '89',
-                                    'old_price' => '99',
+                                    'old_price' => '89',
                                 ],
                                 'express' => [
                                     'price' => '102',
@@ -125,7 +126,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '169',
-                                    'old_price' => '169',
+                                    'old_price' => '179',
                                 ],
                                 'express' => [
                                     'price' => '194',
@@ -146,7 +147,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '189',
-                                    'old_price' => '189',
+                                    'old_price' => '199',
                                 ],
                                 'express' => [
                                     'price' => '217',
@@ -167,7 +168,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '209',
-                                    'old_price' => '209',
+                                    'old_price' => '219',
                                 ],
                                 'express' => [
                                     'price' => '240',
@@ -893,7 +894,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '169',
-                                    'old_price' => '179',
+                                    'old_price' => '169',
                                 ],
                                 'express' => [
                                     'price' => '194',
@@ -914,7 +915,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '199',
-                                    'old_price' => '199',
+                                    'old_price' => '209',
                                 ],
                                 'express' => [
                                     'price' => '228',
@@ -935,7 +936,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '239',
-                                    'old_price' => '239',
+                                    'old_price' => '249',
                                 ],
                                 'express' => [
                                     'price' => '274',
@@ -956,7 +957,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '269',
-                                    'old_price' => '269',
+                                    'old_price' => '279',
                                 ],
                                 'express' => [
                                     'price' => '309',
@@ -2762,7 +2763,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '119',
-                                    'old_price' => '119',
+                                    'old_price' => '129',
                                 ],
                                 'express' => [
                                     'price' => '136',
@@ -2783,7 +2784,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '139',
-                                    'old_price' => '139',
+                                    'old_price' => '149',
                                 ],
                                 'express' => [
                                     'price' => '159',
@@ -2804,7 +2805,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '159',
-                                    'old_price' => '159',
+                                    'old_price' => '169',
                                 ],
                                 'express' => [
                                     'price' => '182',
@@ -3551,7 +3552,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '149',
-                                    'old_price' => '149',
+                                    'old_price' => '159',
                                 ],
                                 'express' => [
                                     'price' => '171',
@@ -3572,7 +3573,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '179',
-                                    'old_price' => '179',
+                                    'old_price' => '189',
                                 ],
                                 'express' => [
                                     'price' => '205',
@@ -3593,7 +3594,7 @@ $prices = [
                                 'available' => true,
                                 'regular' => [
                                     'price' => '209',
-                                    'old_price' => '209',
+                                    'old_price' => '219',
                                 ],
                                 'express' => [
                                     'price' => '240',
@@ -5280,20 +5281,24 @@ $prices = [
     ],
 ];
 
+//get all prices
 function getPrices() {
     global $prices;
     return $prices;
 }
 
+//get prices by locale, painting technique and subject
 function getPricesByTechniqueSubject($locale = 'us', $painting_technique = 'oil', $subject = 'person_1') {
     global $prices;
     return isset($prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]) ? $prices[$locale]['prices']['painting_technique'][$painting_technique][$subject] : null;
 }
+//get prices by locale, painting technique and subject
 function getPriceByTechniqueSubjectSizeDuration($locale = 'us', $painting_technique = 'oil', $subject = 'person_1', $size = '25-35', $priceType = 'regular') {
     global $prices;
     return isset($prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]['sizes'][$size][$priceType]['price']) ? $prices[$locale]['prices']['painting_technique'][$painting_technique][$subject]['sizes'][$size][$priceType]['price'] : 0;
 }
 
+//get sizes by locale, painting technique, subject and price type
 function getSizesBySubjectTechnique($current_lang = 'us', $paintingTechnique = 'oil', $subject = 'person_1', $priceType = 'regular') {
     $allPricesData = getPrices();
     $data['sizes'] = $allPricesData[$current_lang]['sizes'][$paintingTechnique];
@@ -5311,9 +5316,7 @@ function getSizesBySubjectTechnique($current_lang = 'us', $paintingTechnique = '
     return $data['sizes'];
 }
 
-/**
- *  Duration Settings
- */
+//duration settings
 function getDuration() {
     $duration = [
         'all_locales' => [
@@ -5439,8 +5442,7 @@ function getDuration() {
     return $duration;
 }
 
-
-
+//duration based on painting technique and size
 function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
     $duration = getDuration();
     $paintingTechniqueData = null;
@@ -5487,9 +5489,7 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
     return $paintingTechniqueData;
 }
 
-/**
- *  Subjects Settings
- */
+//Subjects Settings
 function getSubjects() {
     $subjects = [
         'person_1' => [
@@ -5572,10 +5572,7 @@ function getSubjects() {
 }
 
 
-/**
- * Backgrounds Settings
- */
-
+//Backgrounds Settings
 function getBackgroundColorsSettings() {
     $backgrounds = [
         'beige' => [
@@ -5606,9 +5603,7 @@ function getBackgroundColorsSettings() {
     return $backgrounds;
 }
 
-/**
- * Discount Settings
- */
+//Discount Settings
 function getDiscounts() {
     $discounts = [
         'usd' => [
@@ -5643,6 +5638,7 @@ function getDiscounts() {
     return $discounts;
 }
 
+//get discount data
 function getDiscount($price = 0, $currency = 'usd') {
     $discount = null;
     $discounts = getDiscounts();
@@ -5663,6 +5659,7 @@ function getDiscount($price = 0, $currency = 'usd') {
     return $discount;
 }
 
+//order preview image based on painting technique, subject and size
 function getOrderPreviewImg($paintingTechnique = 'charcoal', $subject = 'person_1', $customSubject = [], $size = '25-35') {
     $imgPath = '/img/order_preview';
     if ($paintingTechnique && $subject && $size) {

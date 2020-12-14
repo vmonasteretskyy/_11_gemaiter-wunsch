@@ -14,6 +14,7 @@
 global $post;
 $isCart = is_cart();
 $isCheckout = is_checkout();
+
 if (!$isCheckout && !$isCart) {
     get_header();
 }

@@ -1,3 +1,48 @@
 wp-admin
 admin / &8INfZQs9vR1v@$a3k
 admin@test.com
+
+-------------------------------------
+https://login.siteground.com/
+v.monasteretskyy@gmail.com
+`4m)=1@2f1`4
+
+-------------------------------------
+painteddesire.com
+ftp: gemaiter / 1c1&45#12,n@
+Hostname: painteddesire.com
+Username: gemaiter@painteddesire.com
+Password: 1c1&45#12,n@
+Port: 21
+
+db:
+define( 'DB_NAME', 'dbab9b6vcy32y6' );
+/** MySQL database username */
+define( 'DB_USER', 'utj3c4dhygy7d' );
+/** MySQL database password */
+define( 'DB_PASSWORD', 'k97zwwubxqyn' );
+/** MySQL hostname */
+define( 'DB_HOST', '127.0.0.1' );
+
+second db:
+db: User uh8yau73yjbcp is created with password ut9s8frs4hz3
+database: dbdvx4md6v3n3k
+user: uh8yau73yjbcp
+password: ut9s8frs4hz3
+
+-------------------------------------
+gemalterwunsch.com
+ftp: gemaiter / 1c1&45#12,n@
+Hostname: gemalterwunsch.com
+Username: gemaiter@gemalterwunsch.com
+Password: 1c1&45#12,n@
+Port: 21
+
+db:
+define( 'DB_NAME', 'dbzuzj5jmt3p27' );
+/** MySQL database username */
+define( 'DB_USER', 'u58egvjxfjk8s' );
+/** MySQL database password */
+define( 'DB_PASSWORD', '6uebjgdutg65' );
+/** MySQL hostname */
+define( 'DB_HOST', '127.0.0.1' );

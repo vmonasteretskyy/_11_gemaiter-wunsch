@@ -61,6 +61,10 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
   <meta name="theme-color" content="#000" />
   <!-- Custom Browsers Color End -->
 
+
+  <script>
+      var errorTitle = '<?php pll_e("Error");?>';
+  </script>
   <style>
     body {
       /* opacity: 0; */
@@ -71,7 +75,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
       opacity: 0;
     }
 
-    .preloader { 
+    .preloader {
         opacity: 1;
     }
 
@@ -105,7 +109,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     <!-- Start site wrapper -->
     <div class="site-wrapper">
         <!-- Start header -->
-        <header class="header" style="top: auto">
+        <header class="header">
             <div class="header-top">
                 <?php if (isset($data['header_settings']['header_title']) && $data['header_settings']['header_title']): ?>
                     <div class="header-top__left">

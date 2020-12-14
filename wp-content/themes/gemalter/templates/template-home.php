@@ -11,6 +11,7 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
+
 get_header();
 ?>
 

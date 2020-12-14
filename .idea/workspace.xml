@@ -4,17 +4,9 @@
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/custom-functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/custom-functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/form-checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/form-checkout.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,6 +428,26 @@
       <workItem from="1607752903760" duration="3788000" />
       <workItem from="1607759124035" duration="5121000" />
       <workItem from="1607886354624" duration="10514000" />
+      <workItem from="1607979382228" duration="5542000" />
+      <workItem from="1608015772548" duration="3256000" />
+      <workItem from="1608037334219" duration="6331000" />
+      <workItem from="1608044368986" duration="2766000" />
+      <workItem from="1608068453583" duration="8066000" />
+      <workItem from="1608105419501" duration="1891000" />
+      <workItem from="1608112184296" duration="6879000" />
+      <workItem from="1608125533827" duration="26000" />
+      <workItem from="1608132919008" duration="3091000" />
+      <workItem from="1608136456510" duration="531000" />
+      <workItem from="1608147078829" duration="9016000" />
+      <workItem from="1608206199045" duration="3818000" />
+      <workItem from="1608210872581" duration="7593000" />
+      <workItem from="1608241448050" duration="5198000" />
+      <workItem from="1608294048217" duration="988000" />
+      <workItem from="1608296084686" duration="4439000" />
+      <workItem from="1608301995898" duration="2906000" />
+      <workItem from="1608498850701" duration="459000" />
+      <workItem from="1608528588194" duration="1335000" />
+      <workItem from="1608531323523" duration="4374000" />
     </task>
     <servers />
   </component>

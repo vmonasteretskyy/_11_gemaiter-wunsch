@@ -8,8 +8,6 @@
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
-
-get_header();
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
@@ -17,6 +15,8 @@ $data = [
     'title' => isset($fields['title']) ? $fields['title'] : null,
     'sections' => isset($fields['sections']) ? $fields['sections'] : null,
 ];
+
+get_header();
 ?>
 
     <!--Start page-->

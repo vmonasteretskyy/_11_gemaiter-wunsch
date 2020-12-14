@@ -90,7 +90,7 @@
             <div class="modal-bg">
                 <p><i><?php pll_e('Apparently the payment was unsuccessful. <br>Take a step back and try again.'); ?> </i></p>
             </div>
-            <div class="btn btn--accent-border"><?php pll_e('Back'); ?></div>
+            <a href="<?php the_url( (get_url_lang_prefix()) . 'checkout/');?>" class="btn btn--accent-border"><?php pll_e('Back'); ?></a>
         </div>
     </div>
 </div>

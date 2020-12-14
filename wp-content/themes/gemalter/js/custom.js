@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
     const $document = $(document), $window = $(window);
     const currentLang = $('body').data('current-lang');
+    /*TODO: can be changes with baseUrl(+ window.location) on live*/
 
     /*our gallery filters start*/
     $document.on('click', '.gallery-filter-row .option-js', function(e){
@@ -44,7 +45,7 @@ jQuery(document).ready(function ($) {
         popup.find('.error-text').hide();
         //send data to admin when user put data
         if (phone && email) {
-            cf7CalculatorSubmit(contactFormId, args = {
+            cf7Submit(contactFormId, args = {
                 'phone': phone,
                 'email': email,
                 'message': message,
@@ -97,7 +98,7 @@ jQuery(document).ready(function ($) {
         popup.find('.error-text').hide();
         //send data to admin when user put data
         if (first_name && last_name && address && city && state && postal_code && country && phone && email && refund_reason) {
-            cf7CalculatorSubmit(refundFormId, args = {
+            cf7Submit(refundFormId, args = {
                 'first_name': first_name,
                 'last_name': last_name,
                 'address': address,
@@ -130,7 +131,7 @@ jQuery(document).ready(function ($) {
     });
     /*refund form end*/
 
-    /*gift cards form end*/
+    /*gift cards form start*/
     $document.on('submit', '[data-gift-form]', function(e){
         e.preventDefault();
         let form = $(this);
@@ -144,6 +145,7 @@ jQuery(document).ready(function ($) {
             gift_message: form.find('[name="gift_message"]').val(),
             cart_item_key: form.find('[name="cart_item_key"]').length ? form.find('[name="cart_item_key"]').val() : '',
             action: 'ajax_add_to_cart_gift_card',
+            lang: currentLang,
         }
         if (form.data("busy")) return;
         form.data("busy", true).addClass("busy");
@@ -166,8 +168,10 @@ jQuery(document).ready(function ($) {
                         //show html popup
                         //$('body').prepend(data.html);
                     } else {
-                        //redirect to checkout;
-                        window.location = data.redirect_link;
+                        //redirect to checkout(cart page);
+                        //let baseUrl = (currentLang == 'de') ? '/de' : '';
+                        let baseUrl = '';
+                        window.location = baseUrl + data.redirect_link;
                     }
                 },
                 complete: function(){
@@ -183,8 +187,10 @@ jQuery(document).ready(function ($) {
             form.data("busy", false).removeClass("busy");
         }
     });
+    /*gift cards form end*/
 
-    function cf7CalculatorSubmit($formId , $args, callback) {
+    /*send cf7 form*/
+    function cf7Submit($formId , $args, callback) {
         const url = '/wp-json/contact-form-7/v1/contact-forms/' + $formId + '/feedback';
         $.ajax({
                 url: url,
@@ -209,6 +215,7 @@ jQuery(document).ready(function ($) {
         document.dispatchEvent(new Event('modal-open#modal-info'));
     }
 
+    /*show info with popup*/
     function showInfoPopupWithButton(title, description, btnText, btnCallback) {
         title = title || '';
         description = description || '';
@@ -253,6 +260,7 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
     /*update delivery section when size changed*/
     $document.on('change', '[name="size"]', function(e){
         let form = $(this).closest('form');
@@ -295,6 +303,7 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
     /*update sizes section when delivery date&type changed*/
     $document.on('change', '#deliveryDate', function(e){
         let form = $(this).closest('form');
@@ -337,6 +346,7 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
     /*update sizes & delivery sections when changed subject and painting technique*/
     $document.on('change', '[data-size-related]', function(e){
         let form = $(this).closest('form');
@@ -383,6 +393,7 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
     /*PictureLoad start*/
     let widthEl = document.querySelector('.size-preview__picture .js-size-pre__width');
     let heightEl = document.querySelector('.size-line--horizontal .js-size-pre__width');
@@ -428,6 +439,7 @@ jQuery(document).ready(function ($) {
     };
     PictureLoad();
     /*PictureLoad end*/
+
     /*add picture product to cart*/
     $document.on('change click', '[data-add-picture-product-to-cart]', function(e){
         let form = $(this).closest('form');
@@ -440,6 +452,7 @@ jQuery(document).ready(function ($) {
         let formData = new FormData(form[0]);
         formData.append('mode', mode);
         formData.append('action', action);
+        formData.append('lang', currentLang);
         //let files = form.find('[name="photos"]')[0].files;
         if (allFiles.length){
             $.each(allFiles, function(key, file){
@@ -465,8 +478,10 @@ jQuery(document).ready(function ($) {
                     console.log(data);
                     //show html popup
                 } else {
-                    //redirect to checkout;
-                    window.location = data.redirect_link;
+                    //redirect to checkout (cart page);
+                    //let baseUrl = (currentLang == 'de') ? '/de' : '';
+                    let baseUrl = '';
+                    window.location = baseUrl + data.redirect_link;
                 }
             },
             complete: function(){
@@ -478,6 +493,8 @@ jQuery(document).ready(function ($) {
             }
         });
     });
+
+    /*clear photos on change input*/
     $document.on('change', '[name="photos"]', function(e){
         let fileElemInfoPrev = $("#fileElemInfoPrev");
         if (fileElemInfoPrev.length && fileElemInfoPrev.val()) {
@@ -486,7 +503,7 @@ jQuery(document).ready(function ($) {
         }
     });
 
-
+    /*update subject in edit order popup*/
     $document.on('change', '[name="subject"]', function(e){
         let val = $(this).val();
         let labelObject = $(this).closest('label');
@@ -494,9 +511,11 @@ jQuery(document).ready(function ($) {
         $('[data-edit-order-form] [name="edit_subject"]').val(val);
         $('[data-edit-order-form] [name="edit_subject_text"]').val(text);
     });
+    /*update hidden popup*/
     $document.on('change', '[name="size"]', function(e){
         $('[name="hidden_size"]').val('');
     });
+
     /*change result image based on paint technique*/
     $document.on('change', '[name="choose_tech"]', function(e){
         let val = $(this).val();
@@ -509,6 +528,8 @@ jQuery(document).ready(function ($) {
         $('[data-edit-order-form] [name="edit_choose_tech"]').val(val);
         $('[data-edit-order-form] [name="edit_choose_tech_text"]').val(text);
     });
+
+    /*update options in order edit popup*/
     $document.on('click', '[data-edit-order-form] .option-js', function(e){
         let max_items = 16;
         let item = $(this).closest('.form-group--select').find('.input-key-js');
@@ -533,10 +554,8 @@ jQuery(document).ready(function ($) {
         }
         console.log(name);
     });
-    /*submit edit order form*/
 
-
-
+    /*open edit order form*/
     $document.on('click', '[data-edit-order-btn]', function(e){
         e.preventDefault();
         let form = $(this).closest('form');
@@ -578,16 +597,18 @@ jQuery(document).ready(function ($) {
 
     });
 
+    /*submit edit order form btn click*/
     $document.on('click', '[data-submit-edit-form]', function(e){
         e.preventDefault();
         console.log('click_edit');
         $('[data-edit-order-form]').submit();
     });
+
+    /*submit edit order form*/
     $document.on('submit', '[data-edit-order-form]', function(e){
         e.preventDefault();
         console.log('submit_edit');
         let form = $(this);
-
 
         let choose_tech = form.find('[name="edit_choose_tech"]').val();
 
@@ -620,7 +641,6 @@ jQuery(document).ready(function ($) {
         document.dispatchEvent(new Event('modal-close#modal-edit'));
     });
 
-
     /*init summary*/
     function initSummary() {
         let summaryListeners = document.querySelectorAll('.js-radio-summary input');
@@ -639,6 +659,7 @@ jQuery(document).ready(function ($) {
     /*order page end*/
 
     /*cart page start*/
+    /*change quantity*/
     $(document).on('click', '.card-number [data-quantity-cart-item]', function(e) {
         let btn = $(this);
         let cart_item_key = btn.data('cart-item-key');
@@ -696,6 +717,7 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /*delete cart item*/
     $(document).on('click', '.cards .card [data-delete-item]', function(e) {
         let btn = $(this);
         let line = btn.closest('.card');
@@ -742,7 +764,9 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /*apply coupon*/
     $(document).on('click', '[data-apply-coupon]', function(e) {
+        e.preventDefault();
         let btn = $(this);
         let coupon = btn.parent().find('[name="coupon"]').val();
         let wrapper = $('.cart-wrap');
@@ -778,6 +802,9 @@ jQuery(document).ready(function ($) {
                     $('[cancel-coupon-wrapper] [data-coupon-val]').data('coupon-val', coupon);
                     $('[cancel-coupon-wrapper]').show();
                     $('[apply-coupon-wrapper]').hide();
+                    if ($('form.woocommerce-checkout').length && $('form.woocommerce-checkout #payment_types').length && typeof(data.fragments['.woocommerce-checkout-payment']) != 'undefined') {
+                        $('form.woocommerce-checkout #payment_types').html(data.fragments['.woocommerce-checkout-payment']);
+                    }
                 }
             },
             complete: function(){
@@ -786,7 +813,9 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /*cancel coupon*/
     $(document).on('click', '[data-cancel-coupon]', function(e) {
+        e.preventDefault();
         let btn = $(this);
         let coupon = btn.closest('.c-form-coupon').find('[data-coupon-val]').data('coupon-val');
         let wrapper = $('.cart-wrap');
@@ -822,6 +851,9 @@ jQuery(document).ready(function ($) {
                     $('[cancel-coupon-wrapper] [data-coupon-val]').data('coupon-val', '');
                     $('[cancel-coupon-wrapper]').hide();
                     $('[apply-coupon-wrapper]').show();
+                    if ($('form.woocommerce-checkout').length && $('form.woocommerce-checkout #payment_types').length && typeof(data.fragments['.woocommerce-checkout-payment']) != 'undefined') {
+                        $('form.woocommerce-checkout #payment_types').html(data.fragments['.woocommerce-checkout-payment']);
+                    }
                 }
             },
             complete: function(){
@@ -830,10 +862,13 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    /*btn click for proceed-to-checkout*/
     $document.on('click change', '[data-proceed-to-checkout]', function(e){
         e.preventDefault();
         $('[data-shipping-cart-form]').submit();
     });
+
+    /*send shipping fields and redirect to checkout*/
     $document.on('submit', '[data-shipping-cart-form]', function(e){
         e.preventDefault();
         let form = $(this);
@@ -867,6 +902,7 @@ jQuery(document).ready(function ($) {
             'email': email,
             'message': message,
             'action': 'ajax_add_shipping_data',
+            'lang': currentLang
         };
         //send data to admin when user put data
         $.ajax({
@@ -882,7 +918,9 @@ jQuery(document).ready(function ($) {
                     showInfoPopup(data.error_title, data.error_message);
                 } else {
                     //redirect to checkout;
-                    window.location = data.redirect_link;
+                    //let baseUrl = (currentLang == 'de') ? '/de' : '';
+                    let baseUrl = '';
+                    window.location = baseUrl + data.redirect_link;
                 }
             },
             complete: function(){
@@ -902,10 +940,41 @@ jQuery(document).ready(function ($) {
     });
     /*cart page end*/
 
+    /*checkout page start*/
+    /*check for woocommerce errors in woocommerce-NoticeGroup-checkout. If present then show custom error popup*/
+    if ($('form.woocommerce-checkout').length) {
+        const CHECK_INTERVAL = 500;
+        function checkErrors() {
+            if ($('form.woocommerce-checkout .woocommerce-NoticeGroup-checkout').length) {
+                let html = $('form.woocommerce-checkout .woocommerce-NoticeGroup-checkout').html();
+                $('form.woocommerce-checkout .woocommerce-NoticeGroup-checkout').remove();
+                showInfoPopup(errorTitle, html);
+            }
+        }
+        let checkInterval = setInterval(function () {
+            checkErrors();
+        }, CHECK_INTERVAL);
+    }
+
+    /*show failed popup*/
+    if ($('.woocommerce-order-received .order_failed').length) {
+        setTimeout(function() {
+            document.dispatchEvent(new Event('modal-open#modal-oops'));
+        }, 1000);
+    }
+    /*show success popup*/
+    if ($('.woocommerce-order-received .order_success').length) {
+        setTimeout(function() {
+            let email = $('.woocommerce-order-received .order_success').data('order-email');
+            let html = $('#modal-thank .modal-bg i').html();
+            html = html.replace(/EMAIL/gi, email);
+            $('#modal-thank .modal-bg i').html(html);
+            document.dispatchEvent(new Event('modal-open#modal-thank'));
+        }, 1000);
+    }
+    /*checkout page end*/
+
 });
-
-
-
 
 function setCookie(c_name,value,expiredays,domain){var exdate=new Date();exdate.setDate(exdate.getDate()+expiredays);
     document.cookie=c_name+"="+escape(value)+((typeof expiredays == "undefined") ? "" : "; expires="+exdate.toGMTString())+(domain?"; path="+domain:"");}

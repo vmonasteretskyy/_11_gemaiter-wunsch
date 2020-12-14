@@ -12,6 +12,7 @@
  * @package Gemalter
  */
 global $post;
+
 get_header();
 ?>
     <!--Start page-->

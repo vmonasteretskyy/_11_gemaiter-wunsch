@@ -27,6 +27,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	return;
 }
 
+add_action( 'woocommerce_review_order_after_order_total', 'woocommerce_checkout_payment', 20 );
+
 
 $current_lang = pll_current_language();
 
@@ -48,8 +50,6 @@ $data['painting_techniques'] = [
 $data['background_colors'] = getBackgroundColorsSettings();
 
 $shippingFields = getShippingFieldsFromSession();
-//test($shippingFields);
-//TODO - SET customer data
 WC()->customer->set_billing_first_name($shippingFields['first_name']);
 WC()->customer->set_billing_last_name($shippingFields['last_name']);
 WC()->customer->set_billing_address_1($shippingFields['address']);
@@ -68,10 +68,12 @@ WC()->customer->set_shipping_city($shippingFields['city']);
 WC()->customer->set_shipping_state($shippingFields['state']);
 WC()->customer->set_shipping_postcode($shippingFields['postal_code']);
 WC()->customer->set_shipping_country($shippingFields['country']);
-//message
+//message inserts in form-shipping.php file
+//WC()->customer->set_billing_email('');
 ?>
 
     <form name="checkout" method="post" class=" checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
+        <input type="hidden" name="lang" value="<?php echo $current_lang; ?>">
         <div class="cart-inner">
             <div class="cards">
                 <h6 class="c-payment__title">
@@ -83,21 +85,14 @@ WC()->customer->set_shipping_country($shippingFields['country']);
                     </i>
                 </p>
                 <div class="c-payment-inner">
-                    <div class="c-payment__acc">
-                        <label class="radio-button ">
-                            <input type="radio"
-                                   name="payment">
-                            <span class="checkmark"></span>
-                            <img src="<?php echo the_theme_path(); ?>/img/pay-paypal-min.png" alt="">
-                        </label>
-                    </div>
-                    <div class="c-payment__acc">
-                        <label class="radio-button ">
-                            <input type="radio"
-                                   name="payment">
-                            <span class="checkmark"></span>
-                            <img src="<?php echo the_theme_path(); ?>/img/pay-visa-min.png" alt="">
-                        </label>
+                    <?php if ( $checkout->get_checkout_fields() ) : ?>
+                        <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+                        <?php do_action( 'woocommerce_checkout_billing' ); ?>
+                        <?php do_action( 'woocommerce_checkout_shipping' ); ?>
+                        <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+                    <?php endif; ?>
+                    <div id="payment_types">
+                        <?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
                     </div>
                 </div>
             </div>
@@ -124,7 +119,6 @@ WC()->customer->set_shipping_country($shippingFields['country']);
                             $subject = isset($cart_item['attributes']['subject']) ? $cart_item['attributes']['subject'] : '';
                             $subjectTitle = $data['subjects'][$subject]['label'];
                             if ($subject == 'custom') {
-                                //$pets
                                 $persons = $cart_item['attributes']['subject_custom']['persons'];
                                 $pets = $cart_item['attributes']['subject_custom']['pets'];
                                 $subjectTitle .= ': ' . ($persons ?  $persons . ' ' .  pll__('Persons') : '') . ($persons && $pets ? ", " : "") . ($pets ?  $pets . ' ' .  pll__('Pets') : '');
@@ -373,7 +367,16 @@ WC()->customer->set_shipping_country($shippingFields['country']);
                                 </svg>
                                 <?php pll_e('Back');?>
                             </a>
-                            <button data-create-order="" class="btn btn--accent"><?php pll_e('Checkout');?></button>
+                            <noscript>
+                                <?php
+                                printf( esc_html__( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the %1$sUpdate Totals%2$s button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ), '<em>', '</em>' );
+                                ?>
+                                <br/><button type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Checkout', 'woocommerce' ); ?>"><?php esc_html_e( 'Update totals', 'woocommerce' ); ?></button>
+                            </noscript>
+                            <?php echo apply_filters( 'woocommerce_order_button_html', '<button type="submit" class="btn btn--accent" name="woocommerce_checkout_place_order" id="place_order" value="' .  pll__('Checkout') . '" data-value="' .  pll__('Checkout') . '"><span>' .  pll__('Checkout') . '</span></button>' ); // @codingStandardsIgnoreLine ?>
+                            <?php do_action( 'woocommerce_review_order_after_submit' ); ?>
+                            <?php wp_nonce_field( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' ); ?>
+                            <!--<button data-create-order="" class="btn btn--accent"><?php pll_e('Checkout');?></button>-->
                         </div>
                     </div>
                 </div>
@@ -382,7 +385,7 @@ WC()->customer->set_shipping_country($shippingFields['country']);
     </form>
 
 
-
+<?php /*
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
 	<?php if ( $checkout->get_checkout_fields() ) : ?>
@@ -416,5 +419,5 @@ WC()->customer->set_shipping_country($shippingFields['country']);
 	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
 
 </form>
-
+*/ ?>
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

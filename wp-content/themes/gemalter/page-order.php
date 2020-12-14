@@ -14,7 +14,6 @@
 $current_lang = pll_current_language();
 global $post;
 $fields = get_fields($post->ID);
-//test(WC()->cart->get_cart());
 
 $cartItemID = isset($_REQUEST['cart_item_id']) ? trim($_REQUEST['cart_item_id']) : '';
 $cartDiscountedHash = isset($_REQUEST['discount_hash']) ? trim($_REQUEST['discount_hash']) : '';
@@ -159,6 +158,7 @@ if ($cartRecord && isset($cartRecord['attributes']['frame_selected']) && $cartRe
 
 $customSubject = isset($cartRecord['attributes']['subject_custom']) ? $cartRecord['attributes']['subject_custom'] : [];
 $previewImgPath = getOrderPreviewImg($paintingTechnique, $subject, $customSubject, $size);
+
 get_header();
 ?>
     <script>var allFiles = [];</script>

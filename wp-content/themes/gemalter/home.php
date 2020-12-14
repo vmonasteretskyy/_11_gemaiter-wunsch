@@ -50,6 +50,7 @@ $args = array(
 $pagination = paginate_links( $args );
 
 $data['posts_count'] = empty($data['posts']) ? 0 : count($data['posts']);
+
 get_header();
 ?>
 

@@ -1,0 +1,4 @@
+2020-12-15T07:08:18+00:00 CRITICAL syntax error, unexpected '<', expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF) in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-shipping.php on line 52
+
+2020-12-15T07:09:38+00:00 CRITICAL syntax error, unexpected '<', expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF) in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce\checkout\form-shipping.php on line 52
+

@@ -17,82 +17,97 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+$totals = $order->get_order_item_totals();
+// TODO - make this template
+//'checkout/form-pay.php' - from class-wc-shortcode-checkout.php
 ?>
 <form id="order_review" method="post">
 
-	<table class="shop_table">
-		<thead>
-			<tr>
-				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="product-quantity"><?php esc_html_e( 'Qty', 'woocommerce' ); ?></th>
-				<th class="product-total"><?php esc_html_e( 'Totals', 'woocommerce' ); ?></th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php if ( count( $order->get_items() ) > 0 ) : ?>
-				<?php foreach ( $order->get_items() as $item_id => $item ) : ?>
-					<?php
-					if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
-						continue;
-					}
-					?>
-					<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
-						<td class="product-name">
-							<?php
-								echo apply_filters( 'woocommerce_order_item_name', esc_html( $item->get_name() ), $item, false ); // @codingStandardsIgnoreLine
+    <div class="c-form">
+        <h6 class="c-form__title">
+            <?php pll_e('Cart Items');?>
+        </h6>
+        <?php if ( count( $order->get_items() ) > 0 ) : ?>
+            <div class="gift-card__form form">
+                <div class="c-table">
+                    <div class="c-table__row">
+                        <div class="c-table-left fw-700">
+                            <?php pll_e( 'Product'); ?>
+                        </div>
+                        <div class="c-table-right fw-700">
+                            <?php pll_e( 'Price'); ?>
+                        </div>
+                    </div>
+                    <?php foreach ( $order->get_items() as $item_id => $item ) : ?>
+                        <div class="c-table__row">
+                            <div class="c-table-left">
+                                <?php
+                                    echo apply_filters( 'woocommerce_order_item_name', esc_html( $item->get_name() ), $item, false ); // @codingStandardsIgnoreLine
+                                    do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
+                                    /*$margin_side = $text_align = 'left';
+                                    wc_display_item_meta_custom(
+                                        $item,
+                                        array(
+                                            'label_before' => '<strong class="wc-item-meta-label" style="float: ' . esc_attr( $text_align ) . '; margin-' . esc_attr( $margin_side ) . ': .25em; clear: both">',
+                                        )
+                                    );*/
+                                    do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+                                ?>
+                            </div>
+                            <div class="c-table-right">
+                                <?php echo $order->get_formatted_line_subtotal( $item ); ?>
+                                <?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <span class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html( $item->get_quantity() ) ) . '</span>', $item ); ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
 
-								do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
+    <div id="payment">
+        <?php if ( $order->needs_payment() ) : ?>
+            <ul class="wc_payment_methods payment_methods methods">
+                <?php
+                if ( ! empty( $available_gateways ) ) {
+                    foreach ( $available_gateways as $gateway ) {
+                        wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
+                    }
+                } else {
+                    echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll__('Sorry, it seems that there are no available payment methods for your country. Please contact us if you require assistance or wish to make alternate arrangements.') . '</li>';
+                }
+                ?>
+            </ul>
+        <?php endif; ?>
+    </div>
 
-								wc_display_item_meta( $item );
-
-								do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
-							?>
-						</td>
-						<td class="product-quantity"><?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html( $item->get_quantity() ) ) . '</strong>', $item ); ?></td><?php // @codingStandardsIgnoreLine ?>
-						<td class="product-subtotal"><?php echo $order->get_formatted_line_subtotal( $item ); ?></td><?php // @codingStandardsIgnoreLine ?>
-					</tr>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</tbody>
-		<tfoot>
-			<?php if ( $totals ) : ?>
-				<?php foreach ( $totals as $total ) : ?>
-					<tr>
-						<th scope="row" colspan="2"><?php echo $total['label']; ?></th><?php // @codingStandardsIgnoreLine ?>
-						<td class="product-total"><?php echo $total['value']; ?></td><?php // @codingStandardsIgnoreLine ?>
-					</tr>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</tfoot>
-	</table>
-
-	<div id="payment">
-		<?php if ( $order->needs_payment() ) : ?>
-			<ul class="wc_payment_methods payment_methods methods">
-				<?php
-				if ( ! empty( $available_gateways ) ) {
-					foreach ( $available_gateways as $gateway ) {
-						wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
-					}
-				} else {
-					echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . apply_filters( 'woocommerce_no_available_payment_methods_message', esc_html__( 'Sorry, it seems that there are no available payment methods for your location. Please contact us if you require assistance or wish to make alternate arrangements.', 'woocommerce' ) ) . '</li>'; // @codingStandardsIgnoreLine
-				}
-				?>
-			</ul>
-		<?php endif; ?>
-		<div class="form-row">
-			<input type="hidden" name="woocommerce_pay" value="1" />
-
-			<?php wc_get_template( 'checkout/terms.php' ); ?>
-
-			<?php do_action( 'woocommerce_pay_order_before_submit' ); ?>
-
-			<?php echo apply_filters( 'woocommerce_pay_order_button_html', '<button type="submit" class="button alt" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>' ); // @codingStandardsIgnoreLine ?>
-
-			<?php do_action( 'woocommerce_pay_order_after_submit' ); ?>
-
-			<?php wp_nonce_field( 'woocommerce-pay', 'woocommerce-pay-nonce' ); ?>
-		</div>
-	</div>
+    <div class="c-form">
+        <h6 class="c-form__title">
+            <?php pll_e('Amount Details');?>
+        </h6>
+        <div class="gift-card__form form">
+            <div class="c-table">
+                <?php if ( $totals ) : ?>
+                    <?php foreach ( $totals as $key => $total ) : ?>
+                        <div class="c-table__row">
+                            <div class="c-table-left fw-700">
+                                <?php echo pll__($total['label']); ?>
+                            </div>
+                            <div class="c-table-right <?php if ($key != 'payment_method'):?>f-30<?php endif;?>">
+                                <span data-cart-discount-amount="">
+                                    <?php echo $total['value']; ?>
+                                </span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            <div class="c-form__actions">
+                <input type="hidden" name="woocommerce_pay" value="1" />
+                <?php echo apply_filters( 'woocommerce_pay_order_button_html', '<button type="submit" class="btn btn--accent" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . pll__( $order_button_text ) . '</button>' ); ?>
+                <?php do_action( 'woocommerce_pay_order_after_submit' ); ?>
+                <?php wp_nonce_field( 'woocommerce-pay', 'woocommerce-pay-nonce' ); ?>
+            </div>
+        </div>
+    </div>
 </form>
