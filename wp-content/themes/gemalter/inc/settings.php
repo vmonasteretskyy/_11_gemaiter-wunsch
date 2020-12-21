@@ -83,7 +83,10 @@ add_filter('woocommerce_add_cart_item', function ($cart_item) {
         $product->set_price($cart_item['price']);
         $product->set_regular_price($cart_item['price']);
         $cart_item['data'] = $product;
-        /*$product->set_sale_price( $cart_item['new_price'] );*/
+        $cart_item['line_subtotal'] = $cart_item['price'];
+        $cart_item['line_total'] = $cart_item['price'];
+        
+        $product->set_sale_price( $cart_item['price'] );
     }
     return $cart_item;
 }, 11, 1);
@@ -95,7 +98,9 @@ add_filter('woocommerce_get_cart_item_from_session', function ($cart_item, $valu
         $product->set_price($cart_item['price']);
         $product->set_regular_price($cart_item['price']);
         $cart_item['data'] = $product;
-        /*$product->set_sale_price( $cart_item['new_price'] );*/
+        $cart_item['line_subtotal'] = $cart_item['price'];
+        $cart_item['line_total'] = $cart_item['price'];
+        $product->set_sale_price( $cart_item['price'] );
     }
     return $cart_item;
     

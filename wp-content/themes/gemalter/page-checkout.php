@@ -32,9 +32,12 @@ if (!$hasRequireFields) {
     exit;
 }
 
+WC()->cart->calculate_totals();
+WC()->cart->maybe_set_cart_cookies();
+
 get_header();
 ?>
-<?php /*
+
     <!--Start page-->
     <div class="page-wrapper">
         <div class="cart-wrap">
@@ -70,13 +73,6 @@ get_header();
         </div>
     </div>
     <!--End page-->
-*/?>
 
-<?php
-while ( have_posts() ) :
-    the_post();
-    the_content();
-endwhile; // End of the loop.
-?>
 <?php
 get_footer();

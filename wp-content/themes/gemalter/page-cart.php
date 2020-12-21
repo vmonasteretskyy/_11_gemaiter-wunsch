@@ -41,6 +41,10 @@ $cartItems = WC()->cart->get_cart();
 session_start();
 $shippingFields = getShippingFieldsFromSession();
 
+//WC()->cart->calculate_totals();
+//WC()->cart->maybe_set_cart_cookies();
+//test(WC()->cart);
+
 get_header();
 ?>
     <!--Start page-->
@@ -331,7 +335,7 @@ get_header();
                                         <?php if ($countries): ?>
                                             <ul class="options options-js">
                                                 <?php foreach ($countries as $code => $country): ?>
-                                                    <li class="option option-js" data-key="<?php echo $country; ?>">
+                                                    <li class="option option-js" data-key="<?php pll_e($country); ?>">
                                                         <div class="option__text"><?php pll_e($country); ?></div>
                                                     </li>
                                                 <?php endforeach; ?>
