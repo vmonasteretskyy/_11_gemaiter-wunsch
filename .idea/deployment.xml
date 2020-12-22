@@ -23,6 +23,20 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="gemailter-de">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="gemalter">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="lh">
         <serverdata>
           <mappings>

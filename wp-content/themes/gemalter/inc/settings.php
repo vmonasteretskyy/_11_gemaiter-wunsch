@@ -86,7 +86,7 @@ add_filter('woocommerce_add_cart_item', function ($cart_item) {
         $cart_item['line_subtotal'] = $cart_item['price'];
         $cart_item['line_total'] = $cart_item['price'];
         
-        $product->set_sale_price( $cart_item['price'] );
+        $product->set_sale_price($cart_item['price']);
     }
     return $cart_item;
 }, 11, 1);
@@ -100,7 +100,7 @@ add_filter('woocommerce_get_cart_item_from_session', function ($cart_item, $valu
         $cart_item['data'] = $product;
         $cart_item['line_subtotal'] = $cart_item['price'];
         $cart_item['line_total'] = $cart_item['price'];
-        $product->set_sale_price( $cart_item['price'] );
+        $product->set_sale_price($cart_item['price']);
     }
     return $cart_item;
     
@@ -390,10 +390,12 @@ function redirect_cart_page() {
         $pll_current_lang = pll_current_language();
         if ($pll_current_lang_custom && $pll_current_lang_custom != $pll_current_lang) {
             $url = $_SERVER['REQUEST_URI'];
-            if ($pll_current_lang_custom == 'de') {
-                $url = '/de' . $url;
-            } else {
-                $url = str_replace('/de/', '/', $url);
+            if (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE != 'DIFF') {
+                if ($pll_current_lang_custom == 'de') {
+                    $url = '/de' . $url;
+                } else {
+                    $url = str_replace('/de/', '/', $url);
+                }
             }
             wc_setcookie('pll_current_lang_custom', pll_current_language(), time() - 60 * 100);
             wp_redirect($url);
@@ -543,6 +545,27 @@ function ajax_add_to_cart_gift_card() {
 }
 add_action('wp_ajax_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
 add_action('wp_ajax_nopriv_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
+
+//pll xdata_check fix for de site
+function ajax_pll_xdata_check() {
+    header('Content-Type: application/javascript');
+    printf('console.log("%s");', 'test');
+    wp_die();
+    return '';
+}
+add_action('wp_ajax_pll_xdata_check', 'ajax_pll_xdata_check', 1);
+add_action('wp_ajax_nopriv_pll_xdata_check', 'ajax_pll_xdata_check', 1);
+
+
+// add the filter for pll_redirect_home(not used now)
+/*function filter_pll_redirect_home( $redirect ) {
+    // make filter magic happen here...
+    if (isset($_REQUEST['redirect']) && $_REQUEST['redirect']) {
+        $redirect = $_REQUEST['redirect'];
+    }
+    return $redirect;
+};
+add_filter( 'pll_redirect_home', 'filter_pll_redirect_home', 10, 1 );*/
 
 //get sizes (html block) based on subject and painting technique
 function ajax_get_sizes() {
@@ -947,6 +970,8 @@ function ajax_add_to_cart_main_product() {
             $product_attributes['photos'] = json_encode($photos);
         }
     }
+    
+    test($product_attributes['photos']);
     
     if ($hasError) {
         echo json_encode([

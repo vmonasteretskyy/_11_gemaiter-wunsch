@@ -104,7 +104,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
   </style>
 </head>
 
-<body data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>
+<body data-locale-mode="<?php echo WP_LOCALE_MODE; ?>" data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>
 <?php wp_body_open(); ?>
     <!-- Start site wrapper -->
     <div class="site-wrapper">
@@ -216,7 +216,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                                 <ul class="nav__menu">
                                     <?php foreach($menuItems as $item): ?>
                                         <li>
-                                            <a href="<?php echo ($item->url ? $item->url : '#'); ?>"><?php echo $item->title; ?></a>
+                                            <a href="<?php echo ($item->url ? (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE == 'DIFF' ? (str_replace('/de/', '/', $item->url)) : $item->url) : '#'); ?>"><?php echo $item->title; ?></a>
                                         </li>
                                     <?php endforeach; ?>
                                     <?php if($woocommerce->cart->cart_contents_count): ?>
@@ -286,8 +286,8 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                             <div class="nav__flag">
                                 <div class="header__langs_wrap">
                                     <?php /*pll_the_languages();*/?>
-                                    <a href="<?php echo  '/' . $current_url;?>" class="header__langs_a <?php if ($current_lang == 'en'):?>active<?php endif;?>">EN</a>
-                                    <a href="<?php the_url( '/de/' . $current_url);?>" class="header__langs_a <?php if ($current_lang == 'de'):?>active<?php endif;?>">DE</a>
+                                    <a href="<?php echo get_url_en_prefix() . $current_url;?>" class="header__langs_a <?php if ($current_lang == 'en'):?>active<?php endif;?>">EN</a>
+                                    <a href="<?php the_url( get_url_de_prefix() . $current_url);?>" class="header__langs_a <?php if ($current_lang == 'de'):?>active<?php endif;?>">DE</a>
                                 </div>
                             </div>
                         </div>

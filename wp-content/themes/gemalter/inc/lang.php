@@ -279,7 +279,7 @@ pll_register_string("Subtotal:", "Subtotal:");
 pll_register_string("Total:", "Total:");
 pll_register_string("Payment method:", "Payment method:");
 pll_register_string("Cart Items", "Cart Items");
-pll_register_string("Back", "Back");
+pll_register_string("Max 3 files can be uploaded.", "Max 3 files can be uploaded.");
 pll_register_string("Back", "Back");
 
 $countries = getCountries();

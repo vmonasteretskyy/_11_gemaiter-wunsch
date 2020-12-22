@@ -6136,16 +6136,16 @@ return deepmerge
 }));
 });
 
-//      
+//
 // An event handler can take an optional event argument
 // and should not return a value
-                                          
+
 // An array of all currently registered event handlers for a type
-                                            
+
 // A map of event types and their corresponding event handlers.
-                        
-                                   
-  
+
+
+
 
 /** Mitt: Tiny (~200b) functional event emitter / pubsub.
  *  @name mitt
@@ -47743,8 +47743,8 @@ module.exports = "img/g-b-1-min.jpg";
 
             //using jQuery initialization? Creating the $.fn.fullpage object
             if(options.$){
-                Object.keys(FP).forEach(function (key) {    
-                    options.$.fn.fullpage[key] = FP[key];   
+                Object.keys(FP).forEach(function (key) {
+                    options.$.fn.fullpage[key] = FP[key];
                 });
             }
 
@@ -47792,7 +47792,7 @@ module.exports = "img/g-b-1-min.jpg";
             //detecting any change on the URL to scroll to the given anchor link
             //(a way to detect back history button as we play with the hashes on the URL)
             window.addEventListener('hashchange', hashChangeHandler);
-            
+
             // on window focus
             window.addEventListener('focus', focusHandler);
 
@@ -47912,7 +47912,7 @@ module.exports = "img/g-b-1-min.jpg";
             //not inside a single normal scroll element anymore?
             if(!isInsideOneNormalScroll && FP.shared.isNormalScrollElement){
                 setMouseHijack(true);
-                
+
                 if(isUsingScrollOverflow){
                     options.scrollOverflowHandler.setIscroll(target, true);
                 }
@@ -47922,7 +47922,7 @@ module.exports = "img/g-b-1-min.jpg";
         }
 
         /**
-        * Checks the viewport a few times on a define interval of time to 
+        * Checks the viewport a few times on a define interval of time to
         * see if it has changed in any of those. If that's the case, it resizes.
         */
         function doubleCheckHeight(){
@@ -48197,7 +48197,7 @@ module.exports = "img/g-b-1-min.jpg";
                 li += '</li>';
             }
             $('ul', nav)[0].innerHTML = li;
-            
+
             //activating the current active section
 
             var bullet = $('li', $(SECTION_NAV_SEL)[0])[index($(SECTION_ACTIVE_SEL)[0], SECTION_SEL)];
@@ -48292,7 +48292,7 @@ module.exports = "img/g-b-1-min.jpg";
             if(isResizing){
                 return;
             }
-            
+
             if(!options.autoScrolling || options.scrollBar){
                 var currentScroll = getScrollTop();
                 var scrollDirection = getScrollDirection(currentScroll);
@@ -48444,12 +48444,12 @@ module.exports = "img/g-b-1-min.jpg";
             var top = rect.top;
             var bottom = rect.bottom;
 
-            //sometimes there's a 1px offset on the bottom of the screen even when the 
+            //sometimes there's a 1px offset on the bottom of the screen even when the
             //section's height is the window.innerHeight one. I guess because pixels won't allow decimals.
-            //using this prevents from lazyLoading the section that is not yet visible 
+            //using this prevents from lazyLoading the section that is not yet visible
             //(only 1 pixel offset is)
             var pixelOffset = 2;
-            
+
             var isTopInView = top + pixelOffset < windowsHeight && top > 0;
             var isBottomInView = bottom > pixelOffset && bottom < windowsHeight;
 
@@ -48970,7 +48970,7 @@ module.exports = "img/g-b-1-min.jpg";
         */
         function performMovement(v){
             var isFastSpeed = options.scrollingSpeed < 700;
-            var transitionLapse = isFastSpeed ? 700 : options.scrollingSpeed; 
+            var transitionLapse = isFastSpeed ? 700 : options.scrollingSpeed;
 
             // using CSS3 translate functionality
             if (options.css3 && options.autoScrolling && !options.scrollBar) {
@@ -48989,7 +48989,7 @@ module.exports = "img/g-b-1-min.jpg";
 
                         //disabling canScroll when using fastSpeed
                         canScroll = !isFastSpeed;
-                    }, options.scrollingSpeed);                   
+                    }, options.scrollingSpeed);
                 }else{
                     afterSectionLoads(v);
                 }
@@ -49013,7 +49013,7 @@ module.exports = "img/g-b-1-min.jpg";
                             afterSectionLoads(v);
                         },30);
                     }else{
-                        
+
                         afterSectionLoads(v);
 
                         //disabling canScroll when using fastSpeed
@@ -49146,7 +49146,7 @@ module.exports = "img/g-b-1-min.jpg";
 
         /**
         * Makes sure lazyload is done for other sections in the viewport that are not the
-        * active one. 
+        * active one.
         */
         function lazyLoadOthers(){
             var hasAutoHeightSections = $(AUTO_HEIGHT_SEL)[0] || isResponsiveMode() && $(AUTO_HEIGHT_RESPONSIVE_SEL)[0];
@@ -49494,7 +49494,7 @@ module.exports = "img/g-b-1-min.jpg";
                 }
             }
         }
-        
+
         // changing isWindowFocused to true on focus event
         function focusHandler(){
             isWindowFocused = true;
@@ -49765,17 +49765,17 @@ module.exports = "img/g-b-1-min.jpg";
 
         /*
         * Resize event handler.
-        */        
+        */
         function resizeHandler(){
             isResizing = true;
- 
+
             clearTimeout(resizeId);
 
             //in order to call the functions only when the resize is finished
-            //http://stackoverflow.com/questions/4298612/jquery-how-to-call-resize-event-only-once-its-finished-resizing    
+            //http://stackoverflow.com/questions/4298612/jquery-how-to-call-resize-event-only-once-its-finished-resizing
             resizeId = setTimeout(function(){
 
-                //issue #3336 
+                //issue #3336
                 //(some apps or browsers, like Chrome/Firefox for Mobile take time to report the real height)
                 //so we check it 3 times with intervals in that case
                 for(var i = 0; i< 4; i++){
@@ -50401,7 +50401,7 @@ module.exports = "img/g-b-1-min.jpg";
             addClass(container, DESTROYED);
 
             [
-                afterSlideLoadsId, 
+                afterSlideLoadsId,
                 afterSectionLoadsId,
                 resizeId,
                 scrollId,
@@ -53474,7 +53474,7 @@ function scrollWindow() {
         }
     }
 }
-// Check step in viewPort 
+// Check step in viewPort
 function procedureStepHandler() {
     var steps = document.querySelectorAll(PROCEDURE_STEP);
     if (steps.length == 0) {
@@ -53487,7 +53487,7 @@ function procedureStepHandler() {
         }
     });
 }
-// Hide black header-top after scroll 
+// Hide black header-top after scroll
 function headerTopHandler(headerTop) {
     if (window.scrollY > 100) {
         headerTop.classList.add('hide');
@@ -53808,8 +53808,15 @@ var upload_Upload = /** @class */ (function () {
     Upload.prototype.handleDrop = function (event) {
         var dataTransfer = event.dataTransfer;
         var files = Array.from(dataTransfer.files);
+        files = files.filter(function (item) {
+            return item.type.indexOf("image/") != -1 ? true : false;
+        });
         files = files.slice(0, 3);//wp-developer
 
+        if (this.files.length >= 3) {
+            return;
+        }
+        console.log('handleDrop', files);
         this.handleFiles(files);
         this.renderPreviews(files);
     };
@@ -53818,12 +53825,15 @@ var upload_Upload = /** @class */ (function () {
         this.files = __spreadArrays(this.files, files);
         this.files = this.files.slice(0, 3);//wp-developer
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
-            this.options.onChange(this.files);
+            //this.options.onChange(this.files);
         }
+        this.options.onChange(this.files);
+        console.log('handleFiles', this.files);
     };
     Upload.prototype.renderPreviews = function (files) {
         if (files === void 0) { files = this.files; }
         files = files.slice(0, 3);//wp-developer
+        console.log('renderPreviews', this.files, files);
         files.forEach(this.renderPreview.bind(this));
     };
     Upload.prototype.renderPreview = function (file) {
@@ -53859,14 +53869,23 @@ var upload_Upload = /** @class */ (function () {
         var newFiles = Array.isArray(files) ? files : [files];
         this.files = __spreadArrays(this.files, newFiles);
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
+            //wp-developer
             this.options.onChange(this.files);
         }
+        //wp-developer
+        //console.log('add file', this.files);
+        //this.options.onChange(this.files);
         this.renderPreviews(newFiles);
     };
     Upload.prototype.removeFile = function (index) {
         var _a;
+        //wp-developer
+        if(typeof this.files[index] === 'undefined') {
+            index = (this.files.length - 1);
+        }
         this.files.remove(index);
         this.images[index].remove();
+        this.images.splice(index, 1);;
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
             this.options.onChange(this.files);
         }

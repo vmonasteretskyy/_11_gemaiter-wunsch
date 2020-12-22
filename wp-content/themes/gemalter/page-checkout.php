@@ -42,11 +42,11 @@ get_header();
     <div class="page-wrapper">
         <div class="cart-wrap">
             <div class="cart">
-                <?php if (is_wc_endpoint_url('order-pay')):?>
+                <?php if (is_wc_endpoint_url('order-pay')): ?>
                     <div class="title-wrap m-b-50">
                         <h2><?php pll_e('Order pay'); ?></h2>
                     </div>
-                <?php elseif (is_wc_endpoint_url('order-received')):?>
+                <?php elseif (is_wc_endpoint_url('order-received')): ?>
                     <div class="title-wrap m-b-50">
                         <h2><?php pll_e('Order received'); ?></h2>
                     </div>
@@ -54,19 +54,19 @@ get_header();
                     <div class="cart-head">
                         <h2><?php pll_e('Checkout'); ?></h2>
                         <div class="cart-head__amount">
-                            <p><?php pll_e('Total Amount'); ?>: <span><?php echo $data['currency_symbol'];?> </span> </p>
+                            <p><?php pll_e('Total Amount'); ?>: <span><?php echo $data['currency_symbol']; ?> </span></p>
                             <div class="cart-amount h1" data-cart-total-amount="">
-                                <?php echo WC()->cart->get_cart_total();?>
+                                <?php echo WC()->cart->get_cart_total(); ?>
                             </div>
                         </div>
                     </div>
                 <?php endif; ?>
-
+                
                 <?php
-                    while ( have_posts() ) :
-                        the_post();
-                        the_content();
-                    endwhile; // End of the loop.
+                while (have_posts()) :
+                    the_post();
+                    the_content();
+                endwhile; // End of the loop.
                 ?>
 
             </div>

@@ -79,10 +79,13 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', true );
 
-define( 'WP_HOME', 'http://lh.me' );
-define( 'WP_SITEURL', 'http://lh.me' );
-//define( 'WP_HOME', 'http://gemaiter.me' );
-//define( 'WP_SITEURL', 'http://gemaiter.me' );
+//define( 'WP_HOME', 'http://lh.me' );
+//define( 'WP_SITEURL', 'http://lh.me' );
+define( 'WP_HOME', 'http://gemaiter.me' );
+define( 'WP_SITEURL', 'http://gemaiter.me' );
+define( 'WP_LOCALE_MODE', 'SAME' ); // SAME OR DIFF
+define( 'WP_LOCALE_EN_SITE_URL', 'http://gemaiter.me' );
+define( 'WP_LOCALE_DE_SITE_URL', 'http://gemaiter.de' );
 
 /* That's all, stop editing! Happy publishing. */
 

@@ -41,7 +41,7 @@ if ($current_url) {
                         <ul>
                           <?php foreach ($menu->children as $itemChild) : ?>
                             <li class="footer-line">
-                                <a <?php if (strpos($itemChild->url, "data-href") !== false): ?>data-href="<?php echo str_replace("data-href=", "", $itemChild->url);?>" href="javascript:void(0);" class="modal-event-js"<?php else:?>href="<?php echo ($itemChild->url ? $itemChild->url : '#'); ?>"<?php endif;?>>
+                                <a <?php if (strpos($itemChild->url, "data-href") !== false): ?>data-href="<?php echo str_replace("data-href=", "", $itemChild->url);?>" href="javascript:void(0);" class="modal-event-js"<?php else:?>href="<?php echo ($itemChild->url ? (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE == 'DIFF' ? (str_replace('/de/', '/', $itemChild->url)) : $itemChild->url) : '#'); ?>"<?php endif;?>>
                                     <?php $itemChild->icon = get_field('icon', $itemChild->ID); ?>
                                     <?php if ($itemChild->icon): ?>
                                         <span>

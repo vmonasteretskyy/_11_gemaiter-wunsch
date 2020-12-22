@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -450,6 +452,14 @@
       <workItem from="1608531323523" duration="4374000" />
       <workItem from="1608544407919" duration="5025000" />
       <workItem from="1608550799563" duration="601000" />
+      <workItem from="1608579619740" duration="2297000" />
+      <workItem from="1608617701982" duration="1042000" />
+      <workItem from="1608628273674" duration="2521000" />
+      <workItem from="1608638128286" duration="268000" />
+      <workItem from="1608643054004" duration="1824000" />
+      <workItem from="1608650494683" duration="4136000" />
+      <workItem from="1608671831702" duration="4308000" />
+      <workItem from="1608705295455" duration="7449000" />
     </task>
     <servers />
   </component>

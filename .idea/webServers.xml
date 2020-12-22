@@ -9,6 +9,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="c722a1c9-d63d-4855-9bbf-4401a9ddbaee" name="gemailter-de" url="http://gemalterwunsch.com">
+        <fileTransfer host="gemalterwunsch.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

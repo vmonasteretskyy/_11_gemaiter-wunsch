@@ -1,13 +1,14 @@
 .form-group--select .option a {
     color: #fff;
 }
+
 body.blog .gallery-tag svg path {
     fill: #f9ab97;
     stroke: #f9ab97;
 }
 
 [data-contact-form_submit],
-[data-refund-form_submit]{
+[data-refund-form_submit] {
     cursor: pointer;
 }
 
@@ -30,20 +31,24 @@ body.blog .gallery-tag svg path {
 
 .modal__content.busy,
 form.busy,
-.cart-wrap.busy{
+.cart-wrap.busy {
     opacity: 0.5 !important;
     pointer-events: none;
 }
-.card-table__row>*:first-child {
+
+.card-table__row > *:first-child {
     min-width: 200px;
 }
-.card-table__row> .widen-label {
+
+.card-table__row > .widen-label {
     min-width: 270px;
 }
+
 .card-table__row .price-wrapper {
     font-size: 15px;
     font-weight: 600;
 }
+
 .card-table__row .price-wrapper .old_price {
     font-size: 14px;
     font-weight: 500;
@@ -51,6 +56,7 @@ form.busy,
     margin-right: 10px;
     position: relative;
 }
+
 .card-table__row .price-wrapper .old_price:after {
     content: "";
     width: 105%;
@@ -62,7 +68,7 @@ form.busy,
     transform: rotate(-20deg);
 }
 
-.choose-subject-inner .form-group--select .select-label:before{
+.choose-subject-inner .form-group--select .select-label:before {
     content: '';
     position: absolute;
     top: 8px;
@@ -76,29 +82,35 @@ form.busy,
     background-size: contain;
     background-image: url("data:image/svg+xml,%3Csvg width='19' height='7' viewBox='0 0 19 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 7L0.406735 0.249998L18.5933 0.25L9.5 7Z' fill='gray'/%3E%3C/svg%3E%0A")
 }
+
 .delivery-inner {
     flex-direction: row;
     align-items: center;
 }
-@media (max-width: 767.98px){
-    .delivery-inner{
+
+@media (max-width: 767.98px) {
+    .delivery-inner {
         flex-direction: column;
         align-items: flex-start;
     }
 }
-@media (min-width: 767.99px){
+
+@media (min-width: 767.99px) {
     .datepicker {
         width: 450px;
     }
+
     .datepicker--cell {
         height: 42px;
     }
 }
+
 .delivery-types-wrapper {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
+
 .delivery-calendar-wrapper {
     display: flex;
     justify-content: center;
@@ -110,7 +122,7 @@ form.busy,
 }
 
 .cart-head__amount .woocommerce-Price-currencySymbol,
-.c-table .woocommerce-Price-currencySymbol{
+.c-table .woocommerce-Price-currencySymbol {
     display: none;
 }
 
@@ -121,6 +133,7 @@ form.busy,
 .woocommerce-checkout .woocommerce-form-coupon-toggle {
     display: none;
 }
+
 .choose-subject-inner label p {
     text-align: center;
 }
@@ -132,9 +145,7 @@ form.woocommerce-checkout .woocommerce-NoticeGroup-checkout {
 .article__socials-item a {
     display: inline-block !important;
 }
-.article__socials-item a {
-    display: inline-block !important;
-}
+
 .woocommerce-order-pay .c-table .woocommerce-Price-currencySymbol {
     display: inline-block;
     font-size: 20px;

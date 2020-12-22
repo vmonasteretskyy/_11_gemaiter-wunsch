@@ -15,7 +15,7 @@ function the_url($url = null) {
 function get_url_lang_prefix() {
     $current_lang = pll_current_language();
     $prefix = '/';
-    switch ($current_lang) {
+    /*switch ($current_lang) {
         case 'en':
             $prefix = get_url_en_prefix();
             break;
@@ -25,20 +25,31 @@ function get_url_lang_prefix() {
         default:
             $prefix = '/';
             break;
+    }*/
+    if (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE == 'DIFF') {
+        return $prefix;
+    } else {
+        return ($current_lang == 'de' ? '/de/' : '/');
     }
-    //return $prefix;
-    return ($current_lang == 'de' ? '/de/' : '/');
 }
 
 //get en locale prefix
 function get_url_en_prefix() {
-    return '/';
+    if (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE == 'DIFF') {
+        return WP_LOCALE_EN_SITE_URL . '/';
+    } else {
+        return '/';
+    }
     //return 'https://google.com/';
 }
 
 //get de locale prefix
 function get_url_de_prefix() {
-    return '/de/';
+    if (defined('WP_LOCALE_MODE') && WP_LOCALE_MODE == 'DIFF') {
+        return WP_LOCALE_DE_SITE_URL . '/';
+    } else {
+        return '/de/';
+    }
     //return 'https://google.com.ua/';
 }
 
