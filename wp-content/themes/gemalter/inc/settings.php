@@ -366,6 +366,7 @@ function redirect_cart_page() {
             wp_redirect((get_url_lang_prefix()) . 'order/');
         }
     }
+    
     if (is_singular('gallery')) {
         wp_redirect((get_url_lang_prefix()) . 'gallery/');
     }
@@ -971,8 +972,6 @@ function ajax_add_to_cart_main_product() {
         }
     }
     
-    test($product_attributes['photos']);
-    
     if ($hasError) {
         echo json_encode([
             'has_error' => true,
@@ -1446,8 +1445,21 @@ add_action('woocommerce_checkout_create_order_line_item', 'add_order_item_custom
 
 // change order item meta key on admin order page
 function change_order_item_meta_title($key, $meta, $item) {
-    return $key;
     // By using $meta-key we are sure we have the correct one.
+    /*_product_attribute_subject +
+    _product_attribute_subject_custom +
+    _product_attribute_choose_tech +
+    _product_attribute_size +
+    _product_attribute_background_type +
+    _product_attribute_photos +
+    _product_attribute_photos_count +
+    _product_attribute_frame +
+    _product_attribute_frame_selected +
+    _product_attribute_duration_type +
+    _product_attribute_delivery_date +
+    _product_attribute_base_price +
+    _product_attribute_frame_price +
+    _product_attribute_base_discount_price +*/
     // gift
     if ('_product_price' == $key) {
         $key = 'Price';
@@ -1480,11 +1492,11 @@ function change_order_item_meta_title($key, $meta, $item) {
     if ('_product_size' == $key) {
         $key = 'Size';
     }
-    if ('_product_background_type' == $key) {
-        $key = 'Background type';
-    }
     if ('_product_color' == $key) {
         $key = 'Background Color';
+    }
+    if ('_product_background_type' == $key) {
+        $key = 'Background type';
     }
     if ('_product_photos' == $key) {
         $key = 'Photos';
@@ -1522,7 +1534,7 @@ function change_order_item_meta_title($key, $meta, $item) {
     if ('_product_base_discount_price' == $key) {
         $key = 'Discount price';
     }
-    
+
     return $key;
 }
 add_filter('woocommerce_order_item_display_meta_key', 'change_order_item_meta_title', 20, 3);
@@ -1648,6 +1660,8 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                             if ($photos) {
                                 $html = '';
                                 foreach ($photos as $photo) {
+                                    $prevDomains = ['http://lh.me', 'http://gemaiter.me'];
+                                    $photo['path'] = str_replace($prevDomains, WP_SITEURL, $photo['path']);
                                     $html .= '<a style="margin: 5px;" href="' . $photo['path'] . '" target="_blank"><img style="width: 100px;" src="' . $photo['path'] . '"></a>';
                                 }
                                 $metaValue = $html;
@@ -1689,6 +1703,7 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
             }
         }
     }
+    //test($new_formatted_meta);
     return $new_formatted_meta;
 }, 20, 3);
 

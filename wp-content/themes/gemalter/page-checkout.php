@@ -26,7 +26,8 @@ $hasRequireFields = true;
 if (!$shippingFields['first_name'] || !$shippingFields['last_name'] || !$shippingFields['address'] || !$shippingFields['city'] || !$shippingFields['state'] || !$shippingFields['postal_code'] || !$shippingFields['country'] || !$shippingFields['phone'] || !$shippingFields['email']) {
     $hasRequireFields = false;
 }
-if (!$hasRequireFields) {
+$isOrderReceived = is_wc_endpoint_url('order-received');
+if (!$isOrderReceived && !$hasRequireFields) {
     $location = (get_url_lang_prefix()) . 'cart/';
     wp_redirect($location);
     exit;

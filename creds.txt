@@ -46,3 +46,14 @@ define( 'DB_USER', 'u58egvjxfjk8s' );
 define( 'DB_PASSWORD', '6uebjgdutg65' );
 /** MySQL hostname */
 define( 'DB_HOST', '127.0.0.1' );
+
+-------------------------------------
+PayPal
+email:
+gemalterwunsch@hotmail.com
+API Username:
+gemalterwunsch_api1.hotmail.com
+API Password:
+5WWZCL475DUYWRWZ
+Signature:
+AXf506cFR2vK2kST6-qC.lde3w-fA9TH1UAghM31j56nVB-MR3b.64rT

@@ -39,7 +39,7 @@ function dump () {
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '21.12.20' );
+	define( '_S_VERSION', '23.12.20' );
 }
 
 if ( ! function_exists( 'gemalter_setup' ) ) :

@@ -506,13 +506,15 @@ jQuery(document).ready(function ($) {
             fileElemInfoPrev.remove();
             $('.gallery .gallery__image').remove();
         }
-        setTimeout(function(){
-            $('.gallery .gallery__image').each(function (index, item){
-                const element = $(this);
-                if (index > 2) {
-                    element.remove();
-                }
-            });
+        setTimeout(function () {
+            if ($('.gallery .gallery__image').length) {
+                $('.gallery .gallery__image').each(function (index, item) {
+                    const element = $(this);
+                    if (index > 2) {
+                        element.remove();
+                    }
+                });
+            }
         }, 500);
 
     });
@@ -566,7 +568,6 @@ jQuery(document).ready(function ($) {
                 $('[data-edit-order-form] [data-list="background"] [data-type="color"]').hide();
             }
         }
-        console.log(name);
     });
 
     /*open edit order form*/
@@ -614,14 +615,12 @@ jQuery(document).ready(function ($) {
     /*submit edit order form btn click*/
     $document.on('click', '[data-submit-edit-form]', function (e) {
         e.preventDefault();
-        console.log('click_edit');
         $('[data-edit-order-form]').submit();
     });
 
     /*submit edit order form*/
     $document.on('submit', '[data-edit-order-form]', function (e) {
         e.preventDefault();
-        console.log('submit_edit');
         let form = $(this);
 
         let choose_tech = form.find('[name="edit_choose_tech"]').val();
@@ -635,7 +634,6 @@ jQuery(document).ready(function ($) {
             $('[name="choose_tech"][value="' + choose_tech + '"]')[0].dispatchEvent(new Event('change'));
         }
         if (size) {
-            console.log(size);
             $('[name="hidden_size"]').val(size).change();
             $('[name="size"][value="' + size + '"]').prop('checked', true).trigger('change');
             $('[name="size"][value="' + size + '"]')[0].dispatchEvent(new Event('change'));

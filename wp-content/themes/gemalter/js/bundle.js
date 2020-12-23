@@ -53816,7 +53816,6 @@ var upload_Upload = /** @class */ (function () {
         if (this.files.length >= 3) {
             return;
         }
-        console.log('handleDrop', files);
         this.handleFiles(files);
         this.renderPreviews(files);
     };
@@ -53825,15 +53824,14 @@ var upload_Upload = /** @class */ (function () {
         this.files = __spreadArrays(this.files, files);
         this.files = this.files.slice(0, 3);//wp-developer
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
+            //wp-developer
             //this.options.onChange(this.files);
         }
         this.options.onChange(this.files);
-        console.log('handleFiles', this.files);
     };
     Upload.prototype.renderPreviews = function (files) {
         if (files === void 0) { files = this.files; }
         files = files.slice(0, 3);//wp-developer
-        console.log('renderPreviews', this.files, files);
         files.forEach(this.renderPreview.bind(this));
     };
     Upload.prototype.renderPreview = function (file) {
@@ -53869,12 +53867,9 @@ var upload_Upload = /** @class */ (function () {
         var newFiles = Array.isArray(files) ? files : [files];
         this.files = __spreadArrays(this.files, newFiles);
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
-            //wp-developer
             this.options.onChange(this.files);
         }
         //wp-developer
-        //console.log('add file', this.files);
-        //this.options.onChange(this.files);
         this.renderPreviews(newFiles);
     };
     Upload.prototype.removeFile = function (index) {
@@ -53885,7 +53880,7 @@ var upload_Upload = /** @class */ (function () {
         }
         this.files.remove(index);
         this.images[index].remove();
-        this.images.splice(index, 1);;
+        this.images.splice(index, 1);
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
             this.options.onChange(this.files);
         }
