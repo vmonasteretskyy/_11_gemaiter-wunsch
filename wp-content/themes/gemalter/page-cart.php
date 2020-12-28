@@ -43,7 +43,6 @@ $shippingFields = getShippingFieldsFromSession();
 
 //WC()->cart->calculate_totals();
 //WC()->cart->maybe_set_cart_cookies();
-//test(WC()->cart);
 
 get_header();
 ?>

@@ -1534,7 +1534,7 @@ function change_order_item_meta_title($key, $meta, $item) {
     if ('_product_base_discount_price' == $key) {
         $key = 'Discount price';
     }
-
+    
     return $key;
 }
 add_filter('woocommerce_order_item_display_meta_key', 'change_order_item_meta_title', 20, 3);
@@ -1547,7 +1547,6 @@ function change_order_item_meta_value($value, $meta, $item) {
 
 // change order item metadata - all data together
 add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatted_meta, $instance) {
-    return $formatted_meta;
     $item_id = $instance->get_id();
     $hidden_meta = [];
     $hidden_meta[] = '_product_price';
@@ -1629,6 +1628,7 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                                 }
                             } else {
                                 $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
+                                test(pll_current_language());
                             }
                             break;
                         case "_product_attribute_choose_tech":
@@ -1689,8 +1689,12 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                         case "_product_attribute_base_price":
                         case "_product_attribute_frame_price":
                         case "_product_attribute_base_discount_price":
-                            $currencySymbol = $allPrices[$locale]['currency_symbol'];
-                            $metaValue = $currencySymbol . number_format($metaValue);
+                            if (in_array($attrKey, ['_product_attribute_frame_price', '_product_attribute_base_discount_price']) && !$metaValue) {
+                                $skipMetadata = true;
+                            } else {
+                                $currencySymbol = $allPrices[$locale]['currency_symbol'];
+                                $metaValue = $currencySymbol . number_format($metaValue);
+                            }
                             break;
                         default:
                             break;
@@ -1698,12 +1702,14 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                 }
             }
             if (!$skipMetadata) {
+                test($metaValue, 0);
                 $item->display_value = $metaValue;
                 $new_formatted_meta[$key] = $item;
             }
         }
     }
-    //test($new_formatted_meta);
+    // TODO update wp to 5.6 locally and update polylang-pro plugin
+    test($new_formatted_meta);
     return $new_formatted_meta;
 }, 20, 3);
 

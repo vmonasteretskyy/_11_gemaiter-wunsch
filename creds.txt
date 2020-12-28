@@ -57,3 +57,16 @@ API Password:
 5WWZCL475DUYWRWZ
 Signature:
 AXf506cFR2vK2kST6-qC.lde3w-fA9TH1UAghM31j56nVB-MR3b.64rT
+Identity Token: 4TcrHOeJlNPBfCdDDlv6vszL12Qyco--2VpjztqXj7pFb5HP_902AgH5u3u
+-------------------------------------
+Sendgrid
+API key: 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
+
+// paypal success response
+//https://painteddesire.com/wp-admin/post.php?post=560&action=edit
+//https://prnt.sc/w920ff
+//https://painteddesire.com/checkout/order-received/560/?key=wc_order_YjJuUSqsMqCf5&utm_nooverride=1&amt=1.00&cc=USD&cm=%7B%22order_id%22%3A560%2C%22order_key%22%3A%22wc_order_YjJuUSqsMqCf5%22%7D&st=Pending&tx=5JY28925744982220
+
+//local paypal success tricks
+//http://lh.me/checkout/order-received/553/?key=wc_order_iPAn5G3YBCLuI&utm_nooverride=1&amt=1.00&cc=USD&cm=%7B%22order_id%22%3A553%2C%22order_key%22%3A%22wc_order_iPAn5G3YBCLuI%22%7D&st=Pending&tx=5JY28925744982220
+
