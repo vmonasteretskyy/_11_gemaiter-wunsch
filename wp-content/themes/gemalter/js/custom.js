@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
     const $document = $(document), $window = $(window);
     const currentLang = $('body').data('current-lang');
     const currentLocaleMode = $('body').data('locale-mode');
-    /*TODO: can be changes with baseUrl(+ window.location) on live*/
+    /*can be changes related with baseUrl(+ window.location) on live*/
 
     /*our gallery filters start*/
     $document.on('click', '.gallery-filter-row .option-js', function (e) {
@@ -988,7 +988,7 @@ jQuery(document).ready(function ($) {
             setTimeout(function () {
                 let email = $('.woocommerce-order-received .order_success').data('order-email');
                 let html = $('#modal-thank .modal-bg i').html();
-                html = html.replace(/EMAIL/gi, email);
+                html = html.replace(/EMAIL/g, email);
                 $('#modal-thank .modal-bg i').html(html);
                 document.dispatchEvent(new Event('modal-open#modal-thank'));
             }, 1000);

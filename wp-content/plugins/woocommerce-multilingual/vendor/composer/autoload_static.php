@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc3f2e47e8856674120674aae340fdde0
+class ComposerStaticInit9a7c8e5f64fe06f9ab43a51f0d20d522
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -30,6 +30,7 @@ class ComposerStaticInitc3f2e47e8856674120674aae340fdde0
         'WCML\\Block\\Convert\\ConverterProvider' => __DIR__ . '/../..' . '/classes/Block/Convert/ConverterProvider.php',
         'WCML\\Block\\Convert\\Converter\\ProductsByAttributes' => __DIR__ . '/../..' . '/classes/Block/Convert/Converter/ProductsByAttributes.php',
         'WCML\\Block\\Convert\\Hooks' => __DIR__ . '/../..' . '/classes/Block/Convert/Hooks.php',
+        'WCML\\CLI\\Hooks' => __DIR__ . '/../..' . '/classes/CLI/Hooks.php',
         'WCML\\Container\\Config' => __DIR__ . '/../..' . '/classes/Container/Config.php',
         'WCML\\Email\\Settings\\Hooks' => __DIR__ . '/../..' . '/classes/Email/Settings/Hooks.php',
         'WCML\\MO\\Hooks' => __DIR__ . '/../..' . '/classes/MO/Hooks.php',
@@ -260,9 +261,9 @@ class ComposerStaticInitc3f2e47e8856674120674aae340fdde0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc3f2e47e8856674120674aae340fdde0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc3f2e47e8856674120674aae340fdde0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc3f2e47e8856674120674aae340fdde0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9a7c8e5f64fe06f9ab43a51f0d20d522::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9a7c8e5f64fe06f9ab43a51f0d20d522::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit9a7c8e5f64fe06f9ab43a51f0d20d522::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1,16 +1,16 @@
 <?php
 
-//remove wp_generator
+// remove wp_generator
 remove_action('wp_head', 'wp_generator');
 
-//allow svg
+// allow svg
 function allow_new_mime_type($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
 add_filter('mime_types', 'allow_new_mime_type');
 
-//add theme option page
+// add theme option page
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page(array(
         'page_title' => 'Theme Options',
@@ -76,7 +76,7 @@ function custom_find_matching_product_variation($product, $match_attributes = ar
     return 0;
 }
 
-//cart items price
+// cart items price
 add_filter('woocommerce_add_cart_item', function ($cart_item) {
     if (isset($cart_item['price'])) {
         $product = $cart_item['data'];
@@ -91,7 +91,7 @@ add_filter('woocommerce_add_cart_item', function ($cart_item) {
     return $cart_item;
 }, 11, 1);
 
-//cart items price connected to above function
+// cart items price connected to above function
 add_filter('woocommerce_get_cart_item_from_session', function ($cart_item, $values) {
     if (isset($cart_item['price'])) {
         $product = $cart_item['data'];
@@ -106,7 +106,7 @@ add_filter('woocommerce_get_cart_item_from_session', function ($cart_item, $valu
     
 }, 11, 2);
 
-//remove product from cart
+// remove product from cart
 function ajax_product_remove() {
     ob_start();
     $cart_item_key = isset($_POST['cart_item_key']) ? trim($_POST['cart_item_key']) : '';
@@ -174,7 +174,7 @@ function ajax_product_remove() {
 add_action('wp_ajax_product_remove', 'ajax_product_remove');
 add_action('wp_ajax_nopriv_product_remove', 'ajax_product_remove');
 
-//apply coupon code
+// apply coupon code
 function ajax_apply_coupon() {
     ob_start();
     $coupon = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
@@ -238,7 +238,7 @@ function ajax_apply_coupon() {
 add_action('wp_ajax_apply_coupon', 'ajax_apply_coupon');
 add_action('wp_ajax_nopriv_apply_coupon', 'ajax_apply_coupon');
 
-//cancel coupon code
+// cancel coupon code
 function ajax_cancel_coupon() {
     ob_start();
     $coupon = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
@@ -301,7 +301,7 @@ function ajax_cancel_coupon() {
 add_action('wp_ajax_cancel_coupon', 'ajax_cancel_coupon');
 add_action('wp_ajax_nopriv_cancel_coupon', 'ajax_cancel_coupon');
 
-//set product quantity
+// set product quantity
 function set_quantity() {
     $cart_item_key = isset($_POST['cart_item_key']) ? trim($_POST['cart_item_key']) : '';
     $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
@@ -358,7 +358,7 @@ function set_quantity() {
 add_action('wp_ajax_set_quantity', 'set_quantity');
 add_action('wp_ajax_nopriv_set_quantity', 'set_quantity');
 
-//template redirects
+// template redirects
 function redirect_cart_page() {
     if (is_checkout() && !is_wc_endpoint_url('order-received') && !is_wc_endpoint_url('order-pay')) {
         $totalCartItems = WC()->cart->get_cart_contents_count();
@@ -405,7 +405,7 @@ function redirect_cart_page() {
 }
 add_action('template_redirect', 'redirect_cart_page');
 
-//remove shipping fileld from validation
+// remove shipping field from validation
 function woocommerce_after_checkout_validation_function($data, $errors) {
     unset($errors->errors['shipping']);
 }
@@ -431,7 +431,7 @@ function modify_port_per_page($query) {
 }
 add_action('pre_get_posts', 'modify_port_per_page');
 
-//translate title tag
+// translate title tag
 function custom_theme_titles($titleparts) {
     $titleparts['title'] = pll__($titleparts['title']);
     $parts = ['site', 'tagline', 'page'];
@@ -463,7 +463,7 @@ function set_pll_preferred_language() {
 }
 /*add_action( 'init', 'set_pll_preferred_language', 1);*/
 
-//add gift card to cart
+// add gift card to cart
 function ajax_add_to_cart_gift_card() {
     $current_lang = pll_current_language();
     $allPricesData = getPrices();
@@ -547,7 +547,7 @@ function ajax_add_to_cart_gift_card() {
 add_action('wp_ajax_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
 add_action('wp_ajax_nopriv_ajax_add_to_cart_gift_card', 'ajax_add_to_cart_gift_card');
 
-//pll xdata_check fix for de site
+// pll xdata_check fix for de site
 function ajax_pll_xdata_check() {
     header('Content-Type: application/javascript');
     printf('console.log("%s");', 'test');
@@ -568,7 +568,7 @@ add_action('wp_ajax_nopriv_pll_xdata_check', 'ajax_pll_xdata_check', 1);
 };
 add_filter( 'pll_redirect_home', 'filter_pll_redirect_home', 10, 1 );*/
 
-//get sizes (html block) based on subject and painting technique
+// get sizes (html block) based on subject and painting technique
 function ajax_get_sizes() {
     $current_lang = pll_current_language();
     $allPricesData = getPrices();
@@ -788,7 +788,7 @@ function ajax_get_sizes() {
 add_action('wp_ajax_ajax_get_sizes', 'ajax_get_sizes');
 add_action('wp_ajax_nopriv_ajax_get_sizes', 'ajax_get_sizes');
 
-//add picture(main product) to cart
+// add picture(main product) to cart
 function ajax_add_to_cart_main_product() {
     $current_lang = pll_current_language();
     $productSlug = 'picture';
@@ -1062,7 +1062,7 @@ function ajax_add_to_cart_main_product() {
 add_action('wp_ajax_ajax_add_to_cart_main_product', 'ajax_add_to_cart_main_product');
 add_action('wp_ajax_nopriv_ajax_add_to_cart_main_product', 'ajax_add_to_cart_main_product');
 
-//get edit form popup html
+// get edit form popup html
 function ajax_get_edit_order_form_html() {
     $current_lang = pll_current_language();
     $allPricesData = getPrices();
@@ -1313,7 +1313,7 @@ function ajax_get_edit_order_form_html() {
 add_action('wp_ajax_ajax_get_edit_order_form_html', 'ajax_get_edit_order_form_html');
 add_action('wp_ajax_nopriv_ajax_get_edit_order_form_html', 'ajax_get_edit_order_form_html');
 
-//add shipping data from cart page
+// add shipping data from cart page
 function ajax_add_shipping_data() {
     // save field to session
     $shippingFields = [];
@@ -1388,7 +1388,7 @@ function ajax_add_shipping_data() {
 add_action('wp_ajax_ajax_add_shipping_data', 'ajax_add_shipping_data');
 add_action('wp_ajax_nopriv_ajax_add_shipping_data', 'ajax_add_shipping_data');
 
-//add filter to coupons: coupon_main_type
+// add filter to coupons: coupon_main_type
 function add_coupon_main_type() {
     $screen = get_current_screen();
     if ($screen->id != "edit-shop_coupon") {   // Only add to coupons page
@@ -1543,7 +1543,7 @@ add_filter('woocommerce_order_item_display_meta_key', 'change_order_item_meta_ti
 function change_order_item_meta_value($value, $meta, $item) {
     return $value;
 }
-//add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
+// add_filter( 'woocommerce_order_item_display_meta_value', 'change_order_item_meta_value', 20, 3 );
 
 // change order item metadata - all data together
 add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatted_meta, $instance) {
@@ -1588,6 +1588,9 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                         case "_product_attribute_gift_currency":
                             $metaValue = strtoupper($metaValue);
                             break;
+                        case "_product_attribute_gift_id":
+                            $metaValue = '<strong>' . $metaValue . '</strong>';
+                            break;
                         default:
                             break;
                     }
@@ -1628,7 +1631,6 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                                 }
                             } else {
                                 $metaValue = isset($allSubjects[$metaValue]['label']) ? $allSubjects[$metaValue]['label'] : $metaValue;
-                                test(pll_current_language());
                             }
                             break;
                         case "_product_attribute_choose_tech":
@@ -1702,14 +1704,11 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                 }
             }
             if (!$skipMetadata) {
-                test($metaValue, 0);
                 $item->display_value = $metaValue;
                 $new_formatted_meta[$key] = $item;
             }
         }
     }
-    // TODO update wp to 5.6 locally and update polylang-pro plugin
-    test($new_formatted_meta);
     return $new_formatted_meta;
 }, 20, 3);
 
@@ -1856,7 +1855,7 @@ add_filter('woocommerce_currency', 'filter_woocommerce_currency');
 function testing_function() {
     test($_REQUEST);
 }
-//add_action( 'init', 'testing_function', 1);
+// add_action( 'init', 'testing_function', 1);
 
 
 /*gemaiter end*/

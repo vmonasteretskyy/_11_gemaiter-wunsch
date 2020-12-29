@@ -18,8 +18,6 @@
 defined( 'ABSPATH' ) || exit;
 
 $totals = $order->get_order_item_totals();
-// TODO - make this template
-//'checkout/form-pay.php' - from class-wc-shortcode-checkout.php
 ?>
 <form id="order_review" method="post">
 
