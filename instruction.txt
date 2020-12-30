@@ -1,0 +1,128 @@
+1. доступ в адмін частину
+https://painteddesire.com/wp-admin
+admin / &8INfZQs9vR1v@$a3k
+admin@test.com
+---------------------------------------------------------------
+2. загальні налаштування сайту:
+https://painteddesire.com/wp-admin/admin.php?page=theme-options
+-хедер(тексти, телефон, соц. мережі лінки)
+https://prnt.sc/wcve23
+
+-секції дублюються для 2 мов(перекладав через google translate)
+https://prnt.sc/wcvesm
+
+-секція Our Gallery
+https://prnt.sc/wcvm00
+відповідає налаштуванню цієї сторінки
+https://painteddesire.com/gallery/
+https://prnt.sc/wcvmlo
+https://prnt.sc/wcvmu7
+
+-секція Our Artist
+https://prnt.sc/wcvi9d
+відповідає цьому
+https://prnt.sc/wcvj63
+(є на homepage i about сторінках)
+
+-коефіцієнт валют(використовується у gift card)
+https://prnt.sc/wcvhnq
+---------------------------------------------------------------
+3. загальні змінні-рядки для перекладів:
+https://painteddesire.com/wp-admin/admin.php?page=mlang_strings
+тут клієнту треба добре поперекладати
+---------------------------------------------------------------
+4. блог пости:
+https://painteddesire.com/wp-admin/edit.php
+пости відображаються тут
+https://painteddesire.com/blog/
+
+https://prnt.sc/wcvoxf - категорії постів
+https://painteddesire.com/wp-admin/edit-tags.php?taxonomy=category
+https://prnt.sc/wcvpjb - додаються тут
+https://painteddesire.com/wp-admin/post.php?post=401&action=edit - детальний пост
+важливо, не треба(не можна) для поста вибирати категорію із іншої мови.
+---------------------------------------------------------------
+5. всі сторінки
+https://painteddesire.com/wp-admin/edit.php?post_type=page
+тут можна створювати нові сторінки типу цього
+https://painteddesire.com/wp-admin/post.php?post=320&action=edit
+https://painteddesire.com/test-page/
++ можна редагувати вже існуючі кастомні сторінки
+типу terms https://painteddesire.com/wp-admin/post.php?post=312&action=edit
+faq https://painteddesire.com/wp-admin/post.php?post=308&action=edit
+pricing https://painteddesire.com/wp-admin/post.php?post=454&action=edit
+---------------------------------------------------------------
+6. галерея - список редагується тут
+https://painteddesire.com/wp-admin/edit.php?post_type=gallery
+https://painteddesire.com/gallery/ - цей https://prnt.sc/wcvvhl
+
+https://painteddesire.com/wp-admin/post.php?post=164&action=edit - один запис з галереї
+https://prnt.sc/wcvwsp - так додаються категорії, потім по них відбувається фітрування на фронтенді
+важливо, не треба(не можна) для поста вибирати категорію із іншої мови.
+---------------------------------------------------------------
+7. Форми (Contact i refund ) дані із форм попадають сюди
+https://painteddesire.com/wp-admin/edit.php?post_type=wpcf7s
+https://painteddesire.com/wp-admin/post.php?post=428&action=edit - детальна інформація по 1 заповненій формі
+тут можна ще зробити щоб ці дані приходили на емейл адміністратору сайту(якщо треба)
+---------------------------------------------------------------
+8. Список продуктів на сайті
+https://painteddesire.com/wp-admin/edit.php?post_type=product
+тут нічого не потрібно міняти, в нас по цьому вся кастомна логіка
+---------------------------------------------------------------
+9. Атрибути товарів (рамки):
+https://painteddesire.com/wp-admin/edit-tags.php?taxonomy=pa_frames&post_type=product
+https://prnt.sc/wcw29m - треба дубблювати на 2 мови(якщо додав рамку в 1 мову треба додати і в іншу)
+https://prnt.sc/wcw3kg - важливим полем є ціна - вона додається до загальної вартості продукта на фронтенді
+---------------------------------------------------------------
+10. Замовлення - список всіх замовлень
+https://painteddesire.com/wp-admin/edit.php?post_type=shop_order
+
+https://painteddesire.com/wp-admin/post.php?post=560&action=edit - детальна сторінка замовлення
+https://prnt.sc/wcw4lq - дані/атрибути по товару(розмір, тип і т.д.)
+https://painteddesire.com/wp-admin/post.php?post=555&action=edit - сторінка замовлення із вибраними картинками - https://prnt.sc/wcw62v
+
+https://painteddesire.com/wp-admin/post.php?post=562&action=edit - замовлення із gift card
+тут якраз є Gift Card ID: z46TxCg5 - цей код автоматично створює купон у системі, його потім можна використати на чекауті
+https://prnt.sc/wcw6n5 - + тут якраз використовується коефіцієнт валют, що за 100EUR користувач платить 120USD
+---------------------------------------------------------------
+11. купони
+https://painteddesire.com/wp-admin/edit.php?post_type=shop_coupon
+https://prnt.sc/wcw9lc - тут якраз додаються купони із попереднього пункту Gift Card ID - вони одноразові
++ можна створити свої купони, типу цього - https://prnt.sc/wcwamh - загальні купони
+---------------------------------------------------------------
+12. меню
+https://painteddesire.com/wp-admin/nav-menus.php?action=edit&menu=28
+---------------------------------------------------------------
+кастомні сторінки (сторінки які маєть свої додаткові поля в залежності від типу):
+---------------------------------------------------------------
+13. homepage
+https://painteddesire.com/wp-admin/post.php?post=11&action=edit - редагується тут https://prnt.sc/wcwgrs
+---------------------------------------------------------------
+14. about
+https://painteddesire.com/wp-admin/post.php?post=43&action=edit
+---------------------------------------------------------------
+15. gift card
+https://painteddesire.com/wp-admin/post.php?post=433&action=edit
+---------------------------------------------------------------
+16. faq
+https://painteddesire.com/wp-admin/post.php?post=308&action=edit
+---------------------------------------------------------------
+17. order
+https://painteddesire.com/wp-admin/post.php?post=443&action=edit
+https://prnt.sc/wcwo6j - тут редагується тільки описові дані про секцію choose painting technique
+---------------------------------------------------------------
+18. pricing
+https://painteddesire.com/wp-admin/post.php?post=454&action=edit
+---------------------------------------------------------------
+19. procedure
+https://painteddesire.com/wp-admin/post.php?post=341&action=edit
+---------------------------------------------------------------
+20. terms
+https://painteddesire.com/wp-admin/post.php?post=312&action=edit
+---------------------------------------------------------------
++ те саме із німецькими сторінками - все редагується
+---------------------------------------------------------------
+21. тексти на сторінках order/cart/checkout
+редагуються в загальних перекладах https://painteddesire.com/wp-admin/admin.php?page=mlang_strings
+---------------------------------------------------------------
+22. Зараз так зроблено, що буде викортовуватись 1 база даних на 2 сайтах, тобто все редагується/керується через одну адмінку

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/instruction.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -463,7 +462,8 @@
       <workItem from="1609168876739" duration="1755000" />
       <workItem from="1609190653515" duration="4962000" />
       <workItem from="1609244143242" duration="795000" />
-      <workItem from="1609256752899" duration="3601000" />
+      <workItem from="1609256752899" duration="4264000" />
+      <workItem from="1609320269428" duration="4426000" />
     </task>
     <servers />
   </component>
