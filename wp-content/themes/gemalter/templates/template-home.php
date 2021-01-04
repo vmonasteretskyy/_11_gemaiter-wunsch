@@ -14,7 +14,8 @@ $fields = get_fields($post->ID);
 
 get_header();
 ?>
-
+<?php
+/*
 <!-- Start preloader -->
 <div class="preloader">
     <ul class="preloader__quote">
@@ -27,7 +28,8 @@ get_header();
     </div>
 </div>
 <!-- End preloader -->
-
+*/
+?>
 <div id="fullpage">
     <!-- Start introduction section -->
     <section class="section first-section introduction ">
