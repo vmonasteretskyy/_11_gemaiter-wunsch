@@ -1853,9 +1853,33 @@ function filter_woocommerce_currency($option) {
 add_filter('woocommerce_currency', 'filter_woocommerce_currency');
 
 function testing_function() {
-    test($_REQUEST);
+    
+    $data = array(
+        /*'proxyUser' => array(
+            'email' => 'user@example.com'
+        ),*/
+        'limit'  => 50,
+        'offset' => 0,
+        'data'   => array(
+        )
+    );
+    
+    $ch = curl_init();
+    //
+    //Username: 1ZapkWao0ZmojNUZ3RGZ5LwZ0RUB3VwA
+    //API-Token: ZTAvZmMwZGplZwx3L2SuZwL2BGIuLGL4LGV2Z2EuBGH
+    curl_setopt($ch, CURLOPT_URL, 'https://www.provenexpert.com/api/v1/rating/summary/get');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERPWD, '1ZapkWao0ZmojNUZ3RGZ5LwZ0RUB3VwA:ZTAvZmMwZGplZwx3L2SuZwL2BGIuLGL4LGV2Z2EuBGH');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    
+    $json = curl_exec($ch);
+    $result = json_decode($json);
+    test($result);
+    curl_close($ch);
 }
-// add_action( 'init', 'testing_function', 1);
+//add_action( 'init', 'testing_function', 1);
 
 
 /*gemaiter end*/

@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,182 +13,6 @@
   </component>
   <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="1777" column="35" lean-forward="true" selection-start-line="1777" selection-start-column="35" selection-end-line="1777" selection-end-column="35" />
-              <folding>
-                <element signature="n#ajax_product_remove#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/plugins/acf/includes/api/api-template.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6440">
-              <caret line="944" selection-start-line="944" selection-end-line="944" />
-              <folding>
-                <element signature="n#get_field#0;n#!!top" />
-                <element signature="n#the_field#0;n#!!top" />
-                <element signature="n#get_field_object#0;n#!!top" />
-                <element signature="n#acf_maybe_get_field#0;n#!!top" />
-                <element signature="n#acf_maybe_get_sub_field#0;n#!!top" />
-                <element signature="n#get_fields#0;n#!!top" />
-                <element signature="n#get_field_objects#0;n#!!top" />
-                <element signature="n#have_rows#0;n#!!top" />
-                <element signature="n#the_row#0;n#!!top" />
-                <element signature="n#get_row#0;n#!!top" />
-                <element signature="n#get_row_index#0;n#!!top" />
-                <element signature="n#the_row_index#0;n#!!top" />
-                <element signature="n#get_row_sub_field#0;n#!!top" />
-                <element signature="n#get_row_sub_value#0;n#!!top" />
-                <element signature="n#reset_rows#0;n#!!top" />
-                <element signature="n#has_sub_field#0;n#!!top" />
-                <element signature="n#get_sub_field#0;n#!!top" />
-                <element signature="n#the_sub_field#0;n#!!top" />
-                <element signature="n#get_sub_field_object#0;n#!!top" />
-                <element signature="n#get_row_layout#0;n#!!top" />
-                <element signature="n#acf_shortcode#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112220">
-              <caret line="5645" column="26" selection-start-line="5645" selection-start-column="26" selection-end-line="5645" selection-end-column="26" />
-              <folding>
-                <element signature="n#getDiscounts#0;n#!!top" />
-                <element signature="n#getDiscount#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1280">
-              <caret line="81" column="2" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9580">
-              <caret line="490" column="22" selection-start-line="490" selection-start-column="22" selection-end-line="490" selection-end-column="22" />
-              <folding>
-                <element signature="e#6#362#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/page-checkout.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="26" column="31" selection-end-line="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../swd.me/wp-content/themes/swd_rollo/functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4080">
-              <caret line="1830" selection-start-line="1830" selection-end-line="1863" selection-end-column="1" />
-              <folding>
-                <element signature="e#491#2429#1#PHP" />
-                <element signature="e#2676#3045#0#PHP" />
-                <element signature="e#3238#5885#0#PHP" />
-                <element signature="e#5978#7293#0#PHP" />
-                <element signature="e#8581#8739#0#PHP" />
-                <element signature="e#8741#25775#0#PHP" />
-                <element signature="e#25933#26041#0#PHP" />
-                <element signature="e#26088#26239#0#PHP" />
-                <element signature="e#26241#28525#0#PHP" />
-                <element signature="e#28527#32488#0#PHP" />
-                <element signature="e#32638#34822#0#PHP" />
-                <element signature="e#34824#35420#0#PHP" />
-                <element signature="e#35421#36140#0#PHP" />
-                <element signature="e#36141#37158#0#PHP" />
-                <element signature="e#37159#37732#0#PHP" />
-                <element signature="e#37733#38504#0#PHP" />
-                <element signature="e#38505#38861#0#PHP" />
-                <element signature="e#38862#39022#0#PHP" />
-                <element signature="e#39023#39431#0#PHP" />
-                <element signature="e#39432#39661#0#PHP" />
-                <element signature="e#39662#40316#0#PHP" />
-                <element signature="e#40317#40908#0#PHP" />
-                <element signature="e#40909#41447#0#PHP" />
-                <element signature="e#41448#41793#0#PHP" />
-                <element signature="e#41795#42912#0#PHP" />
-                <element signature="e#42914#45054#0#PHP" />
-                <element signature="e#45176#49639#0#PHP" />
-                <element signature="e#49809#50165#1#PHP" />
-                <element signature="e#50231#50597#1#PHP" />
-                <element signature="e#50609#52170#0#PHP" />
-                <element signature="e#52305#53915#0#PHP" />
-                <element signature="e#54029#55505#0#PHP" />
-                <element signature="e#55563#56053#0#PHP" />
-                <element signature="e#56152#56702#0#PHP" />
-                <element signature="e#56800#57765#0#PHP" />
-                <element signature="e#57865#57975#0#PHP" />
-                <element signature="e#58144#58251#1#PHP" />
-                <element signature="e#58312#59263#1#PHP" />
-                <element signature="e#59303#59611#1#PHP" />
-                <element signature="e#59622#61131#0#PHP" />
-                <element signature="e#61133#63976#0#PHP" />
-                <element signature="e#64077#64415#0#PHP" />
-                <element signature="e#64511#64800#0#PHP" />
-                <element signature="e#64885#66099#0#PHP" />
-                <element signature="e#66250#66885#0#PHP" />
-                <element signature="e#66938#74139#0#PHP" />
-                <element signature="e#74265#75943#0#PHP" />
-                <element signature="e#76053#76725#0#PHP" />
-                <element signature="e#76837#78496#0#PHP" />
-                <element signature="e#78498#80498#0#PHP" />
-                <element signature="e#80525#105044#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/functions.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2240">
-              <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4900">
-              <caret line="247" column="25" selection-start-line="247" selection-start-column="21" selection-end-line="247" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -238,6 +64,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -461,6 +295,7 @@
       <workItem from="1609168876739" duration="1755000" />
       <workItem from="1609190653515" duration="4962000" />
       <workItem from="1609395828409" duration="2187000" />
+      <workItem from="1609752902883" duration="1653000" />
     </task>
     <servers />
   </component>
