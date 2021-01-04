@@ -1,0 +1,1 @@
+<?php define('M1_TOKEN', '8c2ecd7306919abb7875f16fb211d73a');
