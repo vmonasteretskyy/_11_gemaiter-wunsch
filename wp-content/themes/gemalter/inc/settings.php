@@ -1378,7 +1378,7 @@ function ajax_add_shipping_data() {
     }
     session_start();
     $_SESSION['shipping_fields'] = $shippingFields;
-    
+    setcookie('csf', json_encode($shippingFields), time() + 60*60*24*30, '/');
     echo json_encode([
         'has_error' => false,
         'redirect_link' => esc_url((get_url_lang_prefix()) . 'checkout/'),

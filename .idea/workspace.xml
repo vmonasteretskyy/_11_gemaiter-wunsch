@@ -4,7 +4,34 @@
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/custom-functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/custom-functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/emogrifier-2020-12-11-c40504ba428748c93f0b0d75a7ca5aff.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-10-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-11-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-12-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-13-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-16-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-17-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-20-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-23-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-24-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-25-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-28-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-11-30-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-01-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-04-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-05-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-07-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-08-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-09-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-11-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/httpswoocommerce.comwp-jsonwccominbox-notifications1.0notifications.json-2020-11-12-b77d0acc11c33db0cdc5dacd178a24dc.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/paypal-2020-12-09-55878b01684676cb0d02e84199eebd46.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,6 +323,8 @@
       <workItem from="1609190653515" duration="4962000" />
       <workItem from="1609395828409" duration="2187000" />
       <workItem from="1609752902883" duration="1653000" />
+      <workItem from="1610311129372" duration="4486000" />
+      <workItem from="1610398707881" duration="9774000" />
     </task>
     <servers />
   </component>

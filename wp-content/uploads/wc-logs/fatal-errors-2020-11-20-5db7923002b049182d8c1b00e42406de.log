@@ -1,4 +1,0 @@
-2020-11-20T06:23:17+00:00 CRITICAL syntax error, unexpected '<' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\home.php on line 174
-
-2020-11-20T07:13:30+00:00 CRITICAL syntax error, unexpected 'get_template_part' (T_STRING) in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\archive.php on line 34
-

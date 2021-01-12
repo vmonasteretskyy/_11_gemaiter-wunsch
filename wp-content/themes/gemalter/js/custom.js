@@ -672,6 +672,55 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    //save fields on change step
+    $(document).on('click', '#order_form .step', function (e) {
+        let index = $(this).index();
+        let form = $('#order_form');
+        let formData = form.serializeObject();
+        formData = Object.assign(formData, {activeStep: index});
+        setCookie('opd', JSON.stringify(formData), 30, '/');
+    });
+
+    //save fields on change input fields
+    $(document).on('change', '#order_form input, #order_form select, #order_form textarea', function (e) {
+        let index = $(this).index();
+        let form = $('#order_form');
+        let formData = form.serializeObject();
+        formData = Object.assign(formData, {activeStep: index});
+        setCookie('opd', JSON.stringify(formData), 30, '/');
+    });
+
+    $(window).load(function (){
+        if(activeStep){
+            console.log($('#order_form .step').eq(activeStep));
+            let item = $('#order_form .step').eq(activeStep);
+            if(item.length){
+                console.log(item[0]);
+                setTimeout(function(){
+                    item[0].dispatchEvent(new Event('click'));
+                }, 1000);
+
+            }
+        }
+    });
+
     /*order page end*/
 
     /*cart page start*/

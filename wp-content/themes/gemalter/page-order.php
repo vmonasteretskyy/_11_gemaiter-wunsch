@@ -31,6 +31,9 @@ if ($cartRecord) {
     exit;
 }
 
+$orderFieldsFromCookie = getOrderFieldsFromCookie();
+$activeStep = isset($orderFieldsFromCookie['activeStep']) ? intval($orderFieldsFromCookie['activeStep']) : 0;
+
 $allPricesData = getPrices();
 
 $cartDiscountedRecord = getCardItemRecord($cartDiscountedHash);
@@ -64,9 +67,39 @@ if ($cartRecord && isset($cartRecord['attributes']['subject']) && $cartRecord['a
         $data['subjects']['custom']['items']['persons']['default'] = isset($cartRecord['attributes']['subject_custom']['persons']) ? $cartRecord['attributes']['subject_custom']['persons'] : $data['subjects']['custom']['items']['persons']['default'];
         $data['subjects']['custom']['items']['pets']['default'] = isset($cartRecord['attributes']['subject_custom']['pets']) ? $cartRecord['attributes']['subject_custom']['pets'] : $data['subjects']['custom']['items']['pets']['default'];
     }
+} else if (isset($orderFieldsFromCookie['subject']) && $orderFieldsFromCookie['subject']) {
+    $subject = $orderFieldsFromCookie['subject'];
+    if ($subject == 'custom') {
+        // logic for custom items
+        $data['subjects']['custom']['items']['persons']['default'] = isset($orderFieldsFromCookie['subject_custom[persons]']) ? $orderFieldsFromCookie['subject_custom[persons]'] : $data['subjects']['custom']['items']['persons']['default'];
+        $data['subjects']['custom']['items']['pets']['default'] = isset($orderFieldsFromCookie['subject_custom[pets]']) ? $orderFieldsFromCookie['subject_custom[pets]'] : $data['subjects']['custom']['items']['pets']['default'];
+    }
 }
 if ($cartRecord && isset($cartRecord['attributes']['subject_price_type']) && $cartRecord['attributes']['subject_price_type']) {
     $subjectPriceType = $cartRecord['attributes']['subject_price_type'];
+} else if (isset($orderFieldsFromCookie['subject']) && $orderFieldsFromCookie['subject']) {
+    $subjectTMP = $orderFieldsFromCookie['subject'];
+    if ($subjectTMP == 'custom') {
+        $countSubjects = 0;
+        $customPersons = isset($orderFieldsFromCookie['subject_custom[persons]']) ? $orderFieldsFromCookie['subject_custom[persons]'] : $data['subjects']['custom']['items']['persons']['default'];
+        $customPets = isset($orderFieldsFromCookie['subject_custom[pets]']) ? $orderFieldsFromCookie['subject_custom[pets]'] : $data['subjects']['custom']['items']['pets']['default'];
+        $subjectCustomMaxElements = isset($orderFieldsFromCookie['subject_custom_max_elements']) ? trim($orderFieldsFromCookie['subject_custom_max_elements']) : 0;
+        $countSubjects = $customPersons + $customPets;
+        if ($countSubjects > $subjectCustomMaxElements) {
+            $countSubjects = $subjectCustomMaxElements;
+        }
+        if ($countSubjects < 1) {
+            $countSubjects = 1;
+        }
+        $subjectPriceType = 'person_' . $countSubjects;
+    } else {
+        $subjects = getSubjects();
+        if (isset($subjects[$subjectTMP])) {
+            $subjectPriceType = $subjects[$subjectTMP]['price_type'];
+        } else {
+            $subjectPriceType = 'person_1';
+        }
+    }
 }
 
 $data['painting_techniques'] = [
@@ -77,6 +110,8 @@ $data['default_painting_technique'] = 'charcoal';
 $paintingTechnique = $data['default_painting_technique'];
 if ($cartRecord && isset($cartRecord['attributes']['choose_tech']) && $cartRecord['attributes']['choose_tech']) {
     $paintingTechnique = $cartRecord['attributes']['choose_tech'];
+} else if (isset($orderFieldsFromCookie['choose_tech']) && $orderFieldsFromCookie['choose_tech']) {
+    $paintingTechnique = $orderFieldsFromCookie['choose_tech'];
 }
 
 $data['currency_symbol'] = $allPricesData[$current_lang]['currency_symbol'];
@@ -87,6 +122,8 @@ $priceType = $data['default_price_type'];
 $priceTypeSelected = 'regular';
 if ($cartRecord && isset($cartRecord['attributes']['duration_type']) && $cartRecord['attributes']['duration_type']) {
     $priceTypeSelected = $cartRecord['attributes']['duration_type'];
+} else if (isset($orderFieldsFromCookie['duration_type']) && $orderFieldsFromCookie['duration_type']) {
+    $priceTypeSelected = $orderFieldsFromCookie['duration_type'];
 }
 $data['sizes'] = getSizesBySubjectTechnique($current_lang, $paintingTechnique, $subjectPriceType, $priceType);
 $data['default_size'] = null;
@@ -101,6 +138,8 @@ if (!empty($data['sizes'])) {
 $size = $data['default_size'];
 if ($cartRecord && isset($cartRecord['attributes']['size']) && $cartRecord['attributes']['size']) {
     $size = $cartRecord['attributes']['size'];
+} else if (isset($orderFieldsFromCookie['size']) && $orderFieldsFromCookie['size']) {
+    $size = $orderFieldsFromCookie['size'];
 }
 $data['default_background_type'] = 'background_artist';
 $backgroundType = $data['default_background_type'];
@@ -161,7 +200,7 @@ $previewImgPath = getOrderPreviewImg($paintingTechnique, $subject, $customSubjec
 
 get_header();
 ?>
-    <script>var allFiles = [];</script>
+    <script>var allFiles = []; activeStep = <?php echo $activeStep;?>;</script>
     <!--Start page-->
     <form id="order_form" class="page-wrapper page-order" onsubmit="return false;">
         <?php if ($cartItemID):?>

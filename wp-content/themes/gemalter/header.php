@@ -102,6 +102,42 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
       }
     }
   </style>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-K8527M8');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8527M8"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <?php if ($current_lang == 'de'): ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B29EFNG5LX"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-B29EFNG5LX');
+        </script>
+        <!-- End Global site tag (gtag.js) - Google Analytics -->
+    <?php elseif ($current_lang == 'en'): ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBH9JR0T93"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-TBH9JR0T93');
+        </script>
+        <!-- End Global site tag (gtag.js) - Google Analytics -->
+    <?php endif; ?>
+
 </head>
 
 <body data-locale-mode="<?php echo WP_LOCALE_MODE; ?>" data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>

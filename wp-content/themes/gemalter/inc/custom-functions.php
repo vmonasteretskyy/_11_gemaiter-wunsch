@@ -619,7 +619,7 @@ function getRandString($stringLength, $includeNumbers = true) {
     return $string;
 }
 
-// get shipping fields from session
+// get shipping fields from session or cookie
 function getShippingFieldsFromSession() {
     $shippingFields = isset($_SESSION['shipping_fields']) ? $_SESSION['shipping_fields'] : [];
     $allFields = [
@@ -640,6 +640,21 @@ function getShippingFieldsFromSession() {
             $shippingFields[$field] = '';
         }
     }
+    $shippingFieldsFromCookie = isset($_COOKIE['csf']) ? json_decode(stripslashes($_COOKIE['csf']), 1) : [];
+    foreach ($allFields as $field) {
+        if (!$shippingFields[$field] && isset($shippingFieldsFromCookie[$field]) && $shippingFieldsFromCookie[$field]) {
+            $shippingFields[$field] = $shippingFieldsFromCookie[$field];
+        }
+    }
     return $shippingFields;
+}
+
+//get order fields from cookie
+function getOrderFieldsFromCookie() {
+    $orderFieldsFromCookie = isset($_COOKIE['opd']) ? json_decode(stripslashes($_COOKIE['opd']), 1) : [];
+    if (!isset($orderFieldsFromCookie['activeStep'])) {
+        $orderFieldsFromCookie['activeStep'] = 0;
+    }
+    return $orderFieldsFromCookie;
 }
 ?>
