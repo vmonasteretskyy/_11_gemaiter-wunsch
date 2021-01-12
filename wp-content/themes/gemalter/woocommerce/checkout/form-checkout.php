@@ -322,9 +322,9 @@ WC()->customer->set_shipping_country($shippingFields['country']);
                                             <label class="select-label select-label-js readonly">
                                                 <div class="select-label__picture">
                                                 </div>
-                                                <input class="input input-value-js" data-amount-shipping-country="" type="text" readonly placeholder="" value="<?php echo $shippingFields['country'];?>" />
+                                                <input class="input input-value-js" data-amount-shipping-country="" type="text" readonly placeholder="" value="<?php echo pll__(getCountryByCode($shippingFields['country']));?>" />
                                                 <!-- Value of this input will be sent to back -->
-                                                <input class="input input-key-js" name="select" readonly hidden value="<?php echo $shippingFields['country'];?>">
+                                                <input class="input input-key-js" name="select" readonly hidden value="<?php echo pll__(getCountryByCode($shippingFields['country']));?>">
                                             </label>
                                             <ul class="options options-js hide">
                                             </ul>

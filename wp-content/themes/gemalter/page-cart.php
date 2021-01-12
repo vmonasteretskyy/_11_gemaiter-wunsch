@@ -286,8 +286,9 @@ get_header();
                                 <?php pll_e('Shipping Address'); ?>
                             </h6>
                             <?php
-                            $countries = getCountries();
+                            $countries = getCountries(true);
                             ?>
+                            <script>var countriesList = <?php echo json_encode($countries); ?>;</script>
                             <div class="gift-card__form">
                                 <p><i><?php pll_e('Shipping Address Text'); ?></i></p>
                                 <form data-shipping-cart-form="" action="" class="form">
@@ -323,14 +324,15 @@ get_header();
                                         <label class="select-label select-label-js">
                                             <div class="select-label__picture">
                                             </div>
-                                            <input class="input input-value-js" type="text" readonly placeholder="<?php pll_e('Country'); ?> *" required value="<?php echo $shippingFields['country']; ?>"/>
+                                            <input class="input input-value-js" type="text" readonly placeholder="<?php pll_e('Country'); ?> *" required value="<?php echo pll__(getCountryByCode($shippingFields['country']));?>"/>
                                             <!-- Value of this input will be sent to back -->
                                             <input class="input input-key-js" name="country" readonly hidden required value="<?php echo $shippingFields['country']; ?>">
+                                            
                                         </label>
                                         <?php if ($countries): ?>
                                             <ul class="options options-js">
                                                 <?php foreach ($countries as $code => $country): ?>
-                                                    <li class="option option-js" data-key="<?php pll_e($country); ?>">
+                                                    <li class="option option-js" data-key="<?php echo $code; ?>">
                                                         <div class="option__text"><?php pll_e($country); ?></div>
                                                     </li>
                                                 <?php endforeach; ?>
@@ -419,9 +421,9 @@ get_header();
                                                     <label class="select-label select-label-js readonly">
                                                         <div class="select-label__picture">
                                                         </div>
-                                                        <input class="input input-value-js" data-amount-shipping-country="" type="text" readonly placeholder="" value="<?php echo $shippingFields['country']; ?>"/>
+                                                        <input class="input input-value-js" data-amount-shipping-country="" type="text" readonly placeholder="" value="<?php echo pll__(getCountryByCode($shippingFields['country'])); ?>"/>
                                                         <!-- Value of this input will be sent to back -->
-                                                        <input class="input input-key-js" name="select" readonly hidden value="<?php echo $shippingFields['country']; ?>">
+                                                        <input class="input input-key-js" name="select" readonly hidden value="<?php echo pll__(getCountryByCode($shippingFields['country'])); ?>">
                                                     </label>
                                                     <ul class="options options-js hide">
                                                     </ul>

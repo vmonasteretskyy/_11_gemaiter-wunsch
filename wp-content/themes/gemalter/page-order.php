@@ -145,12 +145,16 @@ $data['default_background_type'] = 'background_artist';
 $backgroundType = $data['default_background_type'];
 if ($cartRecord && isset($cartRecord['attributes']['background_type']) && $cartRecord['attributes']['background_type']) {
     $backgroundType = $cartRecord['attributes']['background_type'];
+} else if (isset($orderFieldsFromCookie['background_type']) && $orderFieldsFromCookie['background_type']) {
+    $backgroundType = $orderFieldsFromCookie['background_type'];
 }
 $data['background_colors'] = getBackgroundColorsSettings();
 $data['default_background_color'] = '';
 $backgroundColor = $data['default_background_color'];
 if ($cartRecord && isset($cartRecord['attributes']['color']) && $cartRecord['attributes']['color']) {
     $backgroundColor = $cartRecord['attributes']['color'];
+} else if (isset($orderFieldsFromCookie['color']) && $orderFieldsFromCookie['color']) {
+    $backgroundColor = $orderFieldsFromCookie['color'];
 }
 
 $data['duration'] = getDuration();
@@ -158,19 +162,27 @@ $data['duration_with_date'] = getDurationWithDates($paintingTechnique, $size);
 $deliveryDate = '';
 if ($cartRecord && isset($cartRecord['attributes']['delivery_date']) && $cartRecord['attributes']['delivery_date']) {
     $deliveryDate = $cartRecord['attributes']['delivery_date'];
+} else if (isset($orderFieldsFromCookie['delivery_date']) && $orderFieldsFromCookie['delivery_date']) {
+    $deliveryDate = $orderFieldsFromCookie['delivery_date'];
 }
 
 $secondOptionToSendPhoto = false;
 if ($cartRecord && isset($cartRecord['attributes']['second_option_to_send_photo']) && $cartRecord['attributes']['second_option_to_send_photo']) {
     $secondOptionToSendPhoto = $cartRecord['attributes']['second_option_to_send_photo'];
+} else if (isset($orderFieldsFromCookie['second_option_to_send_photo']) && $orderFieldsFromCookie['second_option_to_send_photo']) {
+    $secondOptionToSendPhoto = $orderFieldsFromCookie['second_option_to_send_photo'];
 }
 $artistAdvice = false;
 if ($cartRecord && isset($cartRecord['attributes']['artist_advice']) && $cartRecord['attributes']['artist_advice']) {
     $artistAdvice = $cartRecord['attributes']['artist_advice'];
+} else if (isset($orderFieldsFromCookie['artist_advice']) && $orderFieldsFromCookie['artist_advice']) {
+    $artistAdvice = $orderFieldsFromCookie['artist_advice'];
 }
 $uploadComment = '';
 if ($cartRecord && isset($cartRecord['attributes']['upload_comment']) && $cartRecord['attributes']['upload_comment']) {
     $uploadComment = $cartRecord['attributes']['upload_comment'];
+} else if (isset($orderFieldsFromCookie['upload_comment']) && $orderFieldsFromCookie['upload_comment']) {
+    $uploadComment = $orderFieldsFromCookie['upload_comment'];
 }
 
 $data['frames'] = get_terms(array(
@@ -189,10 +201,14 @@ if (!empty($data['frames'])) {
 $frameType = "need_frame";
 if ($cartRecord && isset($cartRecord['attributes']['frame']) && $cartRecord['attributes']['frame']) {
     $frameType = $cartRecord['attributes']['frame'];
+} else if (isset($orderFieldsFromCookie['frame']) && $orderFieldsFromCookie['frame']) {
+    $frameType = $orderFieldsFromCookie['frame'];
 }
 $frameSelected = '';
 if ($cartRecord && isset($cartRecord['attributes']['frame_selected']) && $cartRecord['attributes']['frame_selected']) {
     $frameSelected = $cartRecord['attributes']['frame_selected'];
+} else if (isset($orderFieldsFromCookie['frame_selected']) && $orderFieldsFromCookie['frame_selected']) {
+    $frameSelected = $orderFieldsFromCookie['frame_selected'];
 }
 
 $customSubject = isset($cartRecord['attributes']['subject_custom']) ? $cartRecord['attributes']['subject_custom'] : [];
@@ -929,7 +945,7 @@ get_header();
         </div>
 
         <div class="order-actions">
-            <button class="order-actions__back js-controls__back hidden"><?php pll_e('Back'); ?></button>
+            <button class="order-actions__back js-controls__back <?php if (!$activeStep):?>hidden<?php endif; ?>"><?php pll_e('Back'); ?></button>
 
             <button type="submit" class="btn btn--accent-border controls__next"><?php pll_e('Continue');?></button>
 

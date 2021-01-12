@@ -221,7 +221,7 @@ require get_template_directory() . '/inc/price_settings.php';
 /*
  * Get counties list
  */
-function getCountries() {
+function getCountries($translate = false) {
     $countries = array(
         "US" => "United States",
         "DE" => "Germany",
@@ -488,7 +488,24 @@ function getCountries() {
         "ZW" => "Zimbabwe",
         "AX" => "Åland Islands",
     );
+    if ($translate) {
+        foreach ($countries as $code => $country) {
+            $countries[$code] = pll__($country);
+        }
+    }
     return $countries;
+}
+
+/*
+ * Get country name by abbr code
+ */
+function getCountryByCode($code = '') {
+    $countries = getCountries();
+    if (array_key_exists($code, $countries)) {
+        return $countries[$code];
+    } else {
+        return $code;
+    }
 }
 
 /*

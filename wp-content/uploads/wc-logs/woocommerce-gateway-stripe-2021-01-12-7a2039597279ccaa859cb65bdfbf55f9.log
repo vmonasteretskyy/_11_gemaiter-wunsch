@@ -1,0 +1,1027 @@
+2021-01-12T10:32:40+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T10:32:40+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 12000
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => United States
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/557/?key=wc_order_q9eKjD4996Kk5&utm_nooverride=1&order_id=557
+        )
+
+    [sofort] => Array
+        (
+            [country] => United States
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T10:32:40+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `UNITED STATES` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T10:33:03+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T10:33:03+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 12000
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => United States
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/557/?key=wc_order_q9eKjD4996Kk5&utm_nooverride=1&order_id=557
+        )
+
+    [sofort] => Array
+        (
+            [country] => United States
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T10:33:04+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `UNITED STATES` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T10:33:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T10:33:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 12000
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => United States
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/557/?key=wc_order_q9eKjD4996Kk5&utm_nooverride=1&order_id=557
+        )
+
+    [sofort] => Array
+        (
+            [country] => United States
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T10:33:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `UNITED STATES` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T12:43:21+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T12:43:21+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 12000
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => Germany
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/561/?key=wc_order_OXjopzmLz6Ola&utm_nooverride=1&order_id=561
+        )
+
+    [sofort] => Array
+        (
+            [country] => Germany
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T12:43:21+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `GERMANY` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T12:45:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T12:45:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 12000
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => de
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/561/?key=wc_order_OXjopzmLz6Ola&utm_nooverride=1&order_id=561
+        )
+
+    [sofort] => Array
+        (
+            [country] => de
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T12:45:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Redirecting to SOFORT...
+====End Log====
+
+
+2021-01-12T12:51:44+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources/src_1I8mLbByDRVe6AxovH0hEQY7
+====End Log====
+
+
+2021-01-12T12:51:44+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+customers request: Array
+(
+    [email] => admin@test.com
+    [description] => Name: test test, Username: test
+    [name] => test test
+    [metadata] => Array
+        (
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T12:51:45+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin processing payment for order 561 for the amount of 120
+====End Log====
+
+
+2021-01-12T12:51:45+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1I8mLbByDRVe6AxovH0hEQY7
+    [amount] => 12000
+    [currency] => eur
+    [description] => Gemalter Wunsch - Order 561
+    [metadata] => Array
+        (
+            [customer_name] => test test
+            [customer_email] => test_new_user@mail.com
+            [order_id] => 561
+            [site_url] => http://lh.me
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_IkGtxW1rWNmSfJ
+    [statement_descriptor] => qqqqqqq
+    [shipping] => Array
+        (
+            [name] => test test
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [city] => tes
+                    [country] => Deutschland
+                    [postal_code] => 07070
+                    [state] => tet
+                )
+
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T12:51:45+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Stripe PaymentIntent pi_1I8mLdByDRVe6Axor9qpHDqo initiated for order 561
+====End Log====
+
+
+2021-01-12T12:51:45+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+payment_intents/pi_1I8mLdByDRVe6Axor9qpHDqo/confirm request: Array
+(
+    [source] => src_1I8mLbByDRVe6AxovH0hEQY7
+    [level3] => Array
+        (
+            [merchant_reference] => 561
+            [shipping_amount] => 0
+            [line_items] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [product_code] => 516
+                            [product_description] => Gift Card
+                            [unit_cost] => 12000
+                            [quantity] => 1
+                            [tax_amount] => 0
+                            [discount_amount] => 0
+                        )
+
+                )
+
+            [shipping_address_zip] => 07070
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T12:51:46+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+payment_intents/pi_1I8mLdByDRVe6Axor9qpHDqo/confirm request: Array
+(
+    [source] => src_1I8mLbByDRVe6AxovH0hEQY7
+)
+
+====End Log====
+
+
+2021-01-12T12:51:47+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Stripe PaymentIntent pi_1I8mLdByDRVe6Axor9qpHDqo succeeded for order 561
+====End Log====
+
+
+2021-01-12T12:51:47+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Processing response: stdClass Object
+(
+    [id] => ch_1I8mLfByDRVe6AxoboUOV0zc
+    [object] => charge
+    [amount] => 12000
+    [amount_captured] => 12000
+    [amount_refunded] => 0
+    [application] => 
+    [application_fee] => 
+    [application_fee_amount] => 
+    [balance_transaction] => txn_1I8mLfByDRVe6AxouC5WJYJb
+    [billing_details] => stdClass Object
+        (
+            [address] => stdClass Object
+                (
+                    [city] => 
+                    [country] => 
+                    [line1] => 
+                    [line2] => 
+                    [postal_code] => 
+                    [state] => 
+                )
+
+            [email] => test_new_user@mail.com
+            [name] =>  
+            [phone] => 
+        )
+
+    [calculated_statement_descriptor] => QQQQQQQ
+    [captured] => 1
+    [created] => 1610455907
+    [currency] => eur
+    [customer] => cus_IkGtxW1rWNmSfJ
+    [description] => Gemalter Wunsch - Order 561
+    [destination] => 
+    [dispute] => 
+    [disputed] => 
+    [failure_code] => 
+    [failure_message] => 
+    [fraud_details] => stdClass Object
+        (
+        )
+
+    [invoice] => 
+    [livemode] => 
+    [metadata] => stdClass Object
+        (
+            [customer_name] => test test
+            [customer_email] => test_new_user@mail.com
+            [order_id] => 561
+            [site_url] => http://lh.me
+        )
+
+    [on_behalf_of] => 
+    [order] => 
+    [outcome] => stdClass Object
+        (
+            [network_status] => approved_by_network
+            [reason] => 
+            [risk_level] => normal
+            [risk_score] => 11
+            [seller_message] => Payment complete.
+            [type] => authorized
+        )
+
+    [paid] => 1
+    [payment_intent] => pi_1I8mLdByDRVe6Axor9qpHDqo
+    [payment_method] => src_1I8mLbByDRVe6AxovH0hEQY7
+    [payment_method_details] => stdClass Object
+        (
+            [card] => stdClass Object
+                (
+                    [brand] => visa
+                    [checks] => stdClass Object
+                        (
+                            [address_line1_check] => 
+                            [address_postal_code_check] => 
+                            [cvc_check] => pass
+                        )
+
+                    [country] => US
+                    [exp_month] => 12
+                    [exp_year] => 2025
+                    [fingerprint] => BAP55szwa9Cy6TKl
+                    [funding] => credit
+                    [installments] => 
+                    [last4] => 4242
+                    [network] => visa
+                    [three_d_secure] => 
+                    [wallet] => 
+                )
+
+            [type] => card
+        )
+
+    [receipt_email] => 
+    [receipt_number] => 
+    [receipt_url] => https://pay.stripe.com/receipts/acct_1I4SK9ByDRVe6Axo/ch_1I8mLfByDRVe6AxoboUOV0zc/rcpt_IkGtSpn7OcNViLeFSlotjDzUUqVJIoi
+    [refunded] => 
+    [refunds] => stdClass Object
+        (
+            [object] => list
+            [data] => Array
+                (
+                )
+
+            [has_more] => 
+            [total_count] => 0
+            [url] => /v1/charges/ch_1I8mLfByDRVe6AxoboUOV0zc/refunds
+        )
+
+    [review] => 
+    [shipping] => stdClass Object
+        (
+            [address] => stdClass Object
+                (
+                    [city] => tes
+                    [country] => Deutschland
+                    [line1] => test
+                    [line2] => test
+                    [postal_code] => 07070
+                    [state] => tet
+                )
+
+            [carrier] => 
+            [name] => test test
+            [phone] => 
+            [tracking_number] => 
+        )
+
+    [source] => stdClass Object
+        (
+            [id] => src_1I8mLbByDRVe6AxovH0hEQY7
+            [object] => source
+            [amount] => 
+            [card] => stdClass Object
+                (
+                    [exp_month] => 12
+                    [exp_year] => 2025
+                    [last4] => 4242
+                    [country] => US
+                    [brand] => Visa
+                    [cvc_check] => pass
+                    [funding] => credit
+                    [fingerprint] => BAP55szwa9Cy6TKl
+                    [three_d_secure] => optional
+                    [name] => 
+                    [address_line1_check] => 
+                    [address_zip_check] => 
+                    [tokenization_method] => 
+                    [dynamic_last4] => 
+                )
+
+            [client_secret] => src_client_secret_m2pQV4DG7QwUUcbd34hIVeOH
+            [created] => 1610455907
+            [currency] => 
+            [flow] => none
+            [livemode] => 
+            [metadata] => stdClass Object
+                (
+                )
+
+            [owner] => stdClass Object
+                (
+                    [address] => 
+                    [email] => test_new_user@mail.com
+                    [name] =>  
+                    [phone] => 
+                    [verified_address] => 
+                    [verified_email] => 
+                    [verified_name] => 
+                    [verified_phone] => 
+                )
+
+            [statement_descriptor] => 
+            [status] => consumed
+            [type] => card
+            [usage] => reusable
+        )
+
+    [source_transfer] => 
+    [statement_descriptor] => qqqqqqq
+    [statement_descriptor_suffix] => 
+    [status] => succeeded
+    [transfer_data] => 
+    [transfer_group] => 
+)
+
+====End Log====
+
+
+2021-01-12T12:51:47+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+balance/history/txn_1I8mLfByDRVe6AxouC5WJYJb
+====End Log====
+
+
+2021-01-12T14:43:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T14:43:57+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => DE
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => DE
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T14:43:58+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Redirecting to SOFORT...
+====End Log====
+
+
+2021-01-12T14:57:10+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T14:57:10+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => DE
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => DE
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T14:57:10+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Redirecting to SOFORT...
+====End Log====
+
+
+2021-01-12T14:58:36+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T14:58:36+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => GERMA
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => GERMA
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T14:58:37+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `GERMA` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T15:00:18+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T15:00:18+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => UK
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => UK
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T15:00:19+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `UK` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T15:00:47+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T15:00:47+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => UA
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => UA
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T15:00:48+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => invalid_sofort_country
+            [message] => Invalid country `UA` for Sofort. Supported values are: AT, BE, DE, ES, IT, NL
+            [param] => sofort[country]
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2021-01-12T15:01:33+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Begin creating SOFORT source
+====End Log====
+
+
+2021-01-12T15:01:33+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+sources request: Array
+(
+    [amount] => 13900
+    [currency] => eur
+    [type] => sofort
+    [owner] => stdClass Object
+        (
+            [phone] => +12015553201
+            [name] => test test
+            [email] => test_new_user@mail.com
+            [address] => Array
+                (
+                    [line1] => test
+                    [line2] => test
+                    [state] => tet
+                    [city] => tes
+                    [postal_code] => 07070
+                    [country] => DE
+                )
+
+        )
+
+    [redirect] => Array
+        (
+            [return_url] => http://lh.me/de/checkout/order-received/565/?key=wc_order_z7s9dro1tSAGJ&utm_nooverride=1&order_id=565
+        )
+
+    [sofort] => Array
+        (
+            [country] => DE
+            [preferred_language] => de
+        )
+
+    [statement_descriptor] => qqqqqqq
+)
+
+====End Log====
+
+
+2021-01-12T15:01:34+00:00 DEBUG 
+====Stripe Version: 4.7.0====
+====Start Log====
+Info: Redirecting to SOFORT...
+====End Log====
+
+
