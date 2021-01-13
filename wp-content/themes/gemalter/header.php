@@ -103,18 +103,22 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     }
   </style>
 
-    <!-- Google Tag Manager -->
+    <!-- DEVELOPER Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K8527M8');</script>
-    <!-- End Google Tag Manager -->
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8527M8"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+        })(window,document,'script','dataLayer','GTM-NK2QTK7');</script>
+    <!-- End DEVELOPER Google Tag Manager -->
+    
     <?php if ($current_lang == 'de'): ?>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-PP9FTWF');</script>
+        <!-- End Google Tag Manager -->
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-B29EFNG5LX"></script>
         <script>
@@ -126,21 +130,48 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
         </script>
         <!-- End Global site tag (gtag.js) - Google Analytics -->
     <?php elseif ($current_lang == 'en'): ?>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-55SPBVM');</script>
+        <!-- End Google Tag Manager -->
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBH9JR0T93"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LG86LZ8QN4"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-TBH9JR0T93');
+            gtag('config', 'G-LG86LZ8QN4');
         </script>
         <!-- End Global site tag (gtag.js) - Google Analytics -->
     <?php endif; ?>
 
+    <!-- Start of gemalterwunsch Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633"> </script>
+    <!-- End of gemalterwunsch Zendesk Widget script -->
+    <?php /*$zopim(function() {(function() {
+    $zopim.livechat.setName('Logged in name');
+    $zopim.livechat.setEmail('user@somewhere.com');
+    $zopim.livechat.addTags('Subscription_Plan');
+    });*/ ?>
+    
 </head>
 
 <body data-locale-mode="<?php echo WP_LOCALE_MODE; ?>" data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>
+<?php if ($current_lang == 'de'): ?>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PP9FTWF"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<?php elseif ($current_lang == 'en'): ?>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55SPBVM"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<?php endif; ?>
 <?php wp_body_open(); ?>
     <!-- Start site wrapper -->
     <div class="site-wrapper">

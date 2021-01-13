@@ -21,6 +21,7 @@ $prices = [
 $duration = getDuration();
 
 get_header();
+//test($prices);
 ?>
 
     <!--Start page-->
@@ -85,13 +86,19 @@ get_header();
                                 <div class="card-table__row js-size-options">
                                     <div>
                                         <?php
-                                        $sizeInfo = explode('-', $sizeKey);
+                                        if ($prices['use_size'] == 'inch') {
+                                            $sizeInfo = $size['label_inch'];
+                                            $sizeInfo = str_replace(['x', '"', ' '], ["-", '', ''], $sizeInfo);
+                                            $sizeInfo = explode('-', $sizeInfo);
+                                        } else {
+                                            $sizeInfo = explode('-', $sizeKey);
+                                        }
                                         $sizeInfo['width'] = isset($sizeInfo[0]) ? $sizeInfo[0] : 0;
                                         $sizeInfo['height'] = isset($sizeInfo[1]) ? $sizeInfo[1] : 0;
                                         ?>
                                         <span style="display: none;" class="width"><?php echo $sizeInfo['width']; ?></span>
                                         <span style="display: none;" class="height"><?php echo $sizeInfo['height']; ?></span>
-                                        <?php echo ($prices['use_size'] == 'inch' ? $size['label'] . '/' . $size['label_inch'] : $size['label']); ?>
+                                        <?php echo ($prices['use_size'] == 'inch' ? $size['label_inch'] : $size['label']); ?>
                                     </div>
                                     <div class="price-wrapper">
                                         <?php if ($size['regular']['old_price'] != $size['regular']['price']):?>
@@ -112,11 +119,11 @@ get_header();
                         </div>
                         <div class="card-table__row custom-size js-custom-size">
                             <div class="custom-size__fields">
-                                <input type="number" class="js-size-width" data-min='25' data-max='120' placeholder="width">
+                                <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>10<?php else: ?>25<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>47<?php else: ?>120<?php endif;?>' placeholder="width">
                                 <span>
                                       x
                                   </span>
-                                <input type="number" class="js-size-height" data-min='35' data-max='180' placeholder="height">
+                                <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>14<?php else: ?>35<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>71<?php else: ?>180<?php endif;?>' placeholder="height">
                             </div>
                             <div>
                                 <input type="text" class="js-size-result custom-size__result" readonly>
@@ -176,13 +183,19 @@ get_header();
                                 <div class="card-table__row js-size-options">
                                     <div class="widen-label">
                                         <?php
-                                            $sizeInfo = explode('-', $sizeKey);
+                                            if ($prices['use_size'] == 'inch') {
+                                                $sizeInfo = $size['label_inch'];
+                                                $sizeInfo = str_replace(['x', '"', ' '], ["-", '', ''], $sizeInfo);
+                                                $sizeInfo = explode('-', $sizeInfo);
+                                            } else {
+                                                $sizeInfo = explode('-', $sizeKey);
+                                            }
                                             $sizeInfo['width'] = isset($sizeInfo[0]) ? $sizeInfo[0] : 0;
                                             $sizeInfo['height'] = isset($sizeInfo[1]) ? $sizeInfo[1] : 0;
                                         ?>
                                         <span style="display: none;" class="width"><?php echo $sizeInfo['width']; ?></span>
                                         <span style="display: none;" class="height"><?php echo $sizeInfo['height']; ?></span>
-                                        <?php echo ($prices['use_size'] == 'inch' ? $size['label'] . '/' . $size['label_inch'] : $size['label']); ?>
+                                        <?php echo ($prices['use_size'] == 'inch' ? $size['label_inch'] : $size['label']); ?>
                                     </div>
                                     <div class="price-wrapper">
                                         <?php if ($size['regular']['old_price'] != $size['regular']['price']):?>
@@ -203,11 +216,11 @@ get_header();
                             </div>
                             <div class="card-table__row custom-size js-custom-size">
                                 <div class="custom-size__fields">
-                                    <input type="number" class="js-size-width" data-min='14.8' data-max='70' placeholder="width">
+                                    <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>6<?php else: ?>14.8<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>28<?php else: ?>70<?php endif;?>' placeholder="width">
                                     <span>
                                           x
                                       </span>
-                                    <input type="number" class="js-size-height" data-min='21' data-max='100' placeholder="height">
+                                    <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>8<?php else: ?>21<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>39<?php else: ?>100<?php endif;?>' placeholder="height">
                                 </div>
                                 <div>
                                     <input type="text" class="js-size-result custom-size__result" readonly>

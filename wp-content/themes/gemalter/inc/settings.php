@@ -1052,6 +1052,11 @@ function ajax_add_to_cart_main_product() {
     }
     $mode = isset($_REQUEST['mode']) ? trim($_REQUEST['mode']) : 'cart';
     
+    if (isset($_COOKIE['opd'])) {
+        setcookie('opd', '', time() - 60 * 60, '/');
+        unset($_COOKIE['opd']);
+    }
+    
     echo json_encode([
         'has_error' => false,
         'redirect_link' => esc_url((get_url_lang_prefix()) . $mode . '/' . ($mode == 'order' && $cart_item_key_new ? ('?discount_hash=' . $cart_item_key_new) : '')),
