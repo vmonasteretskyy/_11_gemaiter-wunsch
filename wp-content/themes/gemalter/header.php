@@ -152,12 +152,29 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     <!-- Start of gemalterwunsch Zendesk Widget script -->
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633"> </script>
     <!-- End of gemalterwunsch Zendesk Widget script -->
-    <?php /*$zopim(function() {(function() {
-    $zopim.livechat.setName('Logged in name');
-    $zopim.livechat.setEmail('user@somewhere.com');
-    $zopim.livechat.addTags('Subscription_Plan');
-    });*/ ?>
-    
+    <?
+    $shippingFields = getShippingFieldsFromSession();
+    if ((isset($shippingFields['first_name']) && $shippingFields['first_name'] && isset($shippingFields['first_name']) && $shippingFields['first_name'])
+        && isset($shippingFields['email']) && $shippingFields['email']
+        && isset($shippingFields['phone']) && $shippingFields['first_name'] ):?>
+    ?>
+        <script>
+            var zopimLivechatData = {
+                name: '<?php echo $shippingFields['first_name'] . ' ' . $shippingFields['last_name'];?>',
+                email: '<?php echo $shippingFields['email'];?>',
+                phone: '<?php echo $shippingFields['phone'];?>',
+            };
+        </script>
+    <?php else:?>
+        <script>
+            var zopimLivechatData = {
+                name: '',
+                email: '',
+                phone: '',
+            };
+        </script>
+    <?php endif;?>
+
 </head>
 
 <body data-locale-mode="<?php echo WP_LOCALE_MODE; ?>" data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>

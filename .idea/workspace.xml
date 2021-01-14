@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-14-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,6 +303,8 @@
       <workItem from="1610454007166" duration="5104000" />
       <workItem from="1610486949120" duration="10208000" />
       <workItem from="1610535434428" duration="14115000" />
+      <workItem from="1610572915906" duration="325000" />
+      <workItem from="1610601511935" duration="8446000" />
     </task>
     <servers />
   </component>

@@ -1062,6 +1062,30 @@ jQuery(document).ready(function ($) {
     });
     /*checkout page end*/
 
+    $(window).load(function () {
+        function checkZopim() {
+            setTimeout(function() {
+                if (typeof ($zopim) !== 'undefined' && typeof ($zopim.livechat) !== 'undefined' ) {
+                    setTimeout(function(){
+                        if (!$zopim.livechat.getName()){
+                            $zopim.livechat.setName(zopimLivechatData.name);
+                        }
+                        if (!$zopim.livechat.getEmail()){
+                            $zopim.livechat.setEmail(zopimLivechatData.email);
+                        }
+                        if (!$zopim.livechat.getPhone()){
+                            $zopim.livechat.setPhone(zopimLivechatData.phone);
+                        }
+                        //$zopim.livechat.setLanguage(currentLang);
+                        $zopim.livechat.addTags('');
+                    }, 1000);
+                } else {
+                    checkZopim();
+                }
+            }, 500);
+        }
+        checkZopim();
+    });
 });
 
 function setCookie(c_name, value, expiredays, domain) {
