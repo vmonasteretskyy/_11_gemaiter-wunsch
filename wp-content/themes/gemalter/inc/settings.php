@@ -1,5 +1,9 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+
 // remove wp_generator
 remove_action('wp_head', 'wp_generator');
 
@@ -1321,7 +1325,11 @@ add_action('wp_ajax_nopriv_ajax_get_edit_order_form_html', 'ajax_get_edit_order_
 // add shipping data from cart page
 function ajax_add_shipping_data() {
     // save field to session
+    $cookieFields = getCustomerFieldsFromCookie();
     $shippingFields = [];
+    $uniquePart = getRandString(8);
+    $shippingFields['external_id'] = isset($cookieFields['external_id']) && $cookieFields['external_id'] ? trim($cookieFields['external_id']) : ('uid-' . time() . '-' . $uniquePart);
+    $shippingFields['unique_part'] = $uniquePart;
     $shippingFields['first_name'] = isset($_REQUEST['first_name']) ? trim($_REQUEST['first_name']) : '';
     $shippingFields['last_name'] = isset($_REQUEST['last_name']) ? trim($_REQUEST['last_name']) : '';
     $shippingFields['address'] = isset($_REQUEST['address']) ? trim($_REQUEST['address']) : '';
@@ -1383,7 +1391,7 @@ function ajax_add_shipping_data() {
     }
     session_start();
     $_SESSION['shipping_fields'] = $shippingFields;
-    setcookie('csf', json_encode($shippingFields), time() + 60*60*24*30, '/');
+    setcookie('csf', json_encode($shippingFields), time() + 60*60*24*365, '/');
     echo json_encode([
         'has_error' => false,
         'redirect_link' => esc_url((get_url_lang_prefix()) . 'checkout/'),
@@ -1886,6 +1894,47 @@ function testing_function() {
 }
 //add_action( 'init', 'testing_function', 1);
 
+function jwtTokenEndpoint() {
+    $isJWT_TOKEN_ENDPOINT = isset($_REQUEST['JWT_TOKEN_ENDPOINT']) ? intval($_REQUEST['JWT_TOKEN_ENDPOINT']) : 0;
+    if ($isJWT_TOKEN_ENDPOINT) {
+        // get user info form cookie
+        /*if (!isset($_COOKIE['csf']['external_id'])) {
+            echo '';
+            exit;
+        }*/
+    
+        $uniquePart = getRandString(8);
+        
+        $customerFields = getCustomerFieldsFromCookie();
+        if (isset($customerFields['unique_part'])) {
+            $uniquePart = $customerFields['unique_part'];
+        }
+
+        $first_name = isset($customerFields['first_name']) ? trim($customerFields['first_name']) : 'User #' . $uniquePart;
+        $last_name = isset($customerFields['last_name']) ? trim($customerFields['last_name']) : '';
+        $name = trim($first_name . ' ' . $last_name);
+        
+        $email = isset($customerFields['email']) ? trim($customerFields['email']) : 'user-' . $uniquePart . '@mail.com';
+        $external_id = isset($customerFields['external_id']) ? trim($customerFields['external_id']) : 'uid-' . time() . '-' . $uniquePart;
+        if (!isset($customerFields['external_id'])) {
+            $customerFields['external_id'] = $external_id;
+            $customerFields['unique_part'] = $uniquePart;
+            setcookie('csf', json_encode($customerFields), time() + 60*60*24*365, '/');
+        }
+        $payload = [
+            'name' => $name,
+            'email' => $email,
+            'iat' => time(),
+            'external_id' => $external_id,
+        ];
+        //test($payload);
+        $secretCode = '432AB98E2D03D38FDB29ED28190060C21D62D8D04EC15BDEDBB239799F6EA035';
+        $token = JWT::encode($payload, $secretCode);
+        echo $token;
+        exit;
+    }
+}
+add_action( 'init', 'jwtTokenEndpoint', 1);
 
 /*gemaiter end*/
 

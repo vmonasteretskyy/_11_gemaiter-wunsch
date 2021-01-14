@@ -152,12 +152,29 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     <!-- Start of gemalterwunsch Zendesk Widget script -->
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633"> </script>
     <!-- End of gemalterwunsch Zendesk Widget script -->
-    <?
+    <script>
+        // if user has shipping info - authenticate
+        //zopim with authenticate
+        zE(function() {
+            $zopim(function() {
+                $zopim.livechat.authenticate({
+                    jwtFn: function(callback) {
+                        fetch('<?php echo WP_HOME; ?>/?JWT_TOKEN_ENDPOINT=1').then(function(res) {
+                            res.text().then(function(jwt) {
+                                callback(jwt);
+                            });
+                        });
+                    }
+                });
+            });
+        });
+        //zopim without authenticate -- in custom.js -- checkZopim()
+    </script>
+    <?php
     $shippingFields = getShippingFieldsFromSession();
     if ((isset($shippingFields['first_name']) && $shippingFields['first_name'] && isset($shippingFields['first_name']) && $shippingFields['first_name'])
         && isset($shippingFields['email']) && $shippingFields['email']
-        && isset($shippingFields['phone']) && $shippingFields['first_name'] ):?>
-    ?>
+        && isset($shippingFields['phone']) && $shippingFields['first_name'] ): ?>
         <script>
             var zopimLivechatData = {
                 name: '<?php echo $shippingFields['first_name'] . ' ' . $shippingFields['last_name'];?>',
@@ -165,7 +182,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                 phone: '<?php echo $shippingFields['phone'];?>',
             };
         </script>
-    <?php else:?>
+    <?php else: ?>
         <script>
             var zopimLivechatData = {
                 name: '',
@@ -173,8 +190,7 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
                 phone: '',
             };
         </script>
-    <?php endif;?>
-
+    <?php endif; ?>
 </head>
 
 <body data-locale-mode="<?php echo WP_LOCALE_MODE; ?>" data-current-lang="<?php echo $current_lang;?>" <?php body_class('fixed-header'); ?>>

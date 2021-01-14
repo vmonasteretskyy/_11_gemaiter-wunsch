@@ -1066,6 +1066,18 @@ jQuery(document).ready(function ($) {
         function checkZopim() {
             setTimeout(function() {
                 if (typeof ($zopim) !== 'undefined' && typeof ($zopim.livechat) !== 'undefined' ) {
+                    /*
+                    //ignore this for now -- not working this part - $zopim.livechat.getName()
+                    zE(function() {
+                        $zopim.livechat.setOnChatStart(function () {
+                            // trigger when chat starts
+                            console.log(window.zopimLivechatData, window.zopimLivechatData.name, window.zopimLivechatData.phone);
+                            console.log($zopim.livechat.getName());
+                        });
+                    });*/
+
+                    /*
+                    //zopim without authenticate
                     setTimeout(function(){
                         if (!$zopim.livechat.getName()){
                             $zopim.livechat.setName(zopimLivechatData.name);
@@ -1078,7 +1090,7 @@ jQuery(document).ready(function ($) {
                         }
                         //$zopim.livechat.setLanguage(currentLang);
                         $zopim.livechat.addTags('');
-                    }, 1000);
+                    }, 1000);*/
                 } else {
                     checkZopim();
                 }

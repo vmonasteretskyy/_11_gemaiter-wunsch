@@ -1,0 +1,30 @@
+2021-01-15T11:00:37+00:00 CRITICAL Uncaught Error: Using $this when not in object context in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php:96
+Stack trace:
+#0 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include()
+#1 /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment.php(28): wc_get_template('checkout/paymen...', Array)
+#2 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include('/home/me/domain...')
+#3 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-template-functions.php(2283): wc_get_template('checkout/paymen...', Array)
+#4 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/class-wc-ajax.php(367): woocommerce_checkout_payment()
+#5 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(287): WC_AJAX::update_order_review('')
+#6 /home/me/domains/lh.me/public_html/wp-includes/cl in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php on line 96
+
+2021-01-15T11:00:39+00:00 CRITICAL Uncaught Error: Using $this when not in object context in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php:96
+Stack trace:
+#0 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include()
+#1 /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment.php(28): wc_get_template('checkout/paymen...', Array)
+#2 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include('/home/me/domain...')
+#3 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-template-functions.php(2283): wc_get_template('checkout/paymen...', Array)
+#4 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(287): woocommerce_checkout_payment('')
+#5 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#6 /home/me/domains/lh.me/public_html/wp-includes/plugin.php(484): WP_Hook->d in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php on line 96
+
+2021-01-15T11:00:48+00:00 CRITICAL Uncaught Error: Using $this when not in object context in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php:96
+Stack trace:
+#0 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include()
+#1 /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment.php(28): wc_get_template('checkout/paymen...', Array)
+#2 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-core-functions.php(345): include('/home/me/domain...')
+#3 /home/me/domains/lh.me/public_html/wp-content/plugins/woocommerce/includes/wc-template-functions.php(2283): wc_get_template('checkout/paymen...', Array)
+#4 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(287): woocommerce_checkout_payment('')
+#5 /home/me/domains/lh.me/public_html/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#6 /home/me/domains/lh.me/public_html/wp-includes/plugin.php(484): WP_Hook->d in /home/me/domains/lh.me/public_html/wp-content/themes/gemalter/woocommerce/checkout/payment-method.php on line 96
+

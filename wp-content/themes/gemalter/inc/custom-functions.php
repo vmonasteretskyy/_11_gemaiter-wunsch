@@ -649,6 +649,12 @@ function getShippingFieldsFromSession() {
     return $shippingFields;
 }
 
+//get customer fields from cookie
+function getCustomerFieldsFromCookie() {
+    $shippingFieldsFromCookie = isset($_COOKIE['csf']) ? json_decode(stripslashes($_COOKIE['csf']), 1) : [];
+    return $shippingFieldsFromCookie;
+}
+
 //get order fields from cookie
 function getOrderFieldsFromCookie() {
     $orderFieldsFromCookie = isset($_COOKIE['opd']) ? json_decode(stripslashes($_COOKIE['opd']), 1) : [];
