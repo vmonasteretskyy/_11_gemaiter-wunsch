@@ -687,6 +687,7 @@ jQuery( function( $ ) {
 				// When no saved cards are available, display the error next to CC fields.
 				errorContainer = selectedMethodElement.find( '.stripe-source-errors' );
 			}
+			console.log(selectedMethodElement, errorContainer);
 
 			/*
 			 * If payment method is SEPA and owner name is not completed,

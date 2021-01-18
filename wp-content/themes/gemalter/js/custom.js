@@ -1027,6 +1027,20 @@ jQuery(document).ready(function ($) {
     if ($('form.woocommerce-checkout').length) {
         const CHECK_INTERVAL = 500;
 
+        $document.on('change', '[name="payment_method"]', function (e) {
+            let val = $(this).val();
+            if (val == 'stripe') {
+                $('.stripe_extra_fields').show();
+            } else {
+                $('.stripe_extra_fields').hide();
+            }
+
+            if (val == 'klarna_payments_pay_later') {
+                $('.payment_method_klarna_payments_pay_later').show();
+            } else {
+                $('.payment_method_klarna_payments_pay_later').hide();
+            }
+        });
         function checkErrors() {
             if ($('form.woocommerce-checkout .woocommerce-NoticeGroup-checkout').length) {
                 let html = $('form.woocommerce-checkout .woocommerce-NoticeGroup-checkout').html();
@@ -1035,9 +1049,33 @@ jQuery(document).ready(function ($) {
             }
         }
 
+        function checkErrors2() {
+            if ($('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').length && $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html()) {
+                let html = $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html();
+                $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html('');
+                showInfoPopup(errorTitle, html);
+            }
+        }
+
         let checkInterval = setInterval(function () {
             checkErrors();
+            checkErrors2();
         }, CHECK_INTERVAL);
+
+        $document.on('click, mouseover', '.wc-stripe-elements-field', function (e) {
+            let item = $(this);
+            let target = item.data('target');
+            if ($('.' + target).length) {
+                $('.' + target).addClass('active');
+            }
+        });
+        $document.on('mouseout', '.wc-stripe-elements-field', function (e) {
+            let item = $(this);
+            let target = item.data('target');
+            if ($('.' + target).length) {
+                $('.' + target).removeClass('active');
+            }
+        });
     }
 
     /*show failed popup*/

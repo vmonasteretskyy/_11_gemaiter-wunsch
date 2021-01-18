@@ -24,9 +24,11 @@ if ( ! is_ajax() ) {
 	<?php if ( WC()->cart->needs_payment() ) : ?>
         <?php
         if ( !empty( $available_gateways ) ) {
+            echo '<ul class="wc_payment_methods payment_methods methods">';
             foreach ( $available_gateways as $gateway ) {
                 wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
             }
+            echo '</ul>';
         } else {
             echo '<ul class="wc_payment_methods payment_methods methods">';
             echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll_e('Sorry, it seems that there are no available payment methods for your country. Please contact us if you require assistance or wish to make alternate arrangements.') . '</li>'; // @codingStandardsIgnoreLine
