@@ -691,7 +691,7 @@ function ajax_get_sizes() {
                            data-w='<?php if ($data['use_size'] == 'inch'): ?><?php echo $itemSize['label_width_inch']; ?><?php else: ?><?php echo $itemSize['label_width']; ?><?php endif; ?>'
                            data-h='<?php if ($data['use_size'] == 'inch'): ?><?php echo $itemSize['label_height_inch']; ?><?php else: ?><?php echo $itemSize['label_height']; ?><?php endif; ?>'
                            value="<?php echo $keySize; ?>" data-summary='result-size'
-                           data-summary_text="<?php if ($data['use_size'] == 'inch'): ?><?php echo $itemSize['label_inch']; ?><?php else: ?><?php echo $itemSize['label']; ?><?php endif; ?>">
+                           data-summary_text='<?php if ($data['use_size'] == 'inch'): ?><?php echo $itemSize['label_inch']; ?><?php else: ?><?php echo $itemSize['label']; ?><?php endif; ?>'>
                     <span class="checkmark"></span>
                     <p class="r-size-card__size">
                         <?php if ($data['use_size'] == 'inch'): ?>
@@ -1260,7 +1260,7 @@ function ajax_get_edit_order_form_html() {
             <div class="select-label__picture">
             </div>
             <input class="input input-value-js" type="text" name="edit_size_text"
-                   value="<?php echo $dataFields['edit_size_text']; ?>" readonly placeholder="<?php pll_e('Size'); ?>"
+                   value='<?php echo $dataFields['edit_size_text']; ?>' readonly placeholder="<?php pll_e('Size'); ?>"
                    required/>
             <!-- Value of this input will be sent to back -->
             <input class="input input-key-js" name="edit_size" value="<?php echo $dataFields['edit_size']; ?>" readonly
