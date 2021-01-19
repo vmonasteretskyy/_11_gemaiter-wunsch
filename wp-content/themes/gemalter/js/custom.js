@@ -1034,8 +1034,7 @@ jQuery(document).ready(function ($) {
             } else {
                 $('.stripe_extra_fields').hide();
             }
-
-            if (val == 'klarna_payments_pay_later') {
+            if (val == 'klarna_payments_pay_later' || val == 'klarna_payments') {
                 $('.payment_method_klarna_payments_pay_later').show();
             } else {
                 $('.payment_method_klarna_payments_pay_later').hide();

@@ -151,3 +151,42 @@ form.woocommerce-checkout .woocommerce-NoticeGroup-checkout {
     font-size: 20px;
     margin-right: 5px;
 }
+
+.payment_box.payment_method_stripe {
+    width: 100%;
+}
+.payment_box.payment_method_stripe .wc-stripe-elements-field,
+.payment_box.payment_method_stripe .wc-stripe-iban-element-field {
+    border: none;
+    border-bottom: 1px solid #545454;
+    padding: 5px 16px;
+}
+.payment_box.payment_method_stripe .form-row label {
+    color: #8c8c8c;
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 500;
+}
+.payment_box.payment_method_stripe fieldset.wc-credit-card-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.payment_box.payment_method_stripe .form-row-wide {
+    width: 100%;
+    margin-bottom: 30px;
+}
+.payment_box.payment_method_stripe .form-row-first {
+    width: 48%;
+}
+.payment_box.payment_method_stripe .form-row-last {
+    width: 48%;
+}
+.payment_box.payment_method_stripe .form-row-wide2 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.payment_box.payment_method_stripe .wc-stripe-elements-field.credit-card__number {
+    padding-left: 50px;
+}

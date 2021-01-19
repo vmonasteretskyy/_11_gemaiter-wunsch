@@ -280,6 +280,10 @@ pll_register_string("Total:", "Total:");
 pll_register_string("Payment method:", "Payment method:");
 pll_register_string("Cart Items", "Cart Items");
 pll_register_string("Max 3 files can be uploaded.", "Max 3 files can be uploaded.");
+pll_register_string("Card Code (CVC)", "Card Code (CVC)");
+pll_register_string("Expiry Date", "Expiry Date");
+pll_register_string("Credit Card", "Credit Card");
+pll_register_string("Credit or debit card", "Credit or debit card");
 pll_register_string("Back", "Back");
 
 $countries = getCountries();
