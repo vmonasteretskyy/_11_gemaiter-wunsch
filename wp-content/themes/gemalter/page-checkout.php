@@ -37,8 +37,27 @@ WC()->cart->maybe_set_cart_cookies();
 
 get_header();
 ?>
-
     <!--Start page-->
+    <script>
+        var stripeErrors = {
+            "The card number is not a valid credit card number.": "<?php pll_e("The card number is not a valid credit card number.");?>",
+            "The card expiration month is invalid.": "<?php pll_e("The card expiration month is invalid.");?>",
+            "The card expiration year is invalid.": "<?php pll_e("The card expiration year is invalid.");?>",
+            "The card security code is invalid.": "<?php pll_e("The card security code is invalid.");?>",
+            "The card number is incorrect.": "<?php pll_e("The card number is incorrect.");?>",
+            "The card number is incomplete.": "<?php pll_e("The card number is incomplete.");?>",
+            "The card security code is incomplete.": "<?php pll_e("The card security code is incomplete.");?>",
+            "The card expiration date is incomplete.": "<?php pll_e("The card expiration date is incomplete.");?>",
+            'The card\'s expiration date is incomplete.': "<?php pll_e('The card\'s expiration date is incomplete.');?>",
+            "The card has expired.": "<?php pll_e("The card has expired.");?>",
+            "The card security code is incorrect.": "<?php pll_e("The card security code is incorrect.");?>",
+            "The card zip code failed validation.": "<?php pll_e("The card zip code failed validation.");?>",
+            "The card expiration year is in the past": "<?php pll_e("The card expiration year is in the past");?>",
+            "The card was declined.": "<?php pll_e("The card was declined.");?>",
+            "There is no card on a customer that is being charged.": "<?php pll_e("There is no card on a customer that is being charged.");?>",
+            "An error occurred while processing the card.": "<?php pll_e("An error occurred while processing the card.");?>",
+        };
+    </script>
     <div class="page-wrapper">
         <div class="cart-wrap">
             <div class="cart">

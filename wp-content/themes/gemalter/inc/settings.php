@@ -1931,7 +1931,6 @@ function jwtTokenEndpoint() {
             'iat' => time(),
             'external_id' => $external_id,
         ];
-        //test($payload);
         $secretCode = '432AB98E2D03D38FDB29ED28190060C21D62D8D04EC15BDEDBB239799F6EA035';
         $token = JWT::encode($payload, $secretCode);
         echo $token;
@@ -1939,6 +1938,33 @@ function jwtTokenEndpoint() {
     }
 }
 add_action( 'init', 'jwtTokenEndpoint', 1);
+
+// wc_stripe_localized_messages_func
+function wc_stripe_localized_messages_func($messages) {
+    return array(
+        'invalid_number'           => pll__( 'The card number is not a valid credit card number.'),
+        'invalid_expiry_month'     => pll__( 'The card\'s expiration month is invalid.'),
+        'invalid_expiry_year'      => pll__( 'The card\'s expiration year is invalid.'),
+        'invalid_cvc'              => pll__( 'The card\'s security code is invalid.'),
+        'incorrect_number'         => pll__( 'The card number is incorrect.'),
+        'incomplete_number'        => pll__( 'The card number is incomplete.'),
+        'incomplete_cvc'           => pll__( 'The card\'s security code is incomplete.'),
+        'incomplete_expiry'        => pll__( 'The card\'s expiration date is incomplete.'),
+        'expired_card'             => pll__( 'The card has expired.'),
+        'incorrect_cvc'            => pll__( 'The card\'s security code is incorrect.'),
+        'incorrect_zip'            => pll__( 'The card\'s zip code failed validation.'),
+        'invalid_expiry_year_past' => pll__( 'The card\'s expiration year is in the past'),
+        'card_declined'            => pll__( 'The card was declined.'),
+        'missing'                  => pll__( 'There is no card on a customer that is being charged.'),
+        'processing_error'         => pll__( 'An error occurred while processing the card.'),
+        'invalid_sofort_country'   => pll__( 'The billing country is not accepted by SOFORT. Please try another country.'),
+        'email_invalid'            => pll__( 'Invalid email address, please correct and try again.'),
+        'invalid_request_error'    => is_add_payment_method_page()
+            ? pll__( 'Unable to save this payment method, please try again or use alternative method.')
+            : pll__( 'Unable to process this payment, please try again or use alternative method.'),
+    );
+}
+add_filter('wc_stripe_localized_messages', 'wc_stripe_localized_messages_func', 10, 1);
 
 /*gemaiter end*/
 

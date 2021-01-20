@@ -15,34 +15,34 @@
  * @version 3.5.3
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-if ( ! is_ajax() ) {
-	do_action( 'woocommerce_review_order_before_payment' );
+if (!is_ajax()) {
+    do_action('woocommerce_review_order_before_payment');
 }
 ?>
-	<?php if ( WC()->cart->needs_payment() ) : ?>
-        <?php
-        if ( !empty( $available_gateways ) ) {
-            echo '<ul class="wc_payment_methods payment_methods methods">';
-            foreach ( $available_gateways as $gateway ) {
-                wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
-            }
-            echo '</ul>';
-        } else {
-            echo '<ul class="wc_payment_methods payment_methods methods">';
-            echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll_e('Sorry, it seems that there are no available payment methods for your country. Please contact us if you require assistance or wish to make alternate arrangements.') . '</li>'; // @codingStandardsIgnoreLine
-            echo '</ul>';
-        }
-        ?>
-	<?php else: ?>
-        <?php
+<?php if (WC()->cart->needs_payment()) : ?>
+    <?php
+    if (!empty($available_gateways)) {
         echo '<ul class="wc_payment_methods payment_methods methods">';
-        echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll_e('Payments is not required. You can continue without paying.') . '</li>'; // @codingStandardsIgnoreLine
+        foreach ($available_gateways as $gateway) {
+            wc_get_template('checkout/payment-method.php', array('gateway' => $gateway));
+        }
         echo '</ul>';
-        ?>
-	<?php endif; ?>
+    } else {
+        echo '<ul class="wc_payment_methods payment_methods methods">';
+        echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll_e('Sorry, it seems that there are no available payment methods for your country. Please contact us if you require assistance or wish to make alternate arrangements.') . '</li>'; // @codingStandardsIgnoreLine
+        echo '</ul>';
+    }
+    ?>
+<?php else: ?>
+    <?php
+    echo '<ul class="wc_payment_methods payment_methods methods">';
+    echo '<li class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . pll_e('Payments is not required. You can continue without paying.') . '</li>'; // @codingStandardsIgnoreLine
+    echo '</ul>';
+    ?>
+<?php endif; ?>
 <?php
-if ( ! is_ajax() ) {
-	do_action( 'woocommerce_review_order_after_payment' );
+if (!is_ajax()) {
+    do_action('woocommerce_review_order_after_payment');
 }

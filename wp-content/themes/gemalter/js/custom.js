@@ -1054,8 +1054,13 @@ jQuery(document).ready(function ($) {
 
         function checkErrors2() {
             if ($('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').length && $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html()) {
-                let html = $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html();
+                let html = $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').text();
+                if (html && stripeErrors.hasOwnProperty(html)) {
+                    html = stripeErrors[html] +'test 111';
+                }
+                console.log(html, stripeErrors);
                 $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html('');
+                $('form.woocommerce-checkout .credit-card__row .stripe-source-errors').html(html);
                 showInfoPopup(errorTitle, html);
             }
         }

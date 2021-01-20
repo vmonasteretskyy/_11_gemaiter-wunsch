@@ -81,7 +81,7 @@ get_header();
                             <div class=""><?php pll_e('size'); ?></div>
                             <div class=""><?php pll_e('price'); ?></div>
                         </div>
-                        <?php foreach ($prices['oil']['sizes'] as $sizeKey => $size): ?>
+                        <?php foreach ($prices['charcoal']['sizes'] as $sizeKey => $size): ?>
                             <?php if ($size['available']): ?>
                                 <div class="card-table__row js-size-options">
                                     <div>
@@ -119,11 +119,11 @@ get_header();
                         </div>
                         <div class="card-table__row custom-size js-custom-size">
                             <div class="custom-size__fields">
-                                <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>10<?php else: ?>25<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>47<?php else: ?>120<?php endif;?>' placeholder="width">
+                                <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>6<?php else: ?>14.8<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>28<?php else: ?>70<?php endif;?>' placeholder="width">
                                 <span>
                                       x
                                   </span>
-                                <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>14<?php else: ?>35<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>71<?php else: ?>180<?php endif;?>' placeholder="height">
+                                <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>8<?php else: ?>21<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>39<?php else: ?>100<?php endif;?>' placeholder="height">
                             </div>
                             <div>
                                 <input type="text" class="js-size-result custom-size__result" readonly>
@@ -169,7 +169,7 @@ get_header();
                             <div class="h6 choose-card-title"><?php echo $fields['choose_2']['title'];?></div>
                         <?php endif; ?>
                     </div>
-                    <?php if ($prices['charcoal']): ?>
+                    <?php if ($prices['oil']): ?>
                         <div class="card-table m-t-65">
                             <h6 class="card-table__head">
                                 <?php pll_e('Our prices starts at'); ?>
@@ -178,11 +178,11 @@ get_header();
                                 <div class="col-6"><?php pll_e('size'); ?></div>
                                 <div class="col-6"><?php pll_e('price'); ?></div>
                             </div>
-                            <?php foreach ($prices['charcoal']['sizes'] as $sizeKey => $size): ?>
+                            <?php foreach ($prices['oil']['sizes'] as $sizeKey => $size): ?>
                                 <?php if ($size['available']): ?>
-                                <div class="card-table__row js-size-options">
-                                    <div class="widen-label">
-                                        <?php
+                                    <div class="card-table__row js-size-options">
+                                        <div class="widen-label">
+                                            <?php
                                             if ($prices['use_size'] == 'inch') {
                                                 $sizeInfo = $size['label_inch'];
                                                 $sizeInfo = str_replace(['x', '"', ' '], ["-", '', ''], $sizeInfo);
@@ -192,18 +192,18 @@ get_header();
                                             }
                                             $sizeInfo['width'] = isset($sizeInfo[0]) ? $sizeInfo[0] : 0;
                                             $sizeInfo['height'] = isset($sizeInfo[1]) ? $sizeInfo[1] : 0;
-                                        ?>
-                                        <span style="display: none;" class="width"><?php echo $sizeInfo['width']; ?></span>
-                                        <span style="display: none;" class="height"><?php echo $sizeInfo['height']; ?></span>
-                                        <?php echo ($prices['use_size'] == 'inch' ? $size['label_inch'] : $size['label']); ?>
+                                            ?>
+                                            <span style="display: none;" class="width"><?php echo $sizeInfo['width']; ?></span>
+                                            <span style="display: none;" class="height"><?php echo $sizeInfo['height']; ?></span>
+                                            <?php echo ($prices['use_size'] == 'inch' ? $size['label_inch'] : $size['label']); ?>
+                                        </div>
+                                        <div class="price-wrapper">
+                                            <?php if ($size['regular']['old_price'] != $size['regular']['price']):?>
+                                                <span class="old_price"><?php echo $prices['currency_symbol']; ?> <?php echo $size['regular']['old_price']; ?></span>
+                                            <?php endif; ?>
+                                            <?php echo $prices['currency_symbol']; ?> <span class="price"><?php echo $size['regular']['price']; ?></span>
+                                        </div>
                                     </div>
-                                    <div class="price-wrapper">
-                                        <?php if ($size['regular']['old_price'] != $size['regular']['price']):?>
-                                            <span class="old_price"><?php echo $prices['currency_symbol']; ?> <?php echo $size['regular']['old_price']; ?></span>
-                                        <?php endif; ?>
-                                        <?php echo $prices['currency_symbol']; ?> <span class="price"><?php echo $size['regular']['price']; ?></span>
-                                    </div>
-                                </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <div class="card-table__row custom-size-action">
@@ -216,11 +216,11 @@ get_header();
                             </div>
                             <div class="card-table__row custom-size js-custom-size">
                                 <div class="custom-size__fields">
-                                    <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>6<?php else: ?>14.8<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>28<?php else: ?>70<?php endif;?>' placeholder="width">
+                                    <input type="number" class="js-size-width" data-min='<?php if ($prices['use_size'] == 'inch'):?>10<?php else: ?>25<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>47<?php else: ?>120<?php endif;?>' placeholder="width">
                                     <span>
                                           x
                                       </span>
-                                    <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>8<?php else: ?>21<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>39<?php else: ?>100<?php endif;?>' placeholder="height">
+                                    <input type="number" class="js-size-height" data-min='<?php if ($prices['use_size'] == 'inch'):?>14<?php else: ?>35<?php endif;?>' data-max='<?php if ($prices['use_size'] == 'inch'):?>71<?php else: ?>180<?php endif;?>' placeholder="height">
                                 </div>
                                 <div>
                                     <input type="text" class="js-size-result custom-size__result" readonly>
