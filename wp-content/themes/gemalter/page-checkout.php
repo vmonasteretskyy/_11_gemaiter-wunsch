@@ -32,7 +32,6 @@ if (!$isOrderReceived && !$hasRequireFields) {
     wp_redirect($location);
     exit;
 }
-
 WC()->cart->calculate_totals();
 WC()->cart->maybe_set_cart_cookies();
 

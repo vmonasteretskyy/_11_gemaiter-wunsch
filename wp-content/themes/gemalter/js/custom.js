@@ -769,6 +769,7 @@ jQuery(document).ready(function ($) {
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
                     wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-tax-amount]').html(data.tax);
                     wrapper.find('[data-cart-discount-amount]').html(data.discount);
                     if (data.discount_main) {
                         wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
@@ -822,6 +823,7 @@ jQuery(document).ready(function ($) {
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
                     wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-tax-amount]').html(data.tax);
                     wrapper.find('[data-cart-discount-amount]').html(data.discount);
                     if (data.discount_main) {
                         wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
@@ -869,6 +871,7 @@ jQuery(document).ready(function ($) {
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
                     wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-tax-amount]').html(data.tax);
                     wrapper.find('[data-cart-discount-amount]').html(data.discount);
                     if (data.discount_main) {
                         wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();
@@ -918,6 +921,7 @@ jQuery(document).ready(function ($) {
                 } else {
                     wrapper.find('[data-cart-total-amount]').html(data.total);
                     wrapper.find('[data-cart-subtotal-amount]').html(data.subtotal);
+                    wrapper.find('[data-cart-tax-amount]').html(data.tax);
                     wrapper.find('[data-cart-discount-amount]').html(data.discount);
                     if (data.discount_main) {
                         wrapper.find('[data-cart-discount-amount]').closest(".c-table__row").show();

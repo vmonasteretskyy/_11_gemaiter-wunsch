@@ -413,6 +413,20 @@ get_header();
                                         </div>
                                     </div>
 
+                                    <?php if (WC()->cart->get_taxes_total()): ?>
+                                        <div class="c-table__row">
+                                            <div class="c-table-left">
+                                                <?php pll_e('Tax Total'); ?>
+                                            </div>
+                                            <div class="c-table-right f-22">
+                                                <span class="f-16"><?php echo $data['currency_symbol']; ?></span>
+                                                <span data-cart-tax-amount="">
+                                                    <?php echo wc_price(WC()->cart->get_taxes_total()); ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
                                     <div class="c-table__row">
                                         <div class="c-table-left">
                                             <div class="c-table-select">

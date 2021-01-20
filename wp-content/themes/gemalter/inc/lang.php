@@ -284,6 +284,7 @@ pll_register_string("Card Code (CVC)", "Card Code (CVC)");
 pll_register_string("Expiry Date", "Expiry Date");
 pll_register_string("Credit Card", "Credit Card");
 pll_register_string("Credit or debit card", "Credit or debit card");
+pll_register_string("Tax Total", "Tax Total");
 pll_register_string("Back", "Back");
 
 $countries = getCountries();

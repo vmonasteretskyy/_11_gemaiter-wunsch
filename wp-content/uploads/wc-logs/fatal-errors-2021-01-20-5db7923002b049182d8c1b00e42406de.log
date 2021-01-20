@@ -1,0 +1,20 @@
+2021-01-20T06:11:34+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function WC_Cart::get_tax_amount(), 0 passed in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\page-checkout.php on line 35 and exactly 1 expected in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-cart.php:2023
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\page-checkout.php(35): WC_Cart->get_tax_amount()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\template-loader.php(106): include('D:\\PROGRAMS\\Ope...')
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-blog-header.php(19): require_once('D:\\PROGRAMS\\Ope...')
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\index.php(17): require('D:\\PROGRAMS\\Ope...')
+#4 {main}
+  thrown in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-cart.php on line 2023
+
+2021-01-20T06:12:23+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function WC_Cart::get_shipping_tax_amount(), 0 passed in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\page-checkout.php on line 35 and exactly 1 expected in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-cart.php:2034
+Stack trace:
+#0 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\page-checkout.php(35): WC_Cart->get_shipping_tax_amount()
+#1 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-includes\template-loader.php(106): include('D:\\PROGRAMS\\Ope...')
+#2 D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-blog-header.php(19): require_once('D:\\PROGRAMS\\Ope...')
+#3 D:\PROGRAMS\OpenServer\domains\gemaiter.me\index.php(17): require('D:\\PROGRAMS\\Ope...')
+#4 {main}
+  thrown in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\plugins\woocommerce\includes\class-wc-cart.php on line 2034
+
+2021-01-20T06:12:56+00:00 CRITICAL syntax error, unexpected ')' in D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\page-checkout.php on line 35
+

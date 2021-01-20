@@ -169,6 +169,7 @@ function ajax_product_remove() {
         'total_products' => WC()->cart->get_cart_contents_count(),
         'total' => WC()->cart->get_total(),
         'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'tax' => wc_price(WC()->cart->get_taxes_total()),
         'discount' => wc_price(WC()->cart->get_discount_total()),
         'discount_main' => WC()->cart->get_discount_total(),
     );
@@ -233,6 +234,7 @@ function ajax_apply_coupon() {
         'total_products' => WC()->cart->get_cart_contents_count(),
         'total' => WC()->cart->get_total(),
         'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'tax' => wc_price(WC()->cart->get_taxes_total()),
         'discount' => wc_price(WC()->cart->get_discount_total()),
         'discount_main' => WC()->cart->get_discount_total(),
     );
@@ -296,6 +298,7 @@ function ajax_cancel_coupon() {
         'total_products' => WC()->cart->get_cart_contents_count(),
         'total' => WC()->cart->get_total(),
         'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'tax' => wc_price(WC()->cart->get_taxes_total()),
         'discount' => wc_price(WC()->cart->get_discount_total()),
         'discount_main' => WC()->cart->get_discount_total(),
     );
@@ -353,6 +356,7 @@ function set_quantity() {
         'item_total_price' => wc_price($item_total_price),
         'total' => WC()->cart->get_total(),
         'subtotal' => wc_price(WC()->cart->get_subtotal()),
+        'tax' => wc_price(WC()->cart->get_taxes_total()),
         'discount' => wc_price(WC()->cart->get_discount_total()),
         'discount_main' => WC()->cart->get_discount_total(),
     );
