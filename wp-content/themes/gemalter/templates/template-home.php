@@ -92,7 +92,7 @@ get_header();
                             <?php echo $main_banner_1['intro_subtitle_mobile'];?>
                         </p>
                     <?php endif;?>
-                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border btn--accent-order"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
             <div class="introduction__item">
@@ -131,7 +131,7 @@ get_header();
     ?>
     <?php if ($screen2Data['title'] || $screen2Data['screen_2_subtitle'] || $screen2Data['screen_2_subtitle_text'] || !empty($screen2Data['screen_2_slider'])): ?>
         <!-- Start our-gallery section -->
-        <section class="section our-gallery ">
+        <section class="section our-gallery our-gallery__first-sect">
             <div class="section-inner">
                 <div class="our-gallery-inner">
                     <?php if($screen2Data['title']): ?>
@@ -187,7 +187,7 @@ get_header();
                                                 <div class="slider_progress_pointer"></div>
                                             </div>
                                         </div>
-                                        <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                                        <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border btn--accent-order"><?php pll_e('Order Now');?></a>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -246,7 +246,7 @@ get_header();
                                             <div class="slider_progress_pointer"></div>
                                         </div>
                                     </div>
-                                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border btn--accent-order"><?php pll_e('Order Now');?></a>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -393,7 +393,7 @@ get_header();
                     </ul>
                 <?php endif; ?>
                 <div class="benefits__actions">
-                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border btn--accent-order"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
         </section>
@@ -456,16 +456,23 @@ get_header();
                                                                 <?php echo $artist['name']; ?>
                                                             </h3>
                                                         <?php endif; ?>
+
+                                                     
                                                         <?php if ((isset($artist['name']) && $artist['name'])): ?>
                                                             <div class="member__quote">
                                                                 <i><?php echo $artist['quote']; ?></i>
                                                             </div>
                                                         <?php endif; ?>
+
+                                     <span class=" btn btn--accent-border  see-more__member-button">See more</span>
+                                                        <span class="see-more__member-cont">
+                                                 
                                                         <?php if ((isset($artist['text']) && $artist['text'])): ?>
                                                         <p>
                                                             <?php echo $artist['text']; ?>
                                                         </p>
                                                         <?php endif; ?>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -555,7 +562,7 @@ get_header();
                 <?php endif; ?>
 
                 <div class="img-text__actions">
-                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border"><?php pll_e('Order Now');?></a>
+                    <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border btn--accent-order"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
         </div>

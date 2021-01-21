@@ -42,7 +42,7 @@ get_header();
             <?php endif; ?>
         </div>
         <div class="container mx-w-1050">
-            <div class="choose-cards choose-cards--full">
+            <div class="choose-cards choose-cards--full choose-cards__price">
                 <div class="choose-card choose__card choose-card--big-img">
                     <div class="choose-card__label">
                         <?php if (isset($fields['choose_1']['text_above_image']) && $fields['choose_1']['text_above_image']): ?>

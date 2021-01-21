@@ -190,3 +190,13 @@ form.woocommerce-checkout .woocommerce-NoticeGroup-checkout {
 .payment_box.payment_method_stripe .wc-stripe-elements-field.credit-card__number {
     padding-left: 50px;
 }
+
+@media (max-width: 991.98px) {
+ 
+.card-table__row > .widen-label {
+  min-width: 190px;
+}
+.card-table__row > *:first-child {
+  min-width: 180px;
+}
+}

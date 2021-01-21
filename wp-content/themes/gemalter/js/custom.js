@@ -1056,7 +1056,7 @@ jQuery(document).ready(function ($) {
             if ($('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').length && $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html()) {
                 let html = $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').text();
                 if (html && stripeErrors.hasOwnProperty(html)) {
-                    html = stripeErrors[html] +'test 111';
+                    html = stripeErrors[html];
                 }
                 console.log(html, stripeErrors);
                 $('form.woocommerce-checkout .c-payment__acc .stripe-source-errors').html('');
@@ -1163,4 +1163,16 @@ function getCookie(c_name) {
         }
     }
     return "";
+}
+
+if(document.querySelector('.see-more__member-cont')){
+    let seeMoreCont = document.querySelectorAll('.see-more__member-cont')
+    let seeMoreBtn = document.querySelectorAll('.see-more__member-button')
+    for(let i of seeMoreBtn){
+        i.addEventListener('click', () => {
+            i.classList.add('active')
+            i.nextElementSibling.classList.add('active')
+            console.log(i.nextElementSibling)
+        })
+    }
 }
