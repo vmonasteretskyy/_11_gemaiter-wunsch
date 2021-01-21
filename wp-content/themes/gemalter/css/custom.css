@@ -191,12 +191,16 @@ form.woocommerce-checkout .woocommerce-NoticeGroup-checkout {
     padding-left: 50px;
 }
 
-@media (max-width: 991.98px) {
- 
-.card-table__row > .widen-label {
-  min-width: 190px;
+label[for="payment_method_klarna_payments_pay_later"] > a {
+    display: none;
 }
-.card-table__row > *:first-child {
-  min-width: 180px;
-}
+
+@media (max-width: 991.98px){
+    .card-table__row > .widen-label{
+        min-width: 190px;
+    }
+
+    .card-table__row > *:first-child{
+        min-width: 180px;
+    }
 }

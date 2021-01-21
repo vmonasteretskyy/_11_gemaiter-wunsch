@@ -464,9 +464,8 @@ get_header();
                                                             </div>
                                                         <?php endif; ?>
 
-                                     <span class=" btn btn--accent-border  see-more__member-button">See more</span>
+                                                        <span class=" btn btn--accent-border  see-more__member-button"><?php pll_e('See More');?></span>
                                                         <span class="see-more__member-cont">
-                                                 
                                                         <?php if ((isset($artist['text']) && $artist['text'])): ?>
                                                         <p>
                                                             <?php echo $artist['text']; ?>

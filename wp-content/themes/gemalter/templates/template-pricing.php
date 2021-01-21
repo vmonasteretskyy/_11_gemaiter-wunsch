@@ -21,7 +21,7 @@ $prices = [
 $duration = getDuration();
 
 get_header();
-//test($prices);
+
 ?>
 
     <!--Start page-->
@@ -248,7 +248,7 @@ get_header();
                     <tr>
                         <td class="new-type-table"></td>
                         <?php foreach ($duration['all_locales']['durations']['painting_technique'] as $item): ?>
-                            <td class="new-title-table"><?php echo $item['label'];?><br> (<?php echo $item['sub_label'];?>)</td>
+                            <td class="new-title-table"><?php echo $item['label'];?><br> (<?php echo ($prices['use_size'] == 'inch' ? $item['sub_label_inch'] : $item['sub_label']);?>)</td>
                         <?php endforeach; ?>
                     </tr>
                     <tr id="new-table-collapse">

@@ -5350,6 +5350,7 @@ function getDuration() {
                         'painting_technique' => 'oil',
                         'label' => pll__('Medium oil portraits'),
                         'sub_label' => '25x35 cm - 40x60 cm',
+                        'sub_label_inch' => '10"x14" - 16"x24"',
                         'sizes' => [
                             '25-35',
                             '30-40',
@@ -5381,6 +5382,7 @@ function getDuration() {
                         'painting_technique' => 'oil',
                         'label' => pll__('Large oil portraits'),
                         'sub_label' => '50x70 cm - 120x180 cm',
+                        'sub_label_inch' => '20"x28" - 47"x71"',
                         'sizes' => [
                             '50-70',
                             '60-80',
@@ -5413,6 +5415,7 @@ function getDuration() {
                         'painting_technique' => 'charcoal',
                         'label' => pll__('Charcoal'),
                         'sub_label' => pll__('all sizes'),
+                        'sub_label_inch' => pll__('all sizes'),
                         'sizes' => [],
                         'regular' => [
                             'label' => '14 ' . pll__('days'),
