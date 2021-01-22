@@ -54532,3 +54532,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ })
 /******/ ]);
+
+/*BUG FIXING:START*/
+
+if(document.querySelector('.see-more__member-cont')){
+
+  let seeMoreCont = document.querySelectorAll('.see-more__member-cont')
+
+  let seeMoreBtn = document.querySelectorAll('.see-more__member-button')
+
+  for(let i of seeMoreBtn){
+
+      i.addEventListener('click', () => {
+
+          i.classList.add('active')
+
+          i.nextElementSibling.classList.add('active')
+          
+      })
+
+  }
+
+}
+
+/*BUG FIXING:END*/
