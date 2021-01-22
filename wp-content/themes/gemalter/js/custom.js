@@ -1165,14 +1165,3 @@ function getCookie(c_name) {
     return "";
 }
 
-if(document.querySelector('.see-more__member-cont')){
-    let seeMoreCont = document.querySelectorAll('.see-more__member-cont')
-    let seeMoreBtn = document.querySelectorAll('.see-more__member-button')
-    for(let i of seeMoreBtn){
-        i.addEventListener('click', () => {
-            i.classList.add('active')
-            i.nextElementSibling.classList.add('active')
-            console.log(i.nextElementSibling)
-        })
-    }
-}

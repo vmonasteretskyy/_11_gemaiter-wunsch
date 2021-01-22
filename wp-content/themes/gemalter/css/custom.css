@@ -40,9 +40,6 @@ form.busy,
     min-width: 200px;
 }
 
-.card-table__row > .widen-label {
-    min-width: 270px;
-}
 
 .card-table__row .price-wrapper {
     font-size: 15px;
@@ -196,10 +193,6 @@ label[for="payment_method_klarna_payments_pay_later"] > a {
 }
 
 @media (max-width: 991.98px){
-    .card-table__row > .widen-label{
-        min-width: 190px;
-    }
-
     .card-table__row > *:first-child{
         min-width: 180px;
     }

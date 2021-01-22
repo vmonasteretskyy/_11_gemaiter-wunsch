@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-home.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +165,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/wp-content/themes/gemalter" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -173,11 +176,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/wp-content/themes/gemalter" />
       <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\woocommerce" />
       <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\inc" />
       <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\templates" />
       <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter" />
-      <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter\template-parts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PROGRAMS\OpenServer\domains\gemaiter.me\wp-content\themes\gemalter" />
@@ -324,7 +327,7 @@
       <workItem from="1611214856315" duration="833000" />
       <workItem from="1611262452862" duration="3095000" />
       <workItem from="1611296163481" duration="2743000" />
-      <workItem from="1611310250539" duration="633000" />
+      <workItem from="1611310250539" duration="4032000" />
     </task>
     <servers />
   </component>

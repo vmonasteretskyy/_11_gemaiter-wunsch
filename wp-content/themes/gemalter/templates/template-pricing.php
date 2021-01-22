@@ -42,7 +42,7 @@ get_header();
             <?php endif; ?>
         </div>
         <div class="container mx-w-1050">
-            <div class="choose-cards choose-cards--full choose-cards__price">
+            <div class="choose-cards choose-cards--full">
                 <div class="choose-card choose__card choose-card--big-img">
                     <div class="choose-card__label">
                         <?php if (isset($fields['choose_1']['text_above_image']) && $fields['choose_1']['text_above_image']): ?>
@@ -78,8 +78,8 @@ get_header();
                             <?php pll_e('Our prices starts at'); ?>
                         </h6>
                         <div class="new-txt-size">
-                            <div class=""><?php pll_e('size'); ?></div>
-                            <div class=""><?php pll_e('price'); ?></div>
+                            <div><?php pll_e('size'); ?></div>
+                            <div><?php pll_e('price'); ?></div>
                         </div>
                         <?php foreach ($prices['charcoal']['sizes'] as $sizeKey => $size): ?>
                             <?php if ($size['available']): ?>
@@ -174,9 +174,9 @@ get_header();
                             <h6 class="card-table__head">
                                 <?php pll_e('Our prices starts at'); ?>
                             </h6>
-                            <div class="row new-txt-size">
-                                <div class="col-6"><?php pll_e('size'); ?></div>
-                                <div class="col-6"><?php pll_e('price'); ?></div>
+                            <div class="new-txt-size">
+                                <div ><?php pll_e('size'); ?></div>
+                                <div ><?php pll_e('price'); ?></div>
                             </div>
                             <?php foreach ($prices['oil']['sizes'] as $sizeKey => $size): ?>
                                 <?php if ($size['available']): ?>

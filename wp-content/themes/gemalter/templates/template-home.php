@@ -131,7 +131,7 @@ get_header();
     ?>
     <?php if ($screen2Data['title'] || $screen2Data['screen_2_subtitle'] || $screen2Data['screen_2_subtitle_text'] || !empty($screen2Data['screen_2_slider'])): ?>
         <!-- Start our-gallery section -->
-        <section class="section our-gallery our-gallery__first-sect">
+        <section class="section our-gallery our-gallery-first-section">
             <div class="section-inner">
                 <div class="our-gallery-inner">
                     <?php if($screen2Data['title']): ?>
@@ -466,11 +466,11 @@ get_header();
 
                                                         <span class=" btn btn--accent-border  see-more__member-button"><?php pll_e('See More');?></span>
                                                         <span class="see-more__member-cont">
-                                                        <?php if ((isset($artist['text']) && $artist['text'])): ?>
-                                                        <p>
-                                                            <?php echo $artist['text']; ?>
-                                                        </p>
-                                                        <?php endif; ?>
+                                                            <?php if ((isset($artist['text']) && $artist['text'])): ?>
+                                                            <p>
+                                                                <?php echo $artist['text']; ?>
+                                                            </p>
+                                                            <?php endif; ?>
                                                         </span>
                                                     </div>
                                                 </div>
