@@ -10178,43 +10178,7 @@ input[type="number"] {
 .p-step__label.active:after {
   background-color: #f9ab97;
 }
-@media (max-width: 991.98px) {
-  .procedure-inner:before {
-    left: 20px;
-  }
-  .p-step,
-  .p-step--revers {
-    display: block;
-    margin: 50px 0;
-    padding-left: 70px;
-  }
-  .p-step .p-step__picture,
-  .p-step .p-step__descr,
-  .p-step--revers .p-step__picture,
-  .p-step--revers .p-step__descr {
-    padding-left: 0;
-    padding-right: 0;
-    max-width: none;
-  }
-  .p-step .p-step__picture,
-  .p-step--revers .p-step__picture {
-    padding-right: 70px;
-  }
-  .p-step .p-step__picture img,
-  .p-step--revers .p-step__picture img {
-    display: block;
-    margin: 0 auto;
-  }
-  .p-step .p-step__label,
-  .p-step--revers .p-step__label {
-    left: 0;
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
+
 @media (max-width: 575.98px) {
   .p-step .p-step__picture,
   .p-step--revers .p-step__picture {
