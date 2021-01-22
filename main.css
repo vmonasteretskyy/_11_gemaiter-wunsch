@@ -9009,7 +9009,7 @@ input[type="number"] {
   padding: 0 15px;
 }
 .new-txt-size > div:first-child {
-  min-width: 180px;
+  min-width: 200px;
 }
 @media (max-width: 995px) {
   .new-title-price {
@@ -15687,6 +15687,11 @@ body {
   .our-gallery--big-padding {
     padding-top: 10px;
   }
+
+
+  .new-txt-size > div:first-child {
+    min-width: 180px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -15939,3 +15944,8 @@ body {
 /* .our-gallery .btn--accent-order{
   transform: translateX(-132px);
 } */
+
+
+.card-table__row > .widen-label {
+  min-width: 200px;
+}
