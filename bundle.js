@@ -54556,3 +54556,62 @@ if(document.querySelector('.see-more__member-cont')){
 }
 
 /*BUG FIXING:END*/
+
+/*ADD DROPDOWN FOR CART:START*/
+
+if(document.querySelector('.cart')){
+if (window.matchMedia("(max-width: 768px)").matches) {
+const acc = document.getElementsByClassName("accordion");
+
+let i;
+
+for (i = 0; i < acc.length; i++) {
+
+  acc[i].addEventListener("click", function() {
+
+    this.classList.toggle("active");
+
+    let panel = this.nextElementSibling;
+
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+}
+}
+
+/*ADD DROPDOWN FOR CART:END*/
+
+/*IF MODAL CONTACT OPEN SCROL = FALSE:START*/
+
+if(document.querySelector('#modal-contact')){
+if (window.matchMedia("(max-width: 768px)").matches) {
+
+  const modalContactWrap = document.querySelector('#modal-contact')
+
+  document.querySelector('.modal-event-js').addEventListener('click', () =>{
+  setTimeout(() => {
+
+    if(modalContactWrap.classList.contains('open')){
+      document.querySelector('body').style.overflow = 'hidden'
+    }
+
+  }, 300);
+})
+
+modalContactWrap.addEventListener('click', () =>{
+  setTimeout(() => {
+
+    if(!modalContactWrap.classList.contains('open')){
+      document.querySelector('body').style.overflow = 'auto' 
+    } 
+
+  }, 300);
+})
+}
+}
+
+/*IF MODAL CONTACT OPEN SCROL = FALSE:END*/
