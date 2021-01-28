@@ -15766,6 +15766,11 @@ body {
 
 @media (max-width: 768px) {
 
+
+  .card-table__row div:nth-child(2) {
+    padding: 7px 5px;
+}
+
 /* accordion  */
 
 .page-cart .cart__aside .c-form:first-child{ 
