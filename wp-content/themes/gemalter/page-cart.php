@@ -282,14 +282,14 @@ get_header();
 
                     <div class="cart__aside">
                         <div class="c-form">
-                            <h6 class="c-form__title">
-                                <?php pll_e('Shipping Address'); ?>
-                            </h6>
                             <?php
                             $countries = getCountries(true);
                             ?>
                             <script>var countriesList = <?php echo json_encode($countries); ?>;</script>
-                            <div class="gift-card__form">
+                            <h6 class="c-form__title accordion">
+                                <?php pll_e('Shipping Address'); ?>
+                            </h6>
+                            <div class="gift-card__form panel">
                                 <p><i><?php pll_e('Shipping Address Text'); ?></i></p>
                                 <form data-shipping-cart-form="" action="" class="form">
                                     <div class="form-group--05">

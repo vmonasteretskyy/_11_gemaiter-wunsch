@@ -754,6 +754,7 @@ function ajax_get_sizes() {
             <?php $iter++; ?>
             <label class="radio-button radio-button<?php echo $iter; ?>">
                 <input <?php if ($type == $priceTypeSelected): ?>checked<?php endif; ?>
+                       data-sel_date="<?php echo $typeData['type_date_sel_from']; ?>"
                        data-from="<?php echo $typeData['type_date_from']; ?>"
                        data-calendar_class="<?php echo $typeData['type_calendar_style']; ?>"
                        data-count="<?php echo $typeData['type_count']; ?>" type="radio"
@@ -926,6 +927,14 @@ function ajax_add_to_cart_main_product() {
     if (!$product_attributes['delivery_date']) {
         $hasError = true;
         $errorMessage .= pll__('Delivery Date is empty.') . '<br>';
+    } else {
+        //TODO: check delivery date for weekend
+        $deliveryDate = $product_attributes['delivery_date'];
+        $dayN = date("N", strtotime($deliveryDate));
+        if ($dayN > 5) {
+            $hasError = true;
+            $errorMessage .= pll__('Delivery date falls on Saturday/Sunday. Choose another date.') . '<br>';
+        }
     }
     if ($hasError) {
         echo json_encode([
@@ -1377,12 +1386,17 @@ function ajax_add_shipping_data() {
         $errorMessage .= pll__("Country is missing.") . "<br>";
     }
     if (!$shippingFields['phone']) {
-        $hasError = true;
-        $errorMessage .= pll__("Phone is missing.") . "<br>";
+        //$hasError = true;
+        //$errorMessage .= pll__("Phone is missing.") . "<br>";
     }
     if (!$shippingFields['email']) {
         $hasError = true;
         $errorMessage .= pll__("Email is missing.") . "<br>";
+    } elseif ($shippingFields['email']) {
+        if (!filter_var($shippingFields["email"], FILTER_VALIDATE_EMAIL)){
+            $hasError = true;
+            $errorMessage .= pll__("Email is not valid.") . "<br>";
+        }
     }
     
     if ($hasError) {

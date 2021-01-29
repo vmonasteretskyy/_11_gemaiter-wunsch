@@ -692,28 +692,59 @@ jQuery(document).ready(function ($) {
     if ($('#order_form').length) {
         //save fields on change step
         $(document).on('click', '#order_form .step', function (e) {
+            let currentStep = activeStep;
             let index = $(this).index();
+            activeStep = index;
             let form = $('#order_form');
             let formData = form.serializeObject();
             formData = Object.assign(formData, {activeStep: index});
             setCookie('opd', JSON.stringify(formData), 30, '/');
+            if (currentStep == 1 && activeStep == 2) {
+                if (!allFiles.length && !$("input[name='second_option_to_send_photo']:checked").length && !$("input[name='artist_advice']:checked").length){
+                    showInfoPopup(photoErrorTitle, photoErrorMessage);
+                    let item = $('#order_form .step').eq(currentStep);
+                    if(item.length){
+                        setTimeout(function(){
+                            item[0].dispatchEvent(new Event('click'));
+                            formData = Object.assign(formData, {activeStep: currentStep});
+                            setCookie('opd', JSON.stringify(formData), 30, '/');
+                        }, 500);
+                    }
+                }
+            }
         });
 
         $(document).on('click', '#order_form .controls__next, #order_form .order-actions__back', function (e) {
             setTimeout(function () {
+                let currentStep = activeStep;
                 let item = $('#order_form .step.active');
                 let index = item.index();
-                console.log(index);
+                activeStep = index;
+                console.log(currentStep, activeStep);
                 let form = $('#order_form');
                 let formData = form.serializeObject();
                 formData = Object.assign(formData, {activeStep: index});
                 setCookie('opd', JSON.stringify(formData), 30, '/');
+                if (currentStep == 1 && activeStep == 2) {
+                    if (!allFiles.length && !$("input[name='second_option_to_send_photo']:checked").length && !$("input[name='artist_advice']:checked").length){
+                        showInfoPopup(photoErrorTitle, photoErrorMessage);
+                        let item = $('#order_form .step').eq(currentStep);
+                        if(item.length){
+                            setTimeout(function(){
+                                item[0].dispatchEvent(new Event('click'));
+                                formData = Object.assign(formData, {activeStep: currentStep});
+                                setCookie('opd', JSON.stringify(formData), 30, '/');
+                            }, 500);
+                        }
+                    }
+                }
             }, 500);
         });
 
         //save fields on change input fields
         $(document).on('change', '#order_form input, #order_form select, #order_form textarea', function (e) {
             let index = $(this).index();
+            activeStep = index;
             let form = $('#order_form');
             let formData = form.serializeObject();
             formData = Object.assign(formData, {activeStep: index});
@@ -732,6 +763,27 @@ jQuery(document).ready(function ($) {
                 }
             }
         });
+
+        if ($window.width() < 992){
+            history.pushState(null, null, location.href);
+            window.onpopstate = function(){
+                console.log('onpopstate', activeStep);
+                if(activeStep > 0){
+                    activeStep = 0;
+                    history.go(1);
+                    let item = $('#order_form .step').eq(activeStep);
+                    if(item.length){
+                        setTimeout(function(){
+                            item[0].dispatchEvent(new Event('click'));
+                            let form = $('#order_form');
+                            let formData = form.serializeObject();
+                            formData = Object.assign(formData, {activeStep: activeStep});
+                            setCookie('opd', JSON.stringify(formData), 30, '/');
+                        }, 100);
+                    }
+                }
+            };
+        }
     }
 
     /*order page end*/

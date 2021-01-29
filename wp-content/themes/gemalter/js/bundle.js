@@ -51466,6 +51466,10 @@ function initCalender() {
             }
             var dateEl = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.from, "YYYY-MM-DD");
             var maxdays = addMomentDays(dateEl, +el.dataset.count);
+            var selDate = null;
+            if (el.dataset.sel_date) {
+                selDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.sel_date, "YYYY-MM-DD");
+            }
             $picker.attr('class', defaultClassName);
             console.log(defaultClassName);
             if (el.dataset.calendar_class)
@@ -51479,6 +51483,9 @@ function initCalender() {
             if (selectedDate) {
                 selectedDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(selectedDate, "YYYY-MM-DD").toDate();
                 $picker.data('datepicker').selectDate(selectedDate);
+            } else if (selDate) {
+                selDate = selDate.toDate();
+                $picker.data('datepicker').selectDate(selDate);
             }
         }
         sdr.forEach(function (el) {
@@ -51491,6 +51498,10 @@ function initCalender() {
                 }
                 var dateEl = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.from, "YYYY-MM-DD");
                 var maxdays = addMomentDays(dateEl, +el.dataset.count);
+                var selDate = null;
+                if (el.dataset.sel_date) {
+                    selDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(el.dataset.sel_date, "YYYY-MM-DD");
+                }
                 $picker.attr('class', defaultClassName);
                 if (el.dataset.calendar_class)
                     $picker.addClass(el.dataset.calendar_class);
@@ -51499,7 +51510,13 @@ function initCalender() {
                     maxDate: maxdays.toDate(),
                     defaultDate: dateEl.toDate(),
                 });
-                $picker.data('datepicker').selectDate(dateEl.toDate());
+                if (selDate) {
+                    selDate = selDate.toDate();
+                    $picker.data('datepicker').selectDate(selDate);
+                } else {
+                    selDate = dateEl.toDate();
+                    $picker.data('datepicker').selectDate(selDate);
+                }
             });
         });
     }
@@ -54652,3 +54669,62 @@ if(document.querySelector('.see-more__member-cont')){
 }
 
 /*BUG FIXING:END*/
+
+/*ADD DROPDOWN FOR CART:START*/
+
+if(document.querySelector('.cart')){
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const acc = document.getElementsByClassName("accordion");
+
+        let i;
+
+        for (i = 0; i < acc.length; i++) {
+
+            acc[i].addEventListener("click", function() {
+
+                this.classList.toggle("active");
+
+                let panel = this.nextElementSibling;
+
+                if (panel.style.maxHeight){
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    }
+}
+
+/*ADD DROPDOWN FOR CART:END*/
+
+/*IF MODAL CONTACT OPEN SCROL = FALSE:START*/
+
+if(document.querySelector('#modal-contact')){
+    if (window.matchMedia("(max-width: 768px)").matches) {
+
+        const modalContactWrap = document.querySelector('#modal-contact')
+
+        document.querySelector('.modal-event-js').addEventListener('click', () =>{
+            setTimeout(() => {
+
+                if(modalContactWrap.classList.contains('open')){
+                    document.querySelector('body').style.overflow = 'hidden'
+                }
+
+            }, 300);
+        })
+
+        modalContactWrap.addEventListener('click', () =>{
+            setTimeout(() => {
+
+                if(!modalContactWrap.classList.contains('open')){
+                    document.querySelector('body').style.overflow = 'auto'
+                }
+
+            }, 300);
+        })
+    }
+}
+
+/*IF MODAL CONTACT OPEN SCROL = FALSE:END*/

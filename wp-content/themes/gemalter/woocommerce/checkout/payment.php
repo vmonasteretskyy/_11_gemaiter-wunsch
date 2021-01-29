@@ -26,6 +26,9 @@ if (!is_ajax()) {
     if (!empty($available_gateways)) {
         echo '<ul class="wc_payment_methods payment_methods methods">';
         foreach ($available_gateways as $gateway) {
+            if ($gateway->id == 'cod') {
+                continue; // also remove from admin
+            }
             wc_get_template('checkout/payment-method.php', array('gateway' => $gateway));
         }
         echo '</ul>';

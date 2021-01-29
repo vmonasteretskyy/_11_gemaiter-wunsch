@@ -23,7 +23,7 @@ $data['use_size'] = $allPricesData[$current_lang]['use_size'];
 session_start();
 $shippingFields = getShippingFieldsFromSession();
 $hasRequireFields = true;
-if (!$shippingFields['first_name'] || !$shippingFields['last_name'] || !$shippingFields['address'] || !$shippingFields['city'] || !$shippingFields['state'] || !$shippingFields['postal_code'] || !$shippingFields['country'] || !$shippingFields['phone'] || !$shippingFields['email']) {
+if (!$shippingFields['first_name'] || !$shippingFields['last_name'] || !$shippingFields['address'] || !$shippingFields['city'] || !$shippingFields['state'] || !$shippingFields['postal_code'] || !$shippingFields['country'] || !$shippingFields['email']) {
     $hasRequireFields = false;
 }
 $isOrderReceived = is_wc_endpoint_url('order-received');

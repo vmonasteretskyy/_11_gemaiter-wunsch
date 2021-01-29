@@ -216,7 +216,12 @@ $previewImgPath = getOrderPreviewImg($paintingTechnique, $subject, $customSubjec
 
 get_header();
 ?>
-    <script>var allFiles = []; activeStep = <?php echo $activeStep;?>;</script>
+    <script>
+        var allFiles = [];
+        var activeStep = <?php echo $activeStep;?>;
+        var photoErrorTitle = '<?php pll_e("Error");?>';
+        var photoErrorMessage = '<?php pll_e("Photos are missing.");?>';
+    </script>
     <!--Start page-->
     <form id="order_form" class="page-wrapper page-order" onsubmit="return false;">
         <?php if ($cartItemID):?>
@@ -854,7 +859,7 @@ get_header();
                                 <?php foreach($data['duration_with_date']['types'] as $type => $typeData): ?>
                                     <?php $iter++;?>
                                     <label class="radio-button radio-button<?php echo $iter;?>">
-                                        <input <?php if ($type == $priceTypeSelected):?>checked<?php endif;?> data-from="<?php echo $typeData['type_date_from']; ?>" data-calendar_class="<?php echo $typeData['type_calendar_style']; ?>" data-count="<?php echo $typeData['type_count']; ?>" type="radio"
+                                        <input <?php if ($type == $priceTypeSelected):?>checked<?php endif;?> data-sel_date="<?php echo $typeData['type_date_sel_from']; ?>" data-from="<?php echo $typeData['type_date_from']; ?>" data-calendar_class="<?php echo $typeData['type_calendar_style']; ?>" data-count="<?php echo $typeData['type_count']; ?>" type="radio"
                                                name="duration_type" value="<?php echo $type; ?>"  class="select_day_radio">
                                         <span class="checkmark"></span>
                                         <p>

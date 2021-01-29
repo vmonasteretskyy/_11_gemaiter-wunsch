@@ -5360,7 +5360,7 @@ function getDuration() {
                         'regular' => [
                             'label' => '19 ' . pll__('days'),
                             'duration_range' => [19],
-                            'count' => 30,
+                            'count' => 80,
                         ],
                         'express' => [
                             'label' => '16 ' . pll__('days'),
@@ -5393,7 +5393,7 @@ function getDuration() {
                         'regular' => [
                             'label' => '21 ' . pll__('days'),
                             'duration_range' => [21],
-                            'count' => 30,
+                            'count' => 80,
                         ],
                         'express' => [
                             'label' => '18 ' . pll__('days'),
@@ -5420,7 +5420,7 @@ function getDuration() {
                         'regular' => [
                             'label' => '14 ' . pll__('days'),
                             'duration_range' => [14],
-                            'count' => 30,
+                            'count' => 80,
                         ],
                         'express' => [
                             'label' => '11 ' . pll__('days'),
@@ -5474,21 +5474,33 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
 
             if ($durationFrom) {
                 $paintingTechniqueData[$type]['type_date_from'] = date("Y-m-d", strtotime('+' . $durationFrom . 'days'));
-                /*$dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_from']));
+                $paintingTechniqueData[$type]['type_date_sel_from'] = $paintingTechniqueData[$type]['type_date_from'];
+                
+                $dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_from']));
+                
                 if ($dayN > 5) {
                     while (1) {
-                        $paintingTechniqueData[$type]['type_date_from'] = date("Y-m-d", strtotime($paintingTechniqueData[$type]['type_date_from'] . ' +1 day'));
-                        $dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_from']));
+                        $paintingTechniqueData[$type]['type_date_sel_from'] = date("Y-m-d", strtotime($paintingTechniqueData[$type]['type_date_sel_from'] . ' +1 day'));
+                        $dayN = date("N", strtotime($paintingTechniqueData[$type]['type_date_sel_from']));
                         if ($dayN < 6) {
                             break;
                         }
                     }
-                }*/
+                }
             }
+            
+            if ($paintingTechniqueData[$type]['type_date_sel_from']) {
+                $durationTo = $durationFrom + $paintingTechniqueData[$type]['type_count'];
+                if (strtotime($paintingTechniqueData[$type]['type_date_sel_from']) >= strtotime(date("Y-m-d", strtotime('+' . $durationTo . 'days')))) {
+                    $paintingTechniqueData[$type]['type_date_sel_from'] = '';
+                }
+            }
+            
             $paintingTechniqueData[$type]['type_date'] = pll__(date("l", strtotime($paintingTechniqueData[$type]['type_date_from']))) . ', ' . date("d.m Y", strtotime($paintingTechniqueData[$type]['type_date_from']));
             $paintingTechniqueData['types'][$type] = $paintingTechniqueData[$type];
         }
     }
+    test($paintingTechniqueData);
     return $paintingTechniqueData;
 }
 

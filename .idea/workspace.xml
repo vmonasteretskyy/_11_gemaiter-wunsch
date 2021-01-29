@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/templates/template-pricing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-31-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,6 +335,14 @@
       <workItem from="1611262452862" duration="3095000" />
       <workItem from="1611296163481" duration="2743000" />
       <workItem from="1611310250539" duration="4032000" />
+      <workItem from="1611738921211" duration="410000" />
+      <workItem from="1611761755581" duration="1238000" />
+      <workItem from="1611914168986" duration="3491000" />
+      <workItem from="1611920283695" duration="117000" />
+      <workItem from="1611920415235" duration="38000" />
+      <workItem from="1611923262997" duration="8081000" />
+      <workItem from="1611957014992" duration="9135000" />
+      <workItem from="1612039852301" duration="4189000" />
     </task>
     <servers />
   </component>
