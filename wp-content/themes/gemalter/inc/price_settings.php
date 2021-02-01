@@ -5500,7 +5500,6 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
             $paintingTechniqueData['types'][$type] = $paintingTechniqueData[$type];
         }
     }
-    test($paintingTechniqueData);
     return $paintingTechniqueData;
 }
 

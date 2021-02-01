@@ -917,7 +917,7 @@ function ajax_add_to_cart_main_product() {
         }
     }
     
-    if ($product_attributes['frame'] == 'not_need_frame') {
+    if (!$product_attributes['frame'] || $product_attributes['frame'] == 'not_need_frame') {
         $product_attributes['frame_selected'] = null;
     }
     if (!$product_attributes['duration_type']) {
@@ -1711,6 +1711,8 @@ add_filter('woocommerce_order_item_get_formatted_meta_data', function ($formatte
                                 $metaValue = 'Yes, I need a frame for My Portrait';
                             } else if ($metaValue == 'not_need_frame') {
                                 $metaValue = 'I buy myself a picture frame';
+                            } else {
+                                $metaValue = '-';
                             }
                             break;
                         case "_product_attribute_frame_selected":

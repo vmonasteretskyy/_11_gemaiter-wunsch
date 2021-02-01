@@ -743,8 +743,11 @@ jQuery(document).ready(function ($) {
 
         //save fields on change input fields
         $(document).on('change', '#order_form input, #order_form select, #order_form textarea', function (e) {
-            let index = $(this).index();
-            activeStep = index;
+            let index = activeStep;
+            if ($(this).attr('id') != 'deliveryDate') {
+                index = $(this).closest('.js-active-section').index('.js-active-section');
+                activeStep = index;
+            }
             let form = $('#order_form');
             let formData = form.serializeObject();
             formData = Object.assign(formData, {activeStep: index});
@@ -769,8 +772,8 @@ jQuery(document).ready(function ($) {
             window.onpopstate = function(){
                 console.log('onpopstate', activeStep);
                 if(activeStep > 0){
-                    activeStep = 0;
-                    history.go(1);
+                    activeStep = activeStep - 1;
+                    //history.go(1);
                     let item = $('#order_form .step').eq(activeStep);
                     if(item.length){
                         setTimeout(function(){
@@ -781,6 +784,8 @@ jQuery(document).ready(function ($) {
                             setCookie('opd', JSON.stringify(formData), 30, '/');
                         }, 100);
                     }
+                } else {
+                    history.back();
                 }
             };
         }

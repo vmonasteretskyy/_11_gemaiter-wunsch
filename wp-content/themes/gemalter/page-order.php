@@ -198,7 +198,7 @@ if (!empty($data['frames'])) {
         $data['frames'][$key]->is_popular = get_field('frame_is_popular', $frame->taxonomy . '_' . $frame->term_id);
     }
 }
-$frameType = "need_frame";
+$frameType = "";
 if ($cartRecord && isset($cartRecord['attributes']['frame']) && $cartRecord['attributes']['frame']) {
     $frameType = $cartRecord['attributes']['frame'];
 } else if (isset($orderFieldsFromCookie['frame']) && $orderFieldsFromCookie['frame']) {
@@ -690,6 +690,15 @@ get_header();
                 <div class="upload-inner">
                     <div class="container-small">
                         <label class="radio-button fz-18 text--w-500 js-radio-accordion">
+                            <input type="radio" name="frame" <?php if ($frameType== "not_need_frame"):?> checked="checked" <?php endif;?> value="not_need_frame">
+                            <span class="checkmark"></span>
+                            <p>
+                                <?php pll_e('I buy myself a picture frame');?>
+                            </p>
+                        </label>
+                    </div>
+                    <div class="container-small">
+                        <label class="radio-button fz-18 text--w-500 js-radio-accordion">
                             <input type="radio"  <?php if ($frameType== "need_frame"):?> checked="checked" <?php endif;?>
                                    name="frame" value="need_frame"  data-content='#choose-frame-content' >
                             <span class="checkmark"></span>
@@ -758,15 +767,6 @@ get_header();
                                 </div>
                             </div>
                         <?php endif; ?>
-                    </div>
-                    <div class="container-small">
-                        <label class="radio-button fz-18 text--w-500 js-radio-accordion">
-                            <input type="radio" name="frame" <?php if ($frameType== "not_need_frame"):?> checked="checked" <?php endif;?> value="not_need_frame">
-                            <span class="checkmark"></span>
-                            <p>
-                                <?php pll_e('I buy myself a picture frame');?>
-                            </p>
-                        </label>
                     </div>
                 </div>
             </div>

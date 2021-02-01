@@ -5,15 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/lang.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/price_settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/inc/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/page-order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2020-12-31-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/checkout/payment.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,6 +339,8 @@
       <workItem from="1611923262997" duration="8081000" />
       <workItem from="1611957014992" duration="9135000" />
       <workItem from="1612039852301" duration="4189000" />
+      <workItem from="1612169192010" duration="1420000" />
+      <workItem from="1612174725791" duration="3280000" />
     </task>
     <servers />
   </component>
