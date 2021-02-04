@@ -15881,9 +15881,10 @@ body {
     justify-content: flex-start;
   }
 
-  .btn--accent-order {
+  .btn--accent-order, .benefits--gallery  .btn--accent-border, .img-text-mod__action  .btn--accent-border, .about-intro__left  .btn--accent-border, .gift-card__form .btn--accent-border{
     background-color: #f9ab97;
     color: #fff;
+ 
   }
 
   .new-txt-size > div {
@@ -15975,6 +15976,12 @@ body {
 }
 #order_form .title-wrap {
 padding: 0;
+}
+
+@media (max-width: 575.98px){
+.gallery-slider__item:before {
+  background: none !important;
+}
 }
 
 
@@ -16069,3 +16076,8 @@ padding: 0;
 
 
 
+/* // developer testing space */
+
+.modal-contact{
+  display: none !important;
+}
