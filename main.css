@@ -16072,14 +16072,3 @@ padding: 0;
   display: none;
 }
 
-
-
-
-
-/* // developer testing space */
-
-#modal-contact, .our-gallery, .first-section, .section.choose, .img-text  {
-  display: none !important;
-}
-
-
