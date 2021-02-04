@@ -62,7 +62,7 @@ get_header();
                     <a href="<?php the_url( (get_url_lang_prefix()) . 'order/');?>" class="btn btn--accent-border introduction-descr__btn"><?php pll_e('Order Now');?></a>
                 </div>
             </div>
-            <div class="introduction__item video-with-control">
+            <div class="introduction__item ">
                 <?php
                 $main_banner_2 = isset($fields['main_banner_2']) ? $fields['main_banner_2'] : '';
                 $image = '';
@@ -72,12 +72,9 @@ get_header();
                     }
                 }
                 ?>
-                <video width="100%" height="100%" <?php if ($image): ?> poster="<?php echo $image; ?>" <?php endif;?> >
-                    <?php if (isset($main_banner_2['video']['url']) && !empty($main_banner_2['video']['url'])) : ?>
-                        <source src="<?php echo $main_banner_2['video']['url'];?>" type="<?php echo $main_banner_2['video']['mime_type'];?>">
-                    <?php endif;?>
-                    <?php pll_e('Your browser does not support the video tag.'); ?>
-                </video>
+                <?php if (isset($image) && !empty($image)) : ?>
+                    <img src="<?php echo $image;?>" alt="" class="img-video-v">
+                <?php endif;?>
                 <div class="video-control"></div>
             </div>
             <div class="introduction__item">

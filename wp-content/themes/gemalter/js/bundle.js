@@ -53355,7 +53355,7 @@ function videoControl() {
     var videos = document.querySelectorAll(VIDEO_WITH_CONTROL);
     videos.forEach(function (item) {
         var video = item.querySelector('video');
-        var control = item.querySelector(VIDEO_CONTROL);
+        var control = document.querySelector(VIDEO_CONTROL);
         if (!video && !control) {
             return;
         }
@@ -54228,6 +54228,10 @@ function GoToStep(stepNumber) {
     if (formData.step === Step.characteristic) {
         document.querySelector(BTN_ORDER_BACK).classList.add('hidden');
     }
+    if (formData.step === Step.upload) {
+        var slider = document.querySelector(SLIDER_FRAME);
+        initSliderGallery(slider, false);
+    }
     return;
 }
 function lastStep(formData) {
@@ -54728,3 +54732,25 @@ if(document.querySelector('#modal-contact')){
 }
 
 /*IF MODAL CONTACT OPEN SCROL = FALSE:END*/
+
+/* VIDEO MODAL : START */
+
+let popupVideoContainer = document.querySelector('.popup-video__container')
+let popupVideo = document.querySelector('.popup-video__container video')
+document.querySelector('.video-control').addEventListener('click', () => {
+    popupVideoContainer.classList.add('active')
+})
+
+document.querySelector('.popup-video__close').addEventListener('click', () => {
+    document.querySelector('.video-control').classList.remove('play')
+    popupVideoContainer.classList.remove('active')
+    popupVideo.pause()
+})
+document.querySelector('.popup-video__bg').addEventListener('click', () => {
+    document.querySelector('.video-control').classList.remove('play')
+    popupVideoContainer.classList.remove('active')
+    popupVideo.pause()
+})
+
+
+/* VIDEO MODAL : END */

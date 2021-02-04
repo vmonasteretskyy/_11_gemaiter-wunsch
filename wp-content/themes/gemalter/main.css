@@ -7304,6 +7304,30 @@ input[type="number"] {
   min-width: 12px;
   background-color: #545454;
 }
+
+
+
+.social-message__container{
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+width: 45px;
+z-index: 100;
+}
+.social-message__container a{
+  display: block;
+  margin-bottom:7px;
+}
+
+  .social-message__container a{
+  margin-bottom: 13px;
+  height: 45px;
+  }
+
+.social-message__container a svg{
+  width: 48px;
+  height: 48px;
+}
 @media (max-width: 370px) {
   .pagination li:first-child a {
     padding-right: 0;
@@ -15589,7 +15613,81 @@ input[type="number"] {
     font-size: 14px;
   }
 }
+
+
+
+/* ..... */
+/* ..... */
+/* NEW STYLE */
+/* ..... */
+/* ..... */
+/* ..... */
+
+
+
+
+.popup-video__container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  z-index: 200;
+}
+
+.popup-video__container video {
+  display: block;
+  max-width: max-content;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+}
+
+.popup-video__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+   opacity: .7;
+   transition: all .3s
+}
+
+.popup-video__container.active {
+  display: block;
+}
+
+.popup-video__close {
+  z-index: 110;
+  position: absolute;
+  top: 15px;
+  right:15px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background:rgba(0, 0, 0, .7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+.popup-video__close svg{
+fill: #fff
+}
+
+
+
+
+
 @media (min-width: 992px) {
+
+  .choose-card__picture img {
+    width: 340px;
+}
+
   .hidden-on-desktop {
     display: none;
   }
@@ -15775,6 +15873,7 @@ body {
 
 
 @media (max-width: 768px) {
+
   .size-preview {
     background-size: cover;
     background-position: center 100px;
@@ -15881,9 +15980,10 @@ body {
     justify-content: flex-start;
   }
 
-  .btn--accent-order {
+  .btn--accent-order, .benefits--gallery  .btn--accent-border, .img-text-mod__action  .btn--accent-border, .about-intro__left  .btn--accent-border, .gift-card__form .btn--accent-border{
     background-color: #f9ab97;
     color: #fff;
+ 
   }
 
   .new-txt-size > div {
@@ -15977,6 +16077,12 @@ body {
 padding: 0;
 }
 
+@media (max-width: 575.98px){
+.gallery-slider__item:before {
+  background: none !important;
+}
+}
+
 
 
 }
@@ -16066,6 +16172,9 @@ padding: 0;
 }
 
 
-
+.img-video-v{
+  width: 100%;
+  height: 100%;
+}
 
 
