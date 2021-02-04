@@ -16078,6 +16078,8 @@ padding: 0;
 
 /* // developer testing space */
 
-#modal-contact{
+#modal-contact, .our-gallery, .first-section{
   display: none !important;
 }
+
+
