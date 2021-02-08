@@ -7310,9 +7310,13 @@ input[type="number"] {
 .social-message__container{
   position: fixed;
   bottom: 60px;
-  right: 20px;
+  right: 23px;
 width: 45px;
 z-index: 100;
+display: none;
+}
+.social-message__container.active{
+display: block;
 }
 .social-message__container a{
   display: block;
@@ -15659,6 +15663,7 @@ z-index: 100;
 
 .popup-video__container.active {
   display: block;
+  z-index: 999999;
 }
 
 .popup-video__close {
@@ -16237,10 +16242,6 @@ min-width: 160px;
   height: 100%;
 }
 
-
-
-/* // testing */
-
-.preloader{
-  display: none;
+#fullpage{
+overflow: hidden !important;
 }

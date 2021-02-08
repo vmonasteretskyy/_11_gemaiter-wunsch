@@ -52945,6 +52945,7 @@ function createFullPage() {
     });
     // console.log('CREATE fullpage');
 }
+
 function rebuildFullPage() {
     if (fullPageObject) {
         // console.log('REABUILD');
@@ -52958,6 +52959,41 @@ function destroyFullPage() {
         fullPageObject = null;
     }
 }
+
+/* VIDEO MODAL : START */
+if(document.querySelector('.popup-video__container')){
+
+   let popupVideoContainer = document.querySelector('.popup-video__container')
+        let popupVideo = document.querySelector('.popup-video__container video')
+        document.querySelector('.video-control').addEventListener('click', () => {
+              popupVideoContainer.classList.add('active')
+              destroyFullPage()
+              document.querySelector('body').style.overflow = 'hidden'
+        })
+
+        document.querySelector('.popup-video__close').addEventListener('click', () => {
+          document.querySelector('.video-control').classList.remove('play')
+          popupVideoContainer.classList.remove('active')
+          popupVideo.pause()
+          createFullPage()
+          if(screen.width < 1200 || screen.height < 600){
+            document.querySelector('body').style.overflow = 'auto'
+        }
+        })
+        document.querySelector('.popup-video__bg').addEventListener('click', () => {
+          document.querySelector('.video-control').classList.remove('play')
+          popupVideoContainer.classList.remove('active')
+          popupVideo.pause()
+          createFullPage()
+          if(screen.width < 1200 || screen.height < 600){
+            document.querySelector('body').style.overflow = 'auto'
+        }
+        }) 
+
+      }
+      /* VIDEO MODAL : END */
+
+
 /* harmony default export */ var fullPage = (fullPagePlugin);
 
 // CONCATENATED MODULE: ./src/ts/helpers/resizeWindow.ts
@@ -54616,25 +54652,15 @@ modalContactWrap.addEventListener('click', () =>{
 
 /*IF MODAL CONTACT OPEN SCROL = FALSE:END*/
 
+/* SOCIAL TIMEOUT : START */
+if(document.querySelector('.social-message__container')){
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+      document.querySelector('.social-message__container').classList.add('active')
+   }, 2000)
+  });
+}
 
-/* VIDEO MODAL : START */
+/* SOCIAL TIMEOUT : END */
 
-   let popupVideoContainer = document.querySelector('.popup-video__container')
-        let popupVideo = document.querySelector('.popup-video__container video')
-        document.querySelector('.video-control').addEventListener('click', () => {
-          popupVideoContainer.classList.add('active')
-        })
 
-        document.querySelector('.popup-video__close').addEventListener('click', () => {
-          document.querySelector('.video-control').classList.remove('play')
-          popupVideoContainer.classList.remove('active')
-          popupVideo.pause()
-        })
-        document.querySelector('.popup-video__bg').addEventListener('click', () => {
-          document.querySelector('.video-control').classList.remove('play')
-          popupVideoContainer.classList.remove('active')
-          popupVideo.pause()
-        })
-
-        
-/* VIDEO MODAL : END */
