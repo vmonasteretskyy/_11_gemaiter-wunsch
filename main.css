@@ -15636,7 +15636,8 @@ display: block;
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
+  /* bottom: 0; */
+  height: 90%;
   display: none;
   z-index: 200;
 }
@@ -15655,7 +15656,8 @@ display: block;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* bottom: 0; */
+  height: 90%;
   background: #000;
    opacity: .7;
    transition: all .3s
