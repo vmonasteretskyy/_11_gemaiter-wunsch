@@ -510,7 +510,7 @@ jQuery(document).ready(function ($) {
             if ($('.gallery .gallery__image').length) {
                 $('.gallery .gallery__image').each(function (index, item) {
                     const element = $(this);
-                    if (index > 2) {
+                    if (index > 7) {
                         element.remove();
                     }
                 });

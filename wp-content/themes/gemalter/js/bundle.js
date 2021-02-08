@@ -53017,6 +53017,40 @@ function destroyFullPage() {
         fullPageObject = null;
     }
 }
+
+/* VIDEO MODAL : START */
+if(document.querySelector('.popup-video__container')){
+
+    let popupVideoContainer = document.querySelector('.popup-video__container')
+    let popupVideo = document.querySelector('.popup-video__container video')
+    document.querySelector('.video-control').addEventListener('click', () => {
+        popupVideoContainer.classList.add('active')
+        destroyFullPage()
+        document.querySelector('body').style.overflow = 'hidden'
+    })
+
+    document.querySelector('.popup-video__close').addEventListener('click', () => {
+        document.querySelector('.video-control').classList.remove('play')
+        popupVideoContainer.classList.remove('active')
+        popupVideo.pause()
+        createFullPage()
+        if(screen.width < 1200 || screen.height < 600){
+            document.querySelector('body').style.overflow = 'auto'
+        }
+    })
+    document.querySelector('.popup-video__bg').addEventListener('click', () => {
+        document.querySelector('.video-control').classList.remove('play')
+        popupVideoContainer.classList.remove('active')
+        popupVideo.pause()
+        createFullPage()
+        if(screen.width < 1200 || screen.height < 600){
+            document.querySelector('body').style.overflow = 'auto'
+        }
+    })
+
+}
+/* VIDEO MODAL : END */
+
 /* harmony default export */ var fullPage = (fullPagePlugin);
 
 // CONCATENATED MODULE: ./src/ts/helpers/resizeWindow.ts
@@ -53809,7 +53843,7 @@ var upload_Upload = /** @class */ (function () {
         this.input.addEventListener('change', function (event) {
             if (event.target instanceof HTMLInputElement && event.target.files) {
                 var files = Array.from(event.target.files);
-                files = files.slice(0, 3);//wp-developer
+                files = files.slice(0, 8);//wp-developer
                 _this.handleFiles(files);
                 _this.renderPreviews(files);
             }
@@ -53828,9 +53862,9 @@ var upload_Upload = /** @class */ (function () {
         files = files.filter(function (item) {
             return item.type.indexOf("image/") != -1 ? true : false;
         });
-        files = files.slice(0, 3);//wp-developer
+        files = files.slice(0, 8);//wp-developer
 
-        if (this.files.length >= 3) {
+        if (this.files.length >= 8) {
             return;
         }
         this.handleFiles(files);
@@ -53839,7 +53873,7 @@ var upload_Upload = /** @class */ (function () {
     Upload.prototype.handleFiles = function (files) {
         var _a;
         this.files = __spreadArrays(this.files, files);
-        this.files = this.files.slice(0, 3);//wp-developer
+        this.files = this.files.slice(0, 8);//wp-developer
         if ((_a = this.options) === null || _a === void 0 ? void 0 : _a.onChange) {
             //wp-developer
             //this.options.onChange(this.files);
@@ -53848,7 +53882,7 @@ var upload_Upload = /** @class */ (function () {
     };
     Upload.prototype.renderPreviews = function (files) {
         if (files === void 0) { files = this.files; }
-        files = files.slice(0, 3);//wp-developer
+        files = files.slice(0, 8);//wp-developer
         files.forEach(this.renderPreview.bind(this));
     };
     Upload.prototype.renderPreview = function (file) {
@@ -54733,24 +54767,13 @@ if(document.querySelector('#modal-contact')){
 
 /*IF MODAL CONTACT OPEN SCROL = FALSE:END*/
 
-/* VIDEO MODAL : START */
+/* SOCIAL TIMEOUT : START */
+if(document.querySelector('.social-message__container')){
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelector('.social-message__container').classList.add('active')
+        }, 2000)
+    });
+}
 
-let popupVideoContainer = document.querySelector('.popup-video__container')
-let popupVideo = document.querySelector('.popup-video__container video')
-document.querySelector('.video-control').addEventListener('click', () => {
-    popupVideoContainer.classList.add('active')
-})
-
-document.querySelector('.popup-video__close').addEventListener('click', () => {
-    document.querySelector('.video-control').classList.remove('play')
-    popupVideoContainer.classList.remove('active')
-    popupVideo.pause()
-})
-document.querySelector('.popup-video__bg').addEventListener('click', () => {
-    document.querySelector('.video-control').classList.remove('play')
-    popupVideoContainer.classList.remove('active')
-    popupVideo.pause()
-})
-
-
-/* VIDEO MODAL : END */
+/* SOCIAL TIMEOUT : END */

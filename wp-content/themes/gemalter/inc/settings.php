@@ -680,6 +680,20 @@ function ajax_get_sizes() {
     $price = $data['sizes'][$size]['price'];
     $discountOutput = getDiscount($price, $data['currency']);
     
+    $applyIsPopularForPersons = false;
+    if (in_array($subject, ['person_1', 'person_2', 'custom'])) {
+        if ($subject == 'custom') {
+            $customPersons = isset($_REQUEST['subject_custom']['persons']) ? trim($_REQUEST['subject_custom']['persons']) : 0;
+            $customPets = isset($_REQUEST['subject_custom']['pets']) ? trim($_REQUEST['subject_custom']['pets']) : 0;
+            
+            if ($customPersons > 0 && $customPets == 0) {
+                $applyIsPopularForPersons = true;
+            }
+        } else {
+            $applyIsPopularForPersons = true;
+        }
+    }
+    
     $html = '';
     ob_start();
     ?>
@@ -731,6 +745,9 @@ function ajax_get_sizes() {
                                   fill="#F9AB97"/>
                         </svg>
                         <?php echo $itemSize['max_subjects']; ?> <?php pll_e('subject max'); ?>
+                        <?php if ($applyIsPopularForPersons && isset($itemSize['is_popular']) && $itemSize['is_popular']):?>
+                            &nbsp;(<?php pll_e('popular'); ?>)
+                        <?php endif; ?>
                     </span>
                 </label>
             </div>

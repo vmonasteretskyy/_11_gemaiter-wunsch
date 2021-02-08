@@ -214,6 +214,16 @@ if ($cartRecord && isset($cartRecord['attributes']['frame_selected']) && $cartRe
 $customSubject = isset($cartRecord['attributes']['subject_custom']) ? $cartRecord['attributes']['subject_custom'] : [];
 $previewImgPath = getOrderPreviewImg($paintingTechnique, $subject, $customSubject, $size);
 
+$applyIsPopularForPersons = false;
+if (in_array($subject, ['person_1', 'person_2', 'custom'])) {
+    if ($subject == 'custom') {
+        if ($data['subjects']['custom']['items']['persons']['default'] > 0 && $data['subjects']['custom']['items']['pets']['default'] == 0) {
+            $applyIsPopularForPersons = true;
+        }
+    } else {
+        $applyIsPopularForPersons = true;
+    }
+}
 get_header();
 ?>
     <script>
@@ -475,6 +485,9 @@ get_header();
                                             <path d="M38.9128 37.4173C38.7384 37.2429 38.4966 37.1426 38.25 37.1426C38.0034 37.1426 37.7616 37.2429 37.5872 37.4173C37.4128 37.5916 37.3125 37.8335 37.3125 38.0801C37.3125 38.3266 37.4128 38.5685 37.5872 38.7429C37.7616 38.9172 38.0034 39.0176 38.25 39.0176C38.4966 39.0176 38.7384 38.9173 38.9128 38.7429C39.0872 38.5685 39.1875 38.3266 39.1875 38.0801C39.1875 37.8335 39.0872 37.5916 38.9128 37.4173Z" fill="#F9AB97"/>
                                         </svg>
                                         <?php echo $itemSize['max_subjects']; ?> <?php pll_e('subject max'); ?>
+                                        <?php if ($applyIsPopularForPersons && isset($itemSize['is_popular']) && $itemSize['is_popular']):?>
+                                            &nbsp;(<?php pll_e('popular'); ?>)
+                                        <?php endif; ?>
                                     </span>
                                     </label>
                                 </div>
