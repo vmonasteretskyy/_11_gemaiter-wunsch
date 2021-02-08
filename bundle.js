@@ -52937,13 +52937,13 @@ function createFullPage() {
     if (window.innerWidth < 1200) {
         return;
     }
-    // fullPageObject = new fullpage_default.a('#fullpage', {
-    //     autoScrolling: true,
-    //     scrollHorizontally: true,
-    //     responsiveWidth: 1200,
-    //     responsiveHeight: 600,
-    // });
-    // console.log('CREATE fullpage');
+    fullPageObject = new fullpage_default.a('#fullpage', {
+        autoScrolling: true,
+        scrollHorizontally: true,
+        responsiveWidth: 1200,
+        responsiveHeight: 600,
+    });
+    console.log('CREATE fullpage');
 }
 
 function rebuildFullPage() {
