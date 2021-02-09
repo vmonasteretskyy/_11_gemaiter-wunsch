@@ -197,3 +197,12 @@ label[for="payment_method_klarna_payments_pay_later"] > a {
         min-width: 180px;
     }
 }
+
+div iframe#launcher {
+    opacity: 0 !important;
+    display: none !important;
+}
+
+.social-message__container a.social-message__chat {
+    display: none;
+}

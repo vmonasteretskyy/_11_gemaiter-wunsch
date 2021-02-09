@@ -14,6 +14,8 @@ $fields = get_fields($post->ID);
 
 get_header();
 ?>
+
+<div class="page-wrapper page-home">
 <?php
 /*
 <!-- Start preloader -->
@@ -270,7 +272,7 @@ get_header();
     ?>
     <?php if ($screen4Data['screen_4_title'] || $screen4Data['screen_4_subtitle'] || $screen4Data['screen_4_choose_1_title'] || $screen4Data['screen_4_choose_1_image']|| $screen4Data['screen_4_choose_2_title'] || $screen4Data['screen_4_choose_2_image']): ?>
         <!-- Start choose section -->
-        <section class="section choose ">
+        <section class="section choose choose-home">
             <div class="section-inner">
                 <div class="choose-inner">
                     <?php if ($screen4Data['screen_4_vertical_title']): ?>
@@ -363,7 +365,7 @@ get_header();
     ?>
     <?php if ($screen5Data['screen_5_title'] || !empty($screen5Data['screen_5_promises'])): ?>
         <!-- Start name section -->
-        <section class="section benefits ">
+        <section class="section benefits benefits-home">
             <div class="benefits-inner">
                 <?php if ($screen5Data['screen_5_vertical_title']): ?>
                     <div class="benefits__label">

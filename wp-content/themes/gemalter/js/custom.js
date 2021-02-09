@@ -1169,6 +1169,9 @@ jQuery(document).ready(function ($) {
         function checkZopim() {
             setTimeout(function() {
                 if (typeof ($zopim) !== 'undefined' && typeof ($zopim.livechat) !== 'undefined' ) {
+                    $('.social-message__chat').show();
+                    zE(function() {
+                    });
                     /*
                     //ignore this for now -- not working this part - $zopim.livechat.getName()
                     zE(function() {
@@ -1200,6 +1203,11 @@ jQuery(document).ready(function ($) {
             }, 500);
         }
         checkZopim();
+    });
+
+    $document.on('click', '.social-message__chat', function (e) {
+        console.log('click');
+        zE('webWidget', 'toggle');
     });
 });
 
