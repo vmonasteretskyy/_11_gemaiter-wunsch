@@ -54657,7 +54657,7 @@ if(document.querySelector('.social-message__container')){
   document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       document.querySelector('.social-message__container').classList.add('active')
-   }, 2000)
+   }, 3400)
   });
 }
 
