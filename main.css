@@ -11098,7 +11098,7 @@ input[type="number"] {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: -20px;
     padding: 0;
     width: 260px;
     -webkit-box-align: end;
