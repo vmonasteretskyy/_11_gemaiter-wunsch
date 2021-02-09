@@ -7349,6 +7349,27 @@ input[type="number"] {
   background: #FFFFFF;
 }
 
+
+.social-message__icon svg circle, .social-message__chat:hover svg rect, .social-message__main--open svg path{
+transition: all .5s;
+}
+
+.social-message__facebook:hover svg circle{
+  fill: #0458b4
+}
+
+.social-message__wats-up:hover svg circle{
+  fill: #1dc071
+}
+
+.social-message__chat:hover svg rect{
+  fill: #ffaf2d
+}
+.social-message__main--open:hover svg path{
+  fill: #f24a1e
+}
+
+
 .social-message__main--close, .social-message__main--open{
   justify-content: center;
   align-items: center;
