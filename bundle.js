@@ -54654,11 +54654,15 @@ modalContactWrap.addEventListener('click', () =>{
 
 /* SOCIAL TIMEOUT : START */
 if(document.querySelector('.social-message__container')){
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-      document.querySelector('.social-message__container').classList.add('active')
-   }, 3400)
-  });
+  let socialMessageBtn = document.querySelector('.social-message__main')
+  let socialMessageIcon = document.querySelectorAll('.social-message__icon')
+
+    socialMessageBtn.addEventListener('click', () => {
+    socialMessageBtn.classList.toggle('active')  
+   for( let i of socialMessageIcon){
+   i.classList.toggle('active')
+   }
+  })
 }
 
 /* SOCIAL TIMEOUT : END */
