@@ -8845,9 +8845,7 @@ display: flex;
   -webkit-transform: translateY(90px);
   transform: translateY(90px);
 }
-.choose-card--pr-120 {
-  margin-right: 120px;
-}
+
 .choose-card .radio-wrap {
   padding: 35px 0 30px;
   text-align: center;
@@ -16027,6 +16025,20 @@ padding-top: 0;
   }
 }
 
+.choose-card--pr-120 {
+  margin-right: 180px;
+}
+@media (max-width: 1550px){
+  .choose-card--pr-120 {
+    margin-right: 120px;
+  }
+}
+
+@media (max-width: 1199.98px){
+.choose-card--pr-120 {
+    margin-right: 0;
+}
+}
 @media (max-width: 767px) {
 
   .gift-card__form .form-group--05 {
