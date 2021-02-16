@@ -15830,6 +15830,10 @@ padding-top: 0;
     margin-top: 80px;
   }
 
+  .choose-home .choose-cards{
+    margin-top: 0;
+  }
+
   .choose-cards__price {
     overflow-x: hidden;
     -ms-flex-direction: row;
@@ -16295,6 +16299,11 @@ padding-top: 0;
 }
 
 @media (max-width: 400px) {
+
+  .choose-home .choose-cards{
+    margin-top: 15px;
+  }
+
   .modal--big .modal__cross {
     right: 25px;
   }
