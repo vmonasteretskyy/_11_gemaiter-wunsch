@@ -15771,6 +15771,9 @@ body {
   background-size: contain;
 }
 
+
+
+
 @media (max-width: 991.98px) {
 
 .benefits-home .benefits-inner{
@@ -15916,7 +15919,11 @@ padding-top: 0;
 }
 
 @media (max-width: 767px) {
-
+  .first-section .introduction__item .item-bg{
+    background-position: bottom;
+      background-repeat: no-repeat;
+      background-size: 68%;
+  }
  
   .choose-home .choose-card__prop:nth-child(2) {
     right: 119px;
@@ -16299,6 +16306,10 @@ padding-top: 0;
 }
 
 @media (max-width: 400px) {
+
+  .first-section .introduction__item .item-bg{
+      background-size: 90%;
+  }
 
   .choose-home .choose-cards{
     margin-top: 15px;
