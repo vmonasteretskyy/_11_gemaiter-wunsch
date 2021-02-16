@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/emails/customer-invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/woocommerce/emails/customer-invoice.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,6 +345,9 @@
       <workItem from="1612867494392" duration="6464000" />
       <workItem from="1612886491586" duration="95000" />
       <workItem from="1613039754973" duration="3148000" />
+      <workItem from="1613121852705" duration="622000" />
+      <workItem from="1613471436640" duration="261000" />
+      <workItem from="1613480271870" duration="2590000" />
     </task>
     <servers />
   </component>

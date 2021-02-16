@@ -97,5 +97,4 @@ if ( $additional_content ) {
  */
 do_action( 'woocommerce_email_footer', $email );
 $html = ob_get_contents();
-test($html);
 ob_end_clean();
