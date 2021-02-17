@@ -415,6 +415,9 @@ add_action('template_redirect', 'redirect_cart_page');
 
 // remove shipping field from validation
 function woocommerce_after_checkout_validation_function($data, $errors) {
+    unset($errors->errors['billing_phone_required']);
+    unset($errors->errors['billing_postcode_validation']);
+    unset($errors->errors['billing_state_validation']);
     unset($errors->errors['shipping']);
 }
 add_action('woocommerce_after_checkout_validation', 'woocommerce_after_checkout_validation_function', 10, 2);
