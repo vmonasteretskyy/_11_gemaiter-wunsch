@@ -228,6 +228,7 @@ get_header();
 ?>
     <script>
         var allFiles = [];
+        var durationData = <?php echo json_encode($data['duration_with_date']); ?>;
         var activeStep = <?php echo $activeStep;?>;
         var photoErrorTitle = '<?php pll_e("Error");?>';
         var photoErrorMessage = '<?php pll_e("Photos are missing.");?>';
@@ -872,7 +873,7 @@ get_header();
                                 <?php foreach($data['duration_with_date']['types'] as $type => $typeData): ?>
                                     <?php $iter++;?>
                                     <label class="radio-button radio-button<?php echo $iter;?>">
-                                        <input <?php if ($type == $priceTypeSelected):?>checked<?php endif;?> data-sel_date="<?php echo $typeData['type_date_sel_from']; ?>" data-from="<?php echo $typeData['type_date_from']; ?>" data-calendar_class="<?php echo $typeData['type_calendar_style']; ?>" data-count="<?php echo $typeData['type_count']; ?>" type="radio"
+                                        <input <?php if ($type == $priceTypeSelected):?>checked<?php endif;?> data-sel_date="<?php echo $typeData['type_date_sel_from']; ?>" data-from="<?php echo $data['duration_with_date']['type_date_from']; ?>" data-calendar_class="<?php echo $typeData['type_calendar_style']; ?>" data-count="<?php echo $data['duration_with_date']['type_count']; ?>" type="radio"
                                                name="duration_type" value="<?php echo $type; ?>"  class="select_day_radio">
                                         <span class="checkmark"></span>
                                         <p>

@@ -5494,6 +5494,14 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
             }
         }
     }
+    
+    $startType = 'request';
+    $endType = 'regular';
+    $defaultDurationFrom = 10; // start date = current date + 10 days
+    $defaultDurationTo = 20; // start date + 20 days
+    
+    $paintingTechniqueData['type_date_from'] = date("Y-m-d", strtotime('+' . $defaultDurationFrom . 'days'));
+    $paintingTechniqueData['type_count'] = 0;
     if ($paintingTechniqueData) {
         $typesAll = array_keys($duration['all_locales']['durations']['types']);
         foreach($typesAll as $type) {
@@ -5519,6 +5527,19 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
                         }
                     }
                 }
+                if ($paintingTechniqueData[$type]['type_date_from'] && $paintingTechniqueData[$type]['type_count']) {
+                    $paintingTechniqueData[$type]['type_range'] = [];
+                    $iteration = 0;
+                    $date = $paintingTechniqueData[$type]['type_date_from'];
+                    while (1) {
+                        $paintingTechniqueData[$type]['type_range'][] = $date;
+                        $date = date("Y-m-d", strtotime($date . ' +1 day'));
+                        $iteration++;
+                        if ($iteration >= $paintingTechniqueData[$type]['type_count']) {
+                            break;
+                        }
+                    }
+                }
             }
             
             if ($paintingTechniqueData[$type]['type_date_sel_from']) {
@@ -5530,7 +5551,17 @@ function getDurationWithDates($paintingTechnique = 'oil', $size = '25-35') {
             
             $paintingTechniqueData[$type]['type_date'] = pll__(date("l", strtotime($paintingTechniqueData[$type]['type_date_from']))) . ', ' . date("d.m Y", strtotime($paintingTechniqueData[$type]['type_date_from']));
             $paintingTechniqueData['types'][$type] = $paintingTechniqueData[$type];
+    
+            if ($startType == $type) {
+                $paintingTechniqueData['type_date_from'] = $paintingTechniqueData[$startType]['type_date_from'];
+            }
+            if ($paintingTechniqueData[$type]['type_count']) {
+                $paintingTechniqueData['type_count'] += $paintingTechniqueData[$type]['type_count'];
+            }
         }
+    }
+    if (!$paintingTechniqueData['type_count']) {
+        $paintingTechniqueData['type_count'] = $defaultDurationTo;
     }
     return $paintingTechniqueData;
 }

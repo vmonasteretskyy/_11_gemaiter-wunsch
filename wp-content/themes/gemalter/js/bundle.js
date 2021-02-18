@@ -51419,17 +51419,94 @@ function initCalender() {
     var options = {
         // minDate: addDays(date, days), // Now can select only dates, which goes after today
         dateFormat: 'yyyy-mm-dd',
-        onSelect: function(date, item) {
+        onSelect: function(date, item, inst) {
+            console.log(date, item, inst);
             jQuery('#deliveryDate').val(date).trigger('change');
+
+            let deliveryType = null;
+
+            var deliveryTypes = document.querySelectorAll('.select_day_radio[ne="duration_type"]');
+            deliveryTypes.forEach((type) => {
+                cb.checked = false;
+            });
+            // regular
+            if (durationData.regular && durationData.regular.type_range.length) {
+                if(durationData.regular.type_range.indexOf(date) !== -1) {
+                    deliveryType = document.querySelector('.select_day_radio[value="regular"]');
+                }
+            }
+            // request
+            if (durationData.request && durationData.request.type_range.length) {
+                if(durationData.request.type_range.indexOf(date) !== -1) {
+                    deliveryType = document.querySelector('.select_day_radio[value="request"]');
+                }
+            }
+            // express
+            if (durationData.express && durationData.express.type_range.length) {
+                if(durationData.express.type_range.indexOf(date) !== -1) {
+                    deliveryType = document.querySelector('.select_day_radio[value="express"]');
+                }
+            }
+            // super_express
+            if (durationData.super_express && durationData.super_express.type_range.length) {
+                if(durationData.super_express.type_range.indexOf(date) !== -1) {
+                    deliveryType = document.querySelector('.select_day_radio[value="super_express"]');
+                }
+            }
+            console.log(deliveryType);
+            if (deliveryType) {
+                deliveryType.checked = true;
+            }
         },
         onRenderCell: function (date, cellType) {
             if(cellType == 'day'){
+
                 var day = date.getDay();
                 var disabledDays = [6, 0];
                 var inDateRange = (Date.parse(this.minDate) <= date.getTime()) && (date.getTime() <= Date.parse(this.maxDate));
+
+                var classes = inDateRange && disabledDays.indexOf(day) !== -1 ? '-disabled-weekend-' : '';
+                var formattedDate = '';
+                var dateYear = date.getFullYear();
+                var dateMonth = date.getMonth();
+                if (dateMonth < 10) {
+                    dateMonth += 1;
+                    dateMonth = '0'+dateMonth;
+                }
+                var dateDay = date.getDate();
+                if (dateDay < 10) {
+                    dateDay = '0'+dateDay;
+                }
+                formattedDate = dateYear + '-' + dateMonth + '-' + dateDay;
+                // regular
+                if (durationData.regular && durationData.regular.type_range.length) {
+                    if(durationData.regular.type_range.indexOf(formattedDate) !== -1) {
+                        classes += ' regular-ceil ';
+                    }
+                }
+                // request
+                if (durationData.request && durationData.request.type_range.length) {
+                    if(durationData.request.type_range.indexOf(formattedDate) !== -1) {
+                        classes += ' request-ceil ';
+                    }
+                }
+                // express
+                if (durationData.express && durationData.express.type_range.length) {
+                    if(durationData.express.type_range.indexOf(formattedDate) !== -1) {
+                        classes += ' express-ceil ';
+                    }
+                }
+                // super_express
+                if (durationData.super_express && durationData.super_express.type_range.length) {
+                    if(durationData.super_express.type_range.indexOf(formattedDate) !== -1) {
+                        classes += ' super_express-ceil ';
+                    }
+                }
+
+
                 return {
                     disabled: disabledDays.indexOf(day) !== -1,
-                    classes: inDateRange && disabledDays.indexOf(day) !== -1 ? '-disabled-weekend-' : '',
+                    classes: classes,
                 };
             }
         },
