@@ -19,16 +19,22 @@ if ($current_url) {
     $current_url .= '/';
 }
 
+$provenExpertLink = 'https://www.provenexpert.com/painted-desire/';
+if ($current_lang == 'de') {
+    $provenExpertLink = 'https://www.provenexpert.com/painted-desire/';
+}
 ?>
 
 <footer class="section last-section-wrap">
   <div class="section-inner">
     <div class="last-section">
       <div class="last-section__logo">
-        <img src="<?php echo the_theme_path(); ?>/img/footer-icon-min.png" alt="">
+        <a href="<?php echo $provenExpertLink; ?>">
+            <img src="<?php echo the_theme_path(); ?>/img/footer-icon-min.png" alt="">
+        </a>
       </div>
       <div class="footer">
-        <a href="#" class="btn btn--card-link btn--accent footer__up"></a>
+        <a href="<?php echo $provenExpertLink; ?>" class="btn btn--card-link btn--accent footer__up"></a>
         <div class="footer__inner">
             <?php $menuItems = get_nav_menu_items("menu-2");?>
             <?php if ($menuItems):?>
