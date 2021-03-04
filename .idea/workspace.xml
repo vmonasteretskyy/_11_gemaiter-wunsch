@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c89e0dd-ee97-44ef-b9bf-3b75daa86fad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/themes/gemalter/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/themes/gemalter/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2021-01-14-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2021-01-15-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/fatal-errors-2021-01-18-5db7923002b049182d8c1b00e42406de.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/klarna_payments-2021-01-12-3ea0c4343e02defbe141908678112f5b.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/klarna_payments-2021-01-15-3ea0c4343e02defbe141908678112f5b.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/klarna_payments-2021-01-16-3ea0c4343e02defbe141908678112f5b.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/klarna_payments-2021-01-18-3ea0c4343e02defbe141908678112f5b.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/woocommerce-gateway-stripe-2021-01-12-7a2039597279ccaa859cb65bdfbf55f9.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/woocommerce-gateway-stripe-2021-01-13-7a2039597279ccaa859cb65bdfbf55f9.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/wc-logs/woocommerce-gateway-stripe-2021-01-16-7a2039597279ccaa859cb65bdfbf55f9.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,6 +349,7 @@
       <workItem from="1613480271870" duration="2590000" />
       <workItem from="1613572208852" duration="588000" />
       <workItem from="1613596074097" duration="1175000" />
+      <workItem from="1614868746157" duration="1153000" />
     </task>
     <servers />
   </component>
