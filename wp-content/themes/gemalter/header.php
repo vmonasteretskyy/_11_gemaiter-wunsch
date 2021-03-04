@@ -52,6 +52,8 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
     <!--End SEO meta tags -->
 	<?php wp_head(); ?>
 
+    <link rel="preload" href="https://painteddesire.com/wp-content/themes/gemalter/fonts/Liana.woff" as="font" type="font/woff" crossorigin="anonymous">
+
   <!-- Template Basic Images Start -->
   <link rel="icon" href="<?php echo the_theme_path(); ?>/img/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="<?php echo the_theme_path(); ?>/img/logo.png" />
@@ -102,14 +104,6 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
       }
     }
   </style>
-
-    <!-- DEVELOPER Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NK2QTK7');</script>
-    <!-- End DEVELOPER Google Tag Manager -->
     
     <?php if ($current_lang == 'de'): ?>
         <!-- Google Tag Manager -->
@@ -148,27 +142,36 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
         </script>
         <!-- End Global site tag (gtag.js) - Google Analytics -->
     <?php endif; ?>
-
+    
+    <?php /*
     <!-- Start of gemalterwunsch Zendesk Widget script -->
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633"> </script>
     <!-- End of gemalterwunsch Zendesk Widget script -->
+    */
+    ?>
     <script>
-        // if user has shipping info - authenticate
-        //zopim with authenticate
-        zE(function() {
-            $zopim(function() {
-                $zopim.livechat.authenticate({
-                    jwtFn: function(callback) {
-                        fetch('<?php echo WP_HOME; ?>/?JWT_TOKEN_ENDPOINT=1').then(function(res) {
-                            res.text().then(function(jwt) {
-                                callback(jwt);
+        setTimeout(function () {
+            let script = document.createElement("script");
+            script.setAttribute("id", "ze-snippet");
+            script.setAttribute("src", "https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633");
+            document.body.appendChild(script);
+            // if user has shipping info - authenticate
+            //zopim with authenticate
+            zE(function() {
+                $zopim(function() {
+                    $zopim.livechat.authenticate({
+                        jwtFn: function(callback) {
+                            fetch('<?php echo WP_HOME; ?>/?JWT_TOKEN_ENDPOINT=1').then(function(res) {
+                                res.text().then(function(jwt) {
+                                    callback(jwt);
+                                });
                             });
-                        });
-                    }
+                        }
+                    });
                 });
             });
-        });
-        //zopim without authenticate -- in custom.js -- checkZopim()
+            //zopim without authenticate -- in custom.js -- checkZopim()
+        }, 5000);
     </script>
     <?php
     $shippingFields = getShippingFieldsFromSession();
