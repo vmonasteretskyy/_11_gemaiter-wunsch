@@ -55,7 +55,7 @@ get_header();
                     <div class="cart-head__amount">
                         <p><?php pll_e('Total Amount'); ?>: <span><?php echo $data['currency_symbol']; ?></span></p>
                         <div class="cart-amount h1" data-cart-total-amount="">
-                            <?php echo WC()->cart->get_cart_total(); ?>
+                            <?php echo WC()->cart->get_total(); ?>
                         </div>
                     </div>
                 </div>
@@ -469,7 +469,7 @@ get_header();
                                         <div class="c-table-right f-30">
                                             <span class="f-20"><?php echo $data['currency_symbol']; ?></span>
                                             <span data-cart-total-amount="">
-                                                <?php echo WC()->cart->get_cart_total(); ?>
+                                                <?php echo WC()->cart->get_total(); ?>
                                             </span>
                                         </div>
                                     </div>

@@ -369,7 +369,7 @@ WC()->customer->set_shipping_country($shippingFields['country']);
                                 <div class="c-table-right f-30">
                                     <span class="f-20"><?php echo $data['currency_symbol'];?></span>
                                     <span data-cart-total-amount="">
-                                        <?php echo WC()->cart->get_cart_total();?>
+                                        <?php echo WC()->cart->get_total();?>
                                     </span>
                                 </div>
                             </div>
