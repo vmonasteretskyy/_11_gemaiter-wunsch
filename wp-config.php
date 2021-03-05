@@ -1,4 +1,6 @@
 <?php
+define( 'WP_CACHE', true ); // Added by WP Rocket
+
 /**
  * The base configuration for WordPress
  *
@@ -78,6 +80,7 @@ $table_prefix = 'wp_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', true );
+define( 'MINIFIED_CSS_JS', true);
 
 //define( 'WP_HOME', 'http://lh.me' );
 //define( 'WP_SITEURL', 'http://lh.me' );
