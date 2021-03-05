@@ -755,7 +755,7 @@ jQuery(document).ready(function ($) {
         });
 
         //set active step
-        $(window).load(function () {
+        $(window).on('load', function () {
             if (activeStep) {
                 let item = $('#order_form .step').eq(activeStep);
                 if (item.length) {
@@ -1144,7 +1144,7 @@ jQuery(document).ready(function ($) {
     }
 
     /*show failed popup*/
-    $(window).load(function () {
+    $(window).on('load', function () {
         if ($('.woocommerce-order-received .order_failed').length) {
             setTimeout(function () {
                 document.dispatchEvent(new Event('modal-open#modal-oops'));
@@ -1152,7 +1152,7 @@ jQuery(document).ready(function ($) {
         }
     });
     /*show success popup*/
-    $(window).load(function () {
+    $(window).on('load', function () {
         if ($('.woocommerce-order-received .order_success').length) {
             setTimeout(function () {
                 let email = $('.woocommerce-order-received .order_success').data('order-email');
@@ -1165,7 +1165,7 @@ jQuery(document).ready(function ($) {
     });
     /*checkout page end*/
 
-    $(window).load(function () {
+    $(window).on('load', function () {
         function checkZopim() {
             setTimeout(function() {
                 if (typeof ($zopim) !== 'undefined' && typeof ($zopim.livechat) !== 'undefined' ) {

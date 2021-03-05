@@ -156,21 +156,23 @@ $data['header_settings'] = get_field('header_settings_' . $current_lang, 'option
             script.setAttribute("src", "https://static.zdassets.com/ekr/snippet.js?key=d5c9d099-2273-4613-805c-28f1d0eeb633");
             document.body.appendChild(script);
             // if user has shipping info - authenticate
-            //zopim with authenticate
-            zE(function() {
-                $zopim(function() {
-                    $zopim.livechat.authenticate({
-                        jwtFn: function(callback) {
-                            fetch('<?php echo WP_HOME; ?>/?JWT_TOKEN_ENDPOINT=1').then(function(res) {
-                                res.text().then(function(jwt) {
-                                    callback(jwt);
+            setTimeout(function (){
+                //zopim with authenticate
+                zE(function() {
+                    $zopim(function() {
+                        $zopim.livechat.authenticate({
+                            jwtFn: function(callback) {
+                                fetch('<?php echo WP_HOME; ?>/?JWT_TOKEN_ENDPOINT=1').then(function(res) {
+                                    res.text().then(function(jwt) {
+                                        callback(jwt);
+                                    });
                                 });
-                            });
-                        }
+                            }
+                        });
                     });
                 });
-            });
-            //zopim without authenticate -- in custom.js -- checkZopim()
+                //zopim without authenticate -- in custom.js -- checkZopim()
+            }, 1000);
         }, 5000);
     </script>
     <?php

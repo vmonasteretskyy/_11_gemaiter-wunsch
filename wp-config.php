@@ -80,11 +80,12 @@ $table_prefix = 'wp_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', true );
+define( 'MINIFIED_CSS_JS', true);
 
-define( 'WP_HOME', 'http://lh.me' );
-define( 'WP_SITEURL', 'http://lh.me' );
-//define( 'WP_HOME', 'http://gemaiter.me' );
-//define( 'WP_SITEURL', 'http://gemaiter.me' );
+//define( 'WP_HOME', 'http://lh.me' );
+//define( 'WP_SITEURL', 'http://lh.me' );
+define( 'WP_HOME', 'http://gemaiter.me' );
+define( 'WP_SITEURL', 'http://gemaiter.me' );
 define( 'WP_LOCALE_MODE', 'SAME' ); // SAME OR DIFF
 define( 'WP_LOCALE_EN_SITE_URL', 'http://gemaiter.me' );
 define( 'WP_LOCALE_DE_SITE_URL', 'http://gemaiter.de' );
